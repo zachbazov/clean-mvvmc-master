@@ -21,9 +21,9 @@ final class TabBarCoordinator: Coordinator {
     
     var gammaViewController: GammaViewController?
     
-    var detailViewController: DetailViewController?
+    var deltaViewController: DeltaViewController?
     
-    var searchViewController: SearchViewController?
+    var omegaViewController: OmegaViewController?
 }
 
 
@@ -64,9 +64,9 @@ extension TabBarCoordinator {
     
     // MARK: External Scene Dependencies
     
-    func createDetailViewController() -> DetailViewController? {
-        let controller = DetailViewController()
-        let viewModel = DetailViewModel()
+    func createDeltaViewController() -> DeltaViewController? {
+        let controller = DeltaViewController.xib as! DeltaViewController
+        let viewModel = DeltaViewModel()
         
         controller.viewModel = viewModel
         controller.viewModel?.coordinator = self
@@ -74,9 +74,9 @@ extension TabBarCoordinator {
         return controller
     }
     
-    func createSearchViewController() -> SearchViewController? {
-        let controller = SearchViewController()
-        let viewModel = SearchViewModel()
+    func createOmegaViewController() -> OmegaViewController? {
+        let controller = OmegaViewController.xib as! OmegaViewController
+        let viewModel = OmegaViewModel()
         
         controller.viewModel = viewModel
         controller.viewModel?.coordinator = self
@@ -107,15 +107,15 @@ extension TabBarCoordinator {
     func coordinate(to screen: Screen) {
         switch screen {
         case .detail:
-            guard let controller = createDetailViewController() else { return }
+            guard let controller = createDeltaViewController() else { return }
             
-            detailViewController = controller
+            deltaViewController = controller
             
             viewController?.present(controller, animated: true)
         case .search:
-            guard let controller = createSearchViewController() else { return }
+            guard let controller = createOmegaViewController() else { return }
             
-            searchViewController = controller
+            omegaViewController = controller
             
             alphaViewController?.navigationController?.pushViewController(controller, animated: true)
         }

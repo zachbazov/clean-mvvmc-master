@@ -1,5 +1,5 @@
 //
-//  SearchViewModel.swift
+//  OmegaViewModel.swift
 //  clean-mvvmc-master
 //
 //  Created by Developer on 15/09/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SearchViewModel: ControllerViewModel {
+final class OmegaViewModel: ControllerViewModel {
     
     var coordinator: TabBarCoordinator?
 }

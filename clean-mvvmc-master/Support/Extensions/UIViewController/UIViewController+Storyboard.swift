@@ -14,12 +14,18 @@ extension UIViewController {
     }
     
     static var xib: UIViewController? {
-        switch self.reuseIdentifier {
+        switch reuseIdentifier {
         case TabBarController.reuseIdentifier:
-            return UIStoryboard(name: TabBarController.reuseIdentifier, bundle: nil)
-                .instantiateViewController(withIdentifier: TabBarController.reuseIdentifier)
+            return UIStoryboard(name: reuseIdentifier, bundle: nil)
+                .instantiateViewController(withIdentifier: reuseIdentifier)
+        case DeltaViewController.reuseIdentifier:
+            return UIStoryboard(name: reuseIdentifier, bundle: nil)
+                .instantiateViewController(withIdentifier: reuseIdentifier)
+        case OmegaViewController.reuseIdentifier:
+            return UIStoryboard(name: reuseIdentifier, bundle: nil)
+                .instantiateViewController(withIdentifier: reuseIdentifier)
         default:
-            return nil
+            fatalError("\(Self.self) should be instantiated by a xib object using the `instantiateViewController(withIdentifier:) method.")
         }
     }
 }

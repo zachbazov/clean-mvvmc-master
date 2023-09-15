@@ -33,13 +33,15 @@
 		8B87E5752AB40A8E009248EC /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5742AB40A8E009248EC /* CustomView.swift */; };
 		8B87E5772AB40A92009248EC /* CustomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5762AB40A92009248EC /* CustomViewModel.swift */; };
 		8B87E5792AB40A97009248EC /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5782AB40A97009248EC /* CustomView.xib */; };
-		8B87E57D2AB40AB7009248EC /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E57C2AB40AB7009248EC /* DetailViewModel.swift */; };
-		8B87E57F2AB40ABC009248EC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E57E2AB40ABC009248EC /* DetailViewController.swift */; };
-		8B87E5812AB40AC1009248EC /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5802AB40AC1009248EC /* SearchViewModel.swift */; };
-		8B87E5832AB40AC7009248EC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5822AB40AC7009248EC /* SearchViewController.swift */; };
+		8B87E57D2AB40AB7009248EC /* DeltaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E57C2AB40AB7009248EC /* DeltaViewModel.swift */; };
+		8B87E57F2AB40ABC009248EC /* DeltaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E57E2AB40ABC009248EC /* DeltaViewController.swift */; };
+		8B87E5812AB40AC1009248EC /* OmegaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5802AB40AC1009248EC /* OmegaViewModel.swift */; };
+		8B87E5832AB40AC7009248EC /* OmegaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5822AB40AC7009248EC /* OmegaViewController.swift */; };
 		8B87E5912AB40B28009248EC /* View+Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5902AB40B28009248EC /* View+Instantiable.swift */; };
 		8B87E5932AB40B40009248EC /* UIViewController+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5922AB40B40009248EC /* UIViewController+Storyboard.swift */; };
 		8B87E5952AB40B4E009248EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5942AB40B4E009248EC /* Profile.swift */; };
+		8B87E5972AB480A0009248EC /* DeltaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */; };
+		8B87E5992AB483E2009248EC /* OmegaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,13 +73,15 @@
 		8B87E5742AB40A8E009248EC /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		8B87E5762AB40A92009248EC /* CustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModel.swift; sourceTree = "<group>"; };
 		8B87E5782AB40A97009248EC /* CustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
-		8B87E57C2AB40AB7009248EC /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		8B87E57E2AB40ABC009248EC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		8B87E5802AB40AC1009248EC /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		8B87E5822AB40AC7009248EC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		8B87E57C2AB40AB7009248EC /* DeltaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaViewModel.swift; sourceTree = "<group>"; };
+		8B87E57E2AB40ABC009248EC /* DeltaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaViewController.swift; sourceTree = "<group>"; };
+		8B87E5802AB40AC1009248EC /* OmegaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmegaViewModel.swift; sourceTree = "<group>"; };
+		8B87E5822AB40AC7009248EC /* OmegaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmegaViewController.swift; sourceTree = "<group>"; };
 		8B87E5902AB40B28009248EC /* View+Instantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Instantiable.swift"; sourceTree = "<group>"; };
 		8B87E5922AB40B40009248EC /* UIViewController+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboard.swift"; sourceTree = "<group>"; };
 		8B87E5942AB40B4E009248EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeltaViewController.storyboard; sourceTree = "<group>"; };
+		8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OmegaViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				8B87E55B2AB409F0009248EC /* TabBar */,
-				8B87E57A2AB40AA2009248EC /* Detail */,
-				8B87E57B2AB40AA6009248EC /* Search */,
+				8B87E57A2AB40AA2009248EC /* Delta */,
+				8B87E57B2AB40AA6009248EC /* Omega */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -266,22 +270,24 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		8B87E57A2AB40AA2009248EC /* Detail */ = {
+		8B87E57A2AB40AA2009248EC /* Delta */ = {
 			isa = PBXGroup;
 			children = (
-				8B87E57C2AB40AB7009248EC /* DetailViewModel.swift */,
-				8B87E57E2AB40ABC009248EC /* DetailViewController.swift */,
+				8B87E57C2AB40AB7009248EC /* DeltaViewModel.swift */,
+				8B87E57E2AB40ABC009248EC /* DeltaViewController.swift */,
+				8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */,
 			);
-			path = Detail;
+			path = Delta;
 			sourceTree = "<group>";
 		};
-		8B87E57B2AB40AA6009248EC /* Search */ = {
+		8B87E57B2AB40AA6009248EC /* Omega */ = {
 			isa = PBXGroup;
 			children = (
-				8B87E5802AB40AC1009248EC /* SearchViewModel.swift */,
-				8B87E5822AB40AC7009248EC /* SearchViewController.swift */,
+				8B87E5802AB40AC1009248EC /* OmegaViewModel.swift */,
+				8B87E5822AB40AC7009248EC /* OmegaViewController.swift */,
+				8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */,
 			);
-			path = Search;
+			path = Omega;
 			sourceTree = "<group>";
 		};
 		8B87E5842AB40AD0009248EC /* Domain */ = {
@@ -440,8 +446,10 @@
 			files = (
 				8B87E5662AB40A3E009248EC /* TabBarController.storyboard in Resources */,
 				8B87E5792AB40A97009248EC /* CustomView.xib in Resources */,
+				8B87E5972AB480A0009248EC /* DeltaViewController.storyboard in Resources */,
 				8B87E5382AB408A1009248EC /* LaunchScreen.storyboard in Resources */,
 				8B87E5352AB408A1009248EC /* Assets.xcassets in Resources */,
+				8B87E5992AB483E2009248EC /* OmegaViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,21 +470,21 @@
 				8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */,
 				8B87E5572AB409E0009248EC /* View.swift in Sources */,
 				8B87E5702AB40A74009248EC /* GammaViewModel.swift in Sources */,
-				8B87E5832AB40AC7009248EC /* SearchViewController.swift in Sources */,
+				8B87E5832AB40AC7009248EC /* OmegaViewController.swift in Sources */,
 				8B87E56E2AB40A6F009248EC /* BetaViewController.swift in Sources */,
 				8B87E5592AB409E3009248EC /* ViewModel.swift in Sources */,
 				8B87E5432AB4096B009248EC /* Application.swift in Sources */,
-				8B87E57D2AB40AB7009248EC /* DetailViewModel.swift in Sources */,
+				8B87E57D2AB40AB7009248EC /* DeltaViewModel.swift in Sources */,
 				8B87E5772AB40A92009248EC /* CustomViewModel.swift in Sources */,
 				8B87E5722AB40A79009248EC /* GammaViewController.swift in Sources */,
 				8B87E54F2AB409BE009248EC /* CoordinatorViewModel.swift in Sources */,
-				8B87E57F2AB40ABC009248EC /* DetailViewController.swift in Sources */,
+				8B87E57F2AB40ABC009248EC /* DeltaViewController.swift in Sources */,
 				8B87E56A2AB40A66009248EC /* AlphaViewController.swift in Sources */,
 				8B87E52C2AB408A0009248EC /* AppDelegate.swift in Sources */,
 				8B87E5682AB40A61009248EC /* AlphaViewModel.swift in Sources */,
 				8B87E5552AB409DC009248EC /* ControllerViewModel.swift in Sources */,
 				8B87E52E2AB408A0009248EC /* SceneDelegate.swift in Sources */,
-				8B87E5812AB40AC1009248EC /* SearchViewModel.swift in Sources */,
+				8B87E5812AB40AC1009248EC /* OmegaViewModel.swift in Sources */,
 				8B87E56C2AB40A6B009248EC /* BetaViewModel.swift in Sources */,
 				8B87E5532AB409D3009248EC /* ViewController.swift in Sources */,
 				8B87E5512AB409C3009248EC /* Coordinator.swift in Sources */,

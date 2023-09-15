@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  OmegaViewController.swift
 //  clean-mvvmc-master
 //
 //  Created by Developer on 15/09/2023.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController, ViewController {
+final class OmegaViewController: UIViewController, ViewController {
     
-    var viewModel: DetailViewModel?
+    var viewModel: OmegaViewModel?
     
     
     deinit {
@@ -19,13 +19,11 @@ final class DetailViewController: UIViewController, ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .black
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        viewModel?.coordinator?.detailViewController = nil
+        viewModel?.coordinator?.omegaViewController = nil
     }
 }
