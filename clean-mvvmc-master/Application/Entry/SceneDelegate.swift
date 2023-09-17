@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder {
     
     var window: UIWindow?
     
-    let application: Application = Application.app
+    let application = Application.app
 }
 
 

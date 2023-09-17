@@ -12,7 +12,7 @@
 		8B87E5352AB408A1009248EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5342AB408A1009248EC /* Assets.xcassets */; };
 		8B87E5382AB408A1009248EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5362AB408A1009248EC /* LaunchScreen.storyboard */; };
 		8B87E5432AB4096B009248EC /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5422AB4096B009248EC /* Application.swift */; };
-		8B87E5452AB40978009248EC /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5442AB40978009248EC /* RootCoordinator.swift */; };
+		8B87E5452AB40978009248EC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5442AB40978009248EC /* AppCoordinator.swift */; };
 		8B87E54D2AB409B6009248EC /* CoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E54C2AB409B6009248EC /* CoordinatorViewController.swift */; };
 		8B87E54F2AB409BE009248EC /* CoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E54E2AB409BE009248EC /* CoordinatorViewModel.swift */; };
 		8B87E5512AB409C3009248EC /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5502AB409C3009248EC /* Coordinator.swift */; };
@@ -42,6 +42,19 @@
 		8B87E5952AB40B4E009248EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5942AB40B4E009248EC /* Profile.swift */; };
 		8B87E5972AB480A0009248EC /* DeltaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */; };
 		8B87E5992AB483E2009248EC /* OmegaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */; };
+		8B87E59E2AB53A45009248EC /* MongoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59D2AB53A45009248EC /* MongoService.swift */; };
+		8B87E5A02AB544C8009248EC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59F2AB544C8009248EC /* Endpoint.swift */; };
+		8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A12AB5CE0C009248EC /* URLService.swift */; };
+		8B87E5A42AB5D0A9009248EC /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A32AB5D0A9009248EC /* DebugPrint.swift */; };
+		8B87E5A62AB6767E009248EC /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A52AB6767E009248EC /* DataTransferService.swift */; };
+		8B87E5A92AB693D9009248EC /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A82AB693D9009248EC /* Repository.swift */; };
+		8B87E5AB2AB693DD009248EC /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5AA2AB693DD009248EC /* UseCase.swift */; };
+		8B87E5AF2AB697C0009248EC /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5AE2AB697C0009248EC /* AuthRepository.swift */; };
+		8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B02AB697C5009248EC /* AuthUseCase.swift */; };
+		8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B42AB73555009248EC /* UserDTO.swift */; };
+		8B87E5B82AB7358C009248EC /* HTTPRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B72AB7358C009248EC /* HTTPRepresentable.swift */; };
+		8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */; };
+		8B87E5BC2AB74C88009248EC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5BB2AB74C88009248EC /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +65,7 @@
 		8B87E5372AB408A1009248EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B87E5392AB408A1009248EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B87E5422AB4096B009248EC /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		8B87E5442AB40978009248EC /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		8B87E5442AB40978009248EC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8B87E54C2AB409B6009248EC /* CoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorViewController.swift; sourceTree = "<group>"; };
 		8B87E54E2AB409BE009248EC /* CoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorViewModel.swift; sourceTree = "<group>"; };
 		8B87E5502AB409C3009248EC /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -82,6 +95,19 @@
 		8B87E5942AB40B4E009248EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeltaViewController.storyboard; sourceTree = "<group>"; };
 		8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OmegaViewController.storyboard; sourceTree = "<group>"; };
+		8B87E59D2AB53A45009248EC /* MongoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoService.swift; sourceTree = "<group>"; };
+		8B87E59F2AB544C8009248EC /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		8B87E5A12AB5CE0C009248EC /* URLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLService.swift; sourceTree = "<group>"; };
+		8B87E5A32AB5D0A9009248EC /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
+		8B87E5A52AB6767E009248EC /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		8B87E5A82AB693D9009248EC /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		8B87E5AA2AB693DD009248EC /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		8B87E5AE2AB697C0009248EC /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		8B87E5B02AB697C5009248EC /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
+		8B87E5B42AB73555009248EC /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
+		8B87E5B72AB7358C009248EC /* HTTPRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRepresentable.swift; sourceTree = "<group>"; };
+		8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUserDTO.swift; sourceTree = "<group>"; };
+		8B87E5BB2AB74C88009248EC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +140,7 @@
 		8B87E52A2AB408A0009248EC /* clean-mvvmc-master */ = {
 			isa = PBXGroup;
 			children = (
-				8B87E5412AB40953009248EC /* Application */,
+				8B87E5B22AB7329E009248EC /* Application */,
 				8B87E5842AB40AD0009248EC /* Domain */,
 				8B87E5852AB40AD6009248EC /* Data */,
 				8B87E58C2AB40B05009248EC /* Support */,
@@ -139,18 +165,9 @@
 				8B87E52D2AB408A0009248EC /* SceneDelegate.swift */,
 				8B87E52B2AB408A0009248EC /* AppDelegate.swift */,
 				8B87E5422AB4096B009248EC /* Application.swift */,
-				8B87E5442AB40978009248EC /* RootCoordinator.swift */,
+				8B87E5442AB40978009248EC /* AppCoordinator.swift */,
 			);
 			path = Entry;
-			sourceTree = "<group>";
-		};
-		8B87E5412AB40953009248EC /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E5402AB4094B009248EC /* Entry */,
-				8B87E5462AB4097F009248EC /* View-ViewModel */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		8B87E5462AB4097F009248EC /* View-ViewModel */ = {
@@ -294,8 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				8B87E5882AB40AEB009248EC /* Models */,
-				8B87E5872AB40AE6009248EC /* UseCases */,
-				8B87E5862AB40AE0009248EC /* Repositories */,
+				8B87E5A72AB693B0009248EC /* Data */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -308,20 +324,6 @@
 				8B87E5892AB40AF3009248EC /* DataSources */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		8B87E5862AB40AE0009248EC /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-		8B87E5872AB40AE6009248EC /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseCases;
 			sourceTree = "<group>";
 		};
 		8B87E5882AB40AEB009248EC /* Models */ = {
@@ -349,6 +351,14 @@
 		8B87E58B2AB40AFD009248EC /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				8B87E59F2AB544C8009248EC /* Endpoint.swift */,
+				8B87E5A12AB5CE0C009248EC /* URLService.swift */,
+				8B87E5A52AB6767E009248EC /* DataTransferService.swift */,
+				8B87E5BB2AB74C88009248EC /* AuthService.swift */,
+				8B87E5B32AB73538009248EC /* Models */,
+				8B87E5B62AB7357A009248EC /* HTTP */,
+				8B87E5AC2AB6973B009248EC /* Repositories */,
+				8B87E5AD2AB69741009248EC /* UseCases */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -357,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				8B87E58D2AB40B0D009248EC /* Extensions */,
+				8B87E5A32AB5D0A9009248EC /* DebugPrint.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -384,6 +395,82 @@
 				8B87E5922AB40B40009248EC /* UIViewController+Storyboard.swift */,
 			);
 			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		8B87E59A2AB53907009248EC /* Essentials */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E59B2AB53911009248EC /* Configurations */,
+				8B87E59C2AB53924009248EC /* Services */,
+			);
+			path = Essentials;
+			sourceTree = "<group>";
+		};
+		8B87E59B2AB53911009248EC /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		8B87E59C2AB53924009248EC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E59D2AB53A45009248EC /* MongoService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8B87E5A72AB693B0009248EC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E5B72AB7358C009248EC /* HTTPRepresentable.swift */,
+				8B87E5A82AB693D9009248EC /* Repository.swift */,
+				8B87E5AA2AB693DD009248EC /* UseCase.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8B87E5AC2AB6973B009248EC /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E5AE2AB697C0009248EC /* AuthRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		8B87E5AD2AB69741009248EC /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E5B02AB697C5009248EC /* AuthUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		8B87E5B22AB7329E009248EC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E5402AB4094B009248EC /* Entry */,
+				8B87E59A2AB53907009248EC /* Essentials */,
+				8B87E5462AB4097F009248EC /* View-ViewModel */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8B87E5B32AB73538009248EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E5B42AB73555009248EC /* UserDTO.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8B87E5B62AB7357A009248EC /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */,
+			);
+			path = HTTP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,31 +551,44 @@
 				8B87E5912AB40B28009248EC /* View+Instantiable.swift in Sources */,
 				8B87E5952AB40B4E009248EC /* Profile.swift in Sources */,
 				8B87E54D2AB409B6009248EC /* CoordinatorViewController.swift in Sources */,
-				8B87E5452AB40978009248EC /* RootCoordinator.swift in Sources */,
+				8B87E59E2AB53A45009248EC /* MongoService.swift in Sources */,
+				8B87E5452AB40978009248EC /* AppCoordinator.swift in Sources */,
 				8B87E5752AB40A8E009248EC /* CustomView.swift in Sources */,
+				8B87E5A92AB693D9009248EC /* Repository.swift in Sources */,
+				8B87E5A02AB544C8009248EC /* Endpoint.swift in Sources */,
 				8B87E5602AB40A1F009248EC /* TabBarCoordinator.swift in Sources */,
 				8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */,
 				8B87E5572AB409E0009248EC /* View.swift in Sources */,
 				8B87E5702AB40A74009248EC /* GammaViewModel.swift in Sources */,
 				8B87E5832AB40AC7009248EC /* OmegaViewController.swift in Sources */,
+				8B87E5B82AB7358C009248EC /* HTTPRepresentable.swift in Sources */,
 				8B87E56E2AB40A6F009248EC /* BetaViewController.swift in Sources */,
+				8B87E5AF2AB697C0009248EC /* AuthRepository.swift in Sources */,
 				8B87E5592AB409E3009248EC /* ViewModel.swift in Sources */,
 				8B87E5432AB4096B009248EC /* Application.swift in Sources */,
+				8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */,
+				8B87E5A62AB6767E009248EC /* DataTransferService.swift in Sources */,
 				8B87E57D2AB40AB7009248EC /* DeltaViewModel.swift in Sources */,
 				8B87E5772AB40A92009248EC /* CustomViewModel.swift in Sources */,
+				8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */,
 				8B87E5722AB40A79009248EC /* GammaViewController.swift in Sources */,
 				8B87E54F2AB409BE009248EC /* CoordinatorViewModel.swift in Sources */,
 				8B87E57F2AB40ABC009248EC /* DeltaViewController.swift in Sources */,
+				8B87E5BC2AB74C88009248EC /* AuthService.swift in Sources */,
 				8B87E56A2AB40A66009248EC /* AlphaViewController.swift in Sources */,
+				8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */,
 				8B87E52C2AB408A0009248EC /* AppDelegate.swift in Sources */,
 				8B87E5682AB40A61009248EC /* AlphaViewModel.swift in Sources */,
 				8B87E5552AB409DC009248EC /* ControllerViewModel.swift in Sources */,
+				8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */,
 				8B87E52E2AB408A0009248EC /* SceneDelegate.swift in Sources */,
 				8B87E5812AB40AC1009248EC /* OmegaViewModel.swift in Sources */,
 				8B87E56C2AB40A6B009248EC /* BetaViewModel.swift in Sources */,
 				8B87E5532AB409D3009248EC /* ViewController.swift in Sources */,
 				8B87E5512AB409C3009248EC /* Coordinator.swift in Sources */,
+				8B87E5AB2AB693DD009248EC /* UseCase.swift in Sources */,
 				8B87E5932AB40B40009248EC /* UIViewController+Storyboard.swift in Sources */,
+				8B87E5A42AB5D0A9009248EC /* DebugPrint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +723,8 @@
 		8B87E53D2AB408A1009248EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				API_HOST = "localhost:3000";
+				API_SCHEME = http;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -651,6 +753,8 @@
 		8B87E53E2AB408A1009248EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				API_HOST = "localhost:3000";
+				API_SCHEME = http;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

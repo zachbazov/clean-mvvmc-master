@@ -11,7 +11,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="gkM-Hb-6kR">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" id="u89-vr-Yfr" customClass="TabBarController" customModule="CoordinatorExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="u89-vr-Yfr" customClass="TabBarController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0H4-Nb-0gy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

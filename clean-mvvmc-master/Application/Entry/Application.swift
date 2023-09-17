@@ -11,7 +11,7 @@ final class Application {
     
     static let app = Application()
     
-    private(set) lazy var coordinator = RootCoordinator()
+    private(set) lazy var coordinator = AppCoordinator()
     
     
     private init() {}

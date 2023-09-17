@@ -22,6 +22,10 @@ class AlphaViewController: UIViewController, ViewController {
         super.viewDidLoad()
         
         createCustomView()
+        
+        let user = UserDTO(email: "qwe@gmail.com", password: "qweqweqwe")
+        let request = HTTPUserDTO.Request(user: user)
+        MongoService.shared.authService.signIn(request)
     }
 }
 

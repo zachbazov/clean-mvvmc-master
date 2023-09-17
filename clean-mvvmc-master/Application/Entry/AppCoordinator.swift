@@ -1,5 +1,5 @@
 //
-//  RootCoordinator.swift
+//  AppCoordinator.swift
 //  clean-mvvmc-master
 //
 //  Created by Developer on 15/09/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RootCoordinator {
+final class AppCoordinator {
     
     weak var window: UIWindow? {
         didSet {
@@ -19,7 +19,7 @@ final class RootCoordinator {
 }
 
 
-extension RootCoordinator {
+extension AppCoordinator {
     
     private func createTabBarCoordinator() -> TabBarCoordinator {
         let coordinator = TabBarCoordinator()
@@ -35,7 +35,7 @@ extension RootCoordinator {
 }
 
 
-extension RootCoordinator {
+extension AppCoordinator {
     
     private func coordinate(to viewController: UIViewController?) {
         window?.rootViewController = viewController
