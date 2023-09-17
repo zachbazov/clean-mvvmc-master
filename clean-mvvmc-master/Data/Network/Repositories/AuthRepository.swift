@@ -40,7 +40,7 @@ extension AuthRepository {
 
 extension AuthRepository {
     
-    static func signIn(with request: HTTPUserDTO.Request) -> Endpoint<HTTPUserDTO.Response> {
+    static func signIn(with request: HTTPUserDTO.Request) -> Endpoint {
         guard let email = request.user.email,
               let password = request.user.password
         else { fatalError() }

@@ -52,9 +52,9 @@
 		8B87E5AF2AB697C0009248EC /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5AE2AB697C0009248EC /* AuthRepository.swift */; };
 		8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B02AB697C5009248EC /* AuthUseCase.swift */; };
 		8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B42AB73555009248EC /* UserDTO.swift */; };
-		8B87E5B82AB7358C009248EC /* HTTPRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B72AB7358C009248EC /* HTTPRepresentable.swift */; };
 		8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */; };
 		8B87E5BC2AB74C88009248EC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5BB2AB74C88009248EC /* AuthService.swift */; };
+		8BA5210B2AB7715D00DAE2F7 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,9 +105,9 @@
 		8B87E5AE2AB697C0009248EC /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		8B87E5B02AB697C5009248EC /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		8B87E5B42AB73555009248EC /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
-		8B87E5B72AB7358C009248EC /* HTTPRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRepresentable.swift; sourceTree = "<group>"; };
 		8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUserDTO.swift; sourceTree = "<group>"; };
 		8B87E5BB2AB74C88009248EC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +121,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B0A73B62AB7831A00B7C7B7 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		8B23AD762AB7824E0008EECC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8B87E59D2AB53A45009248EC /* MongoService.swift */,
+				8B87E5A12AB5CE0C009248EC /* URLService.swift */,
+				8B87E5A52AB6767E009248EC /* DataTransferService.swift */,
+				8B87E5BB2AB74C88009248EC /* AuthService.swift */,
+				8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		8B87E51F2AB408A0009248EC = {
 			isa = PBXGroup;
 			children = (
@@ -311,7 +330,8 @@
 			isa = PBXGroup;
 			children = (
 				8B87E5882AB40AEB009248EC /* Models */,
-				8B87E5A72AB693B0009248EC /* Data */,
+				8B87E5A82AB693D9009248EC /* Repository.swift */,
+				8B87E5AA2AB693DD009248EC /* UseCase.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -320,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				8B87E58B2AB40AFD009248EC /* Network */,
-				8B87E58A2AB40AF8009248EC /* CoreData */,
-				8B87E5892AB40AF3009248EC /* DataSources */,
+				8B87E58A2AB40AF8009248EC /* Persistent Stores */,
+				8B87E5892AB40AF3009248EC /* Data Sources */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -330,35 +350,33 @@
 			isa = PBXGroup;
 			children = (
 				8B87E5942AB40B4E009248EC /* Profile.swift */,
+				8B0A73B62AB7831A00B7C7B7 /* HTTP */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		8B87E5892AB40AF3009248EC /* DataSources */ = {
+		8B87E5892AB40AF3009248EC /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = DataSources;
+			path = "Data Sources";
 			sourceTree = "<group>";
 		};
-		8B87E58A2AB40AF8009248EC /* CoreData */ = {
+		8B87E58A2AB40AF8009248EC /* Persistent Stores */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = CoreData;
+			path = "Persistent Stores";
 			sourceTree = "<group>";
 		};
 		8B87E58B2AB40AFD009248EC /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				8B87E59F2AB544C8009248EC /* Endpoint.swift */,
-				8B87E5A12AB5CE0C009248EC /* URLService.swift */,
-				8B87E5A52AB6767E009248EC /* DataTransferService.swift */,
-				8B87E5BB2AB74C88009248EC /* AuthService.swift */,
 				8B87E5B32AB73538009248EC /* Models */,
-				8B87E5B62AB7357A009248EC /* HTTP */,
 				8B87E5AC2AB6973B009248EC /* Repositories */,
 				8B87E5AD2AB69741009248EC /* UseCases */,
+				8B23AD762AB7824E0008EECC /* Services */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -397,40 +415,6 @@
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
-		8B87E59A2AB53907009248EC /* Essentials */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E59B2AB53911009248EC /* Configurations */,
-				8B87E59C2AB53924009248EC /* Services */,
-			);
-			path = Essentials;
-			sourceTree = "<group>";
-		};
-		8B87E59B2AB53911009248EC /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Configurations;
-			sourceTree = "<group>";
-		};
-		8B87E59C2AB53924009248EC /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E59D2AB53A45009248EC /* MongoService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		8B87E5A72AB693B0009248EC /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E5B72AB7358C009248EC /* HTTPRepresentable.swift */,
-				8B87E5A82AB693D9009248EC /* Repository.swift */,
-				8B87E5AA2AB693DD009248EC /* UseCase.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		8B87E5AC2AB6973B009248EC /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,7 +435,6 @@
 			isa = PBXGroup;
 			children = (
 				8B87E5402AB4094B009248EC /* Entry */,
-				8B87E59A2AB53907009248EC /* Essentials */,
 				8B87E5462AB4097F009248EC /* View-ViewModel */,
 			);
 			path = Application;
@@ -461,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				8B87E5B42AB73555009248EC /* UserDTO.swift */,
+				8B87E5B62AB7357A009248EC /* HTTP */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -561,7 +545,7 @@
 				8B87E5572AB409E0009248EC /* View.swift in Sources */,
 				8B87E5702AB40A74009248EC /* GammaViewModel.swift in Sources */,
 				8B87E5832AB40AC7009248EC /* OmegaViewController.swift in Sources */,
-				8B87E5B82AB7358C009248EC /* HTTPRepresentable.swift in Sources */,
+				8BA5210B2AB7715D00DAE2F7 /* ImageService.swift in Sources */,
 				8B87E56E2AB40A6F009248EC /* BetaViewController.swift in Sources */,
 				8B87E5AF2AB697C0009248EC /* AuthRepository.swift in Sources */,
 				8B87E5592AB409E3009248EC /* ViewModel.swift in Sources */,

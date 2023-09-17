@@ -21,17 +21,16 @@ protocol Requestable {
     func urlRequest(with config: URLRequestConfigurable) throws -> URLRequest
 }
 
-protocol ResponseRequestable: Requestable {
-    associatedtype ResponseType
-    
+
+protocol ResponseDecodable {
     var responseDecoder: URLResponseDecoder? { get }
 }
 
 
-struct Endpoint<R>: ResponseRequestable {
-    
-    typealias ResponseType = R
-    
+typealias ResponseRequestable = Requestable & ResponseDecodable
+
+
+struct Endpoint: ResponseRequestable {
     
     var method: HTTPMethod
     var path: String

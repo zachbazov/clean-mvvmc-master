@@ -29,8 +29,7 @@ protocol DataTransferRequestable {
     func request<T, E>(endpoint: E,
                        completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     where T: Decodable,
-          E: ResponseRequestable,
-          E.ResponseType == T
+          E: ResponseRequestable
     
     func request<E>(endpoint: E,
                     completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
@@ -53,7 +52,7 @@ struct DataTransferService {
 
 extension DataTransferService: DataTransferRequestable {
     
-    func request<T, E>(endpoint: E, completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable? where T: Decodable, T == E.ResponseType, E: ResponseRequestable {
+    func request<T, E>(endpoint: E, completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable? where T: Decodable, E: ResponseRequestable {
         return urlService.request(endpoint: endpoint) { result in
             switch result {
             case .success(let data):

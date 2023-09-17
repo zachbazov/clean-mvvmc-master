@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class HTTPUserDTO: HTTPRepresentable {
+final class HTTPUserDTO {
     
     struct Request: Decodable {
         let user: UserDTO
