@@ -9,11 +9,14 @@ import Foundation
 
 protocol UseCaseRequestable {
     
-    associatedtype E
-    associatedtype ResponseType where ResponseType: Decodable
+    associatedtype EndpointType
+    associatedtype RequestType: Decodable
+    associatedtype ErrorResponseType: Decodable
+    associatedtype ResponseType: Decodable
     
-    func request(endpoint: E,
-                 request: Any?,
+    func request(endpoint: EndpointType,
+                 request: RequestType,
+                 error: ((ErrorResponseType) -> Void)?,
                  cached: ((ResponseType?) -> Void)?,
                  completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
 }

@@ -9,12 +9,8 @@ import Foundation
 
 protocol RepositoryRequestable {
     
-    associatedtype ResponseType where ResponseType: Decodable
-    
-    func sign(endpoint: AuthUseCase.E,
-              request: Any?,
-              cached: ((ResponseType?) -> Void)?,
-              completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    associatedtype EndpointType
+    associatedtype ResponseType: Decodable
     
     func find(request: Any?,
               cached: ((ResponseType?) -> Void)?,
@@ -25,37 +21,6 @@ protocol RepositoryRequestable {
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     func delete(request: Any?,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-}
-
-extension RepositoryRequestable {
-    
-    func sign(endpoint: AuthUseCase.E,
-              request: Any?,
-              cached: ((ResponseType?) -> Void)?,
-              completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func find(request: Any?,
-              cached: ((ResponseType?) -> Void)?,
-              completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func create(request: Any?,
-                completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func update(request: Any?,
-                completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func delete(request: Any?,
-                completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
 }
 
 

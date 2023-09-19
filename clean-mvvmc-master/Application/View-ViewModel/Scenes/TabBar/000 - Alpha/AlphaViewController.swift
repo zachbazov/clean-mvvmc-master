@@ -22,10 +22,6 @@ class AlphaViewController: UIViewController, ViewController {
         super.viewDidLoad()
         
         createCustomView()
-        
-        let user = UserDTO(email: "qwe@gmail.com", password: "qweqweqwe")
-        let request = HTTPUserDTO.Request(user: user)
-        MongoService.shared.authService.signIn(request)
     }
 }
 
@@ -33,7 +29,7 @@ class AlphaViewController: UIViewController, ViewController {
 extension AlphaViewController {
     
     private func createCustomView() {
-        let model = Profile(name: "iOS")
+        let model = Profile(name: "iOS", image: "person.circle")
         let customViewModel = CustomViewModel(with: model)
         
         customView = CustomView(on: customViewContainer, with: customViewModel)

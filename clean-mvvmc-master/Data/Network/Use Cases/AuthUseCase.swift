@@ -7,12 +7,7 @@
 
 import Foundation
 
-final class AuthUseCase: UseCase {
-    
-    enum Endpoints {
-        case signIn
-    }
-    
+struct AuthUseCase: UseCase {
     
     let repository = AuthRepository()
 }
@@ -20,14 +15,28 @@ final class AuthUseCase: UseCase {
 
 extension AuthUseCase {
     
+    enum Endpoints {
+        case signIn
+    }
+}
+
+
+extension AuthUseCase {
+    
     @discardableResult
     func request(endpoint: Endpoints,
-                 request: Any?,
+                 request: HTTPUserDTO.Request,
+                 error: ((HTTPMongoErrorResponseDTO) -> Void)?,
                  cached: ((HTTPUserDTO.Response?) -> Void)?,
                  completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        
         switch endpoint {
         case .signIn:
-            return repository.sign(endpoint: endpoint, request: request, cached: cached, completion: completion)
+            return repository.sign(endpoint: endpoint,
+                                   request: request,
+                                   error: error,
+                                   cached: cached,
+                                   completion: completion)
         }
     }
 }

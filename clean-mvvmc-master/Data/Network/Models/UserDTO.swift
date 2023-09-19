@@ -8,7 +8,7 @@
 import Foundation
 
 @objc
-final class UserDTO: NSObject {
+public final class UserDTO: NSObject, Codable, NSSecureCoding {
     
     var _id: String?
     var name: String?
@@ -48,35 +48,105 @@ final class UserDTO: NSObject {
     }
     
     public required init?(coder: NSCoder) {
-        self._id = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "_id") as? String
-        self.name = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "name") as? String
-        self.email = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "email") as? String
-        self.password = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "password") as? String
-        self.passwordConfirm = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "passwordConfirm") as? String
-        self.role = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "role") as? String
-        self.active = coder.decodeObject(of: [UserDTO.self, NSNumber.self], forKey: "active") as? Bool
-        self.token = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "token") as? String
-        self.mylist = coder.decodeObject(of: [UserDTO.self, NSArray.self, NSString.self], forKey: "mylist") as? [String]
-        self.profiles = coder.decodeObject(of: [UserDTO.self, NSArray.self, NSString.self], forKey: "profiles") as? [String]
-        self.selectedProfile = coder.decodeObject(of: [UserDTO.self, NSString.self], forKey: "selectedProfile") as? String
+        self._id = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.id.rawValue) as? String
+        
+        self.name = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.name.rawValue) as? String
+        
+        self.email = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.email.rawValue) as? String
+        
+        self.password = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.password.rawValue) as? String
+        
+        self.passwordConfirm = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.passwordConfirm.rawValue) as? String
+        
+        self.role = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.role.rawValue) as? String
+        
+        self.active = coder.decodeObject(
+            of: [UserDTO.self, NSNumber.self],
+            forKey: Key.active.rawValue) as? Bool
+        
+        self.token = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.token.rawValue) as? String
+        
+        self.mylist = coder.decodeObject(
+            of: [UserDTO.self, NSArray.self, NSString.self],
+            forKey: Key.mylist.rawValue) as? [String]
+        
+        self.profiles = coder.decodeObject(
+            of: [UserDTO.self, NSArray.self, NSString.self],
+            forKey: Key.profiles.rawValue) as? [String]
+        
+        self.selectedProfile = coder.decodeObject(
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.selectedProfile.rawValue) as? String
     }
 }
 
-extension UserDTO: Codable, NSSecureCoding {
+extension UserDTO {
     
     public static var supportsSecureCoding: Bool { true }
     
+    
     public func encode(with coder: NSCoder) {
-        coder.encode(_id, forKey: "_id")
-        coder.encode(name, forKey: "name")
-        coder.encode(email, forKey: "email")
-        coder.encode(password, forKey: "password")
-        coder.encode(passwordConfirm, forKey: "passwordConfirm")
-        coder.encode(role, forKey: "role")
-        coder.encode(active, forKey: "active")
-        coder.encode(token, forKey: "token")
-        coder.encode(mylist, forKey: "mylist")
-        coder.encode(profiles, forKey: "profiles")
-        coder.encode(selectedProfile, forKey: "selectedProfile")
+        coder.encode(_id, forKey: Key.id.rawValue)
+        coder.encode(name, forKey: Key.name.rawValue)
+        coder.encode(email, forKey: Key.email.rawValue)
+        coder.encode(password, forKey: Key.password.rawValue)
+        coder.encode(passwordConfirm, forKey: Key.passwordConfirm.rawValue)
+        coder.encode(role, forKey: Key.role.rawValue)
+        coder.encode(active, forKey: Key.active.rawValue)
+        coder.encode(token, forKey: Key.token.rawValue)
+        coder.encode(mylist, forKey: Key.mylist.rawValue)
+        coder.encode(profiles, forKey: Key.profiles.rawValue)
+        coder.encode(selectedProfile, forKey: Key.selectedProfile.rawValue)
+    }
+}
+
+
+extension UserDTO {
+    
+    enum Key: String {
+        case id = "_id"
+        case name
+        case email
+        case password
+        case passwordConfirm
+        case role
+        case active
+        case token
+        case mylist
+        case profiles
+        case selectedProfile
+    }
+}
+
+
+extension UserDTO {
+    
+    func toDomain() -> User {
+        return User(
+            _id: _id,
+            name: name,
+            email: email,
+            password: password,
+            passwordConfirm: passwordConfirm,
+            role: role,
+            active: active,
+            token: token,
+            mylist: mylist,
+            profiles: profiles,
+            selectedProfile: selectedProfile)
     }
 }

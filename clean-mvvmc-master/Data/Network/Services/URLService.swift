@@ -60,7 +60,7 @@ protocol URLSessionable {
 extension URLSession: URLSessionable {
     
     func request(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTaskCancellable {
-        let task = URLSession.shared.dataTask(with: request, completionHandler: completion)
+        let task = dataTask(with: request, completionHandler: completion)
         
         task.resume()
         
@@ -92,7 +92,7 @@ enum URLRequestError: Error {
         case .generic(let error):
             return error.localizedDescription
         case .urlGeneration:
-            return "Could not generate the provider url."
+            return "Could not generate the provided url."
         }
     }
 }
@@ -112,8 +112,10 @@ protocol URLRequestErrorLoggable {
 
 protocol URLRequestable {
     func request(endpoint: Requestable,
+                 withErrorHandler errorHandler: ((HTTPMongoErrorResponseDTO) -> Void)?,
                  completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable?
     func request(request: URLRequest,
+                 withErrorHandler errorHandler: ((HTTPMongoErrorResponseDTO) -> Void)?,
                  completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable
 }
 
@@ -128,8 +130,17 @@ struct URLService {
 
 extension URLService: URLRequestable {
     
-    func request(request: URLRequest, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable {
+    enum HTTPCode: Int {
+        case ok                     = 200
+        case badRequest             = 400
+        case unauthorized           = 401
+        case notFound               = 404
+        case internalServerError    = 500
+    }
+    
+    func request(request: URLRequest, withErrorHandler errorHandler: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable {
         let dataTask = session.request(request: request) { data, response, error in
+            
             if let requestError = error {
                 var error: URLRequestError
                 
@@ -141,12 +152,35 @@ extension URLService: URLRequestable {
                 
                 self.logger.log(error: error)
                 
-                completion(.failure(error))
-            } else {
-                self.logger.log(responseData: data, response: response)
-                
-                completion(.success(data))
+                return completion(.failure(error))
             }
+            
+            if let response = response as? HTTPURLResponse {
+                
+                let statusCode = HTTPCode(rawValue: response.statusCode)
+                
+                switch statusCode {
+                case .unauthorized, .badRequest:
+                    if let data = data {
+                        
+                        let dataTransferService = MongoService.shared.dataTransferService
+                        
+                        do {
+                            let errorResponse: HTTPMongoErrorResponseDTO = try dataTransferService.decoder.json.decode(data)
+                            
+                            return errorHandler?(errorResponse) ?? {}()
+                        } catch {
+                            debugPrint(.debug, "URLService request error \(error)")
+                        }
+                    }
+                default:
+                    debugPrint(.debug, "URLService statusCode \(response.statusCode)")
+                }
+            }
+            
+            self.logger.log(responseData: data, response: response)
+            
+            completion(.success(data))
         }
         
         logger.log(request: request)
@@ -154,11 +188,11 @@ extension URLService: URLRequestable {
         return dataTask
     }
     
-    func request(endpoint: Requestable, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
+    func request(endpoint: Requestable, withErrorHandler error: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
         do {
             let urlRequest: URLRequest = try endpoint.urlRequest(with: config)
             
-            return request(request: urlRequest, completion: completion)
+            return request(request: urlRequest, withErrorHandler: error, completion: completion)
         } catch {
             completion(.failure(.urlGeneration))
             

@@ -8,7 +8,7 @@
 import UIKit.UIImage
 
 protocol ImageDownloadable {
-    func download(url: URL, identifier: String, completion: ((UIImage?) -> Void)?)
+    func download(url: URL, identifier: NSString, completion: ((UIImage?) -> Void)?)
 }
 
 
@@ -81,12 +81,14 @@ final class URLImageProtocol: URLProtocol {
 
 final class ImageService {
     
-    private lazy var session: URLSession = urlSession()
+    private lazy var session: URLSession = createURLSession()
     
     private(set) var cache = NSCache<NSString, UIImage>()
+}
+
+extension ImageService {
     
-    
-    func urlSession() -> URLSession {
+    private func createURLSession() -> URLSession {
         let configuration = URLSessionConfiguration.ephemeral
         
         configuration.protocolClasses = [URLImageProtocol.classForCoder()]
@@ -99,7 +101,7 @@ final class ImageService {
 
 extension ImageService: ImageDownloadable {
     
-    func download(url: URL, identifier: String, completion: ((UIImage?) -> Void)?) {
+    func download(url: URL, identifier: NSString, completion: ((UIImage?) -> Void)?) {
         if let cachedImage = cache.object(forKey: identifier as NSString) {
             DispatchQueue.main.async {
                 completion?(cachedImage)
@@ -113,10 +115,12 @@ extension ImageService: ImageDownloadable {
                   let self = self,
                   let data = data,
                   let image = UIImage(data: data)
-            else { return completion?(nil) ?? {}() }
+            else {
+                return completion?(nil) ?? {}()
+            }
             
             DispatchQueue.global(qos: .userInitiated).async {
-                self.cache.setObject(image, forKey: identifier as NSString)
+                self.cache.setObject(image, forKey: identifier)
                 
                 DispatchQueue.main.async {
                     completion?(image)

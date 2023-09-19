@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol APIHostProvidable {
+private protocol MongoHostProvidable {
     var absoluteString: String { get }
 }
 
@@ -18,7 +18,7 @@ final class MongoService {
     static var shared = MongoService()
     
     
-    private let provider = APIHostProvider()
+    private let provider = MongoHostProvider()
     
     private lazy var urlService: URLService = createURLService()
     
@@ -29,7 +29,6 @@ final class MongoService {
     
     private init() {}
 }
-
 
 extension MongoService {
     
@@ -47,7 +46,7 @@ extension MongoService {
 }
 
 
-struct APIHostProvider: APIHostProvidable {
+struct MongoHostProvider: MongoHostProvidable {
     
     private var host: String {
         guard let host = Bundle.main.object(forInfoDictionaryKey: "API Host") as? String else {
