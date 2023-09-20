@@ -27,7 +27,7 @@ protocol DataTransferErrorLoggable {
 
 protocol DataTransferRequestable {
     func request<T, E>(endpoint: E,
-                       withErrorHandler error: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                       error: ((HTTPMongoErrorResponseDTO) -> Void)?,
                        completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     where T: Decodable,
           E: ResponseRequestable
@@ -54,19 +54,21 @@ struct DataTransferService {
 extension DataTransferService: DataTransferRequestable {
     
     func request<T, E>(endpoint: E,
-                       withErrorHandler error: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                       error: ((HTTPMongoErrorResponseDTO) -> Void)?,
                        completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     where T: Decodable, E: ResponseRequestable {
         
         return urlService.request(
             endpoint: endpoint,
-            withErrorHandler: error,
+            error: error,
             completion: { result in
                 switch result {
                 case .success(let data):
+                    
                     let result: Result<T, DataTransferError> = decode(data: data, decoder: decoder)
                     
                     return completion(result)
+                    
                 case .failure(let error):
                     logger.log(error: error)
                     
@@ -83,11 +85,13 @@ extension DataTransferService: DataTransferRequestable {
         
         return urlService.request(
             endpoint: endpoint,
-            withErrorHandler: nil,
+            error: nil,
             completion: { result in
                 switch result {
                 case .success:
+                    
                     return completion(.success(()))
+                    
                 case .failure(let error):
                     logger.log(error: error)
                     
@@ -143,44 +147,5 @@ struct DataTransferErrorLogger: DataTransferErrorLoggable {
     func log(error: Error) {
         debugPrint(.linebreak, "------------")
         debugPrint(.error, error.localizedDescription)
-    }
-}
-
-
-struct URLResponseDecoder {
-    
-    let json = JSON()
-    let rawData = RawData()
-    
-    
-    struct JSON: URLResponseDecodable {
-        
-        private let decoder = JSONDecoder()
-        
-        func decode<T>(_ data: Data) throws -> T where T: Decodable {
-            return try decoder.decode(T.self, from: data)
-        }
-    }
-    
-    
-    struct RawData: URLResponseDecodable {
-        
-        enum CodingKeys: String, CodingKey {
-            case `default` = ""
-        }
-        
-        
-        func decode<T>(_ data: Data) throws -> T where T: Decodable {
-            if T.self is Data.Type, let data = data as? T {
-                
-                return data
-                
-            } else {
-                let context = DecodingError.Context(codingPath: [CodingKeys.default],
-                                                    debugDescription: "Expected `Data` type.")
-                
-                throw DecodingError.typeMismatch(T.self, context)
-            }
-        }
     }
 }

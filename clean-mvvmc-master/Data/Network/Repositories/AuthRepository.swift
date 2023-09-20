@@ -52,34 +52,12 @@ extension AuthRepository {
                 let endpoint = AuthRepository.signIn(with: request)
                 
                 sessionTask.task = dataTransferService.request(endpoint: endpoint,
-                                                               withErrorHandler: error,
+                                                               error: error,
                                                                completion: completion)
             }
             
             return sessionTask
         }
-    }
-}
-
-
-extension AuthRepository {
-    
-    func find(request: Any?,
-              cached: ((HTTPUserDTO.Response?) -> Void)?,
-              completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func create(request: Any?, completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func update(request: Any?, completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
-    }
-    
-    func delete(request: Any?, completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        return nil
     }
 }
 

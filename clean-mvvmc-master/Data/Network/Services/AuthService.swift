@@ -7,20 +7,10 @@
 
 import Foundation
 
+
 final class AuthService {
     
     var user: UserDTO?
-    
-    
-    func updateUser(for response: HTTPUserDTO.Response, withRequest request: HTTPUserDTO.Request?) {
-        user = response.data
-        user?._id = response.data?._id
-        user?.token = response.token
-        
-        if let request = request {
-            user?.password = request.user.password
-        }
-    }
 }
 
 
@@ -41,6 +31,7 @@ extension AuthService {
                 guard let self = self else { return }
                 
                 if let response = response {
+                    
                     self.updateUser(for: response, withRequest: request)
                     
                     return cached?(response) ?? {}()
@@ -51,15 +42,31 @@ extension AuthService {
                 
                 switch result {
                 case .success(let response):
+                    
                     self.updateUser(for: response, withRequest: request)
                     
                     let responseStore = UserResponseStore()
                     responseStore.saveResponse(response, withRequest: request)
                     
                     completion?(response)
+                    
                 case .failure(let error):
                     debugPrint(.error, error.localizedDescription)
                 }
             })
+    }
+}
+
+
+extension AuthService {
+    
+    func updateUser(for response: HTTPUserDTO.Response, withRequest request: HTTPUserDTO.Request?) {
+        user = response.data
+        user?._id = response.data?._id
+        user?.token = response.token
+        
+        if let request = request {
+            user?.password = request.user.password
+        }
     }
 }

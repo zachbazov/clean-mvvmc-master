@@ -7,6 +7,15 @@
 
 import Foundation
 
+enum URLResponseCode: Int {
+    case ok                     = 200
+    case badRequest             = 400
+    case unauthorized           = 401
+    case notFound               = 404
+    case internalServerError    = 500
+}
+
+
 protocol URLRequestConfigurable {
     var baseURL: URL { get }
     var headers: [String: String] { get }
@@ -98,12 +107,21 @@ enum URLRequestError: Error {
 }
 
 
-protocol URLRequestErrorResolvable {
+private protocol URLRequestErrorResolvable {
     func resolve(error: Error) -> URLRequestError
+    func resolve(requestError: Error, response: URLResponse?, with data: Data?) -> URLRequestError
 }
 
 
-protocol URLRequestErrorLoggable {
+private protocol URLRequestMongoErrorResolvable {
+    
+    associatedtype ResponseType: Decodable
+    
+    func resolve(statusCode: URLResponseCode, data: Data?) -> ResponseType?
+}
+
+
+private protocol URLRequestErrorLoggable {
     func log(request: URLRequest)
     func log(responseData data: Data?, response: URLResponse?)
     func log(error: Error)
@@ -112,10 +130,10 @@ protocol URLRequestErrorLoggable {
 
 protocol URLRequestable {
     func request(endpoint: Requestable,
-                 withErrorHandler errorHandler: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                 error: ((HTTPMongoErrorResponseDTO) -> Void)?,
                  completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable?
     func request(request: URLRequest,
-                 withErrorHandler errorHandler: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                 error: ((HTTPMongoErrorResponseDTO) -> Void)?,
                  completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable
 }
 
@@ -124,61 +142,38 @@ struct URLService {
     
     let config: URLRequestConfigurable
     let session = URLSession.shared
-    let resolver = URLRequestErrorResolver()
+    let urlErrorResolver = URLRequestErrorResolver()
+    let mongoErrorResolver = URLRequestMongoErrorResolver()
     let logger = URLRequestErrorLogger()
 }
 
+
 extension URLService: URLRequestable {
     
-    enum HTTPCode: Int {
-        case ok                     = 200
-        case badRequest             = 400
-        case unauthorized           = 401
-        case notFound               = 404
-        case internalServerError    = 500
-    }
-    
-    func request(request: URLRequest, withErrorHandler errorHandler: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable {
-        let dataTask = session.request(request: request) { data, response, error in
+    func request(request: URLRequest, error: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable {
+        
+        let dataTask = session.request(request: request) { data, response, requestError in
             
-            if let requestError = error {
-                var error: URLRequestError
+            if let requestError = requestError {
                 
-                if let response = response as? HTTPURLResponse {
-                    error = .error(statusCode: response.statusCode, data: data)
-                } else {
-                    error = resolver.resolve(error: requestError)
-                }
+                let urlRequestError = urlErrorResolver.resolve(requestError: requestError, response: response, with: data)
                 
-                self.logger.log(error: error)
+                logger.log(error: urlRequestError)
                 
-                return completion(.failure(error))
+                return completion(.failure(urlRequestError))
             }
             
-            if let response = response as? HTTPURLResponse {
+            if let response = response as? HTTPURLResponse,
+               let statusCode = URLResponseCode(rawValue: response.statusCode) {
                 
-                let statusCode = HTTPCode(rawValue: response.statusCode)
+                let resolvedResponse = mongoErrorResolver.resolve(statusCode: statusCode, data: data)
                 
-                switch statusCode {
-                case .unauthorized, .badRequest:
-                    if let data = data {
-                        
-                        let dataTransferService = MongoService.shared.dataTransferService
-                        
-                        do {
-                            let errorResponse: HTTPMongoErrorResponseDTO = try dataTransferService.decoder.json.decode(data)
-                            
-                            return errorHandler?(errorResponse) ?? {}()
-                        } catch {
-                            debugPrint(.debug, "URLService request error \(error)")
-                        }
-                    }
-                default:
-                    debugPrint(.debug, "URLService statusCode \(response.statusCode)")
+                if let errorResponse = resolvedResponse {
+                    return error?(errorResponse) ?? {}()
                 }
             }
             
-            self.logger.log(responseData: data, response: response)
+            logger.log(responseData: data, response: response)
             
             completion(.success(data))
         }
@@ -188,11 +183,12 @@ extension URLService: URLRequestable {
         return dataTask
     }
     
-    func request(endpoint: Requestable, withErrorHandler error: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
+    func request(endpoint: Requestable, error: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
+        
         do {
             let urlRequest: URLRequest = try endpoint.urlRequest(with: config)
             
-            return request(request: urlRequest, withErrorHandler: error, completion: completion)
+            return request(request: urlRequest, error: error, completion: completion)
         } catch {
             completion(.failure(.urlGeneration))
             
@@ -202,7 +198,59 @@ extension URLService: URLRequestable {
 }
 
 
+struct URLResponseDecoder {
+    
+    let json = JSON()
+    let rawData = RawData()
+    
+    
+    struct JSON: URLResponseDecodable {
+        
+        private let decoder = JSONDecoder()
+        
+        func decode<T>(_ data: Data) throws -> T where T: Decodable {
+            return try decoder.decode(T.self, from: data)
+        }
+    }
+    
+    
+    struct RawData: URLResponseDecodable {
+        
+        enum CodingKeys: String, CodingKey {
+            case `default` = ""
+        }
+        
+        
+        func decode<T>(_ data: Data) throws -> T where T: Decodable {
+            
+            if T.self is Data.Type, let data = data as? T {
+                
+                return data
+                
+            } else {
+                let context = DecodingError.Context(codingPath: [CodingKeys.default],
+                                                    debugDescription: "Expected `Data` type.")
+                
+                throw DecodingError.typeMismatch(T.self, context)
+            }
+        }
+    }
+}
+
+
 struct URLRequestErrorResolver: URLRequestErrorResolvable {
+    
+    fileprivate func resolve(requestError: Error, response: URLResponse?, with data: Data?) -> URLRequestError {
+        var urlRequestError: URLRequestError
+        
+        if let response = response as? HTTPURLResponse {
+            urlRequestError = .error(statusCode: response.statusCode, data: data)
+        } else {
+            urlRequestError = resolve(error: requestError)
+        }
+        
+        return urlRequestError
+    }
     
     func resolve(error: Error) -> URLRequestError {
         let code = URLError.Code(rawValue: (error as NSError).code)
@@ -216,6 +264,41 @@ struct URLRequestErrorResolver: URLRequestErrorResolvable {
             return .cancelled
         default:
             return .generic(error)
+        }
+    }
+}
+
+
+struct URLRequestMongoErrorResolver: URLRequestMongoErrorResolvable {
+    
+    fileprivate func resolve(statusCode: URLResponseCode, data: Data?) -> HTTPMongoErrorResponseDTO? {
+        switch statusCode {
+        case .unauthorized, .badRequest:
+            
+            if let data = data,
+               let errorResponse: HTTPMongoErrorResponseDTO = decode(data) {
+
+                return errorResponse
+            }
+        default:
+            debugPrint(.debug, "URLService statusCode \(statusCode.rawValue)")
+            
+            return nil
+        }
+        
+        return nil
+    }
+    
+    
+    private func decode(_ data: Data) -> HTTPMongoErrorResponseDTO? {
+        do {
+            let decoder = URLResponseDecoder()
+
+            return try decoder.json.decode(data)
+        } catch {
+            debugPrint(.error, "JSON parsing error for type `\(HTTPMongoErrorResponseDTO.self)` occured at \(error.localizedDescription).")
+
+            return nil
         }
     }
 }

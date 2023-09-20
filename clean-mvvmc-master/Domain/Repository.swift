@@ -23,5 +23,29 @@ protocol RepositoryRequestable {
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
 }
 
+extension Repository {
+    
+    func find(request: Any?,
+              cached: ((ResponseType?) -> Void)?,
+              completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
+    
+    func create(request: Any?,
+                completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
+    
+    func update(request: Any?,
+                completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
+    
+    func delete(request: Any?,
+                completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
+}
+
 
 protocol Repository: RepositoryRequestable {}
