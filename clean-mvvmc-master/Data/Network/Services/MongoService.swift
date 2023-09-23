@@ -35,7 +35,7 @@ extension MongoService {
     private func createURLService() -> URLService {
         guard let url = URL(string: provider.absoluteString) else { fatalError() }
         
-        let requestConfig = URLRequestConfig(baseURL: url)
+        let requestConfig = URLRequestConfiguration(baseURL: url)
         
         return URLService(config: requestConfig)
     }

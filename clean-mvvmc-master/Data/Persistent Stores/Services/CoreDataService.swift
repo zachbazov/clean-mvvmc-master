@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import CodeBureau
 
 enum CoreDataStoreError: Error {
     case read(Error)

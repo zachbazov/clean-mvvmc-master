@@ -6,42 +6,7 @@
 //
 
 import Foundation
-
-enum DataTransferError: Error {
-    case noResponse
-    case parsing(Error)
-    case requestFailure(URLRequestError)
-    case resolvedRequestFailure(Error)
-}
-
-
-protocol DataTransferErrorResolvable {
-    func resolve(urlRequestError error: URLRequestError) -> DataTransferError
-}
-
-
-protocol DataTransferErrorLoggable {
-    func log(error: Error)
-}
-
-
-protocol DataTransferRequestable {
-    func request<T, E>(endpoint: E,
-                       error: ((HTTPMongoErrorResponseDTO) -> Void)?,
-                       completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    where T: Decodable,
-          E: ResponseRequestable
-    
-    func request<E>(endpoint: E,
-                    completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    where E: ResponseRequestable
-}
-
-
-protocol URLResponseDecodable {
-    func decode<T>(_ data: Data) throws -> T where T: Decodable
-}
-
+import CodeBureau
 
 struct DataTransferService {
     
@@ -118,34 +83,5 @@ extension DataTransferService {
             
             return .failure(.parsing(error))
         }
-    }
-}
-
-
-struct DataTransferErrorResolver: DataTransferErrorResolvable {
-    
-    func resolve(urlRequestError error: URLRequestError) -> DataTransferError {
-        let resolvedError = resolve(error: error)
-        
-        return resolvedError is URLRequestError ? .requestFailure(error) : .resolvedRequestFailure(resolvedError)
-    }
-    
-    
-    private func resolve(error: URLRequestError) -> Error {
-        let code = URLError.Code(rawValue: (error as NSError).code)
-        
-        switch code {
-        default:
-            return error
-        }
-    }
-}
-
-
-struct DataTransferErrorLogger: DataTransferErrorLoggable {
-    
-    func log(error: Error) {
-        debugPrint(.linebreak, "------------")
-        debugPrint(.error, error.localizedDescription)
     }
 }

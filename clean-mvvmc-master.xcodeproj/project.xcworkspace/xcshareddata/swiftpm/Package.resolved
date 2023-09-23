@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "codebureau",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zachbazov/CodeBureau.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6aaa57c0f121234181130e2f898bbe1f988098f2"
+      }
+    }
+  ],
+  "version" : 2
+}

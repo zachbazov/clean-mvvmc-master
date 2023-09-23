@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import CodeBureau
 
 final class AuthService {
     
@@ -31,8 +31,8 @@ extension AuthService {
                 guard let self = self else { return }
                 
                 if let response = response {
-                    
                     self.updateUser(for: response, withRequest: request)
+                    self.verifyJWTIntegrity()
                     
                     return cached?(response) ?? {}()
                 }
@@ -44,6 +44,7 @@ extension AuthService {
                 case .success(let response):
                     
                     self.updateUser(for: response, withRequest: request)
+                    self.verifyJWTIntegrity()
                     
                     let responseStore = UserResponseStore()
                     responseStore.saveResponse(response, withRequest: request)
@@ -60,13 +61,54 @@ extension AuthService {
 
 extension AuthService {
     
+    private var secretKeyData: Data {
+        let key = Bundle.main.object(forInfoDictionaryKey: "JWT Secret") as! String
+        return key.data(using: .utf8)!
+    }
+    
+    
     func updateUser(for response: HTTPUserDTO.Response, withRequest request: HTTPUserDTO.Request?) {
-        user = response.data
-        user?._id = response.data?._id
-        user?.token = response.token
+        guard let responseData = response.data else { return }
+        
+        user = responseData
+        user?._id = responseData._id
         
         if let request = request {
             user?.password = request.user.password
         }
+        
+        if let token = response.token {
+            user?.token = token
+        }
+    }
+    
+    func verifyJWTIntegrity() {
+        guard let token = user?.token else { return }
+        
+        do {
+            let jwt = try JWT<PayloadStandardJWT>(jwtString: token,
+                                                  verifier: .hs256(key: secretKeyData))
+            
+            jwt.payload.log()
+            
+            let payloadValidity = jwt.validatePayload()
+            switch payloadValidity {
+            case .expired:
+                deleteCurrentUserResponseFromStore()
+            default:
+                break
+            }
+        } catch {
+            debugPrint(.debug, "AuthService JWT Error \(error)")
+        }
+    }
+    
+    private func deleteCurrentUserResponseFromStore() {
+        guard let user = user else { return }
+        
+        let coreDataService = CoreDataService.shared
+        let request = HTTPUserDTO.Request(user: user)
+        let responseStore = UserResponseStore()
+        responseStore.deleteResponse(withRequest: request, in: coreDataService.context())
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import CodeBureau
 
 struct UserResponseStore: ResponsePersistable {
     
