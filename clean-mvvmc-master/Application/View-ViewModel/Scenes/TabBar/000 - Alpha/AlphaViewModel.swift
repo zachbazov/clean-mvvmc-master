@@ -10,4 +10,6 @@ import Foundation
 final class AlphaViewModel: ControllerViewModel {
     
     var coordinator: TabBarCoordinator?
+    
+    let useCase = AuthUseCase()
 }
