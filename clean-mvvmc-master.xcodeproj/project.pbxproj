@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B263A852ABA437A00C50D66 /* ResponsePersistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B263A842ABA437A00C50D66 /* ResponsePersistable.swift */; };
+		8B049D952ABFC072004DC481 /* MongoDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8B049D942ABFC072004DC481 /* MongoDB */; };
+		8B049D972ABFC1BC004DC481 /* MongoHostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B049D962ABFC1BC004DC481 /* MongoHostProvider.swift */; };
 		8B263A872ABA442500C50D66 /* MongoErrorResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B263A862ABA442500C50D66 /* MongoErrorResponseDTO.swift */; };
 		8B263A892ABA444700C50D66 /* HTTPMongoErrorResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B263A882ABA444700C50D66 /* HTTPMongoErrorResponseDTO.swift */; };
 		8B46973D2AB7BFFD00CC8131 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46973C2AB7BFFD00CC8131 /* ProfileDTO.swift */; };
@@ -27,13 +28,6 @@
 		8B87E5382AB408A1009248EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5362AB408A1009248EC /* LaunchScreen.storyboard */; };
 		8B87E5432AB4096B009248EC /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5422AB4096B009248EC /* Application.swift */; };
 		8B87E5452AB40978009248EC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5442AB40978009248EC /* AppCoordinator.swift */; };
-		8B87E54D2AB409B6009248EC /* CoordinatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E54C2AB409B6009248EC /* CoordinatorViewController.swift */; };
-		8B87E54F2AB409BE009248EC /* CoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E54E2AB409BE009248EC /* CoordinatorViewModel.swift */; };
-		8B87E5512AB409C3009248EC /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5502AB409C3009248EC /* Coordinator.swift */; };
-		8B87E5532AB409D3009248EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5522AB409D3009248EC /* ViewController.swift */; };
-		8B87E5552AB409DC009248EC /* ControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5542AB409DC009248EC /* ControllerViewModel.swift */; };
-		8B87E5572AB409E0009248EC /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5562AB409E0009248EC /* View.swift */; };
-		8B87E5592AB409E3009248EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5582AB409E3009248EC /* ViewModel.swift */; };
 		8B87E5602AB40A1F009248EC /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E55F2AB40A1F009248EC /* TabBarCoordinator.swift */; };
 		8B87E5622AB40A26009248EC /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5612AB40A26009248EC /* TabBarViewModel.swift */; };
 		8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5632AB40A2B009248EC /* TabBarController.swift */; };
@@ -56,7 +50,7 @@
 		8B87E5952AB40B4E009248EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5942AB40B4E009248EC /* Profile.swift */; };
 		8B87E5972AB480A0009248EC /* DeltaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */; };
 		8B87E5992AB483E2009248EC /* OmegaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */; };
-		8B87E59E2AB53A45009248EC /* MongoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59D2AB53A45009248EC /* MongoService.swift */; };
+		8B87E59E2AB53A45009248EC /* MongoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59D2AB53A45009248EC /* MongoServer.swift */; };
 		8B87E5A02AB544C8009248EC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59F2AB544C8009248EC /* Endpoint.swift */; };
 		8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A12AB5CE0C009248EC /* URLService.swift */; };
 		8B87E5A62AB6767E009248EC /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A52AB6767E009248EC /* DataTransferService.swift */; };
@@ -66,7 +60,7 @@
 		8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B02AB697C5009248EC /* AuthUseCase.swift */; };
 		8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B42AB73555009248EC /* UserDTO.swift */; };
 		8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */; };
-		8B87E5BC2AB74C88009248EC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5BB2AB74C88009248EC /* AuthService.swift */; };
+		8B87E5BC2AB74C88009248EC /* MongoAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5BB2AB74C88009248EC /* MongoAuthenticator.swift */; };
 		8B8F81B62ABF2B25006B72CB /* CodeBureau in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81B52ABF2B25006B72CB /* CodeBureau */; };
 		8B8F81B92ABF3264006B72CB /* URLRequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */; };
 		8B8F81BB2ABF32B1006B72CB /* URLSessionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */; };
@@ -76,6 +70,29 @@
 		8B8F81C32ABF43D6006B72CB /* URLRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */; };
 		8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81DA2ABF59CC006B72CB /* DataTransferErrorLogger.swift */; };
 		8B8F81DD2ABF59CD006B72CB /* DataTransferErrorResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81DB2ABF59CC006B72CB /* DataTransferErrorResolver.swift */; };
+		8B8F81E02ABFB3DF006B72CB /* URLDataTransfer in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81DF2ABFB3DF006B72CB /* URLDataTransfer */; };
+		8B8F81E32ABFB82C006B72CB /* Cryptographic in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81E22ABFB82C006B72CB /* Cryptographic */; };
+		8B935FDD2AD89FB2000268CB /* UIBarButton+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B935FDC2AD89FB2000268CB /* UIBarButton+View.swift */; };
+		8B935FE22AD957F3000268CB /* UIView+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B935FE12AD957F3000268CB /* UIView+Visibility.swift */; };
+		8B9E5E8A2AC8BECB003FDC04 /* MongoAuthRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E862AC8BECB003FDC04 /* MongoAuthRequestable.swift */; };
+		8B9E5E8B2AC8BECB003FDC04 /* MongoAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E872AC8BECB003FDC04 /* MongoAuthenticable.swift */; };
+		8B9E5E8C2AC8BECB003FDC04 /* MongoHostProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E882AC8BECB003FDC04 /* MongoHostProvidable.swift */; };
+		8B9E5E8D2AC8BECB003FDC04 /* MongoServable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E892AC8BECB003FDC04 /* MongoServable.swift */; };
+		8B9E5FE32AD59329003FDC04 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5FE22AD59329003FDC04 /* TextField.swift */; };
+		8BA1348E2AC2293400C50653 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1348D2AC2293400C50653 /* AuthCoordinator.swift */; };
+		8BA134902AC2293B00C50653 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1348F2AC2293B00C50653 /* AuthViewController.swift */; };
+		8BA134922AC2294A00C50653 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134912AC2294A00C50653 /* AuthViewModel.swift */; };
+		8BA134942AC2296800C50653 /* AuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BA134932AC2296800C50653 /* AuthViewController.storyboard */; };
+		8BA134982AC255D300C50653 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134972AC255D300C50653 /* SignUpViewController.swift */; };
+		8BA1349A2AC255DA00C50653 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134992AC255DA00C50653 /* SignUpViewModel.swift */; };
+		8BA1349C2AC255E800C50653 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1349B2AC255E800C50653 /* SignInViewController.swift */; };
+		8BA1349E2AC255EE00C50653 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1349D2AC255EE00C50653 /* SignInViewModel.swift */; };
+		8BA134A02AC2E09E00C50653 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA1349F2AC2E09E00C50653 /* SignUpViewController.xib */; };
+		8BA134A22AC2E13100C50653 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA134A12AC2E13100C50653 /* SignInViewController.xib */; };
+		8BA134A42AC5AB6F00C50653 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134A32AC5AB6F00C50653 /* NavigationController.swift */; };
+		8BA134A62AC5CA6900C50653 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134A52AC5CA6900C50653 /* Theme.swift */; };
+		8BA134A92AC5CAC900C50653 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */; };
+		8BA134AB2AC6265A00C50653 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134AA2AC6265A00C50653 /* GradientView.swift */; };
 		8BA5210B2AB7715D00DAE2F7 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */; };
 		8BB692972AB7B9660076207C /* CoreDataStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BB692952AB7B9660076207C /* CoreDataStore.xcdatamodeld */; };
 		8BB692992AB7BD350076207C /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB692982AB7BD350076207C /* Media.swift */; };
@@ -92,7 +109,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B263A842ABA437A00C50D66 /* ResponsePersistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePersistable.swift; sourceTree = "<group>"; };
+		8B049D962ABFC1BC004DC481 /* MongoHostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoHostProvider.swift; sourceTree = "<group>"; };
 		8B263A862ABA442500C50D66 /* MongoErrorResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoErrorResponseDTO.swift; sourceTree = "<group>"; };
 		8B263A882ABA444700C50D66 /* HTTPMongoErrorResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMongoErrorResponseDTO.swift; sourceTree = "<group>"; };
 		8B46973C2AB7BFFD00CC8131 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
@@ -114,13 +131,6 @@
 		8B87E5392AB408A1009248EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B87E5422AB4096B009248EC /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		8B87E5442AB40978009248EC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		8B87E54C2AB409B6009248EC /* CoordinatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorViewController.swift; sourceTree = "<group>"; };
-		8B87E54E2AB409BE009248EC /* CoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorViewModel.swift; sourceTree = "<group>"; };
-		8B87E5502AB409C3009248EC /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		8B87E5522AB409D3009248EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8B87E5542AB409DC009248EC /* ControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerViewModel.swift; sourceTree = "<group>"; };
-		8B87E5562AB409E0009248EC /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		8B87E5582AB409E3009248EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8B87E55F2AB40A1F009248EC /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		8B87E5612AB40A26009248EC /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		8B87E5632AB40A2B009248EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -143,7 +153,7 @@
 		8B87E5942AB40B4E009248EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeltaViewController.storyboard; sourceTree = "<group>"; };
 		8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OmegaViewController.storyboard; sourceTree = "<group>"; };
-		8B87E59D2AB53A45009248EC /* MongoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoService.swift; sourceTree = "<group>"; };
+		8B87E59D2AB53A45009248EC /* MongoServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoServer.swift; sourceTree = "<group>"; };
 		8B87E59F2AB544C8009248EC /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		8B87E5A12AB5CE0C009248EC /* URLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLService.swift; sourceTree = "<group>"; };
 		8B87E5A52AB6767E009248EC /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
@@ -153,7 +163,7 @@
 		8B87E5B02AB697C5009248EC /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		8B87E5B42AB73555009248EC /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUserDTO.swift; sourceTree = "<group>"; };
-		8B87E5BB2AB74C88009248EC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		8B87E5BB2AB74C88009248EC /* MongoAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoAuthenticator.swift; sourceTree = "<group>"; };
 		8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConfiguration.swift; sourceTree = "<group>"; };
 		8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTask.swift; sourceTree = "<group>"; };
 		8B8F81BC2ABF437C006B72CB /* URLResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseDecoder.swift; sourceTree = "<group>"; };
@@ -162,6 +172,27 @@
 		8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestLogger.swift; sourceTree = "<group>"; };
 		8B8F81DA2ABF59CC006B72CB /* DataTransferErrorLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferErrorLogger.swift; sourceTree = "<group>"; };
 		8B8F81DB2ABF59CC006B72CB /* DataTransferErrorResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferErrorResolver.swift; sourceTree = "<group>"; };
+		8B935FDC2AD89FB2000268CB /* UIBarButton+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButton+View.swift"; sourceTree = "<group>"; };
+		8B935FE12AD957F3000268CB /* UIView+Visibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Visibility.swift"; sourceTree = "<group>"; };
+		8B9E5E862AC8BECB003FDC04 /* MongoAuthRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoAuthRequestable.swift; sourceTree = "<group>"; };
+		8B9E5E872AC8BECB003FDC04 /* MongoAuthenticable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoAuthenticable.swift; sourceTree = "<group>"; };
+		8B9E5E882AC8BECB003FDC04 /* MongoHostProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoHostProvidable.swift; sourceTree = "<group>"; };
+		8B9E5E892AC8BECB003FDC04 /* MongoServable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoServable.swift; sourceTree = "<group>"; };
+		8B9E5FE22AD59329003FDC04 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		8BA1348D2AC2293400C50653 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		8BA1348F2AC2293B00C50653 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		8BA134912AC2294A00C50653 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		8BA134932AC2296800C50653 /* AuthViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthViewController.storyboard; sourceTree = "<group>"; };
+		8BA134972AC255D300C50653 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8BA134992AC255DA00C50653 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		8BA1349B2AC255E800C50653 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		8BA1349D2AC255EE00C50653 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		8BA1349F2AC2E09E00C50653 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		8BA134A12AC2E13100C50653 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		8BA134A32AC5AB6F00C50653 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		8BA134A52AC5CA6900C50653 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HEX.swift"; sourceTree = "<group>"; };
+		8BA134AA2AC6265A00C50653 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		8BB692962AB7B9660076207C /* CoreDataStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStore.xcdatamodel; sourceTree = "<group>"; };
 		8BB692982AB7BD350076207C /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
@@ -183,18 +214,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8F81B62ABF2B25006B72CB /* CodeBureau in Frameworks */,
+				8B049D952ABFC072004DC481 /* MongoDB in Frameworks */,
+				8B8F81E02ABFB3DF006B72CB /* URLDataTransfer in Frameworks */,
+				8B8F81E32ABFB82C006B72CB /* Cryptographic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B049D982ABFC1FA004DC481 /* MongoService */ = {
+			isa = PBXGroup;
+			children = (
+				8B9E5E872AC8BECB003FDC04 /* MongoAuthenticable.swift */,
+				8B9E5E862AC8BECB003FDC04 /* MongoAuthRequestable.swift */,
+				8B9E5E882AC8BECB003FDC04 /* MongoHostProvidable.swift */,
+				8B9E5E892AC8BECB003FDC04 /* MongoServable.swift */,
+				8B87E59D2AB53A45009248EC /* MongoServer.swift */,
+				8B049D962ABFC1BC004DC481 /* MongoHostProvider.swift */,
+				8B87E5BB2AB74C88009248EC /* MongoAuthenticator.swift */,
+			);
+			path = MongoService;
+			sourceTree = "<group>";
+		};
 		8B23AD762AB7824E0008EECC /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8B8F81B72ABF3247006B72CB /* URLService */,
-				8B87E5BB2AB74C88009248EC /* AuthService.swift */,
-				8B87E59D2AB53A45009248EC /* MongoService.swift */,
+				8B8F81B72ABF3247006B72CB /* URLDataTransfer */,
+				8B049D982ABFC1FA004DC481 /* MongoService */,
 				8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */,
 			);
 			path = Services;
@@ -261,52 +308,18 @@
 		8B87E5472AB4098C009248EC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B87E5482AB40992009248EC /* Patterns */,
+				8BA134AA2AC6265A00C50653 /* GradientView.swift */,
+				8BA134A32AC5AB6F00C50653 /* NavigationController.swift */,
+				8B9E5FE22AD59329003FDC04 /* TextField.swift */,
+				8BA134A52AC5CA6900C50653 /* Theme.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		8B87E5482AB40992009248EC /* Patterns */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E5492AB40997009248EC /* Coordinator */,
-				8B87E54A2AB4099C009248EC /* ViewController */,
-				8B87E54B2AB409A1009248EC /* View */,
-			);
-			path = Patterns;
-			sourceTree = "<group>";
-		};
-		8B87E5492AB40997009248EC /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E5502AB409C3009248EC /* Coordinator.swift */,
-				8B87E54E2AB409BE009248EC /* CoordinatorViewModel.swift */,
-				8B87E54C2AB409B6009248EC /* CoordinatorViewController.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		8B87E54A2AB4099C009248EC /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E5522AB409D3009248EC /* ViewController.swift */,
-				8B87E5542AB409DC009248EC /* ControllerViewModel.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		8B87E54B2AB409A1009248EC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8B87E5562AB409E0009248EC /* View.swift */,
-				8B87E5582AB409E3009248EC /* ViewModel.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		8B87E55A2AB409E9009248EC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8BA1348C2AC2291300C50653 /* Auth */,
 				8B87E55B2AB409F0009248EC /* TabBar */,
 				8B87E57A2AB40AA2009248EC /* Delta */,
 				8B87E57B2AB40AA6009248EC /* Omega */,
@@ -460,8 +473,11 @@
 		8B87E58D2AB40B0D009248EC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8B87E58E2AB40B11009248EC /* View */,
+				8BA134A72AC5CA8B00C50653 /* UIColor */,
+				8B935FDB2AD89F8A000268CB /* UIBarButton */,
+				8B935FE02AD957DB000268CB /* UIView */,
 				8B87E58F2AB40B15009248EC /* UIViewController */,
+				8B87E58E2AB40B11009248EC /* View */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -537,7 +553,7 @@
 			path = HTTP;
 			sourceTree = "<group>";
 		};
-		8B8F81B72ABF3247006B72CB /* URLService */ = {
+		8B8F81B72ABF3247006B72CB /* URLDataTransfer */ = {
 			isa = PBXGroup;
 			children = (
 				8B87E59F2AB544C8009248EC /* Endpoint.swift */,
@@ -548,19 +564,68 @@
 				8B8F81C02ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift */,
 				8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */,
 				8B8F81BC2ABF437C006B72CB /* URLResponseDecoder.swift */,
-				8B8F81D92ABF5848006B72CB /* DataTransferService */,
-			);
-			path = URLService;
-			sourceTree = "<group>";
-		};
-		8B8F81D92ABF5848006B72CB /* DataTransferService */ = {
-			isa = PBXGroup;
-			children = (
 				8B87E5A52AB6767E009248EC /* DataTransferService.swift */,
 				8B8F81DA2ABF59CC006B72CB /* DataTransferErrorLogger.swift */,
 				8B8F81DB2ABF59CC006B72CB /* DataTransferErrorResolver.swift */,
 			);
-			path = DataTransferService;
+			path = URLDataTransfer;
+			sourceTree = "<group>";
+		};
+		8B935FDB2AD89F8A000268CB /* UIBarButton */ = {
+			isa = PBXGroup;
+			children = (
+				8B935FDC2AD89FB2000268CB /* UIBarButton+View.swift */,
+			);
+			path = UIBarButton;
+			sourceTree = "<group>";
+		};
+		8B935FE02AD957DB000268CB /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				8B935FE12AD957F3000268CB /* UIView+Visibility.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		8BA1348C2AC2291300C50653 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				8BA1348D2AC2293400C50653 /* AuthCoordinator.swift */,
+				8BA134912AC2294A00C50653 /* AuthViewModel.swift */,
+				8BA1348F2AC2293B00C50653 /* AuthViewController.swift */,
+				8BA134932AC2296800C50653 /* AuthViewController.storyboard */,
+				8BA134962AC255C400C50653 /* Sign Up */,
+				8BA134952AC255B600C50653 /* Sign In */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		8BA134952AC255B600C50653 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				8BA1349D2AC255EE00C50653 /* SignInViewModel.swift */,
+				8BA1349B2AC255E800C50653 /* SignInViewController.swift */,
+				8BA134A12AC2E13100C50653 /* SignInViewController.xib */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		8BA134962AC255C400C50653 /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				8BA134992AC255DA00C50653 /* SignUpViewModel.swift */,
+				8BA134972AC255D300C50653 /* SignUpViewController.swift */,
+				8BA1349F2AC2E09E00C50653 /* SignUpViewController.xib */,
+			);
+			path = "Sign Up";
+			sourceTree = "<group>";
+		};
+		8BA134A72AC5CA8B00C50653 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		8BB79E6B2AB79E51000E191A /* Services */ = {
@@ -576,7 +641,6 @@
 		8BF4DD532AB7A56400536F7E /* Stores */ = {
 			isa = PBXGroup;
 			children = (
-				8B263A842ABA437A00C50D66 /* ResponsePersistable.swift */,
 				8BD210FD2AB7CEB000030A89 /* UserResponseStore.swift */,
 			);
 			path = Stores;
@@ -600,6 +664,9 @@
 			name = "clean-mvvmc-master";
 			packageProductDependencies = (
 				8B8F81B52ABF2B25006B72CB /* CodeBureau */,
+				8B8F81DF2ABFB3DF006B72CB /* URLDataTransfer */,
+				8B8F81E22ABFB82C006B72CB /* Cryptographic */,
+				8B049D942ABFC072004DC481 /* MongoDB */,
 			);
 			productName = "clean-mvvmc-master";
 			productReference = 8B87E5282AB408A0009248EC /* clean-mvvmc-master.app */;
@@ -631,6 +698,9 @@
 			mainGroup = 8B87E51F2AB408A0009248EC;
 			packageReferences = (
 				8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */,
+				8B8F81DE2ABFB3DF006B72CB /* XCRemoteSwiftPackageReference "URLDataTransfer" */,
+				8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */,
+				8B049D932ABFC072004DC481 /* XCRemoteSwiftPackageReference "MongoDB" */,
 			);
 			productRefGroup = 8B87E5292AB408A0009248EC /* Products */;
 			projectDirPath = "";
@@ -652,6 +722,9 @@
 				8B87E5382AB408A1009248EC /* LaunchScreen.storyboard in Resources */,
 				8B87E5352AB408A1009248EC /* Assets.xcassets in Resources */,
 				8B87E5992AB483E2009248EC /* OmegaViewController.storyboard in Resources */,
+				8BA134A02AC2E09E00C50653 /* SignUpViewController.xib in Resources */,
+				8BA134A22AC2E13100C50653 /* SignInViewController.xib in Resources */,
+				8BA134942AC2296800C50653 /* AuthViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,10 +741,11 @@
 				8B4697472AB7C76C00CC8131 /* HTTPProfileDTO.swift in Sources */,
 				8B8F81DD2ABF59CD006B72CB /* DataTransferErrorResolver.swift in Sources */,
 				8B87E5952AB40B4E009248EC /* Profile.swift in Sources */,
-				8B87E54D2AB409B6009248EC /* CoordinatorViewController.swift in Sources */,
-				8B87E59E2AB53A45009248EC /* MongoService.swift in Sources */,
+				8B9E5E8D2AC8BECB003FDC04 /* MongoServable.swift in Sources */,
+				8B87E59E2AB53A45009248EC /* MongoServer.swift in Sources */,
 				8B87E5452AB40978009248EC /* AppCoordinator.swift in Sources */,
 				8B8F81BB2ABF32B1006B72CB /* URLSessionTask.swift in Sources */,
+				8B935FDD2AD89FB2000268CB /* UIBarButton+View.swift in Sources */,
 				8B87E5752AB40A8E009248EC /* CustomView.swift in Sources */,
 				8B46973D2AB7BFFD00CC8131 /* ProfileDTO.swift in Sources */,
 				8B87E5A92AB693D9009248EC /* Repository.swift in Sources */,
@@ -681,33 +755,40 @@
 				8B87E5602AB40A1F009248EC /* TabBarCoordinator.swift in Sources */,
 				8B263A872ABA442500C50D66 /* MongoErrorResponseDTO.swift in Sources */,
 				8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */,
-				8B87E5572AB409E0009248EC /* View.swift in Sources */,
+				8B9E5E8A2AC8BECB003FDC04 /* MongoAuthRequestable.swift in Sources */,
 				8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */,
 				8BB692972AB7B9660076207C /* CoreDataStore.xcdatamodeld in Sources */,
 				8BB692A12AB7BD870076207C /* Episode.swift in Sources */,
 				8B87E5702AB40A74009248EC /* GammaViewModel.swift in Sources */,
 				8B87E5832AB40AC7009248EC /* OmegaViewController.swift in Sources */,
+				8B935FE22AD957F3000268CB /* UIView+Visibility.swift in Sources */,
 				8B263A892ABA444700C50D66 /* HTTPMongoErrorResponseDTO.swift in Sources */,
+				8BA134AB2AC6265A00C50653 /* GradientView.swift in Sources */,
 				8BF4DD522AB7A08B00536F7E /* CoreDataService.swift in Sources */,
 				8BB692992AB7BD350076207C /* Media.swift in Sources */,
+				8B9E5FE32AD59329003FDC04 /* TextField.swift in Sources */,
 				8BA5210B2AB7715D00DAE2F7 /* ImageService.swift in Sources */,
+				8B9E5E8C2AC8BECB003FDC04 /* MongoHostProvidable.swift in Sources */,
 				8B87E56E2AB40A6F009248EC /* BetaViewController.swift in Sources */,
 				8B87E5AF2AB697C0009248EC /* AuthRepository.swift in Sources */,
-				8B87E5592AB409E3009248EC /* ViewModel.swift in Sources */,
+				8BA134922AC2294A00C50653 /* AuthViewModel.swift in Sources */,
 				8B87E5432AB4096B009248EC /* Application.swift in Sources */,
+				8B9E5E8B2AC8BECB003FDC04 /* MongoAuthenticable.swift in Sources */,
 				8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */,
+				8BA134902AC2293B00C50653 /* AuthViewController.swift in Sources */,
+				8BA1349C2AC255E800C50653 /* SignInViewController.swift in Sources */,
 				8BB6929D2AB7BD630076207C /* List.swift in Sources */,
 				8B87E5A62AB6767E009248EC /* DataTransferService.swift in Sources */,
 				8B87E57D2AB40AB7009248EC /* DeltaViewModel.swift in Sources */,
-				8B263A852ABA437A00C50D66 /* ResponsePersistable.swift in Sources */,
+				8BA1349A2AC255DA00C50653 /* SignUpViewModel.swift in Sources */,
 				8B87E5772AB40A92009248EC /* CustomViewModel.swift in Sources */,
+				8BA1348E2AC2293400C50653 /* AuthCoordinator.swift in Sources */,
 				8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */,
 				8BF4DD552AB7A61F00536F7E /* ValueTransformer.swift in Sources */,
 				8B87E5722AB40A79009248EC /* GammaViewController.swift in Sources */,
 				8B4697452AB7C76600CC8131 /* HTTPSectionDTO.swift in Sources */,
-				8B87E54F2AB409BE009248EC /* CoordinatorViewModel.swift in Sources */,
 				8B87E57F2AB40ABC009248EC /* DeltaViewController.swift in Sources */,
-				8B87E5BC2AB74C88009248EC /* AuthService.swift in Sources */,
+				8B87E5BC2AB74C88009248EC /* MongoAuthenticator.swift in Sources */,
 				8BB692A52AB7BD970076207C /* Trailer.swift in Sources */,
 				8B4697492AB7C79600CC8131 /* EpisodeDTO.swift in Sources */,
 				8B87E56A2AB40A66009248EC /* AlphaViewController.swift in Sources */,
@@ -715,24 +796,27 @@
 				8B87E52C2AB408A0009248EC /* AppDelegate.swift in Sources */,
 				8B46974B2AB7C79A00CC8131 /* SeasonDTO.swift in Sources */,
 				8B8F81C12ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift in Sources */,
+				8BA1349E2AC255EE00C50653 /* SignInViewModel.swift in Sources */,
 				8B87E5682AB40A61009248EC /* AlphaViewModel.swift in Sources */,
 				8B8F81BF2ABF43A4006B72CB /* URLRequestErrorResolver.swift in Sources */,
-				8B87E5552AB409DC009248EC /* ControllerViewModel.swift in Sources */,
+				8BA134A42AC5AB6F00C50653 /* NavigationController.swift in Sources */,
 				8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */,
 				8B4697512AB7C7BC00CC8131 /* HTTPSeasonDTO.swift in Sources */,
 				8B87E52E2AB408A0009248EC /* SceneDelegate.swift in Sources */,
 				8B87E5812AB40AC1009248EC /* OmegaViewModel.swift in Sources */,
+				8BA134A62AC5CA6900C50653 /* Theme.swift in Sources */,
 				8B87E56C2AB40A6B009248EC /* BetaViewModel.swift in Sources */,
 				8BB6929F2AB7BD780076207C /* ProfileSetting.swift in Sources */,
 				8B46973F2AB7C1BE00CC8131 /* SectionDTO.swift in Sources */,
-				8B87E5532AB409D3009248EC /* ViewController.swift in Sources */,
-				8B87E5512AB409C3009248EC /* Coordinator.swift in Sources */,
+				8BA134A92AC5CAC900C50653 /* UIColor+HEX.swift in Sources */,
 				8B8F81B92ABF3264006B72CB /* URLRequestConfiguration.swift in Sources */,
 				8B87E5AB2AB693DD009248EC /* UseCase.swift in Sources */,
 				8B4697412AB7C1C200CC8131 /* MediaDTO.swift in Sources */,
 				8B87E5932AB40B40009248EC /* UIViewController+Storyboard.swift in Sources */,
 				8BB6929B2AB7BD380076207C /* Section.swift in Sources */,
 				8BB79E6A2AB79A09000E191A /* User.swift in Sources */,
+				8BA134982AC255D300C50653 /* SignUpViewController.swift in Sources */,
+				8B049D972ABFC1BC004DC481 /* MongoHostProvider.swift in Sources */,
 				8B46974D2AB7C7A200CC8131 /* ListDTO.swift in Sources */,
 				8B8F81BD2ABF437C006B72CB /* URLResponseDecoder.swift in Sources */,
 				8BD210FE2AB7CEB000030A89 /* UserResponseStore.swift in Sources */,
@@ -805,7 +889,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -860,7 +944,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -887,6 +971,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				JWT_SECRET = n37fl1x5w1f7z4chb4z0vri0sd3v3l0p3r;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -918,6 +1003,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				JWT_SECRET = n37fl1x5w1f7z4chb4z0vri0sd3v3l0p3r;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -956,6 +1042,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8B049D932ABFC072004DC481 /* XCRemoteSwiftPackageReference "MongoDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zachbazov/MongoDB.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zachbazov/CodeBureau.git";
@@ -964,13 +1058,44 @@
 				kind = branch;
 			};
 		};
+		8B8F81DE2ABFB3DF006B72CB /* XCRemoteSwiftPackageReference "URLDataTransfer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zachbazov/URLDataTransfer.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zachbazov/Cryptographic.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8B049D942ABFC072004DC481 /* MongoDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B049D932ABFC072004DC481 /* XCRemoteSwiftPackageReference "MongoDB" */;
+			productName = MongoDB;
+		};
 		8B8F81B52ABF2B25006B72CB /* CodeBureau */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */;
 			productName = CodeBureau;
+		};
+		8B8F81DF2ABFB3DF006B72CB /* URLDataTransfer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B8F81DE2ABFB3DF006B72CB /* XCRemoteSwiftPackageReference "URLDataTransfer" */;
+			productName = URLDataTransfer;
+		};
+		8B8F81E22ABFB82C006B72CB /* Cryptographic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */;
+			productName = Cryptographic;
 		};
 /* End XCSwiftPackageProductDependency section */
 

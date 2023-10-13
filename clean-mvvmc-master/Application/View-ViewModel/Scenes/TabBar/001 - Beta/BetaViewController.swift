@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CodeBureau
 
 class BetaViewController: UIViewController, ViewController {
     

@@ -6,7 +6,34 @@
       "location" : "https://github.com/zachbazov/CodeBureau.git",
       "state" : {
         "branch" : "main",
-        "revision" : "6aaa57c0f121234181130e2f898bbe1f988098f2"
+        "revision" : "c0d9ed5f8ddc1ceaaeb87a37c0014167048bdbc4"
+      }
+    },
+    {
+      "identity" : "cryptographic",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zachbazov/Cryptographic.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f22e985ed3b5364c57b4a0be3ed9bba169ce07f2"
+      }
+    },
+    {
+      "identity" : "mongodb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zachbazov/MongoDB.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "615c68764eea259f928ebb374ab2c8496b7f296e"
+      }
+    },
+    {
+      "identity" : "urldatatransfer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zachbazov/URLDataTransfer.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5cfdc0d268e68d0c3fa45210da7b2568a4cbe233"
       }
     }
   ],

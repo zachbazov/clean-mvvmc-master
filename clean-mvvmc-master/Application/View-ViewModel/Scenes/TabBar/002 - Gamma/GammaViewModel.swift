@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CodeBureau
 
 final class GammaViewModel: ControllerViewModel {
     

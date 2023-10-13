@@ -9,13 +9,11 @@ import UIKit
 
 final class AppCoordinator {
     
-    weak var window: UIWindow? {
-        didSet {
-            coordinate(to: tabBarCoordinator?.viewController)
-        }
-    }
+    weak var window: UIWindow?
     
     lazy var tabBarCoordinator: TabBarCoordinator? = createTabBarCoordinator()
+    
+    lazy var authCoordinator: AuthCoordinator? = createAuthCoordinator()
 }
 
 
@@ -32,12 +30,26 @@ extension AppCoordinator {
         
         return coordinator
     }
+    
+    private func createAuthCoordinator() -> AuthCoordinator {
+        let coordinator = AuthCoordinator()
+        let viewModel = AuthViewModel()
+        let navigation = AuthViewController.xib as! NavigationController
+        let controller = navigation.viewControllers.first as! AuthViewController
+        
+        controller.controllerViewModel = viewModel
+        controller.controllerViewModel?.coordinator = coordinator
+        coordinator.viewController = controller
+        coordinator.navigationController = navigation
+        
+        return coordinator
+    }
 }
 
 
 extension AppCoordinator {
     
-    private func coordinate(to viewController: UIViewController?) {
+    func coordinate(to viewController: UIViewController?) {
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }

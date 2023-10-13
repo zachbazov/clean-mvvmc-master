@@ -12,6 +12,8 @@ final class Application {
     
     static let app = Application()
     
+    var server = MongoServer(host: MongoHostProvider())
+    
     private(set) lazy var coordinator = AppCoordinator()
     
     
@@ -24,28 +26,64 @@ extension Application {
     func appDidLaunch(in window: UIWindow?) {
         coordinator.window = window
         
-        resignSession()
+        server.delegate = self
+    }
+}
+
+
+extension Application: MongoServerDelegate {
+    
+    func serverDidLaunch(_ server: MongoServer) {
+        self.server(server, reauthenticeUserFromStore: UserResponseStore())
     }
     
+    func server(_ server: MongoServer, reauthenticeUserFromStore store: UserResponseStore) {
+        store.fetcher.fetch { [weak self] result in
+            guard let self = self else { return }
+            
+            self.handleFetchResponse(for: result)
+        }
+    }
+}
+
+
+extension Application {
     
-    private func resignSession() {
-        let authService = MongoService.shared.authService
-        
-        let user = UserDTO(email: "qwe@gmail.com", password: "qweqweqwe")
+    private func handleFetchResponse(for result: Result<HTTPUserDTO.Response?, CoreDataStoreError>) {
+        switch result {
+        case .success(let response):
+            if let response = response,
+               let user = response.data {
+                return authenticate(user)
+            }
+            
+            coordinateToAuthScene()
+        case .failure(let error):
+            debugPrint(.error, "\(error)")
+        }
+    }
+    
+    private func authenticate(_ user: UserDTO) {
         let request = HTTPUserDTO.Request(user: user)
         
-        authService.signIn(
+        server.authenticator.signIn(
             request,
-            error: { response in
-                debugPrint(.debug, "Error \(response)")
+            error: nil,
+            cached: { _ in
+                self.coordinateToTabBarScene()
             },
-            cached: { response in
-                debugPrint(.debug, "Cached \(response)")
-            },
-            completion: { response in
-                if let response = response {
-                    debugPrint(.debug, "Completion \(response)")
-                }
-            })
+            completion: nil)
+    }
+    
+    private func coordinateToTabBarScene() {
+        let tabBarCoordinator = coordinator.tabBarCoordinator
+        
+        coordinator.coordinate(to: tabBarCoordinator?.viewController)
+    }
+    
+    private func coordinateToAuthScene() {
+        let authCoordinator = coordinator.authCoordinator
+        
+        coordinator.coordinate(to: authCoordinator?.navigationController)
     }
 }

@@ -6,11 +6,17 @@
 //
 
 import Foundation
-import CodeBureau
+import URLDataTransfer
 
 struct AuthUseCase: UseCase {
     
-    let repository = AuthRepository()
+    let repository: AuthRepository
+    
+    init() {
+        let server = Application.app.server
+        
+        self.repository = AuthRepository(dataTransferService: server.dataTransferService)
+    }
 }
 
 

@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import CodeBureau
 
-extension UIViewController {
+extension UIViewController: Reusable {
     
-    static var reuseIdentifier: String {
+    public static var reuseIdentifier: String {
         return String(describing: Self.self)
     }
+}
+
+extension UIViewController: StoryboardInstantiable {
     
-    static var xib: UIViewController? {
+    public static var xib: UIViewController? {
         switch reuseIdentifier {
+        case AuthViewController.reuseIdentifier:
+            return UIStoryboard(name: reuseIdentifier, bundle: nil)
+                .instantiateViewController(withIdentifier: reuseIdentifier)
         case TabBarController.reuseIdentifier:
             return UIStoryboard(name: reuseIdentifier, bundle: nil)
                 .instantiateViewController(withIdentifier: reuseIdentifier)

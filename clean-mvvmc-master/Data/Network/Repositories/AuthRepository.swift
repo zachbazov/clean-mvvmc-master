@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CodeBureau
+import URLDataTransfer
 
 protocol AuthRequestable {
     
@@ -24,8 +24,7 @@ protocol AuthRequestable {
 
 
 struct AuthRepository: Repository, AuthRequestable {
-    
-    let dataTransferService = MongoService.shared.dataTransferService
+    var dataTransferService: DataTransferService
 }
 
 
@@ -42,7 +41,7 @@ extension AuthRepository {
             let responseStore = UserResponseStore()
             let sessionTask = URLSessionTask()
             
-            responseStore.fetchResponse(for: request) { result in
+            responseStore.fetcher.fetch(for: request) { result in
                 
                 if case let .success(response?) = result {
                     return cached?(response) ?? {}()
@@ -53,8 +52,8 @@ extension AuthRepository {
                 let endpoint = AuthRepository.signIn(with: request)
                 
                 sessionTask.task = dataTransferService.request(endpoint: endpoint,
-                                                               error: error,
-                                                               completion: completion)
+                                                                error: error,
+                                                                completion: completion)
             }
             
             return sessionTask
