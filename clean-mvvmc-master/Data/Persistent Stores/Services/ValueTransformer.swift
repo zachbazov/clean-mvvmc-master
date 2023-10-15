@@ -7,23 +7,6 @@
 
 import Foundation
 
-private enum ValueTransformerValue: String {
-    case user = "UserTransformer"
-    case media = "MediaTransformer"
-    case section = "SectionTransformer"
-}
-
-
-extension NSValueTransformerName {
-    
-    static let user = NSValueTransformerName(rawValue: ValueTransformerValue.user.rawValue)
-    
-    static let section = NSValueTransformerName(rawValue: ValueTransformerValue.section.rawValue)
-    
-    static let media = NSValueTransformerName(rawValue: ValueTransformerValue.media.rawValue)
-}
-
-
 final class ValueTransformer<T>: NSSecureUnarchiveFromDataTransformer where T: NSObject {
     
     override class func allowsReverseTransformation() -> Bool {

@@ -12,8 +12,4 @@ class NavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Theme.preferredStatusBarStyle
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
 }

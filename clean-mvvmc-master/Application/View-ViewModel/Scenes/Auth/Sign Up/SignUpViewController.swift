@@ -58,15 +58,14 @@ final class SignUpViewController: UIViewController, ViewController {
     }
     
     @IBAction
-    func backgroundDidTap() {
+    private func backgroundDidTap() {
         view.endEditing(true)
     }
     
     
     @objc
-    func keyboardWillShow() {
-        let value: CGFloat = -40.0
-        var centerY = value
+    private func keyboardWillShow() {
+        var centerY: CGFloat = -40.0
         
         if UIDevice.current.orientation.isLandscape {
             centerY = calculateCenterYConstantForLandspace()
@@ -74,14 +73,14 @@ final class SignUpViewController: UIViewController, ViewController {
         
         stackViewCenterY.constant = centerY
         
-        animateLayoutUpdate()
+        animateLayoutIfNeeded()
     }
     
     @objc
-    func keyboardWillHide() {
+    private func keyboardWillHide() {
         stackViewCenterY.constant = .zero
         
-        animateLayoutUpdate()
+        animateLayoutIfNeeded()
     }
     
     
@@ -127,22 +126,10 @@ final class SignUpViewController: UIViewController, ViewController {
         UIView.animate(withDuration: 0.3) {
             
             for (textField, heightConstraint) in zip(textFields, heightConstraints) {
-                self.updateTextFieldLayout(for: textField, with: heightConstraint)
+                textField.setHeightConstraint(heightConstraint)
+                textField.checkForFirstResponder()
             }
         }
-    }
-    
-    private func updateTextFieldLayout(for textField: TextField, with heightConstraint: NSLayoutConstraint) {
-        
-        textField.setHeightConstraint(heightConstraint)
-        
-        if textField.isFirstResponder {
-            textField.textFieldDidBeginEditing()
-            
-            return
-        }
-        
-        textField.textFieldDidEndEditing()
     }
     
     private func calculateCenterYConstantForLandspace() -> CGFloat {
@@ -155,12 +142,6 @@ final class SignUpViewController: UIViewController, ViewController {
             return -120.0
         default:
             return -160.0
-        }
-    }
-    
-    private func animateLayoutUpdate() {
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
         }
     }
 }

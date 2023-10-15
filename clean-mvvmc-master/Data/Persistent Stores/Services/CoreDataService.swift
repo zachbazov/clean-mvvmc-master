@@ -8,34 +8,13 @@
 import CoreData
 import CodeBureau
 
-enum CoreDataStoreError: Error {
-    case read(Error)
-    case save(Error)
-    case delete(Error)
-}
-
-
-private protocol CoreDataPersistable {
-    var persistentContainer: NSPersistentContainer { get }
-    var mainContext: NSManagedObjectContext { get }
-    var privateContext: NSManagedObjectContext { get }
-    
-    func context() -> NSManagedObjectContext
-    func saveContext()
-}
-
-
-private protocol CoreDataValueTransformable {
-    
-    func addTransformer<T>(of type: T.Type,
-                           for name: NSValueTransformerName)
-    where T: NSObject
-}
-
-
 final class CoreDataService: CoreDataPersistable {
     
     static var shared = CoreDataService()
+    
+    
+    private init() {
+    }
     
     
     lazy var persistentContainer: NSPersistentContainer = createPersistentContainer()
@@ -43,38 +22,6 @@ final class CoreDataService: CoreDataPersistable {
     lazy var mainContext: NSManagedObjectContext = createMainContext()
     
     lazy var privateContext: NSManagedObjectContext = createPrivateContext()
-    
-    
-    private init() {}
-    
-    
-    func context() -> NSManagedObjectContext {
-        return mainContext
-    }
-    
-    func saveContext() {
-        mainContext.performAndWait { [weak self] in
-            guard let self = self else { return }
-            
-            do {
-                guard self.mainContext.hasChanges else { return }
-                
-                try self.mainContext.save()
-            } catch {
-                assertionFailure("CoreDataService main context unresolved error \(error), \((error as NSError).userInfo)")
-            }
-            
-            self.privateContext.perform {
-                do {
-                    guard self.privateContext.hasChanges else { return }
-                    
-                    try self.privateContext.save()
-                } catch {
-                    assertionFailure("CoreDataService private context unresolved error \(error), \((error as NSError).userInfo)")
-                }
-            }
-        }
-    }
 }
 
 
@@ -139,5 +86,36 @@ extension CoreDataService {
         let url = container.persistentStoreCoordinator.url(for: persistentStore)
         
         debugPrint(.url, "CoreDataService Store URL: \(url)")
+    }
+}
+
+extension CoreDataService {
+    
+    func context() -> NSManagedObjectContext {
+        return mainContext
+    }
+    
+    func saveContext() {
+        mainContext.performAndWait { [weak self] in
+            guard let self = self else { return }
+            
+            do {
+                guard self.mainContext.hasChanges else { return }
+                
+                try self.mainContext.save()
+            } catch {
+                assertionFailure("CoreDataService main context unresolved error \(error), \((error as NSError).userInfo)")
+            }
+            
+            self.privateContext.perform {
+                do {
+                    guard self.privateContext.hasChanges else { return }
+                    
+                    try self.privateContext.save()
+                } catch {
+                    assertionFailure("CoreDataService private context unresolved error \(error), \((error as NSError).userInfo)")
+                }
+            }
+        }
     }
 }

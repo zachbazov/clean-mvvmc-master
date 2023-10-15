@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PnB-dT-OG5">
-                    <rect key="frame" x="78.666666666666686" y="382" width="235.66666666666663" height="88"/>
+                    <rect key="frame" x="78.666666666666671" y="382" width="235.66666666666663" height="88"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="28U-rs-kJU" userLabel="Email" customClass="TextField" customModule="clean_mvvmc_master" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="235.66666666666666" height="40"/>
@@ -87,8 +87,8 @@
                         </textField>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSC-zw-OVX">
-                    <rect key="frame" x="78.666666666666686" y="486" width="235.66666666666663" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSC-zw-OVX" customClass="BorderedButton" customModule="clean_mvvmc_master" customModuleProvider="target">
+                    <rect key="frame" x="78.666666666666671" y="486" width="235.66666666666663" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="ZnK-Ns-WfS"/>
                     </constraints>
@@ -96,6 +96,20 @@
                     <color key="tintColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Sign In"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="signInButtonDidTap" destination="-1" eventType="touchUpInside" id="VC8-eT-r3x"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="4cC-wV-ZO0"/>
@@ -136,4 +150,15 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <designables>
+        <designable name="04J-Ig-RPt">
+            <size key="intrinsicContentSize" width="20" height="29"/>
+        </designable>
+        <designable name="28U-rs-kJU">
+            <size key="intrinsicContentSize" width="20" height="30.666666666666668"/>
+        </designable>
+        <designable name="TSC-zw-OVX">
+            <size key="intrinsicContentSize" width="48" height="29"/>
+        </designable>
+    </designables>
 </document>

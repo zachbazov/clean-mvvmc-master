@@ -56,26 +56,59 @@ final class SignInViewController: UIViewController, ViewController {
         updateTextFieldsForEditingEvent()
     }
     
+    @IBAction
+    private func signInButtonDidTap() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else {
+            return
+        }
+        
+        let user = UserDTO(email: email, password: password)
+        let request = HTTPUserDTO.Request(user: user)
+        
+        viewModel?.signIn(
+            with: request,
+            completion: { [weak self] user in
+                guard let self = self else { return }
+                
+                guard user != nil else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    self.viewModel?.coordinator?.signInViewController = nil
+                    self.viewModel?.coordinator?.viewController = nil
+                    self.viewModel?.coordinator?.navigationController?.removeFromParent()
+                    self.viewModel?.coordinator?.navigationController = nil
+                    
+                    let appCoordinator = Application.app.coordinator
+                    let tabBarController = appCoordinator.tabBarCoordinator?.viewController
+                    
+                    appCoordinator.coordinate(to: tabBarController)
+                }
+            })
+    }
+    
     
     @objc
     private func keyboardWillShow() {
-        let value: CGFloat = -48.0
-        var centerY = value
+        var centerY: CGFloat = -48.0
         
         if UIDevice.current.orientation.isLandscape {
-            centerY = calculateCenterYConstantForLandspace()
+            centerY = calculateTextFieldsStackCenterYForLandspace()
         }
         
         stackViewCenterY.constant = centerY
         
-        animateLayoutUpdate()
+        animateLayoutIfNeeded()
     }
     
     @objc
     private func keyboardWillHide() {
         stackViewCenterY.constant = .zero
         
-        animateLayoutUpdate()
+        animateLayoutIfNeeded()
     }
     
     
@@ -117,36 +150,18 @@ final class SignInViewController: UIViewController, ViewController {
         UIView.animate(withDuration: 0.3) {
             
             for (textField, heightConstraint) in zip(textFields, heightConstraints) {
-                self.updateTextFieldLayout(for: textField, with: heightConstraint)
+                textField.setHeightConstraint(heightConstraint)
+                textField.checkForFirstResponder()
             }
         }
     }
     
-    private func updateTextFieldLayout(for textField: TextField, with heightConstraint: NSLayoutConstraint) {
-        
-        textField.setHeightConstraint(heightConstraint)
-        
-        if textField.isFirstResponder {
-            textField.textFieldDidBeginEditing()
-            
-            return
-        }
-        
-        textField.textFieldDidEndEditing()
-    }
-    
-    private func calculateCenterYConstantForLandspace() -> CGFloat {
+    private func calculateTextFieldsStackCenterYForLandspace() -> CGFloat {
         switch true {
         case emailTextField.isFirstResponder:
             return -48.0
         default:
             return -96.0
-        }
-    }
-    
-    private func animateLayoutUpdate() {
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
         }
     }
 }

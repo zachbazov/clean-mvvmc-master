@@ -7,15 +7,7 @@
 
 import UIKit
 
-protocol ViewLifecycle {
-    func viewDidDeploySubviews()
-}
-extension ViewLifecycle {
-    func viewDidDeploySubviews() {}
-}
-
-extension UIView: ViewLifecycle {
-}
+// MARK: - TextField Type
 
 @IBDesignable
 final class TextField: UITextField {
@@ -41,13 +33,12 @@ final class TextField: UITextField {
     @IBInspectable
     var floatingPlaceholder: String = "" {
         didSet {
-            setFloatingPlaceholder(floatingPlaceholder)
+            setFloatingPlaceholderText(floatingPlaceholder)
         }
     }
     
     
-    let floatingLabel: UILabel = UILabel()
-    
+    let floatingLabel = UILabel()
     
     weak var heightConstraint: NSLayoutConstraint?
     
@@ -55,17 +46,17 @@ final class TextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.viewDidConfigure()
-        self.viewHierarchyDidConfigure()
-        self.viewEventsDidTarget()
+        self.configureHierarchy()
+        self.configureSubviews()
+        self.targetSubviews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.viewDidConfigure()
-        self.viewHierarchyDidConfigure()
-        self.viewEventsDidTarget()
+        self.configureHierarchy()
+        self.configureSubviews()
+        self.targetSubviews()
     }
     
     
@@ -80,37 +71,49 @@ final class TextField: UITextField {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        viewDidDeploySubviews()
+        constraintFloatingLabel()
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        let padding = UIEdgeInsets(top: topPadding, left: leadingPadding, bottom: bottomPadding, right: trailingPadding)
+        let padding = UIEdgeInsets(top: topPadding,
+                                   left: leadingPadding,
+                                   bottom: bottomPadding,
+                                   right: trailingPadding)
+        
         return bounds.inset(by: padding)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        let padding = UIEdgeInsets(top: topPadding, left: leadingPadding, bottom: bottomPadding, right: trailingPadding)
+        let padding = UIEdgeInsets(top: topPadding,
+                                   left: leadingPadding,
+                                   bottom: bottomPadding,
+                                   right: trailingPadding)
+        
         return bounds.inset(by: padding)
     }
+}
+
+// MARK: - ViewLifecycleBehavior Implementation
+
+extension TextField {
     
-    
-    func viewDidDeploySubviews() {
-        constraintFloatingLabel()
-    }
-    
-    func viewDidConfigure() {
-        configureFloatingLabel()
-    }
-    
-    func viewHierarchyDidConfigure() {
+    func configureHierarchy() {
         addSubview(floatingLabel)
     }
     
-    func viewEventsDidTarget() {
+    func configureSubviews() {
+        configureFloatingLabel()
+    }
+    
+    func targetSubviews() {
         addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
     }
-    
+}
+
+// MARK: - Private Implementation
+
+extension TextField {
     
     private func constraintFloatingLabel() {
         NSLayoutConstraint.activate([
@@ -139,7 +142,7 @@ final class TextField: UITextField {
         }
     }
     
-    private func setFloatingPlaceholder(_ placeholder: String) {
+    private func setFloatingPlaceholderText(_ placeholder: String) {
         floatingLabel.text = placeholder
         floatingLabel.sizeToFit()
     }
@@ -148,16 +151,8 @@ final class TextField: UITextField {
         textColor = color
     }
     
-    
-    func setHeightConstraint(_ constraint: NSLayoutConstraint?) {
-        guard heightConstraint == nil else { return }
-        
-        heightConstraint = constraint
-    }
-    
-    
     @objc
-    func textFieldDidBeginEditing() {
+    private func textFieldDidBeginEditing() {
         animateFloatingLabel()
         
         setTextColor(.white)
@@ -166,11 +161,26 @@ final class TextField: UITextField {
     }
     
     @objc
-    func textFieldDidEndEditing() {
+    private func textFieldDidEndEditing() {
         hideFloatingLabel()
         
         setTextColor(.clear)
         
         heightConstraint?.constant = 40.0
+    }
+}
+
+// MARK: - Internal Implementation
+
+extension TextField {
+    
+    func setHeightConstraint(_ constraint: NSLayoutConstraint?) {
+        guard heightConstraint == nil else { return }
+        
+        heightConstraint = constraint
+    }
+    
+    func checkForFirstResponder() {
+        isFirstResponder ? textFieldDidBeginEditing() : textFieldDidEndEditing()
     }
 }

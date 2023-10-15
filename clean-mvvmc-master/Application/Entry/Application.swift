@@ -17,7 +17,8 @@ final class Application {
     private(set) lazy var coordinator = AppCoordinator()
     
     
-    private init() {}
+    private init() {
+    }
 }
 
 
@@ -49,11 +50,13 @@ extension Application: MongoServerDelegate {
 
 extension Application {
     
-    private func handleFetchResponse(for result: Result<HTTPUserDTO.Response?, CoreDataStoreError>) {
+    private func handleFetchResponse(for result: Result<HTTPUserDTO.Response?, CoreDataPersistingError>) {
         switch result {
         case .success(let response):
+            
             if let response = response,
                let user = response.data {
+                
                 return authenticate(user)
             }
             
