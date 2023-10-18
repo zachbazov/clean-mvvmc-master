@@ -38,6 +38,7 @@ extension AuthRepository {
         
         switch endpoint {
         case .signIn:
+            
             let responseStore = UserResponseStore()
             let sessionTask = URLSessionTask()
             
@@ -52,9 +53,23 @@ extension AuthRepository {
                 let endpoint = AuthRepository.signIn(with: request)
                 
                 sessionTask.task = dataTransferService.request(endpoint: endpoint,
-                                                                error: error,
-                                                                completion: completion)
+                                                               error: error,
+                                                               completion: completion)
             }
+            
+            return sessionTask
+            
+        case .signUp:
+            
+            let sessionTask = URLSessionTask()
+            
+            guard !sessionTask.isCancelled else { return nil }
+            
+            let endpoint = AuthRepository.signUp(with: request)
+            
+            sessionTask.task = dataTransferService.request(endpoint: endpoint,
+                                                           error: error,
+                                                           completion: completion)
             
             return sessionTask
         }
@@ -65,13 +80,18 @@ extension AuthRepository {
 extension AuthRepository {
     
     static func signIn(with request: HTTPUserDTO.Request) -> Endpoint {
-        guard let email = request.user.email,
-              let password = request.user.password
-        else { fatalError() }
         
         let path = "api/v1/users/signin"
-        let bodyParams: [String: Any] = ["email": email, "password": password]
+        let encodedBodyParams = request.user
         
-        return Endpoint(method: .post, path: path, bodyParameters: bodyParams)
+        return Endpoint(method: .post, path: path, bodyParametersEncodable: encodedBodyParams)
+    }
+    
+    static func signUp(with request: HTTPUserDTO.Request) -> Endpoint {
+        
+        let path = "api/v1/users/signup"
+        let encodedBodyParams = request.user
+        
+        return Endpoint(method: .post, path: path, bodyParametersEncodable: encodedBodyParams)
     }
 }

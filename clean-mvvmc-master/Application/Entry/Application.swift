@@ -12,13 +12,14 @@ final class Application {
     
     static let app = Application()
     
-    var server = MongoServer(host: MongoHostProvider())
-    
-    private(set) lazy var coordinator = AppCoordinator()
-    
     
     private init() {
     }
+    
+    
+    var server = MongoServer(host: MongoHostProvider())
+    
+    private(set) lazy var coordinator = AppCoordinator()
 }
 
 
@@ -26,6 +27,7 @@ extension Application {
     
     func appDidLaunch(in window: UIWindow?) {
         coordinator.window = window
+        coordinator.window?.makeKeyAndVisible()
         
         server.delegate = self
     }
@@ -61,6 +63,7 @@ extension Application {
             }
             
             coordinateToAuthScene()
+            
         case .failure(let error):
             debugPrint(.error, "\(error)")
         }

@@ -11,6 +11,7 @@ final class AppCoordinator {
     
     weak var window: UIWindow?
     
+    
     lazy var tabBarCoordinator: TabBarCoordinator? = createTabBarCoordinator()
     
     lazy var authCoordinator: AuthCoordinator? = createAuthCoordinator()
@@ -51,6 +52,5 @@ extension AppCoordinator {
     
     func coordinate(to viewController: UIViewController?) {
         window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
     }
 }

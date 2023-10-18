@@ -8,6 +8,8 @@
 import UIKit
 import CodeBureau
 
+// MARK: - SignInViewController Type
+
 final class SignInViewController: UIViewController, ViewController {
     
     @IBOutlet private weak var emailTextField: TextField!
@@ -26,17 +28,18 @@ final class SignInViewController: UIViewController, ViewController {
     var viewModel: SignInViewModel?
     
     
+    private let chainAnimator = ChainAnimator()
+    
+    
     deinit {
-        resignKeyboardEvents()
-        
-        viewModel = nil
+        viewDidDeallocate()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        signKeyboardEvents()
+        viewDidBindObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -45,6 +48,24 @@ final class SignInViewController: UIViewController, ViewController {
         viewModel?.coordinator?.signInViewController = nil
     }
     
+    func viewDidBindObservers() {
+        signKeyboardEvents()
+    }
+    
+    func viewDidUnbindObservers() {
+        resignKeyboardEvents()
+    }
+    
+    func viewDidDeallocate() {
+        viewDidUnbindObservers()
+        
+        viewModel = nil
+    }
+}
+
+// MARK: - Private Implementation
+
+extension SignInViewController {
     
     @IBAction
     private func backgroundDidTap() {
@@ -75,21 +96,9 @@ final class SignInViewController: UIViewController, ViewController {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    
-                    self.viewModel?.coordinator?.signInViewController = nil
-                    self.viewModel?.coordinator?.viewController = nil
-                    self.viewModel?.coordinator?.navigationController?.removeFromParent()
-                    self.viewModel?.coordinator?.navigationController = nil
-                    
-                    let appCoordinator = Application.app.coordinator
-                    let tabBarController = appCoordinator.tabBarCoordinator?.viewController
-                    
-                    appCoordinator.coordinate(to: tabBarController)
-                }
+                self.executeChainAnimation()
             })
     }
-    
     
     @objc
     private func keyboardWillShow() {
@@ -162,6 +171,64 @@ final class SignInViewController: UIViewController, ViewController {
             return -48.0
         default:
             return -96.0
+        }
+    }
+    
+    private func executeChainAnimation() {
+        
+        let authCoordinator = viewModel?.coordinator
+        let appCoordinator = Application.app.coordinator
+        let tabBarController = appCoordinator.tabBarCoordinator?.viewController
+        
+        DispatchQueue.main.async {
+            
+            self.chainAnimator
+                .animate(withDuration: 0.5,
+                         delay: .zero,
+                         options: .curveEaseInOut,
+                         animations: {
+                    
+                    self.backgroundDidTap()
+                })
+                .then(duration: 0.5,
+                      delay: 1.0,
+                      options: .curveEaseInOut,
+                      completion: {
+                    
+                    authCoordinator?.navigationController?.popViewController(animated: true)
+                })
+                .then(duration: 0.5,
+                      delay: 2.0,
+                      options: .curveEaseInOut,
+                      completion: {
+                    
+                    authCoordinator?.navigationController?.setNavigationBarHidden(true, animated: true)
+                })
+                .then(duration: 0.5,
+                      delay: 3.0,
+                      options: .curveEaseInOut,
+                      animations: {
+                    
+                    authCoordinator?.viewController?.view.transform = CGAffineTransform(translationX: .zero, y: authCoordinator?.viewController?.view.frame.height ?? .zero)
+                },
+                      completion: {
+                    
+                    authCoordinator?.viewController = nil
+                    authCoordinator?.navigationController = nil
+                    
+                    appCoordinator.authCoordinator = nil
+                    
+                    appCoordinator.coordinate(to: tabBarController)
+                    
+                    tabBarController?.view.transform = CGAffineTransform(translationX: .zero, y: tabBarController?.view.bounds.height ?? .zero)
+                })
+                .then(duration: 0.5,
+                      delay: 4.0,
+                      options: .curveEaseInOut,
+                      animations: {
+                    
+                    tabBarController?.view.transform = .identity
+                })
         }
     }
 }

@@ -8,12 +8,16 @@
 import Foundation
 import CodeBureau
 
+// MARK: - SignInViewModel Type
+
 struct SignInViewModel: ControllerViewModel {
     
     var coordinator: AuthCoordinator?
     
     let useCase = AuthUseCase()
 }
+
+// MARK: - Internal Implementation
 
 extension SignInViewModel {
     
@@ -43,11 +47,14 @@ extension SignInViewModel {
                     
                     authService.responses.saver.save(response, withRequest: request)
                     
-                    if let user = response.data {
-                        return completion(user)
+                    DispatchQueue.main.async {
+                        if let user = response.data {
+                            
+                            return completion(user)
+                        }
+                        
+                        completion(nil)
                     }
-                    
-                    completion(nil)
                     
                 case .failure(let error):
                     debugPrint(.error, error.localizedDescription)

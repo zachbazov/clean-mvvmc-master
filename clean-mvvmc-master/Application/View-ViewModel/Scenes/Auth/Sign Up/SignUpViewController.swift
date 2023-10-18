@@ -8,6 +8,8 @@
 import UIKit
 import CodeBureau
 
+// MARK: - SignUpViewController Type
+
 final class SignUpViewController: UIViewController, ViewController {
     
     @IBOutlet private weak var nameTextField: TextField!
@@ -32,17 +34,18 @@ final class SignUpViewController: UIViewController, ViewController {
     var viewModel: SignUpViewModel?
     
     
+    private let chainAnimator = ChainAnimator()
+    
+    
     deinit {
-        resignKeyboardEvents()
-        
-        viewModel = nil
+        viewDidDeallocate()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        signKeyboardEvents()
+        viewDidBindObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,6 +54,24 @@ final class SignUpViewController: UIViewController, ViewController {
         viewModel?.coordinator?.signUpViewController = nil
     }
     
+    func viewDidBindObservers() {
+        signKeyboardEvents()
+    }
+    
+    func viewDidUnbindObservers() {
+        resignKeyboardEvents()
+    }
+    
+    func viewDidDeallocate() {
+        viewDidUnbindObservers()
+        
+        viewModel = nil
+    }
+}
+
+// MARK: - Private Implementation
+
+extension SignUpViewController {
     
     @IBAction
     private func textFieldsDidBeginEditing() {
@@ -62,6 +83,26 @@ final class SignUpViewController: UIViewController, ViewController {
         view.endEditing(true)
     }
     
+    @IBAction
+    private func signUpButtonDidTap() {
+        guard let name = nameTextField.text,
+              let email = emailTextField.text,
+              let password = passwordTextField.text,
+              let passwordConfirm = passwordConfirmTextField.text else {
+            return
+        }
+        
+        let user = UserDTO(name: name, email: email, password: password, passwordConfirm: passwordConfirm)
+        let request = HTTPUserDTO.Request(user: user)
+        
+        viewModel?.signUp(
+            with: request,
+            completion: { [weak self] in
+                guard let self = self else { return }
+                
+                self.executeChainAnimation()
+            })
+    }
     
     @objc
     private func keyboardWillShow() {
@@ -142,6 +183,64 @@ final class SignUpViewController: UIViewController, ViewController {
             return -120.0
         default:
             return -160.0
+        }
+    }
+    
+    private func executeChainAnimation() {
+        
+        let authCoordinator = viewModel?.coordinator
+        let appCoordinator = Application.app.coordinator
+        let tabBarController = appCoordinator.tabBarCoordinator?.viewController
+        
+        DispatchQueue.main.async {
+            
+            self.chainAnimator
+                .animate(withDuration: 0.5,
+                         delay: .zero,
+                         options: .curveEaseInOut,
+                         animations: {
+                    
+                    self.backgroundDidTap()
+                })
+                .then(duration: 0.5,
+                      delay: 1.0,
+                      options: .curveEaseInOut,
+                      completion: {
+                    
+                    authCoordinator?.navigationController?.popViewController(animated: true)
+                })
+                .then(duration: 0.5,
+                      delay: 2.0,
+                      options: .curveEaseInOut,
+                      completion: {
+                    
+                    authCoordinator?.navigationController?.setNavigationBarHidden(true, animated: true)
+                })
+                .then(duration: 0.5,
+                      delay: 3.0,
+                      options: .curveEaseInOut,
+                      animations: {
+                    
+                    authCoordinator?.viewController?.view.transform = CGAffineTransform(translationX: .zero, y: authCoordinator?.viewController?.view.frame.height ?? .zero)
+                },
+                      completion: {
+                    
+                    authCoordinator?.viewController = nil
+                    authCoordinator?.navigationController = nil
+                    
+                    appCoordinator.authCoordinator = nil
+                    
+                    appCoordinator.coordinate(to: tabBarController)
+                    
+                    tabBarController?.view.transform = CGAffineTransform(translationX: .zero, y: tabBarController?.view.bounds.height ?? .zero)
+                })
+                .then(duration: 0.5,
+                      delay: 4.0,
+                      options: .curveEaseInOut,
+                      animations: {
+                    
+                    tabBarController?.view.transform = .identity
+                })
         }
     }
 }

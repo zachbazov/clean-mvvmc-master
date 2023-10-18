@@ -171,6 +171,9 @@
                             <real key="value" value="1.5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="signUpButtonDidTap" destination="-1" eventType="touchUpInside" id="SSo-IH-cWF"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

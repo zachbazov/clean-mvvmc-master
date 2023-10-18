@@ -8,6 +8,8 @@
 import UIKit
 import CodeBureau
 
+// MARK: - AuthViewController Type
+
 final class AuthViewController: UIViewController, CoordinatorViewController {
     
     @IBOutlet private weak var backgroundImageView: UIImageView!
@@ -28,7 +30,12 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
     var controllerViewModel: AuthViewModel?
     
     
-    private var animator = ViewAnimator()
+    private let chainAnimator = ChainAnimator()
+    
+    
+    deinit {
+        viewDidDeallocate()
+    }
     
     
     override func viewDidLoad() {
@@ -36,8 +43,7 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
         
         Theme.applyAppearance(for: navigationController)
         
-        configureViewAnimator()
-        animator.execute()
+        executeChainAnimation()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -47,6 +53,14 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
         bottomGradientView.redraw()
     }
     
+    func viewDidDeallocate() {
+        controllerViewModel = nil
+    }
+}
+
+// MARK: - Private Implementation
+
+extension AuthViewController {
     
     @IBAction
     private func buttonDidTap(_ sender: AnyObject) {
@@ -61,76 +75,63 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
     }
     
     
-    private func configureViewAnimator() {
-        animator.preparations = { [weak self] in
-            guard let self = self else { return }
-            
-            let offsetY: CGFloat = 64.0
-            let scale: CGFloat = 1.2
-            
-            self.headerTextView.conceal()
-            self.bodyTextView.conceal()
-            self.topGradientView.conceal()
-            self.bottomGradientView.conceal()
-            self.signInButton.view?.conceal()
-            self.backgroundImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
-            self.signUpButton.transform = CGAffineTransform(translationX: .zero, y: offsetY)
-            self.headerTextView.transform = CGAffineTransform(scaleX: scale, y: scale)
-            self.navigationController?.navigationBar.transform = CGAffineTransform(translationX: .zero, y: -offsetY)
-        }
+    private func executeChainAnimation() {
         
-        animator.operations = { [weak self] in
-            guard let self = self else { return }
-            
-            let firstAnimationDuration: TimeInterval = 1.5
-            let secondAnimationDuration: TimeInterval = 0.5
-            
-            let firstAnimationDelay: TimeInterval = 0.25
-            let secondAnimationDelay: TimeInterval = .zero
-            let thirdAnimationDelay: TimeInterval = 0.5
-            let fourthAnimationDelay: TimeInterval = 0.5
-            let fifthAnimationDelay: TimeInterval = 0.5
-            
-            let options: UIView.AnimationOptions = [.curveEaseInOut]
-            
-            animator
-                .animate(withDuration: firstAnimationDuration,
-                         delay: firstAnimationDelay,
-                         options: options) {
-                    
-                    self.backgroundImageView.transform = .identity
-                    
-                }.then(duration: secondAnimationDuration,
-                       delay: secondAnimationDelay,
-                       options: options) {
-                    
-                    self.headerTextView.reveal()
-                    
-                    self.topGradientView.reveal()
-                    self.bottomGradientView.reveal()
-                    
-                    self.signUpButton.transform = .identity
-                    
-                    self.navigationController?.navigationBar.transform = .identity
-                    
-                }.then(duration: secondAnimationDuration,
-                       delay: thirdAnimationDelay,
-                       options: options) {
-                    
-                    self.headerTextView.transform = .identity
-                    
-                }.then(duration: secondAnimationDuration,
-                       delay: fourthAnimationDelay,
-                       options: options) {
-                    
-                    self.bodyTextView.reveal()
-                    
-                }.then(duration: secondAnimationDuration,
-                       delay: fifthAnimationDelay,
-                       options: options) {
-                    
-                    self.signInButton.view?.reveal()
-                }
-        }
+        let offsetY: CGFloat = 64.0
+        let scale: CGFloat = 1.2
+        
+        headerTextView.conceal()
+        bodyTextView.conceal()
+        topGradientView.conceal()
+        bottomGradientView.conceal()
+        signInButton.view?.conceal()
+        backgroundImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        signUpButton.transform = CGAffineTransform(translationX: .zero, y: offsetY)
+        headerTextView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        navigationController?.navigationBar.transform = CGAffineTransform(translationX: .zero, y: -offsetY)
+        
+        chainAnimator
+            .animate(withDuration: 1.5,
+                     delay: 0.25,
+                     options: .curveEaseInOut,
+                     animations: {
+                
+                self.backgroundImageView.transform = .identity
+            })
+            .then(duration: 0.5,
+                  delay: 0.5,
+                  options: .curveEaseInOut,
+                  animations: {
+                
+                self.headerTextView.reveal()
+                
+                self.topGradientView.reveal()
+                self.bottomGradientView.reveal()
+                
+                self.signUpButton.transform = .identity
+                
+                self.navigationController?.navigationBar.transform = .identity
+            })
+            .then(duration: 0.5,
+                  delay: 0.75,
+                  options: .curveEaseInOut,
+                  animations: {
+                
+                self.headerTextView.transform = .identity
+            })
+            .then(duration: 0.5,
+                  delay: 1.0,
+                  options: .curveEaseInOut,
+                  animations: {
+                
+                self.bodyTextView.reveal()
+            })
+            .then(duration: 0.5,
+                  delay: 1.25,
+                  options: .curveEaseInOut,
+                  animations: {
+                
+              self.signInButton.view?.reveal()
+            })
     }
 }

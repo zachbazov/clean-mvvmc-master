@@ -24,6 +24,7 @@ extension AuthUseCase {
     
     enum Endpoints {
         case signIn
+        case signUp
     }
 }
 
@@ -38,7 +39,7 @@ extension AuthUseCase {
                  completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         
         switch endpoint {
-        case .signIn:
+        case .signIn, .signUp:
             return repository.sign(endpoint: endpoint,
                                    request: request,
                                    error: error,

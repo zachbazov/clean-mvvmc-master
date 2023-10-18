@@ -63,6 +63,7 @@ extension AuthCoordinator {
             signUpViewController = controller
             
             navigationController?.pushViewController(controller, animated: true)
+            
         case .signIn:
             let controller = createSignInViewController()
             
