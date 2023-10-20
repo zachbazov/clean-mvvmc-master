@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HTTPSeasonDTO {
+struct HTTPSeasonDTO: HTTPRepresentable {
     
     struct Request: Decodable {
         var id: String?
@@ -19,5 +19,14 @@ struct HTTPSeasonDTO {
     struct Response: Decodable {
         let status: String
         let data: [SeasonDTO]
+    }
+}
+
+
+extension HTTPSeasonDTO.Response {
+    
+    func toDomain() -> HTTPSeason.Response {
+        return HTTPSeason.Response(status: status,
+                                   data: data.toDomain().first)
     }
 }

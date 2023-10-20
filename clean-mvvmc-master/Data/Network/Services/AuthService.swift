@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CodeBureau
 
 final class AuthService {
     
@@ -17,8 +18,11 @@ final class AuthService {
     
     var user: UserDTO?
     
-    let responses = UserResponseStore()
-    
+    let userResponseStore = UserResponseStore()
+}
+
+
+extension AuthService {
     
     func setUser(with request: HTTPUserDTO.Request?, response: HTTPUserDTO.Response) {
         
@@ -30,5 +34,29 @@ final class AuthService {
         if let request = request {
             user?.password = request.user.password
         }
+    }
+    
+    func signOut(completion: ((Bool) -> Void)?) {
+        
+        let useCase = AuthUseCase()
+        
+        useCase.request(
+            endpoint: .signOut,
+            completion: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success:
+                    
+                    self.userResponseStore.deleter.delete()
+                    
+                    completion?(true)
+                    
+                case .failure(let error):
+                    debugPrint(.error, error.localizedDescription)
+                    
+                    completion?(false)
+                }
+            })
     }
 }

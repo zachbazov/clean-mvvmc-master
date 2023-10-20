@@ -20,6 +20,26 @@ protocol UseCaseRequestable {
                  error: ((ErrorResponseType) -> Void)?,
                  cached: ((ResponseType?) -> Void)?,
                  completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    
+    func request(endpoint: EndpointType,
+                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+}
+
+
+extension UseCaseRequestable {
+    
+    func request(endpoint: EndpointType,
+                 request: RequestType,
+                 error: ((ErrorResponseType) -> Void)?,
+                 cached: ((ResponseType?) -> Void)?,
+                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
+    
+    func request(endpoint: EndpointType,
+                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
 }
 
 

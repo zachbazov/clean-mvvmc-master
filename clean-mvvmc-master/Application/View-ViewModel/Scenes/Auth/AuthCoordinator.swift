@@ -17,6 +17,8 @@ final class AuthCoordinator: Coordinator {
     var signInViewController: SignInViewController?
     
     var signUpViewController: SignUpViewController?
+    
+    var profileViewController: ProfileViewController?
 }
 
 
@@ -24,7 +26,7 @@ extension AuthCoordinator {
     
     private func createSignInViewController() -> SignInViewController {
         let viewModel = SignInViewModel()
-        let controller = SignInViewController()
+        let controller = SignInViewController.xib as! SignInViewController
         
         controller.viewModel = viewModel
         controller.viewModel?.coordinator = self
@@ -34,7 +36,7 @@ extension AuthCoordinator {
     
     private func createSignUpViewController() -> SignUpViewController {
         let viewModel = SignUpViewModel()
-        let controller = SignUpViewController()
+        let controller = SignUpViewController.xib as! SignUpViewController
         
         controller.viewModel = viewModel
         controller.viewModel?.coordinator = self

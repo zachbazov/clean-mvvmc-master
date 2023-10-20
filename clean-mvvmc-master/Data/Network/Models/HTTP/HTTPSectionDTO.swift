@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct HTTPSectionDTO {
+struct HTTPSectionDTO: HTTPRepresentable {
     
     struct Request: Decodable {
         let user: UserDTO
@@ -18,6 +18,16 @@ struct HTTPSectionDTO {
         let status: String
         let results: Int
         let data: [SectionDTO]
+    }
+}
+
+
+extension HTTPSectionDTO.Response {
+    
+    func toDomain() -> HTTPSection.Response {
+        return HTTPSection.Response(status: status,
+                                    results: results,
+                                    data: data.toDomain())
     }
 }
 

@@ -21,6 +21,7 @@ final class MongoServer: MongoServable {
     
     let authenticator = MongoAuthenticator()
     
+    
     weak var delegate: MongoServerDelegate? {
         didSet {
             delegate?.serverDidLaunch(self)

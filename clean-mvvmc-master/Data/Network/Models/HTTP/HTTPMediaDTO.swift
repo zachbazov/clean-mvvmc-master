@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct HTTPMediaDTO {
+struct HTTPMediaDTO: HTTPRepresentable {
     
     struct Request: Decodable {
         var id: String?
@@ -19,6 +19,16 @@ struct HTTPMediaDTO {
         let status: String
         let results: Int
         let data: [MediaDTO]
+    }
+}
+
+
+extension HTTPMediaDTO.Response {
+    
+    func toDomain() -> HTTPMedia.Response {
+        return HTTPMedia.Response(status: status,
+                                  results: results,
+                                  data: data.toDomain())
     }
 }
 

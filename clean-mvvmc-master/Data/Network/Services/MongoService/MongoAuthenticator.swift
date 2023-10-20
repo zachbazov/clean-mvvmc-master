@@ -18,7 +18,7 @@ final class MongoAuthenticator: MongoAuthenticable {
 extension MongoAuthenticator: MongoAuthRequestable {
     
     func signIn(_ request: HTTPUserDTO.Request,
-                error: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                error: ((HTTPServerErrorDTO.Response) -> Void)?,
                 cached: ((HTTPUserDTO.Response) -> Void)?,
                 completion: ((HTTPUserDTO.Response?) -> Void)?) {
         

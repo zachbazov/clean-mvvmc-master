@@ -19,7 +19,7 @@ struct DataTransferService {
 extension DataTransferService: DataTransferRequestable {
     
     func request<T, E>(endpoint: E,
-                       error: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                       error: ((HTTPServerErrorDTO.Response) -> Void)?,
                        completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     where T: Decodable, E: ResponseRequestable {
         

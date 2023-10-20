@@ -20,10 +20,14 @@ protocol AuthRequestable {
               error: ((ErrorResponseType) -> Void)?,
               cached: ((ResponseType?) -> Void)?,
               completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    
+    func sign(endpoint: EndpointType,
+              completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
 }
 
 
 struct AuthRepository: Repository, AuthRequestable {
+    
     var dataTransferService: DataTransferService
 }
 
@@ -32,7 +36,7 @@ extension AuthRepository {
     
     func sign(endpoint: AuthUseCase.Endpoints,
               request: HTTPUserDTO.Request,
-              error: ((HTTPMongoErrorResponseDTO) -> Void)?,
+              error: ((HTTPServerErrorDTO.Response) -> Void)?,
               cached: ((HTTPUserDTO.Response?) -> Void)?,
               completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         
@@ -72,6 +76,30 @@ extension AuthRepository {
                                                            completion: completion)
             
             return sessionTask
+            
+        default:
+            return nil
+        }
+    }
+    
+    @discardableResult
+    func sign(endpoint: AuthUseCase.Endpoints,
+              completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        switch endpoint {
+        case .signOut:
+            
+            let sessionTask = URLSessionTask()
+            
+            guard !sessionTask.isCancelled else { return nil }
+            
+            let endpoint = AuthRepository.signOut()
+            
+            sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
+            
+            return sessionTask
+            
+        default:
+            return nil
         }
     }
 }
@@ -84,7 +112,9 @@ extension AuthRepository {
         let path = "api/v1/users/signin"
         let encodedBodyParams = request.user
         
-        return Endpoint(method: .post, path: path, bodyParametersEncodable: encodedBodyParams)
+        return Endpoint(method: .post,
+                        path: path,
+                        bodyParametersEncodable: encodedBodyParams)
     }
     
     static func signUp(with request: HTTPUserDTO.Request) -> Endpoint {
@@ -92,6 +122,15 @@ extension AuthRepository {
         let path = "api/v1/users/signup"
         let encodedBodyParams = request.user
         
-        return Endpoint(method: .post, path: path, bodyParametersEncodable: encodedBodyParams)
+        return Endpoint(method: .post,
+                        path: path,
+                        bodyParametersEncodable: encodedBodyParams)
+    }
+    
+    static func signOut() -> Endpoint {
+        
+        let path = "api/v1/users/signout"
+        
+        return Endpoint(method: .get, path: path)
     }
 }

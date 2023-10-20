@@ -11,12 +11,12 @@ import URLDataTransfer
 
 struct URLRequestMongoErrorResolver: URLRequestMongoErrorResolvable {
     
-    func resolve(statusCode: URLResponseCode, data: Data?) -> HTTPMongoErrorResponseDTO? {
+    func resolve(statusCode: URLResponseCode, data: Data?) -> HTTPServerErrorDTO.Response? {
         switch statusCode {
         case .unauthorized, .badRequest:
             
             if let data = data,
-               let errorResponse: HTTPMongoErrorResponseDTO = decode(data) {
+               let errorResponse: HTTPServerErrorDTO.Response = decode(data) {
 
                 return errorResponse
             }
@@ -30,13 +30,13 @@ struct URLRequestMongoErrorResolver: URLRequestMongoErrorResolvable {
     }
     
     
-    private func decode(_ data: Data) -> HTTPMongoErrorResponseDTO? {
+    private func decode(_ data: Data) -> HTTPServerErrorDTO.Response? {
         do {
             let decoder = URLResponseDecoder()
 
             return try decoder.json.decode(data)
         } catch {
-            debugPrint(.error, "JSON parsing error for type `\(HTTPMongoErrorResponseDTO.self)` occured at \(error.localizedDescription).")
+            debugPrint(.error, "JSON parsing error for type `\(HTTPServerErrorDTO.Response.self)` occured at \(error.localizedDescription).")
 
             return nil
         }

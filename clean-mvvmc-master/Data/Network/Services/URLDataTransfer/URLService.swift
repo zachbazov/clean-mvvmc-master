@@ -20,7 +20,7 @@ struct URLService {
 
 extension URLService: URLRequestable {
     
-    func request(request: URLRequest, error: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable {
+    func request(request: URLRequest, error: ((HTTPServerErrorDTO.Response) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable {
         
         let dataTask = session.request(request: request) { data, response, requestError in
             
@@ -53,7 +53,7 @@ extension URLService: URLRequestable {
         return dataTask
     }
     
-    func request(endpoint: Requestable, error: ((HTTPMongoErrorResponseDTO) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
+    func request(endpoint: Requestable, error: ((HTTPServerErrorDTO.Response) -> Void)?, completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
         
         do {
             let urlRequest: URLRequest = try endpoint.urlRequest(with: configuration)

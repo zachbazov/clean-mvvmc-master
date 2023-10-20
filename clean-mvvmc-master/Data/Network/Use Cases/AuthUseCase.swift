@@ -8,14 +8,16 @@
 import Foundation
 import URLDataTransfer
 
-struct AuthUseCase: UseCase {
+final class AuthUseCase: UseCase {
     
-    let repository: AuthRepository
+    lazy var repository: AuthRepository = createRepository()
     
-    init() {
+    
+    private func createRepository() -> AuthRepository {
         let server = Application.app.server
+        let dataTransferService = server.dataTransferService
         
-        self.repository = AuthRepository(dataTransferService: server.dataTransferService)
+        return AuthRepository(dataTransferService: dataTransferService)
     }
 }
 
@@ -25,6 +27,7 @@ extension AuthUseCase {
     enum Endpoints {
         case signIn
         case signUp
+        case signOut
     }
 }
 
@@ -34,7 +37,7 @@ extension AuthUseCase {
     @discardableResult
     func request(endpoint: Endpoints,
                  request: HTTPUserDTO.Request,
-                 error: ((HTTPMongoErrorResponseDTO) -> Void)?,
+                 error: ((HTTPServerErrorDTO.Response) -> Void)?,
                  cached: ((HTTPUserDTO.Response?) -> Void)?,
                  completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         
@@ -45,6 +48,21 @@ extension AuthUseCase {
                                    error: error,
                                    cached: cached,
                                    completion: completion)
+        default:
+            return nil
+        }
+    }
+    
+    @discardableResult
+    func request(endpoint: Endpoints,
+                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        
+        switch endpoint {
+        case .signOut:
+            return repository.sign(endpoint: endpoint, completion: completion)
+            
+        default:
+            return nil
         }
     }
 }

@@ -15,6 +15,8 @@ final class AppCoordinator {
     lazy var tabBarCoordinator: TabBarCoordinator? = createTabBarCoordinator()
     
     lazy var authCoordinator: AuthCoordinator? = createAuthCoordinator()
+    
+    lazy var profileCoordinator: ProfileCoordinator? = createProfileCoordinator()
 }
 
 
@@ -37,6 +39,20 @@ extension AppCoordinator {
         let viewModel = AuthViewModel()
         let navigation = AuthViewController.xib as! NavigationController
         let controller = navigation.viewControllers.first as! AuthViewController
+        
+        controller.controllerViewModel = viewModel
+        controller.controllerViewModel?.coordinator = coordinator
+        coordinator.viewController = controller
+        coordinator.navigationController = navigation
+        
+        return coordinator
+    }
+    
+    private func createProfileCoordinator() -> ProfileCoordinator {
+        let coordinator = ProfileCoordinator()
+        let viewModel = ProfileViewModel()
+        let navigation = ProfileViewController.xib as! NavigationController
+        let controller = navigation.viewControllers.first as! ProfileViewController
         
         controller.controllerViewModel = viewModel
         controller.controllerViewModel?.coordinator = coordinator

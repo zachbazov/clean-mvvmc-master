@@ -10,43 +10,47 @@ import URLDataTransfer
 
 protocol RepositoryRequestable {
     
-    associatedtype EndpointType
+    associatedtype RequestType: Decodable
     associatedtype ResponseType: Decodable
     
-    func find(request: Any?,
+    func find(request: RequestType,
               cached: ((ResponseType?) -> Void)?,
               completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    func create(request: Any?,
+    
+    func create(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    func update(request: Any?,
+    
+    func update(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    func delete(request: Any?,
+    
+    func delete(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
 }
 
+
+protocol Repository: RepositoryRequestable {}
+
+
 extension Repository {
     
-    func find(request: Any?,
+    func find(request: RequestType,
               cached: ((ResponseType?) -> Void)?,
               completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }
     
-    func create(request: Any?,
+    func create(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }
     
-    func update(request: Any?,
+    func update(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }
     
-    func delete(request: Any?,
+    func delete(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }
 }
-
-
-protocol Repository: RepositoryRequestable {}

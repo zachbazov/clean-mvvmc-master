@@ -75,8 +75,18 @@ extension Application {
         server.authenticator.signIn(
             request,
             error: nil,
-            cached: { _ in
-                self.coordinateToTabBarScene()
+            cached: { response in
+                let authService = AuthService.shared
+                
+                authService.setUser(with: nil, response: response)
+                
+                if let user = response.data,
+                   let _ = user.selectedProfile {
+                   
+                    return self.coordinateToTabBarScene()
+                }
+                
+                self.coordinateToProfileScene()
             },
             completion: nil)
     }
@@ -91,5 +101,11 @@ extension Application {
         let authCoordinator = coordinator.authCoordinator
         
         coordinator.coordinate(to: authCoordinator?.navigationController)
+    }
+    
+    private func coordinateToProfileScene() {
+        let profileCoordinator = coordinator.profileCoordinator
+        
+        coordinator.coordinate(to: profileCoordinator?.navigationController)
     }
 }

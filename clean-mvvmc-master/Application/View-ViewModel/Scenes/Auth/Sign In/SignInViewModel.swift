@@ -45,7 +45,7 @@ extension SignInViewModel {
                     
                     authService.setUser(with: request, response: response)
                     
-                    authService.responses.saver.save(response, withRequest: request)
+                    authService.userResponseStore.saver.save(response, withRequest: request)
                     
                     DispatchQueue.main.async {
                         if let user = response.data {

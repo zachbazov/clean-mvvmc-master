@@ -26,3 +26,11 @@ extension SeasonDTO {
                       episodes: episodes.map { $0.toDomain() })
     }
 }
+
+
+extension Array where Element == SeasonDTO {
+    
+    func toDomain() -> [Season] {
+        return map { $0.toDomain() }
+    }
+}

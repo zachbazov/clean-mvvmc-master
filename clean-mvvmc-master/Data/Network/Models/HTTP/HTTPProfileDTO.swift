@@ -9,7 +9,7 @@ import Foundation
 
 struct HTTPProfileDTO {
     
-    struct GET {
+    struct GET: HTTPRepresentable {
         
         struct Request: Decodable {
             let user: UserDTO
@@ -25,7 +25,7 @@ struct HTTPProfileDTO {
     }
     
     
-    struct POST {
+    struct POST: HTTPRepresentable {
         
         struct Request: Decodable {
             let user: UserDTO
@@ -40,7 +40,7 @@ struct HTTPProfileDTO {
     }
     
     
-    struct PATCH {
+    struct PATCH: HTTPRepresentable {
         
         struct Request: Decodable {
             let user: UserDTO
@@ -56,7 +56,7 @@ struct HTTPProfileDTO {
     }
     
     
-    struct DELETE {
+    struct DELETE: HTTPRepresentable {
         
         struct Request: Decodable {
             let user: UserDTO
@@ -68,11 +68,14 @@ struct HTTPProfileDTO {
             let status: String
         }
     }
+}
+
+
+extension HTTPProfileDTO {
     
-    
-    struct Settings: Decodable {
+    struct Settings {
         
-        struct PATCH {
+        struct PATCH: HTTPRepresentable {
             
             struct Request: Decodable {
                 let user: UserDTO
@@ -86,5 +89,86 @@ struct HTTPProfileDTO {
                 let data: ProfileDTO.Settings
             }
         }
+    }
+}
+
+
+extension HTTPProfileDTO.GET.Request {
+    
+    func toDomain() -> HTTPProfile.GET.Request {
+        return HTTPProfile.GET.Request(user: user.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.GET.Response {
+    
+    func toDomain() -> HTTPProfile.GET.Response {
+        return HTTPProfile.GET.Response(status: status,
+                                        results: results,
+                                        data: data.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.POST.Request {
+    
+    func toDomain() -> HTTPProfile.POST.Request {
+        return HTTPProfile.POST.Request(user: user.toDomain(),
+                                        profile: profile.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.POST.Response {
+    
+    func toDomain() -> HTTPProfile.POST.Response {
+        return HTTPProfile.POST.Response(status: status,
+                                         data: data.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.PATCH.Request {
+    
+    func toDomain() -> HTTPProfile.PATCH.Request {
+        return HTTPProfile.PATCH.Request(user: user.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.PATCH.Response {
+    
+    func toDomain() -> HTTPProfile.PATCH.Response {
+        return HTTPProfile.PATCH.Response(status: status,
+                                          data: data.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.DELETE.Request {
+    
+    func toDomain() -> HTTPProfile.DELETE.Request {
+        return HTTPProfile.DELETE.Request(user: user.toDomain(),
+                                          id: id)
+    }
+}
+
+extension HTTPProfileDTO.DELETE.Response {
+    
+    func toDomain() -> HTTPProfile.DELETE.Response {
+        return HTTPProfile.DELETE.Response(status: status)
+    }
+}
+
+
+extension HTTPProfileDTO.Settings.PATCH.Request {
+    
+    func toDomain() -> HTTPProfile.Settings.PATCH.Request {
+        return HTTPProfile.Settings.PATCH.Request(user: user.toDomain(),
+                                                  id: id,
+                                                  settings: settings.toDomain())
+    }
+}
+
+extension HTTPProfileDTO.Settings.PATCH.Response {
+    
+    func toDomain() -> HTTPProfile.Settings.PATCH.Response {
+        return HTTPProfile.Settings.PATCH.Response(status: status,
+                                                   data: data.toDomain())
     }
 }

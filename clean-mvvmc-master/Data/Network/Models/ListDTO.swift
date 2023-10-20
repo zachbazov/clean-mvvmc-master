@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ListDTO<T>: Decodable where T: Decodable {
+struct ListDTO<T>: Decodable where T: Decodable {
     
     let user: String
     let media: [T]

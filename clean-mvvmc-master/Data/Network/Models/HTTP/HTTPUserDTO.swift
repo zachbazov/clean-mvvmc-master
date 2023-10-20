@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct HTTPUserDTO {
+struct HTTPUserDTO: HTTPRepresentable {
     
     struct Request: Decodable {
         let user: UserDTO
@@ -16,11 +16,28 @@ struct HTTPUserDTO {
     
     
     struct Response: Decodable {
+        var message: String?
         var status: String?
         var token: String?
         var data: UserDTO?
-        
-        var message: String?
+    }
+}
+
+
+extension HTTPUserDTO.Request {
+    
+    func toDomain() -> HTTPUser.Request {
+        return HTTPUser.Request(user: user.toDomain(),
+                                selectedProfile: selectedProfile)
+    }
+}
+
+extension HTTPUserDTO.Response {
+    
+    func toDomain() -> HTTPUser.Response {
+        return HTTPUser.Response(status: status,
+                                 token: token,
+                                 data: data?.toDomain())
     }
 }
 
@@ -42,8 +59,6 @@ extension HTTPUserDTO.Response {
 extension UserResponseEntity {
     
     func toDTO() -> HTTPUserDTO.Response? {
-        guard let token = token else { return nil }
-        
         return HTTPUserDTO.Response(status: status,
                                     token: token,
                                     data: data)
