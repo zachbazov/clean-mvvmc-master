@@ -1,12 +1,11 @@
 //
-//  Repository.swift
+//  RepositoryRequestable.swift
 //  clean-mvvmc-master
 //
-//  Created by Developer on 17/09/2023.
+//  Created by Developer on 21/10/2023.
 //
 
 import Foundation
-import URLDataTransfer
 
 protocol RepositoryRequestable {
     
@@ -25,13 +24,22 @@ protocol RepositoryRequestable {
     
     func delete(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    
+    @available(iOS 13.0.0, *)
+    func find(request: RequestType) async -> ResponseType?
+    
+    @available(iOS 13.0.0, *)
+    func create(request: RequestType) async -> ResponseType?
+    
+    @available(iOS 13.0.0, *)
+    func update(request: RequestType) async -> ResponseType?
+    
+    @available(iOS 13.0.0, *)
+    func delete(request: RequestType) async -> ResponseType?
 }
 
 
-protocol Repository: RepositoryRequestable {}
-
-
-extension Repository {
+extension RepositoryRequestable {
     
     func find(request: RequestType,
               cached: ((ResponseType?) -> Void)?,
@@ -51,6 +59,26 @@ extension Repository {
     
     func delete(request: RequestType,
                 completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        return nil
+    }
+    
+    @available(iOS 13.0.0, *)
+    func find(request: RequestType) async -> ResponseType? {
+        return nil
+    }
+    
+    @available(iOS 13.0.0, *)
+    func create(request: RequestType) async -> ResponseType? {
+        return nil
+    }
+    
+    @available(iOS 13.0.0, *)
+    func update(request: RequestType) async -> ResponseType? {
+        return nil
+    }
+    
+    @available(iOS 13.0.0, *)
+    func delete(request: RequestType) async -> ResponseType? {
         return nil
     }
 }

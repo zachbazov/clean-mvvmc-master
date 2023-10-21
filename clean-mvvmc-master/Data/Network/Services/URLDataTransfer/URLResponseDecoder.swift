@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 struct URLResponseDecoder {
     
@@ -17,6 +16,7 @@ struct URLResponseDecoder {
     struct JSON: URLResponseDecodable {
         
         private let decoder = JSONDecoder()
+        
         
         func decode<T>(_ data: Data) throws -> T where T: Decodable {
             return try decoder.decode(T.self, from: data)
@@ -33,10 +33,10 @@ struct URLResponseDecoder {
         
         func decode<T>(_ data: Data) throws -> T where T: Decodable {
             
-            if T.self is Data.Type, let data = data as? T {
+            if T.self is Data.Type, 
+                let data = data as? T {
                 
                 return data
-                
             } else {
                 let context = DecodingError.Context(codingPath: [CodingKeys.default],
                                                     debugDescription: "Expected `Data` type.")

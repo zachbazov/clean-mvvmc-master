@@ -7,7 +7,6 @@
 
 import Foundation
 import CodeBureau
-import URLDataTransfer
 
 public struct DataTransferErrorLogger: DataTransferErrorLoggable {
     

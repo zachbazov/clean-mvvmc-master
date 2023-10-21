@@ -1,5 +1,5 @@
 //
-//  CoreDataPersistingError.swift
+//  CoreDataError.swift
 //  clean-mvvmc-master
 //
 //  Created by Developer on 15/10/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CoreDataPersistingError: Error {
+enum CoreDataError: Error {
     
     case read(Error)
     case save(Error)

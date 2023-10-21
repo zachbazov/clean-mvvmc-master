@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 final class AuthUseCase: UseCase {
     
@@ -35,17 +34,20 @@ extension AuthUseCase {
 extension AuthUseCase {
     
     @discardableResult
-    func request(endpoint: Endpoints,
-                 request: HTTPUserDTO.Request,
-                 error: ((HTTPServerErrorDTO.Response) -> Void)?,
-                 cached: ((HTTPUserDTO.Response?) -> Void)?,
-                 completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+    func request<T, U>(endpoint: Endpoints,
+                       request: U,
+                       cached: ((T?) -> Void)?,
+                       completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    where T: Decodable, U: Decodable {
         
         switch endpoint {
         case .signIn, .signUp:
+            let request = request as! HTTPUserDTO.Request
+            let cached = cached as? (HTTPUserDTO.Response?) -> Void
+            let completion = completion as! (Result<HTTPUserDTO.Response, DataTransferError>) -> Void
+            
             return repository.sign(endpoint: endpoint,
                                    request: request,
-                                   error: error,
                                    cached: cached,
                                    completion: completion)
         default:

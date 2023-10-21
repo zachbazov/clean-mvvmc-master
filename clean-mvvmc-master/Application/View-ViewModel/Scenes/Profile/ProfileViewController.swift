@@ -7,7 +7,6 @@
 
 import UIKit
 import CodeBureau
-import URLDataTransfer
 
 final class ProfileViewController: UIViewController, CoordinatorViewController {
     
@@ -26,33 +25,7 @@ final class ProfileViewController: UIViewController, CoordinatorViewController {
         viewDidDeploySubviews()
         viewDidConfigure()
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
-            
-            let authService = AuthService.shared
-            
-            guard let user = authService.user else {
-                return
-            }
-            
-            let useCase = ProfileUseCase()
-            let request = HTTPProfileDTO.GET.Request(user: user)
-            
-            useCase.request(
-                endpoint: .find,
-                request: request,
-                error: nil,
-                cached: nil,
-                completion: { result in
-                    switch result {
-                    case .success(let response):
-                        
-                        print(response.toDomain())
-                        
-                    case .failure(let error):
-                        print(error)
-                    }
-                })
-        })
+        //controllerViewModel?.fetchProfiles()
     }
     
     

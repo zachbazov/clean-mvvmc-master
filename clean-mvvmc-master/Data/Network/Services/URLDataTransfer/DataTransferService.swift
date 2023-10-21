@@ -6,31 +6,27 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 struct DataTransferService {
     
-    let urlService: URLService
+    let urlService: URLRequestable
     let resolver = DataTransferErrorResolver()
     let logger = DataTransferErrorLogger()
-    let decoder = URLResponseDecoder()
 }
+
 
 extension DataTransferService: DataTransferRequestable {
     
-    func request<T, E>(endpoint: E,
-                       error: ((HTTPServerErrorDTO.Response) -> Void)?,
-                       completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    where T: Decodable, E: ResponseRequestable {
+    func request<T>(endpoint: Routable,
+                    completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable? where T: Decodable {
         
         return urlService.request(
             endpoint: endpoint,
-            error: error,
             completion: { result in
                 switch result {
                 case .success(let data):
                     
-                    let result: Result<T, DataTransferError> = decode(data: data, decoder: decoder)
+                    let result: Result<T, DataTransferError> = decode(data: data, decoder: endpoint.responseDecoder)
                     
                     return completion(result)
                     
@@ -44,13 +40,11 @@ extension DataTransferService: DataTransferRequestable {
             })
     }
     
-    func request<E>(endpoint: E,
-                    completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    where E: ResponseRequestable {
+    func request(endpoint: Routable,
+                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         
         return urlService.request(
             endpoint: endpoint,
-            error: nil,
             completion: { result in
                 switch result {
                 case .success:
@@ -66,6 +60,24 @@ extension DataTransferService: DataTransferRequestable {
                 }
             })
     }
+    
+    func request<T>(endpoint: Routable) async -> T? where T: Decodable {
+        guard let (data, _) = try? await urlService.request(endpoint: endpoint) else {
+            return nil
+        }
+        
+        let response: T? = await decode(data: data, decoder: endpoint.responseDecoder)
+        
+        return response
+    }
+    
+    func request(endpoint: Routable) async -> Void? {
+        guard let _ = try? await urlService.request(endpoint: endpoint) else {
+            return nil
+        }
+        
+        return Void()
+    }
 }
 
 
@@ -73,7 +85,9 @@ extension DataTransferService {
     
     private func decode<T>(data: Data?, decoder: URLResponseDecoder) -> Result<T, DataTransferError> where T: Decodable {
         do {
-            guard let data = data else { return .failure(.noResponse) }
+            guard let data = data else {
+                return .failure(.noResponse)
+            }
             
             let response: T = try decoder.json.decode(data)
             
@@ -82,6 +96,22 @@ extension DataTransferService {
             logger.log(error: error)
             
             return .failure(.parsing(error))
+        }
+    }
+    
+    private func decode<T>(data: Data?, decoder: URLResponseDecoder) async -> T? where T: Decodable {
+        do {
+            guard let data = data else {
+                return nil
+            }
+            
+            let response: T = try decoder.json.decode(data)
+            
+            return response
+        } catch {
+            logger.log(error: error)
+            
+            return nil
         }
     }
 }

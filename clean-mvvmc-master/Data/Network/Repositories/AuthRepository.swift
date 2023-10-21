@@ -6,18 +6,15 @@
 //
 
 import Foundation
-import URLDataTransfer
 
-protocol AuthRequestable {
+protocol AuthRoutable {
     
     associatedtype EndpointType
     associatedtype RequestType: Decodable
-    associatedtype ErrorResponseType: Decodable
     associatedtype ResponseType: Decodable
     
     func sign(endpoint: EndpointType,
               request: RequestType,
-              error: ((ErrorResponseType) -> Void)?,
               cached: ((ResponseType?) -> Void)?,
               completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     
@@ -26,9 +23,11 @@ protocol AuthRequestable {
 }
 
 
-struct AuthRepository: Repository, AuthRequestable {
+struct AuthRepository: Repository, AuthRoutable {
     
-    var dataTransferService: DataTransferService
+    let dataTransferService: DataTransferRequestable
+    
+    private let responseStore = UserResponseStore()
 }
 
 
@@ -36,29 +35,25 @@ extension AuthRepository {
     
     func sign(endpoint: AuthUseCase.Endpoints,
               request: HTTPUserDTO.Request,
-              error: ((HTTPServerErrorDTO.Response) -> Void)?,
               cached: ((HTTPUserDTO.Response?) -> Void)?,
               completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         
         switch endpoint {
         case .signIn:
             
-            let responseStore = UserResponseStore()
             let sessionTask = URLSessionTask()
             
-            responseStore.fetcher.fetch(for: request) { result in
+            responseStore.fetcher.fetchResponse() { result in
                 
                 if case let .success(response?) = result {
-                    return cached?(response) ?? {}()
+                    return cached?(response) ?? Void()
                 }
                 
                 guard !sessionTask.isCancelled else { return }
                 
                 let endpoint = AuthRepository.signIn(with: request)
                 
-                sessionTask.task = dataTransferService.request(endpoint: endpoint,
-                                                               error: error,
-                                                               completion: completion)
+                sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
             }
             
             return sessionTask
@@ -71,9 +66,7 @@ extension AuthRepository {
             
             let endpoint = AuthRepository.signUp(with: request)
             
-            sessionTask.task = dataTransferService.request(endpoint: endpoint,
-                                                           error: error,
-                                                           completion: completion)
+            sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
             
             return sessionTask
             
@@ -107,17 +100,18 @@ extension AuthRepository {
 
 extension AuthRepository {
     
-    static func signIn(with request: HTTPUserDTO.Request) -> Endpoint {
+    static func signIn(with request: HTTPUserDTO.Request) -> Routable {
         
         let path = "api/v1/users/signin"
-        let encodedBodyParams = request.user
+        let bodyParams: [String: Any] = ["email": request.user.email ?? "",
+                                         "password": request.user.password ?? ""]
         
         return Endpoint(method: .post,
                         path: path,
-                        bodyParametersEncodable: encodedBodyParams)
+                        bodyParameters: bodyParams)
     }
     
-    static func signUp(with request: HTTPUserDTO.Request) -> Endpoint {
+    static func signUp(with request: HTTPUserDTO.Request) -> Routable {
         
         let path = "api/v1/users/signup"
         let encodedBodyParams = request.user
@@ -127,7 +121,7 @@ extension AuthRepository {
                         bodyParametersEncodable: encodedBodyParams)
     }
     
-    static func signOut() -> Endpoint {
+    static func signOut() -> Routable {
         
         let path = "api/v1/users/signout"
         

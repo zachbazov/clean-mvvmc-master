@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 struct URLRequestConfiguration: URLRequestConfigurable {
+    
     let baseURL: URL
     let headers: [String: String] = [:]
     let queryParameters: [String: String] = [:]

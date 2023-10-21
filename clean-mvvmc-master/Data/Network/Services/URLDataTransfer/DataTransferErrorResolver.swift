@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import URLDataTransfer
 
-public struct DataTransferErrorResolver: DataTransferErrorResolvable {
+struct DataTransferErrorResolver: DataTransferErrorResolvable {
     
-    public func resolve(urlRequestError error: URLRequestError) -> DataTransferError {
+    func resolve(urlRequestError error: URLRequestError) -> DataTransferError {
         let resolvedError = resolve(error: error)
         
         return resolvedError is URLRequestError ? .requestFailure(error) : .resolvedRequestFailure(resolvedError)

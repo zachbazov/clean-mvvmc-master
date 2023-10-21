@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 final class URLSessionTask: URLSessionTaskable {
     
@@ -18,6 +17,7 @@ final class URLSessionTask: URLSessionTaskable {
     
     var isCancelled: Bool = false
 }
+
 
 extension URLSessionTask: URLSessionTaskCancellable {
     

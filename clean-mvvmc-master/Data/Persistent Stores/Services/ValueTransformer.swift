@@ -21,6 +21,7 @@ final class ValueTransformer<T>: NSSecureUnarchiveFromDataTransformer where T: N
         return [NSArray.self, T.self]
     }
     
+    
     override func transformedValue(_ value: Any?) -> Any? {
         guard let data = value as? Data else {
             fatalError("Unexpected data type, received \(type(of: value)).")

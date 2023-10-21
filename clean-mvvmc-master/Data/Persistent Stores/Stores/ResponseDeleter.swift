@@ -5,21 +5,37 @@
 //  Created by Developer on 15/10/2023.
 //
 
-import Foundation
+import CoreData
 import CodeBureau
 
 struct ResponseDeleter: ResponseDeletable {
     
-    func delete() {
+    func deleteResponse<T>(of type: T.Type) where T: NSManagedObject {
+        
         let coreDataService = CoreDataService.shared
-        let context = coreDataService.context()
-        let fetchRequest = UserResponseEntity.fetchRequest()
+        
+        deleteResponse(for: type, in: coreDataService.context())
+        
+        coreDataService.saveContext()
+    }
+}
+
+
+extension ResponseDeleter {
+    
+    private func deleteResponse<T>(for type: T.Type, in context: NSManagedObjectContext) where T: NSManagedObject {
         
         do {
-            if let result = try context.fetch(fetchRequest).first {
-                context.delete(result)
+            switch type {
+            case is UserResponseEntity.Type:
                 
-                coreDataService.saveContext()
+                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = T.fetchRequest()
+                
+                if let result = try context.fetch(fetchRequest).first {
+                    context.delete(result as! NSManagedObject)
+                }
+            default:
+                break
             }
         } catch {
             debugPrint(.error, "Unresolved error \(error) occured as trying to delete object.")

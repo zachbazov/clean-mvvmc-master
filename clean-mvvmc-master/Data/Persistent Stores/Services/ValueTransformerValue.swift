@@ -14,6 +14,7 @@ enum ValueTransformerValue: String {
     case section = "SectionTransformer"
 }
 
+
 extension NSValueTransformerName {
     
     static let user = NSValueTransformerName(rawValue: ValueTransformerValue.user.rawValue)

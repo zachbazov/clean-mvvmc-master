@@ -100,7 +100,9 @@ extension SignUpViewController {
             completion: { [weak self] in
                 guard let self = self else { return }
                 
-                self.executeChainAnimation()
+                DispatchQueue.main.async {
+                    self.executeChainAnimation()
+                }
             })
     }
     

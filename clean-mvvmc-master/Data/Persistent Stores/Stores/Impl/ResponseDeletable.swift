@@ -5,8 +5,9 @@
 //  Created by Developer on 15/10/2023.
 //
 
-import Foundation
+import CoreData
 
 protocol ResponseDeletable {
-    func delete()
+    
+    func deleteResponse<T>(of type: T.Type) where T: NSManagedObject
 }

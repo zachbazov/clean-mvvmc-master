@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 final class UserUseCase: UseCase {
     
@@ -32,14 +31,17 @@ extension UserUseCase {
 
 extension UserUseCase {
     
-    func request(endpoint: Endpoints,
-                 request: HTTPUserDTO.Request,
-                 error: ((HTTPServerErrorDTO.Response) -> Void)?,
-                 cached: ((HTTPUserDTO.Response?) -> Void)?,
-                 completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+    func request<T, U>(endpoint: Endpoints,
+                       request: U,
+                       cached: ((T?) -> Void)?,
+                       completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    where T: Decodable, U: Decodable {
         
         switch endpoint {
         case .find:
+            let request = request as! HTTPUserDTO.Request
+            let completion = completion as! (Result<HTTPUserDTO.Response, DataTransferError>) -> Void
+            
             return repository.find(request: request,
                                    cached: nil,
                                    completion: completion)

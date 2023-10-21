@@ -88,7 +88,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Unlimited movies, TV shows, and more." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2v-sL-gTy" userLabel="Primary Text View">
-                                <rect key="frame" x="32" y="340" width="328.99999999999994" height="86"/>
+                                <rect key="frame" x="32" y="340" width="329" height="86"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="vL8-TU-PmM"/>
@@ -514,8 +514,8 @@
                                 <exclude reference="uom-Hz-QX7"/>
                                 <exclude reference="RfZ-7n-u1A"/>
                                 <exclude reference="tsL-OK-pO7"/>
-                                <exclude reference="iJO-v2-fws"/>
                                 <exclude reference="gij-DY-xtj"/>
+                                <exclude reference="iJO-v2-fws"/>
                                 <exclude reference="4Wx-yu-dCn"/>
                                 <exclude reference="YRh-gc-fLS"/>
                             </mask>

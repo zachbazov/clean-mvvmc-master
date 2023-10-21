@@ -7,12 +7,11 @@
 
 import Foundation
 import CodeBureau
-import URLDataTransfer
 
-struct Endpoint: ResponseRequestable {
+struct Endpoint: Routable {
     
-    var method: HTTPMethod
-    var path: String
+    let method: HTTPMethod
+    let path: String
     var isFullPath: Bool = false
     var headerParameters: [String : String] = .jsonContentType
     var queryParametersEncodable: Encodable?
@@ -20,6 +19,5 @@ struct Endpoint: ResponseRequestable {
     var bodyParametersEncodable: Encodable?
     var bodyParameters: [String : Any] = [:]
     var bodyEncoding: BodyEndcoding = .jsonSerializationData
-    
-    var responseDecoder: ResponseDecodable?
+    let responseDecoder = URLResponseDecoder()
 }

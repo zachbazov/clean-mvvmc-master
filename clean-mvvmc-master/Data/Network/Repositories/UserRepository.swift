@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 struct UserRepository {
     
-    var dataTransferService: DataTransferService
+    let dataTransferService: DataTransferRequestable
 }
 
 

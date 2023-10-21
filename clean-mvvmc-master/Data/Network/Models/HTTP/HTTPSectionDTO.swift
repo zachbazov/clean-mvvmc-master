@@ -36,13 +36,13 @@ extension HTTPSectionDTO.Response {
     
     func toEntity(in context: NSManagedObjectContext) -> SectionResponseEntity {
         
-        let authenticator = Application.app.server.authenticator
+        let authService = Application.app.server.authService
         let entity = SectionResponseEntity(context: context)
         
         entity.status = status
         entity.results = Int32(results)
         entity.data = data
-        entity.userId = authenticator.user?._id
+        entity.userId = authService.user?._id
         
         return entity
     }

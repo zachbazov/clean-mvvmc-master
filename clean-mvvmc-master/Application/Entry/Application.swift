@@ -17,7 +17,7 @@ final class Application {
     }
     
     
-    var server = MongoServer(host: MongoHostProvider())
+    var server = Server()
     
     private(set) lazy var coordinator = AppCoordinator()
 }
@@ -34,14 +34,18 @@ extension Application {
 }
 
 
-extension Application: MongoServerDelegate {
+extension Application: ServerDelegate {
     
-    func serverDidLaunch(_ server: MongoServer) {
-        self.server(server, reauthenticeUserFromStore: UserResponseStore())
+    func serverDidLaunch(_ server: Server) {
+        
+        let store = UserResponseStore()
+        
+        self.server(server, reauthenticateFromStore: store)
     }
     
-    func server(_ server: MongoServer, reauthenticeUserFromStore store: UserResponseStore) {
-        store.fetcher.fetch { [weak self] result in
+    func server(_ server: Server, reauthenticateFromStore store: ResponsePersistable) {
+        
+        store.fetcher.fetchResponse() { [weak self] result in
             guard let self = self else { return }
             
             self.handleFetchResponse(for: result)
@@ -52,7 +56,7 @@ extension Application: MongoServerDelegate {
 
 extension Application {
     
-    private func handleFetchResponse(for result: Result<HTTPUserDTO.Response?, CoreDataPersistingError>) {
+    private func handleFetchResponse(for result: Result<HTTPUserDTO.Response?, CoreDataError>) {
         switch result {
         case .success(let response):
             
@@ -65,24 +69,22 @@ extension Application {
             coordinateToAuthScene()
             
         case .failure(let error):
-            debugPrint(.error, "\(error)")
+            debugPrint(.error, error.localizedDescription)
         }
     }
     
     private func authenticate(_ user: UserDTO) {
         let request = HTTPUserDTO.Request(user: user)
         
-        server.authenticator.signIn(
-            request,
-            error: nil,
-            cached: { response in
-                let authService = AuthService.shared
+        server.authService.signIn(
+            with: request,
+            cached: { [weak self] response in
+                guard let self = self,
+                      let user = response.data?.toDomain() else {
+                    return
+                }
                 
-                authService.setUser(with: nil, response: response)
-                
-                if let user = response.data,
-                   let _ = user.selectedProfile {
-                   
+                if let _ = user.selectedProfile {
                     return self.coordinateToTabBarScene()
                 }
                 
@@ -90,6 +92,10 @@ extension Application {
             },
             completion: nil)
     }
+}
+
+
+extension Application {
     
     private func coordinateToTabBarScene() {
         let tabBarCoordinator = coordinator.tabBarCoordinator

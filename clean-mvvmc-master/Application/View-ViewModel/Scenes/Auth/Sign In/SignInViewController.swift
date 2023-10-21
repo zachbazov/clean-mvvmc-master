@@ -89,14 +89,15 @@ extension SignInViewController {
         
         viewModel?.signIn(
             with: request,
-            completion: { [weak self] user in
-                guard let self = self else { return }
-                
-                guard user != nil else {
+            completion: { [weak self] response in
+                guard let self = self,
+                      let _ = response.data else {
                     return
                 }
                 
-                self.executeChainAnimation()
+                DispatchQueue.main.async {
+                    self.executeChainAnimation()
+                }
             })
     }
     

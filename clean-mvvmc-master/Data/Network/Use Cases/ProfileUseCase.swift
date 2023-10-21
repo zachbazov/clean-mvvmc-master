@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 final class ProfileUseCase: UseCase {
     
@@ -33,17 +32,31 @@ extension ProfileUseCase {
 extension ProfileUseCase {
     
     @discardableResult
-    func request(endpoint: Endpoints,
-                 request: HTTPProfileDTO.GET.Request,
-                 error: ((HTTPServerErrorDTO.Response) -> Void)?,
-                 cached: ((HTTPProfileDTO.GET.Response?) -> Void)?,
-                 completion: @escaping (Result<HTTPProfileDTO.GET.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+    func request<T, U>(endpoint: Endpoints,
+                       request: U,
+                       cached: ((T?) -> Void)?,
+                       completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    where T: Decodable, U: Decodable {
         
         switch endpoint {
         case .find:
+            let request = request as! HTTPProfileDTO.GET.Request
+            let cached = cached as! (HTTPProfileDTO.GET.Response?) -> Void
+            let completion = completion as! (Result<HTTPProfileDTO.GET.Response, DataTransferError>) -> Void
+            
             return repository.find(request: request,
-                                   cached: nil,
+                                   cached: cached,
                                    completion: completion)
+        }
+    }
+    
+    @available(iOS 13.0.0, *)
+    func request<T, U>(endpoint: Endpoints, request: U) async -> T? where T: Decodable, U: Decodable {
+        switch endpoint {
+        case .find:
+            let request = request as! HTTPProfileDTO.GET.Request
+            
+            return await repository.find(request: request) as? T
         }
     }
 }

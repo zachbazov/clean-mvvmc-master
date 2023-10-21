@@ -17,24 +17,6 @@
         "branch" : "main",
         "revision" : "f22e985ed3b5364c57b4a0be3ed9bba169ce07f2"
       }
-    },
-    {
-      "identity" : "mongodb",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zachbazov/MongoDB.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "615c68764eea259f928ebb374ab2c8496b7f296e"
-      }
-    },
-    {
-      "identity" : "urldatatransfer",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zachbazov/URLDataTransfer.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "5cfdc0d268e68d0c3fa45210da7b2568a4cbe233"
-      }
     }
   ],
   "version" : 2

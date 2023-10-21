@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import URLDataTransfer
 
 struct ProfileRepository {
     
-    var dataTransferService: DataTransferService
+    let dataTransferService: DataTransferRequestable
 }
 
 
@@ -26,10 +25,7 @@ extension ProfileRepository: Repository {
         
         let endpoint = ProfileRepository.find(with: request)
         
-        sessionTask.task = dataTransferService.request(
-            endpoint: endpoint,
-            error: nil,
-            completion: completion)
+        sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
         
         return sessionTask
     }
@@ -48,12 +44,21 @@ extension ProfileRepository: Repository {
                 completion: @escaping (Result<HTTPProfileDTO.GET.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }
+    
+    @available(iOS 13.0.0, *)
+    func find(request: HTTPProfileDTO.GET.Request) async -> HTTPProfileDTO.GET.Response? {
+        
+        let endpoint = ProfileRepository.find(with: request)
+        let response: HTTPProfileDTO.GET.Response? = await dataTransferService.request(endpoint: endpoint)
+        
+        return response
+    }
 }
 
 
 extension ProfileRepository {
     
-    static func find(with request: HTTPProfileDTO.GET.Request) -> Endpoint {
+    static func find(with request: HTTPProfileDTO.GET.Request) -> Routable {
         
         let path = "api/v1/users/profiles"
         let queryParams: [String: Any] = ["user": request.user._id ?? ""]

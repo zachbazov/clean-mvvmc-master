@@ -13,52 +13,16 @@ import CodeBureau
 struct SignInViewModel: ControllerViewModel {
     
     var coordinator: AuthCoordinator?
-    
-    let useCase = AuthUseCase()
 }
 
 // MARK: - Internal Implementation
 
 extension SignInViewModel {
     
-    func signIn(with request: HTTPUserDTO.Request, completion: @escaping (UserDTO?) -> Void) {
+    func signIn(with request: HTTPUserDTO.Request, completion: @escaping (HTTPUserDTO.Response) -> Void) {
         
-        let authService = AuthService.shared
+        let authService = Application.app.server.authService
         
-        useCase.request(
-            endpoint: .signIn,
-            request: request,
-            error: nil,
-            cached: { response in
-                guard let response = response,
-                      let user = response.data else {
-                    return
-                }
-                
-                authService.setUser(with: request, response: response)
-                
-                completion(user)
-            },
-            completion: { result in
-                switch result {
-                case .success(let response):
-                    
-                    authService.setUser(with: request, response: response)
-                    
-                    authService.userResponseStore.saver.save(response, withRequest: request)
-                    
-                    DispatchQueue.main.async {
-                        if let user = response.data {
-                            
-                            return completion(user)
-                        }
-                        
-                        completion(nil)
-                    }
-                    
-                case .failure(let error):
-                    debugPrint(.error, error.localizedDescription)
-                }
-            })
+        authService.signIn(with: request, cached: nil, completion: completion)
     }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 import CodeBureau
-import URLDataTransfer
 
 struct URLRequestLogger: URLRequestLoggable {
     
@@ -34,7 +33,7 @@ struct URLRequestLogger: URLRequestLoggable {
         guard let data = data else { return }
         
         if let dataDict = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-            debugPrint(.network, "response: \(String(describing: dataDict))")
+            //debugPrint(.network, "response: \(String(describing: dataDict))")
             debugPrint(.network, "status: \(dataDict["status"]!)")
         }
     }

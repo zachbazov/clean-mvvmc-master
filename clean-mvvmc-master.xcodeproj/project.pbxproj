@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B049D952ABFC072004DC481 /* MongoDB in Frameworks */ = {isa = PBXBuildFile; productRef = 8B049D942ABFC072004DC481 /* MongoDB */; };
-		8B049D972ABFC1BC004DC481 /* MongoHostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B049D962ABFC1BC004DC481 /* MongoHostProvider.swift */; };
+		8B049D972ABFC1BC004DC481 /* ServerHostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B049D962ABFC1BC004DC481 /* ServerHostProvider.swift */; };
 		8B06BA5B2AD9C51A00DFF745 /* UIViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B06BA5A2AD9C51A00DFF745 /* UIViewController+Layout.swift */; };
-		8B263A872ABA442500C50D66 /* ServerErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B263A862ABA442500C50D66 /* ServerErrorDTO.swift */; };
-		8B263A892ABA444700C50D66 /* HTTPServerErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B263A882ABA444700C50D66 /* HTTPServerErrorDTO.swift */; };
 		8B46973D2AB7BFFD00CC8131 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46973C2AB7BFFD00CC8131 /* ProfileDTO.swift */; };
 		8B46973F2AB7C1BE00CC8131 /* SectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46973E2AB7C1BE00CC8131 /* SectionDTO.swift */; };
 		8B4697412AB7C1C200CC8131 /* MediaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4697402AB7C1C200CC8131 /* MediaDTO.swift */; };
@@ -35,7 +32,7 @@
 		8B64B8D52ADC668700A272C5 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8D42ADC668700A272C5 /* AuthService.swift */; };
 		8B64B8D72ADC775E00A272C5 /* CoreDataPersistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8D62ADC775E00A272C5 /* CoreDataPersistable.swift */; };
 		8B64B8D92ADC778500A272C5 /* CoreDataValueTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8D82ADC778400A272C5 /* CoreDataValueTransformable.swift */; };
-		8B64B8DB2ADC77B000A272C5 /* CoreDataPersistingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8DA2ADC77B000A272C5 /* CoreDataPersistingError.swift */; };
+		8B64B8DB2ADC77B000A272C5 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8DA2ADC77B000A272C5 /* CoreDataError.swift */; };
 		8B64B8DD2ADC792500A272C5 /* ValueTransformerValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8DC2ADC792500A272C5 /* ValueTransformerValue.swift */; };
 		8B64B8E02AE0593300A272C5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8DF2AE0593300A272C5 /* ProfileViewController.swift */; };
 		8B64B8E22AE0593E00A272C5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B64B8E12AE0593E00A272C5 /* ProfileViewModel.swift */; };
@@ -74,7 +71,7 @@
 		8B87E5952AB40B4E009248EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5942AB40B4E009248EC /* Profile.swift */; };
 		8B87E5972AB480A0009248EC /* DeltaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */; };
 		8B87E5992AB483E2009248EC /* OmegaViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */; };
-		8B87E59E2AB53A45009248EC /* MongoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59D2AB53A45009248EC /* MongoServer.swift */; };
+		8B87E59E2AB53A45009248EC /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59D2AB53A45009248EC /* Server.swift */; };
 		8B87E5A02AB544C8009248EC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E59F2AB544C8009248EC /* Endpoint.swift */; };
 		8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A12AB5CE0C009248EC /* URLService.swift */; };
 		8B87E5A62AB6767E009248EC /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5A52AB6767E009248EC /* DataTransferService.swift */; };
@@ -84,17 +81,14 @@
 		8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B02AB697C5009248EC /* AuthUseCase.swift */; };
 		8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B42AB73555009248EC /* UserDTO.swift */; };
 		8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */; };
-		8B87E5BC2AB74C88009248EC /* MongoAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5BB2AB74C88009248EC /* MongoAuthenticator.swift */; };
 		8B8F81B62ABF2B25006B72CB /* CodeBureau in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81B52ABF2B25006B72CB /* CodeBureau */; };
 		8B8F81B92ABF3264006B72CB /* URLRequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */; };
 		8B8F81BB2ABF32B1006B72CB /* URLSessionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */; };
 		8B8F81BD2ABF437C006B72CB /* URLResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81BC2ABF437C006B72CB /* URLResponseDecoder.swift */; };
 		8B8F81BF2ABF43A4006B72CB /* URLRequestErrorResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81BE2ABF43A4006B72CB /* URLRequestErrorResolver.swift */; };
-		8B8F81C12ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81C02ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift */; };
 		8B8F81C32ABF43D6006B72CB /* URLRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */; };
 		8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81DA2ABF59CC006B72CB /* DataTransferErrorLogger.swift */; };
 		8B8F81DD2ABF59CD006B72CB /* DataTransferErrorResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81DB2ABF59CC006B72CB /* DataTransferErrorResolver.swift */; };
-		8B8F81E02ABFB3DF006B72CB /* URLDataTransfer in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81DF2ABFB3DF006B72CB /* URLDataTransfer */; };
 		8B8F81E32ABFB82C006B72CB /* Cryptographic in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81E22ABFB82C006B72CB /* Cryptographic */; };
 		8B935FDD2AD89FB2000268CB /* UIBarButton+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B935FDC2AD89FB2000268CB /* UIBarButton+View.swift */; };
 		8B935FE22AD957F3000268CB /* UIView+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B935FE12AD957F3000268CB /* UIView+Visibility.swift */; };
@@ -105,16 +99,35 @@
 		8B953C222AE1361C00CF411E /* HTTPSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C212AE1361C00CF411E /* HTTPSeason.swift */; };
 		8B953C242AE1363700CF411E /* HTTPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C232AE1363700CF411E /* HTTPList.swift */; };
 		8B953C262AE1367700CF411E /* HTTPRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C252AE1367700CF411E /* HTTPRepresentable.swift */; };
-		8B953C282AE1421500CF411E /* HTTPServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C272AE1421500CF411E /* HTTPServerError.swift */; };
-		8B953C2A2AE1458800CF411E /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C292AE1458800CF411E /* ServerError.swift */; };
 		8B953C2C2AE14C8400CF411E /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C2B2AE14C8400CF411E /* UserRepository.swift */; };
 		8B953C2E2AE14C8900CF411E /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C2D2AE14C8900CF411E /* UserUseCase.swift */; };
 		8B953C302AE1B37D00CF411E /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C2F2AE1B37C00CF411E /* ProfileRepository.swift */; };
 		8B953C322AE1B4A900CF411E /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C312AE1B4A900CF411E /* ProfileUseCase.swift */; };
-		8B9E5E8A2AC8BECB003FDC04 /* MongoAuthRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E862AC8BECB003FDC04 /* MongoAuthRequestable.swift */; };
-		8B9E5E8B2AC8BECB003FDC04 /* MongoAuthenticable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E872AC8BECB003FDC04 /* MongoAuthenticable.swift */; };
-		8B9E5E8C2AC8BECB003FDC04 /* MongoHostProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E882AC8BECB003FDC04 /* MongoHostProvidable.swift */; };
-		8B9E5E8D2AC8BECB003FDC04 /* MongoServable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5E892AC8BECB003FDC04 /* MongoServable.swift */; };
+		8B953C4A2AE2A27D00CF411E /* URLSessionRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C352AE2A27B00CF411E /* URLSessionRequestable.swift */; };
+		8B953C4B2AE2A27D00CF411E /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C362AE2A27C00CF411E /* Routable.swift */; };
+		8B953C4C2AE2A27D00CF411E /* URLRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C372AE2A27C00CF411E /* URLRequestable.swift */; };
+		8B953C4D2AE2A27D00CF411E /* DataTransferError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C382AE2A27C00CF411E /* DataTransferError.swift */; };
+		8B953C4E2AE2A27D00CF411E /* URLRequestErrorResolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C392AE2A27C00CF411E /* URLRequestErrorResolvable.swift */; };
+		8B953C4F2AE2A27D00CF411E /* URLResponseDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C3A2AE2A27C00CF411E /* URLResponseDecodable.swift */; };
+		8B953C502AE2A27D00CF411E /* URLSessionTaskCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C3B2AE2A27C00CF411E /* URLSessionTaskCancellable.swift */; };
+		8B953C512AE2A27D00CF411E /* DataTransferErrorResolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C3C2AE2A27C00CF411E /* DataTransferErrorResolvable.swift */; };
+		8B953C522AE2A27E00CF411E /* URLRequestConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C3D2AE2A27C00CF411E /* URLRequestConfigurable.swift */; };
+		8B953C532AE2A27E00CF411E /* EncodableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C3E2AE2A27C00CF411E /* EncodableDictionary.swift */; };
+		8B953C552AE2A27E00CF411E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C402AE2A27C00CF411E /* HTTPMethod.swift */; };
+		8B953C562AE2A27E00CF411E /* DataTransferErrorLoggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C412AE2A27C00CF411E /* DataTransferErrorLoggable.swift */; };
+		8B953C572AE2A27E00CF411E /* URLRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C422AE2A27C00CF411E /* URLRequestError.swift */; };
+		8B953C582AE2A27E00CF411E /* URLRequestLoggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C432AE2A27D00CF411E /* URLRequestLoggable.swift */; };
+		8B953C592AE2A27E00CF411E /* URLSessionTaskable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C442AE2A27D00CF411E /* URLSessionTaskable.swift */; };
+		8B953C5A2AE2A27E00CF411E /* DataTransferRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C452AE2A27D00CF411E /* DataTransferRequestable.swift */; };
+		8B953C5B2AE2A27E00CF411E /* URLRequestGenerationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C462AE2A27D00CF411E /* URLRequestGenerationError.swift */; };
+		8B953C5C2AE2A27E00CF411E /* URLResponseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C472AE2A27D00CF411E /* URLResponseCode.swift */; };
+		8B9C93B72AE3B53200B7AD52 /* RepositoryRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */; };
+		8B9C93B92AE3BFC200B7AD52 /* UseCaseRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */; };
+		8B9C93BD2AE3C91300B7AD52 /* ServerHostProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */; };
+		8B9C93BF2AE41D2700B7AD52 /* AuthRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93BE2AE41D2700B7AD52 /* AuthRequestable.swift */; };
+		8B9C93C52AE41E5F00B7AD52 /* URLImageRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93C42AE41E5F00B7AD52 /* URLImageRequestable.swift */; };
+		8B9C93C82AE41E9100B7AD52 /* URLImageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93C72AE41E9100B7AD52 /* URLImageProtocol.swift */; };
+		8B9C93CA2AE41FDE00B7AD52 /* ServerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93C92AE41FDE00B7AD52 /* ServerDelegate.swift */; };
 		8B9E5FE32AD59329003FDC04 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9E5FE22AD59329003FDC04 /* TextField.swift */; };
 		8BA1348E2AC2293400C50653 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1348D2AC2293400C50653 /* AuthCoordinator.swift */; };
 		8BA134902AC2293B00C50653 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1348F2AC2293B00C50653 /* AuthViewController.swift */; };
@@ -128,7 +141,7 @@
 		8BA134A62AC5CA6900C50653 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134A52AC5CA6900C50653 /* Theme.swift */; };
 		8BA134A92AC5CAC900C50653 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */; };
 		8BA134AB2AC6265A00C50653 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134AA2AC6265A00C50653 /* GradientView.swift */; };
-		8BA5210B2AB7715D00DAE2F7 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */; };
+		8BA5210B2AB7715D00DAE2F7 /* URLImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5210A2AB7715D00DAE2F7 /* URLImageService.swift */; };
 		8BB692972AB7B9660076207C /* CoreDataStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BB692952AB7B9660076207C /* CoreDataStore.xcdatamodeld */; };
 		8BB692992AB7BD350076207C /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB692982AB7BD350076207C /* Media.swift */; };
 		8BB6929B2AB7BD380076207C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6929A2AB7BD380076207C /* Section.swift */; };
@@ -144,10 +157,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B049D962ABFC1BC004DC481 /* MongoHostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoHostProvider.swift; sourceTree = "<group>"; };
+		8B049D962ABFC1BC004DC481 /* ServerHostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHostProvider.swift; sourceTree = "<group>"; };
 		8B06BA5A2AD9C51A00DFF745 /* UIViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Layout.swift"; sourceTree = "<group>"; };
-		8B263A862ABA442500C50D66 /* ServerErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorDTO.swift; sourceTree = "<group>"; };
-		8B263A882ABA444700C50D66 /* HTTPServerErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerErrorDTO.swift; sourceTree = "<group>"; };
 		8B46973C2AB7BFFD00CC8131 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		8B46973E2AB7C1BE00CC8131 /* SectionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDTO.swift; sourceTree = "<group>"; };
 		8B4697402AB7C1C200CC8131 /* MediaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDTO.swift; sourceTree = "<group>"; };
@@ -171,7 +182,7 @@
 		8B64B8D42ADC668700A272C5 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		8B64B8D62ADC775E00A272C5 /* CoreDataPersistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistable.swift; sourceTree = "<group>"; };
 		8B64B8D82ADC778400A272C5 /* CoreDataValueTransformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataValueTransformable.swift; sourceTree = "<group>"; };
-		8B64B8DA2ADC77B000A272C5 /* CoreDataPersistingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistingError.swift; sourceTree = "<group>"; };
+		8B64B8DA2ADC77B000A272C5 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		8B64B8DC2ADC792500A272C5 /* ValueTransformerValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformerValue.swift; sourceTree = "<group>"; };
 		8B64B8DF2AE0593300A272C5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8B64B8E12AE0593E00A272C5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -212,7 +223,7 @@
 		8B87E5942AB40B4E009248EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		8B87E5962AB480A0009248EC /* DeltaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeltaViewController.storyboard; sourceTree = "<group>"; };
 		8B87E5982AB483E2009248EC /* OmegaViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OmegaViewController.storyboard; sourceTree = "<group>"; };
-		8B87E59D2AB53A45009248EC /* MongoServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoServer.swift; sourceTree = "<group>"; };
+		8B87E59D2AB53A45009248EC /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		8B87E59F2AB544C8009248EC /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		8B87E5A12AB5CE0C009248EC /* URLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLService.swift; sourceTree = "<group>"; };
 		8B87E5A52AB6767E009248EC /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
@@ -222,12 +233,10 @@
 		8B87E5B02AB697C5009248EC /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		8B87E5B42AB73555009248EC /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUserDTO.swift; sourceTree = "<group>"; };
-		8B87E5BB2AB74C88009248EC /* MongoAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoAuthenticator.swift; sourceTree = "<group>"; };
 		8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConfiguration.swift; sourceTree = "<group>"; };
 		8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTask.swift; sourceTree = "<group>"; };
 		8B8F81BC2ABF437C006B72CB /* URLResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseDecoder.swift; sourceTree = "<group>"; };
 		8B8F81BE2ABF43A4006B72CB /* URLRequestErrorResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestErrorResolver.swift; sourceTree = "<group>"; };
-		8B8F81C02ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestMongoErrorResolver.swift; sourceTree = "<group>"; };
 		8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestLogger.swift; sourceTree = "<group>"; };
 		8B8F81DA2ABF59CC006B72CB /* DataTransferErrorLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferErrorLogger.swift; sourceTree = "<group>"; };
 		8B8F81DB2ABF59CC006B72CB /* DataTransferErrorResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferErrorResolver.swift; sourceTree = "<group>"; };
@@ -240,16 +249,35 @@
 		8B953C212AE1361C00CF411E /* HTTPSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSeason.swift; sourceTree = "<group>"; };
 		8B953C232AE1363700CF411E /* HTTPList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPList.swift; sourceTree = "<group>"; };
 		8B953C252AE1367700CF411E /* HTTPRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRepresentable.swift; sourceTree = "<group>"; };
-		8B953C272AE1421500CF411E /* HTTPServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerError.swift; sourceTree = "<group>"; };
-		8B953C292AE1458800CF411E /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		8B953C2B2AE14C8400CF411E /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		8B953C2D2AE14C8900CF411E /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		8B953C2F2AE1B37C00CF411E /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		8B953C312AE1B4A900CF411E /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
-		8B9E5E862AC8BECB003FDC04 /* MongoAuthRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoAuthRequestable.swift; sourceTree = "<group>"; };
-		8B9E5E872AC8BECB003FDC04 /* MongoAuthenticable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoAuthenticable.swift; sourceTree = "<group>"; };
-		8B9E5E882AC8BECB003FDC04 /* MongoHostProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoHostProvidable.swift; sourceTree = "<group>"; };
-		8B9E5E892AC8BECB003FDC04 /* MongoServable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MongoServable.swift; sourceTree = "<group>"; };
+		8B953C352AE2A27B00CF411E /* URLSessionRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionRequestable.swift; sourceTree = "<group>"; };
+		8B953C362AE2A27C00CF411E /* Routable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		8B953C372AE2A27C00CF411E /* URLRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestable.swift; sourceTree = "<group>"; };
+		8B953C382AE2A27C00CF411E /* DataTransferError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferError.swift; sourceTree = "<group>"; };
+		8B953C392AE2A27C00CF411E /* URLRequestErrorResolvable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestErrorResolvable.swift; sourceTree = "<group>"; };
+		8B953C3A2AE2A27C00CF411E /* URLResponseDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLResponseDecodable.swift; sourceTree = "<group>"; };
+		8B953C3B2AE2A27C00CF411E /* URLSessionTaskCancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionTaskCancellable.swift; sourceTree = "<group>"; };
+		8B953C3C2AE2A27C00CF411E /* DataTransferErrorResolvable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferErrorResolvable.swift; sourceTree = "<group>"; };
+		8B953C3D2AE2A27C00CF411E /* URLRequestConfigurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestConfigurable.swift; sourceTree = "<group>"; };
+		8B953C3E2AE2A27C00CF411E /* EncodableDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableDictionary.swift; sourceTree = "<group>"; };
+		8B953C402AE2A27C00CF411E /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		8B953C412AE2A27C00CF411E /* DataTransferErrorLoggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferErrorLoggable.swift; sourceTree = "<group>"; };
+		8B953C422AE2A27C00CF411E /* URLRequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestError.swift; sourceTree = "<group>"; };
+		8B953C432AE2A27D00CF411E /* URLRequestLoggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestLoggable.swift; sourceTree = "<group>"; };
+		8B953C442AE2A27D00CF411E /* URLSessionTaskable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionTaskable.swift; sourceTree = "<group>"; };
+		8B953C452AE2A27D00CF411E /* DataTransferRequestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransferRequestable.swift; sourceTree = "<group>"; };
+		8B953C462AE2A27D00CF411E /* URLRequestGenerationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestGenerationError.swift; sourceTree = "<group>"; };
+		8B953C472AE2A27D00CF411E /* URLResponseCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLResponseCode.swift; sourceTree = "<group>"; };
+		8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRequestable.swift; sourceTree = "<group>"; };
+		8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseRequestable.swift; sourceTree = "<group>"; };
+		8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerHostProvidable.swift; sourceTree = "<group>"; };
+		8B9C93BE2AE41D2700B7AD52 /* AuthRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestable.swift; sourceTree = "<group>"; };
+		8B9C93C42AE41E5F00B7AD52 /* URLImageRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageRequestable.swift; sourceTree = "<group>"; };
+		8B9C93C72AE41E9100B7AD52 /* URLImageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageProtocol.swift; sourceTree = "<group>"; };
+		8B9C93C92AE41FDE00B7AD52 /* ServerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDelegate.swift; sourceTree = "<group>"; };
 		8B9E5FE22AD59329003FDC04 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		8BA1348D2AC2293400C50653 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		8BA1348F2AC2293B00C50653 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -263,7 +291,7 @@
 		8BA134A52AC5CA6900C50653 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HEX.swift"; sourceTree = "<group>"; };
 		8BA134AA2AC6265A00C50653 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		8BA5210A2AB7715D00DAE2F7 /* URLImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageService.swift; sourceTree = "<group>"; };
 		8BB692962AB7B9660076207C /* CoreDataStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStore.xcdatamodel; sourceTree = "<group>"; };
 		8BB692982AB7BD350076207C /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		8BB6929A2AB7BD380076207C /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -284,8 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8F81B62ABF2B25006B72CB /* CodeBureau in Frameworks */,
-				8B049D952ABFC072004DC481 /* MongoDB in Frameworks */,
-				8B8F81E02ABFB3DF006B72CB /* URLDataTransfer in Frameworks */,
 				8B8F81E32ABFB82C006B72CB /* Cryptographic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,13 +322,9 @@
 		8B049D982ABFC1FA004DC481 /* MongoService */ = {
 			isa = PBXGroup;
 			children = (
-				8B9E5E872AC8BECB003FDC04 /* MongoAuthenticable.swift */,
-				8B9E5E862AC8BECB003FDC04 /* MongoAuthRequestable.swift */,
-				8B9E5E882AC8BECB003FDC04 /* MongoHostProvidable.swift */,
-				8B9E5E892AC8BECB003FDC04 /* MongoServable.swift */,
-				8B87E59D2AB53A45009248EC /* MongoServer.swift */,
-				8B049D962ABFC1BC004DC481 /* MongoHostProvider.swift */,
-				8B87E5BB2AB74C88009248EC /* MongoAuthenticator.swift */,
+				8B9C93C12AE41D7600B7AD52 /* Impl */,
+				8B049D962ABFC1BC004DC481 /* ServerHostProvider.swift */,
+				8B87E59D2AB53A45009248EC /* Server.swift */,
 			);
 			path = MongoService;
 			sourceTree = "<group>";
@@ -311,9 +333,9 @@
 			isa = PBXGroup;
 			children = (
 				8B8F81B72ABF3247006B72CB /* URLDataTransfer */,
+				8B9C93C32AE41D8C00B7AD52 /* URLImageService */,
+				8B9C93C02AE41D3C00B7AD52 /* AuthService */,
 				8B049D982ABFC1FA004DC481 /* MongoService */,
-				8BA5210A2AB7715D00DAE2F7 /* ImageService.swift */,
-				8B64B8D42ADC668700A272C5 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -424,7 +446,6 @@
 				8BA134A52AC5CA6900C50653 /* Theme.swift */,
 				8B6BA72C2ADBF9B900B7FD8A /* BorderedButton.swift */,
 				8B64B8C12ADC2B5A00A272C5 /* ViewLifecycleBehavior.swift */,
-				8B953C252AE1367700CF411E /* HTTPRepresentable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -517,8 +538,8 @@
 			isa = PBXGroup;
 			children = (
 				8B87E5882AB40AEB009248EC /* Models */,
-				8B87E5A82AB693D9009248EC /* Repository.swift */,
-				8B87E5AA2AB693DD009248EC /* UseCase.swift */,
+				8B9C93BA2AE3C14B00B7AD52 /* Repository */,
+				8B9C93BB2AE3C15600B7AD52 /* Use Case */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -546,7 +567,6 @@
 				8BB692A02AB7BD870076207C /* Episode.swift */,
 				8BB692A42AB7BD960076207C /* Trailer.swift */,
 				8BB6929C2AB7BD630076207C /* List.swift */,
-				8B953C292AE1458800CF411E /* ServerError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -656,7 +676,6 @@
 				8B46974A2AB7C79A00CC8131 /* SeasonDTO.swift */,
 				8B4697482AB7C79600CC8131 /* EpisodeDTO.swift */,
 				8B46974C2AB7C7A200CC8131 /* ListDTO.swift */,
-				8B263A862ABA442500C50D66 /* ServerErrorDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -670,7 +689,6 @@
 				8B4697422AB7C75C00CC8131 /* HTTPMediaDTO.swift */,
 				8B4697502AB7C7BC00CC8131 /* HTTPSeasonDTO.swift */,
 				8B4697522AB7C7C900CC8131 /* HTTPListDTO.swift */,
-				8B263A882ABA444700C50D66 /* HTTPServerErrorDTO.swift */,
 			);
 			path = HTTP;
 			sourceTree = "<group>";
@@ -678,12 +696,12 @@
 		8B8F81B72ABF3247006B72CB /* URLDataTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				8B953C332AE2A27300CF411E /* Impl */,
 				8B87E59F2AB544C8009248EC /* Endpoint.swift */,
 				8B87E5A12AB5CE0C009248EC /* URLService.swift */,
 				8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */,
 				8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */,
 				8B8F81BE2ABF43A4006B72CB /* URLRequestErrorResolver.swift */,
-				8B8F81C02ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift */,
 				8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */,
 				8B8F81BC2ABF437C006B72CB /* URLResponseDecoder.swift */,
 				8B87E5A52AB6767E009248EC /* DataTransferService.swift */,
@@ -718,9 +736,116 @@
 				8B953C1F2AE1361600CF411E /* HTTPMedia.swift */,
 				8B953C212AE1361C00CF411E /* HTTPSeason.swift */,
 				8B953C232AE1363700CF411E /* HTTPList.swift */,
-				8B953C272AE1421500CF411E /* HTTPServerError.swift */,
 			);
 			path = HTTP;
+			sourceTree = "<group>";
+		};
+		8B953C332AE2A27300CF411E /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				8B953C3E2AE2A27C00CF411E /* EncodableDictionary.swift */,
+				8B953C252AE1367700CF411E /* HTTPRepresentable.swift */,
+				8B953C402AE2A27C00CF411E /* HTTPMethod.swift */,
+				8B953C362AE2A27C00CF411E /* Routable.swift */,
+				8B953C372AE2A27C00CF411E /* URLRequestable.swift */,
+				8B953C3D2AE2A27C00CF411E /* URLRequestConfigurable.swift */,
+				8B953C422AE2A27C00CF411E /* URLRequestError.swift */,
+				8B953C392AE2A27C00CF411E /* URLRequestErrorResolvable.swift */,
+				8B953C462AE2A27D00CF411E /* URLRequestGenerationError.swift */,
+				8B953C432AE2A27D00CF411E /* URLRequestLoggable.swift */,
+				8B953C472AE2A27D00CF411E /* URLResponseCode.swift */,
+				8B953C3A2AE2A27C00CF411E /* URLResponseDecodable.swift */,
+				8B953C352AE2A27B00CF411E /* URLSessionRequestable.swift */,
+				8B953C442AE2A27D00CF411E /* URLSessionTaskable.swift */,
+				8B953C3B2AE2A27C00CF411E /* URLSessionTaskCancellable.swift */,
+				8B953C382AE2A27C00CF411E /* DataTransferError.swift */,
+				8B953C412AE2A27C00CF411E /* DataTransferErrorLoggable.swift */,
+				8B953C3C2AE2A27C00CF411E /* DataTransferErrorResolvable.swift */,
+				8B953C452AE2A27D00CF411E /* DataTransferRequestable.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		8B9C93BA2AE3C14B00B7AD52 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */,
+				8B87E5A82AB693D9009248EC /* Repository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		8B9C93BB2AE3C15600B7AD52 /* Use Case */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */,
+				8B87E5AA2AB693DD009248EC /* UseCase.swift */,
+			);
+			path = "Use Case";
+			sourceTree = "<group>";
+		};
+		8B9C93C02AE41D3C00B7AD52 /* AuthService */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93C22AE41D7C00B7AD52 /* Impl */,
+				8B64B8D42ADC668700A272C5 /* AuthService.swift */,
+			);
+			path = AuthService;
+			sourceTree = "<group>";
+		};
+		8B9C93C12AE41D7600B7AD52 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */,
+				8B9C93C92AE41FDE00B7AD52 /* ServerDelegate.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		8B9C93C22AE41D7C00B7AD52 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93BE2AE41D2700B7AD52 /* AuthRequestable.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		8B9C93C32AE41D8C00B7AD52 /* URLImageService */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93C62AE41E6900B7AD52 /* Impl */,
+				8B9C93C72AE41E9100B7AD52 /* URLImageProtocol.swift */,
+				8BA5210A2AB7715D00DAE2F7 /* URLImageService.swift */,
+			);
+			path = URLImageService;
+			sourceTree = "<group>";
+		};
+		8B9C93C62AE41E6900B7AD52 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				8B9C93C42AE41E5F00B7AD52 /* URLImageRequestable.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		8B9C93CB2AE4213000B7AD52 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				8B64B8D62ADC775E00A272C5 /* CoreDataPersistable.swift */,
+				8B64B8D82ADC778400A272C5 /* CoreDataValueTransformable.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		8B9C93CC2AE42B4B00B7AD52 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				8B64B8C52ADC649100A272C5 /* ResponseFetchable.swift */,
+				8B64B8C72ADC64A200A272C5 /* ResponseSavable.swift */,
+				8B64B8C92ADC64A700A272C5 /* ResponseDeletable.swift */,
+				8B64B8D22ADC661100A272C5 /* ResponsePersistable.swift */,
+			);
+			path = Impl;
 			sourceTree = "<group>";
 		};
 		8BA1348C2AC2291300C50653 /* Auth */ = {
@@ -766,10 +891,9 @@
 			isa = PBXGroup;
 			children = (
 				8BB692952AB7B9660076207C /* CoreDataStore.xcdatamodeld */,
+				8B9C93CB2AE4213000B7AD52 /* Impl */,
 				8BF4DD512AB7A08B00536F7E /* CoreDataService.swift */,
-				8B64B8D62ADC775E00A272C5 /* CoreDataPersistable.swift */,
-				8B64B8D82ADC778400A272C5 /* CoreDataValueTransformable.swift */,
-				8B64B8DA2ADC77B000A272C5 /* CoreDataPersistingError.swift */,
+				8B64B8DA2ADC77B000A272C5 /* CoreDataError.swift */,
 				8BF4DD542AB7A61F00536F7E /* ValueTransformer.swift */,
 				8B64B8DC2ADC792500A272C5 /* ValueTransformerValue.swift */,
 			);
@@ -779,14 +903,11 @@
 		8BF4DD532AB7A56400536F7E /* Stores */ = {
 			isa = PBXGroup;
 			children = (
-				8BD210FD2AB7CEB000030A89 /* UserResponseStore.swift */,
-				8B64B8C52ADC649100A272C5 /* ResponseFetchable.swift */,
-				8B64B8C72ADC64A200A272C5 /* ResponseSavable.swift */,
-				8B64B8C92ADC64A700A272C5 /* ResponseDeletable.swift */,
+				8B9C93CC2AE42B4B00B7AD52 /* Impl */,
 				8B64B8C32ADC648700A272C5 /* ResponseFetcher.swift */,
 				8B64B8CB2ADC64DE00A272C5 /* ResponseSaver.swift */,
 				8B64B8CD2ADC650300A272C5 /* ResponseDeleter.swift */,
-				8B64B8D22ADC661100A272C5 /* ResponsePersistable.swift */,
+				8BD210FD2AB7CEB000030A89 /* UserResponseStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -809,9 +930,7 @@
 			name = "clean-mvvmc-master";
 			packageProductDependencies = (
 				8B8F81B52ABF2B25006B72CB /* CodeBureau */,
-				8B8F81DF2ABFB3DF006B72CB /* URLDataTransfer */,
 				8B8F81E22ABFB82C006B72CB /* Cryptographic */,
-				8B049D942ABFC072004DC481 /* MongoDB */,
 			);
 			productName = "clean-mvvmc-master";
 			productReference = 8B87E5282AB408A0009248EC /* clean-mvvmc-master.app */;
@@ -843,9 +962,7 @@
 			mainGroup = 8B87E51F2AB408A0009248EC;
 			packageReferences = (
 				8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */,
-				8B8F81DE2ABFB3DF006B72CB /* XCRemoteSwiftPackageReference "URLDataTransfer" */,
 				8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */,
-				8B049D932ABFC072004DC481 /* XCRemoteSwiftPackageReference "MongoDB" */,
 			);
 			productRefGroup = 8B87E5292AB408A0009248EC /* Products */;
 			projectDirPath = "";
@@ -884,60 +1001,60 @@
 				8B953C222AE1361C00CF411E /* HTTPSeason.swift in Sources */,
 				8B87E5622AB40A26009248EC /* TabBarViewModel.swift in Sources */,
 				8B87E5912AB40B28009248EC /* View+Instantiable.swift in Sources */,
+				8B953C512AE2A27D00CF411E /* DataTransferErrorResolvable.swift in Sources */,
 				8B4697472AB7C76C00CC8131 /* HTTPProfileDTO.swift in Sources */,
 				8B8F81DD2ABF59CD006B72CB /* DataTransferErrorResolver.swift in Sources */,
 				8B87E5952AB40B4E009248EC /* Profile.swift in Sources */,
-				8B9E5E8D2AC8BECB003FDC04 /* MongoServable.swift in Sources */,
-				8B87E59E2AB53A45009248EC /* MongoServer.swift in Sources */,
+				8B87E59E2AB53A45009248EC /* Server.swift in Sources */,
 				8B87E5452AB40978009248EC /* AppCoordinator.swift in Sources */,
 				8B8F81BB2ABF32B1006B72CB /* URLSessionTask.swift in Sources */,
-				8B953C282AE1421500CF411E /* HTTPServerError.swift in Sources */,
+				8B953C502AE2A27D00CF411E /* URLSessionTaskCancellable.swift in Sources */,
+				8B953C582AE2A27E00CF411E /* URLRequestLoggable.swift in Sources */,
+				8B953C5B2AE2A27E00CF411E /* URLRequestGenerationError.swift in Sources */,
 				8B953C302AE1B37D00CF411E /* ProfileRepository.swift in Sources */,
 				8B935FDD2AD89FB2000268CB /* UIBarButton+View.swift in Sources */,
 				8B87E5752AB40A8E009248EC /* CustomView.swift in Sources */,
+				8B9C93CA2AE41FDE00B7AD52 /* ServerDelegate.swift in Sources */,
 				8B46973D2AB7BFFD00CC8131 /* ProfileDTO.swift in Sources */,
 				8B87E5A92AB693D9009248EC /* Repository.swift in Sources */,
 				8B64B8CC2ADC64DE00A272C5 /* ResponseSaver.swift in Sources */,
 				8BB692A32AB7BD8A0076207C /* Season.swift in Sources */,
 				8B8F81C32ABF43D6006B72CB /* URLRequestLogger.swift in Sources */,
+				8B953C552AE2A27E00CF411E /* HTTPMethod.swift in Sources */,
 				8B87E5A02AB544C8009248EC /* Endpoint.swift in Sources */,
 				8B87E5602AB40A1F009248EC /* TabBarCoordinator.swift in Sources */,
-				8B263A872ABA442500C50D66 /* ServerErrorDTO.swift in Sources */,
 				8B953C202AE1361600CF411E /* HTTPMedia.swift in Sources */,
 				8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */,
 				8B64B8D32ADC661100A272C5 /* ResponsePersistable.swift in Sources */,
 				8B64B8CA2ADC64A700A272C5 /* ResponseDeletable.swift in Sources */,
-				8B9E5E8A2AC8BECB003FDC04 /* MongoAuthRequestable.swift in Sources */,
 				8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */,
 				8BB692972AB7B9660076207C /* CoreDataStore.xcdatamodeld in Sources */,
 				8BB692A12AB7BD870076207C /* Episode.swift in Sources */,
 				8B87E5702AB40A74009248EC /* GammaViewModel.swift in Sources */,
 				8B87E5832AB40AC7009248EC /* OmegaViewController.swift in Sources */,
 				8B935FE22AD957F3000268CB /* UIView+Visibility.swift in Sources */,
-				8B263A892ABA444700C50D66 /* HTTPServerErrorDTO.swift in Sources */,
 				8BA134AB2AC6265A00C50653 /* GradientView.swift in Sources */,
 				8B953C322AE1B4A900CF411E /* ProfileUseCase.swift in Sources */,
 				8BF4DD522AB7A08B00536F7E /* CoreDataService.swift in Sources */,
 				8BB692992AB7BD350076207C /* Media.swift in Sources */,
 				8B64B8D92ADC778500A272C5 /* CoreDataValueTransformable.swift in Sources */,
 				8B9E5FE32AD59329003FDC04 /* TextField.swift in Sources */,
-				8BA5210B2AB7715D00DAE2F7 /* ImageService.swift in Sources */,
-				8B9E5E8C2AC8BECB003FDC04 /* MongoHostProvidable.swift in Sources */,
+				8BA5210B2AB7715D00DAE2F7 /* URLImageService.swift in Sources */,
 				8B64B8F22AE0618F00A272C5 /* AddProfileViewModel.swift in Sources */,
 				8B06BA5B2AD9C51A00DFF745 /* UIViewController+Layout.swift in Sources */,
 				8B64B8F02AE0616200A272C5 /* AddProfileViewController.swift in Sources */,
 				8B64B8C22ADC2B5A00A272C5 /* ViewLifecycleBehavior.swift in Sources */,
+				8B953C4C2AE2A27D00CF411E /* URLRequestable.swift in Sources */,
 				8B87E56E2AB40A6F009248EC /* BetaViewController.swift in Sources */,
 				8B87E5AF2AB697C0009248EC /* AuthRepository.swift in Sources */,
 				8BA134922AC2294A00C50653 /* AuthViewModel.swift in Sources */,
-				8B953C2A2AE1458800CF411E /* ServerError.swift in Sources */,
 				8B64B8E62AE05EAD00A272C5 /* ProfileCoordinator.swift in Sources */,
 				8B87E5432AB4096B009248EC /* Application.swift in Sources */,
-				8B9E5E8B2AC8BECB003FDC04 /* MongoAuthenticable.swift in Sources */,
 				8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */,
 				8BA134902AC2293B00C50653 /* AuthViewController.swift in Sources */,
 				8BA1349C2AC255E800C50653 /* SignInViewController.swift in Sources */,
 				8BB6929D2AB7BD630076207C /* List.swift in Sources */,
+				8B953C4B2AE2A27D00CF411E /* Routable.swift in Sources */,
 				8B87E5A62AB6767E009248EC /* DataTransferService.swift in Sources */,
 				8B87E57D2AB40AB7009248EC /* DeltaViewModel.swift in Sources */,
 				8BA1349A2AC255DA00C50653 /* SignUpViewModel.swift in Sources */,
@@ -945,6 +1062,7 @@
 				8B64B8DD2ADC792500A272C5 /* ValueTransformerValue.swift in Sources */,
 				8BA1348E2AC2293400C50653 /* AuthCoordinator.swift in Sources */,
 				8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */,
+				8B9C93C82AE41E9100B7AD52 /* URLImageProtocol.swift in Sources */,
 				8B6BA72D2ADBF9B900B7FD8A /* BorderedButton.swift in Sources */,
 				8BF4DD552AB7A61F00536F7E /* ValueTransformer.swift in Sources */,
 				8B64B8C82ADC64A200A272C5 /* ResponseSavable.swift in Sources */,
@@ -952,27 +1070,33 @@
 				8B64B8C42ADC648700A272C5 /* ResponseFetcher.swift in Sources */,
 				8B953C1E2AE1361100CF411E /* HTTPSection.swift in Sources */,
 				8B4697452AB7C76600CC8131 /* HTTPSectionDTO.swift in Sources */,
+				8B953C572AE2A27E00CF411E /* URLRequestError.swift in Sources */,
 				8B64B8E22AE0593E00A272C5 /* ProfileViewModel.swift in Sources */,
 				8B87E57F2AB40ABC009248EC /* DeltaViewController.swift in Sources */,
-				8B87E5BC2AB74C88009248EC /* MongoAuthenticator.swift in Sources */,
 				8B64B8EE2AE0614D00A272C5 /* EditProfileViewController.swift in Sources */,
+				8B953C4A2AE2A27D00CF411E /* URLSessionRequestable.swift in Sources */,
 				8BB692A52AB7BD970076207C /* Trailer.swift in Sources */,
+				8B9C93BF2AE41D2700B7AD52 /* AuthRequestable.swift in Sources */,
 				8B953C262AE1367700CF411E /* HTTPRepresentable.swift in Sources */,
 				8B4697492AB7C79600CC8131 /* EpisodeDTO.swift in Sources */,
+				8B9C93BD2AE3C91300B7AD52 /* ServerHostProvidable.swift in Sources */,
 				8B87E56A2AB40A66009248EC /* AlphaViewController.swift in Sources */,
 				8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */,
+				8B953C5C2AE2A27E00CF411E /* URLResponseCode.swift in Sources */,
 				8B87E52C2AB408A0009248EC /* AppDelegate.swift in Sources */,
 				8B46974B2AB7C79A00CC8131 /* SeasonDTO.swift in Sources */,
 				8B64B8D12ADC65F200A272C5 /* NSFetchRequestResult+Mapping.swift in Sources */,
-				8B8F81C12ABF43BB006B72CB /* URLRequestMongoErrorResolver.swift in Sources */,
 				8B953C1C2AE1360D00CF411E /* HTTPProfile.swift in Sources */,
+				8B9C93B92AE3BFC200B7AD52 /* UseCaseRequestable.swift in Sources */,
 				8BA1349E2AC255EE00C50653 /* SignInViewModel.swift in Sources */,
-				8B64B8DB2ADC77B000A272C5 /* CoreDataPersistingError.swift in Sources */,
+				8B64B8DB2ADC77B000A272C5 /* CoreDataError.swift in Sources */,
 				8B87E5682AB40A61009248EC /* AlphaViewModel.swift in Sources */,
 				8B8F81BF2ABF43A4006B72CB /* URLRequestErrorResolver.swift in Sources */,
 				8BA134A42AC5AB6F00C50653 /* NavigationController.swift in Sources */,
 				8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */,
 				8B4697512AB7C7BC00CC8131 /* HTTPSeasonDTO.swift in Sources */,
+				8B953C522AE2A27E00CF411E /* URLRequestConfigurable.swift in Sources */,
+				8B9C93C52AE41E5F00B7AD52 /* URLImageRequestable.swift in Sources */,
 				8B87E52E2AB408A0009248EC /* SceneDelegate.swift in Sources */,
 				8B87E5812AB40AC1009248EC /* OmegaViewModel.swift in Sources */,
 				8B64B8E02AE0593300A272C5 /* ProfileViewController.swift in Sources */,
@@ -982,23 +1106,31 @@
 				8BB6929F2AB7BD780076207C /* ProfileSetting.swift in Sources */,
 				8B953C242AE1363700CF411E /* HTTPList.swift in Sources */,
 				8B46973F2AB7C1BE00CC8131 /* SectionDTO.swift in Sources */,
+				8B953C4F2AE2A27D00CF411E /* URLResponseDecodable.swift in Sources */,
 				8BA134A92AC5CAC900C50653 /* UIColor+HEX.swift in Sources */,
+				8B953C4D2AE2A27D00CF411E /* DataTransferError.swift in Sources */,
 				8B8F81B92ABF3264006B72CB /* URLRequestConfiguration.swift in Sources */,
 				8B87E5AB2AB693DD009248EC /* UseCase.swift in Sources */,
+				8B953C4E2AE2A27D00CF411E /* URLRequestErrorResolvable.swift in Sources */,
+				8B953C5A2AE2A27E00CF411E /* DataTransferRequestable.swift in Sources */,
 				8B4697412AB7C1C200CC8131 /* MediaDTO.swift in Sources */,
+				8B953C592AE2A27E00CF411E /* URLSessionTaskable.swift in Sources */,
 				8B87E5932AB40B40009248EC /* UIViewController+Storyboard.swift in Sources */,
 				8B64B8D72ADC775E00A272C5 /* CoreDataPersistable.swift in Sources */,
 				8BB6929B2AB7BD380076207C /* Section.swift in Sources */,
 				8B953C2C2AE14C8400CF411E /* UserRepository.swift in Sources */,
 				8B64B8CE2ADC650300A272C5 /* ResponseDeleter.swift in Sources */,
+				8B9C93B72AE3B53200B7AD52 /* RepositoryRequestable.swift in Sources */,
 				8BB79E6A2AB79A09000E191A /* User.swift in Sources */,
 				8BA134982AC255D300C50653 /* SignUpViewController.swift in Sources */,
-				8B049D972ABFC1BC004DC481 /* MongoHostProvider.swift in Sources */,
+				8B049D972ABFC1BC004DC481 /* ServerHostProvider.swift in Sources */,
 				8B46974D2AB7C7A200CC8131 /* ListDTO.swift in Sources */,
+				8B953C562AE2A27E00CF411E /* DataTransferErrorLoggable.swift in Sources */,
 				8B64B8C62ADC649100A272C5 /* ResponseFetchable.swift in Sources */,
 				8B8F81BD2ABF437C006B72CB /* URLResponseDecoder.swift in Sources */,
 				8B953C2E2AE14C8900CF411E /* UserUseCase.swift in Sources */,
 				8BD210FE2AB7CEB000030A89 /* UserResponseStore.swift in Sources */,
+				8B953C532AE2A27E00CF411E /* EncodableDictionary.swift in Sources */,
 				8B4697532AB7C7C900CC8131 /* HTTPListDTO.swift in Sources */,
 				8B64B8D52ADC668700A272C5 /* AuthService.swift in Sources */,
 			);
@@ -1222,25 +1354,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B049D932ABFC072004DC481 /* XCRemoteSwiftPackageReference "MongoDB" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/zachbazov/MongoDB.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zachbazov/CodeBureau.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		8B8F81DE2ABFB3DF006B72CB /* XCRemoteSwiftPackageReference "URLDataTransfer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/zachbazov/URLDataTransfer.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -1257,20 +1373,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B049D942ABFC072004DC481 /* MongoDB */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B049D932ABFC072004DC481 /* XCRemoteSwiftPackageReference "MongoDB" */;
-			productName = MongoDB;
-		};
 		8B8F81B52ABF2B25006B72CB /* CodeBureau */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */;
 			productName = CodeBureau;
-		};
-		8B8F81DF2ABFB3DF006B72CB /* URLDataTransfer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B8F81DE2ABFB3DF006B72CB /* XCRemoteSwiftPackageReference "URLDataTransfer" */;
-			productName = URLDataTransfer;
 		};
 		8B8F81E22ABFB82C006B72CB /* Cryptographic */ = {
 			isa = XCSwiftPackageProductDependency;
