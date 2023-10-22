@@ -8,13 +8,13 @@
 import CoreData
 import CodeBureau
 
-struct ResponseDeleter: ResponseDeletable {
+struct ResponseDeleter<E>: ResponseDeletable where E: NSManagedObject {
     
-    func deleteResponse<T>(of type: T.Type) where T: NSManagedObject {
+    func deleteResponse() {
         
         let coreDataService = CoreDataService.shared
         
-        deleteResponse(for: type, in: coreDataService.context())
+        deleteResponse(in: coreDataService.context())
         
         coreDataService.saveContext()
     }
@@ -23,19 +23,13 @@ struct ResponseDeleter: ResponseDeletable {
 
 extension ResponseDeleter {
     
-    private func deleteResponse<T>(for type: T.Type, in context: NSManagedObjectContext) where T: NSManagedObject {
+    private func deleteResponse(in context: NSManagedObjectContext) {
         
         do {
-            switch type {
-            case is UserResponseEntity.Type:
-                
-                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = T.fetchRequest()
-                
-                if let result = try context.fetch(fetchRequest).first {
-                    context.delete(result as! NSManagedObject)
-                }
-            default:
-                break
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = E.fetchRequest()
+            
+            if let result = try context.fetch(fetchRequest).first {
+                context.delete(result as! NSManagedObject)
             }
         } catch {
             debugPrint(.error, "Unresolved error \(error) occured as trying to delete object.")

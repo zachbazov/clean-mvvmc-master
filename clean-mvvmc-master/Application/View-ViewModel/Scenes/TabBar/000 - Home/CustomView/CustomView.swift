@@ -41,10 +41,12 @@ final class CustomView: UIView, View {
 
 
 extension CustomView {
-    @IBAction private func viewDidTap() {
+    
+    @IBAction
+    private func viewDidTap() {
         guard let coordinator = Application.app.coordinator.tabBarCoordinator else { return }
         
-        coordinator.coordinate(to: .search)
+        coordinator.coordinate(to: .detail)
     }
 }
 

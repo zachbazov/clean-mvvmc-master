@@ -38,7 +38,7 @@ extension Application: ServerDelegate {
     
     func serverDidLaunch(_ server: Server) {
         
-        let store = UserResponseStore()
+        let store = AuthResponseStore()
         
         self.server(server, reauthenticateFromStore: store)
     }
@@ -76,21 +76,52 @@ extension Application {
     private func authenticate(_ user: UserDTO) {
         let request = HTTPUserDTO.Request(user: user)
         
-        server.authService.signIn(
-            with: request,
-            cached: { [weak self] response in
-                guard let self = self,
-                      let user = response.data?.toDomain() else {
-                    return
+        sendRequest(request)
+    }
+    
+    private func sendRequest(_ request: HTTPUserDTO.Request) {
+        
+        if #available(iOS 13.0.0, *) {
+            
+            Task {
+                if let response: HTTPUserDTO.Response = await server.authService.signIn(request: request) {
+                    
+                    if let user = response.data,
+                       let _ = user.selectedProfile {
+                        
+                        return DispatchQueue.main.async { [weak self] in
+                            guard let self = self else { return }
+                            
+                            self.coordinateToTabBarScene()
+                        }
+                    }
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        
+                        self.coordinateToProfileScene()
+                    }
                 }
-                
-                if let _ = user.selectedProfile {
-                    return self.coordinateToTabBarScene()
-                }
-                
-                self.coordinateToProfileScene()
-            },
-            completion: nil)
+            }
+            
+        } else {
+            
+            server.authService.signIn(
+                with: request,
+                cached: { [weak self] response in
+                    guard let self = self,
+                          let user = response.data?.toDomain() else {
+                        return
+                    }
+                    
+                    if let _ = user.selectedProfile {
+                        return self.coordinateToTabBarScene()
+                    }
+                    
+                    self.coordinateToProfileScene()
+                },
+                completion: nil)
+        }
     }
 }
 

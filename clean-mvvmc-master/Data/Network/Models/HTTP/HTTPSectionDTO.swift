@@ -42,7 +42,6 @@ extension HTTPSectionDTO.Response {
         entity.status = status
         entity.results = Int32(results)
         entity.data = data
-        entity.userId = authService.user?._id
         
         return entity
     }

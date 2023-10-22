@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u89-vr-Yfr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u89-vr-Yfr">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-118" y="-151"/>
         </scene>
-        <!--Alpha Navigation Controller-->
+        <!--Home Navigation Controller-->
         <scene sceneID="5ca-oN-obg">
             <objects>
-                <navigationController title="Alpha Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="Eg8-jq-p06" sceneMemberID="viewController">
+                <navigationController title="Home Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="Eg8-jq-p06" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Alpha" image="house" catalog="system" selectedImage="house.fill" id="H1Z-bX-wCe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MYc-yf-B0r">
@@ -46,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="951.90839694656484" y="-890.14084507042253"/>
         </scene>
-        <!--AlphaViewController-->
+        <!--Home View Controller-->
         <scene sceneID="1f4-sV-n0V">
             <objects>
-                <viewController title="AlphaViewController" id="yxv-lu-o3F" customClass="AlphaViewController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Home View Controller" id="yxv-lu-o3F" customClass="HomeViewController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rpc-Fx-zYt">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="1878.6259541984732" y="-890.14084507042253"/>
         </scene>
-        <!--BetaViewController-->
+        <!--News View Controller-->
         <scene sceneID="I4U-g0-iQe">
             <objects>
-                <viewController title="BetaViewController" id="lOp-J7-sSD" customClass="BetaViewController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="News View Controller" id="lOp-J7-sSD" customClass="NewsViewController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kpN-ak-tcl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="952" y="-151"/>
         </scene>
-        <!--GammaViewController-->
+        <!--MyNetflix View Controller-->
         <scene sceneID="acz-we-qrQ">
             <objects>
-                <viewController title="GammaViewController" id="ucr-Gx-KRb" customClass="GammaViewController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MyNetflix View Controller" id="ucr-Gx-KRb" customClass="MyNetflixViewController" customModule="clean_mvvmc_master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6es-3q-o46">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,13 +124,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

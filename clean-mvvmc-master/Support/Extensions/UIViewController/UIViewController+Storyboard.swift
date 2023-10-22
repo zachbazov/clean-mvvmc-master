@@ -47,11 +47,7 @@ extension UIViewController: StoryboardInstantiable {
             return UIStoryboard(name: reuseIdentifier, bundle: nil)
                 .instantiateViewController(withIdentifier: reuseIdentifier)
             
-        case DeltaViewController.reuseIdentifier:
-            return UIStoryboard(name: reuseIdentifier, bundle: nil)
-                .instantiateViewController(withIdentifier: reuseIdentifier)
-            
-        case OmegaViewController.reuseIdentifier:
+        case DetailViewController.reuseIdentifier:
             return UIStoryboard(name: reuseIdentifier, bundle: nil)
                 .instantiateViewController(withIdentifier: reuseIdentifier)
             

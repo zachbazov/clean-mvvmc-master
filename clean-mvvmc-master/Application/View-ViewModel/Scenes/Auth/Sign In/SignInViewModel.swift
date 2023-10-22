@@ -25,4 +25,12 @@ extension SignInViewModel {
         
         authService.signIn(with: request, cached: nil, completion: completion)
     }
+    
+    @available(iOS 13.0.0, *)
+    func signIn(with request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response? {
+        
+        let authService = Application.app.server.authService
+        
+        return await authService.signIn(request: request)
+    }
 }

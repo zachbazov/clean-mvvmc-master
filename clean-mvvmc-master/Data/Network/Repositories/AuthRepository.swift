@@ -7,93 +7,105 @@
 
 import Foundation
 
-protocol AuthRoutable {
-    
-    associatedtype EndpointType
-    associatedtype RequestType: Decodable
-    associatedtype ResponseType: Decodable
-    
-    func sign(endpoint: EndpointType,
-              request: RequestType,
-              cached: ((ResponseType?) -> Void)?,
-              completion: @escaping (Result<ResponseType, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-    
-    func sign(endpoint: EndpointType,
-              completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
-}
-
-
-struct AuthRepository: Repository, AuthRoutable {
+struct AuthRepository: Repository {
     
     let dataTransferService: DataTransferRequestable
     
-    private let responseStore = UserResponseStore()
+    private let responseStore = AuthResponseStore()
 }
 
 
 extension AuthRepository {
     
-    func sign(endpoint: AuthUseCase.Endpoints,
-              request: HTTPUserDTO.Request,
-              cached: ((HTTPUserDTO.Response?) -> Void)?,
-              completion: @escaping (Result<HTTPUserDTO.Response, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+    func find<T, U>(request: U,
+                    cached: ((T?) -> Void)?,
+                    completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable? where T: Decodable, U: Decodable {
         
-        switch endpoint {
-        case .signIn:
+        let sessionTask = URLSessionTask()
+        
+        responseStore.fetcher.fetchResponse() { (result: Result<HTTPUserDTO.Response?, CoreDataError>) in
             
-            let sessionTask = URLSessionTask()
-            
-            responseStore.fetcher.fetchResponse() { result in
-                
-                if case let .success(response?) = result {
-                    return cached?(response) ?? Void()
-                }
-                
-                guard !sessionTask.isCancelled else { return }
-                
-                let endpoint = AuthRepository.signIn(with: request)
-                
-                sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
+            if case let .success(response?) = result {
+                return cached?(response as? T) ?? Void()
             }
             
-            return sessionTask
+            guard !sessionTask.isCancelled else { return }
             
-        case .signUp:
-            
-            let sessionTask = URLSessionTask()
-            
-            guard !sessionTask.isCancelled else { return nil }
-            
-            let endpoint = AuthRepository.signUp(with: request)
+            let endpoint = AuthRepository.signIn(with: request as! HTTPUserDTO.Request)
             
             sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
-            
-            return sessionTask
-            
-        default:
-            return nil
         }
+        
+        return sessionTask
     }
     
-    @discardableResult
-    func sign(endpoint: AuthUseCase.Endpoints,
-              completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
-        switch endpoint {
-        case .signOut:
-            
-            let sessionTask = URLSessionTask()
-            
-            guard !sessionTask.isCancelled else { return nil }
-            
-            let endpoint = AuthRepository.signOut()
-            
-            sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
-            
-            return sessionTask
-            
-        default:
-            return nil
+    func create<T, U>(request: U,
+                      completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable? where T: Decodable, U: Decodable {
+        
+        let sessionTask = URLSessionTask()
+        
+        guard !sessionTask.isCancelled else { return nil }
+        
+        let endpoint = AuthRepository.signUp(with: request as! HTTPUserDTO.Request)
+        
+        sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
+        
+        return sessionTask
+    }
+    
+    func delete(completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        
+        let sessionTask = URLSessionTask()
+        
+        guard !sessionTask.isCancelled else { return nil }
+        
+        let endpoint = AuthRepository.signOut()
+        
+        sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
+        
+        return sessionTask
+    }
+    
+    @available(iOS 13.0.0, *)
+    func find<T, U>(request: U) async -> T? where T: Decodable, U: Decodable {
+        
+        if let cached: HTTPUserDTO.Response? = responseStore.fetcher.fetchResponse() {
+            return cached as? T
         }
+        
+        let endpoint = AuthRepository.signIn(with: request as! HTTPUserDTO.Request)
+        
+        let response: HTTPUserDTO.Response? = await dataTransferService.request(endpoint: endpoint)
+        
+        responseStore.deleter.deleteResponse()
+        
+        responseStore.saver.saveResponse(response, with: request)
+        
+        return response as? T
+    }
+    
+    @available(iOS 13.0.0, *)
+    func create<T, U>(request: U) async -> T? where T: Decodable, U: Decodable {
+        
+        let endpoint = AuthRepository.signUp(with: request as! HTTPUserDTO.Request)
+        
+        let response: HTTPUserDTO.Response? = await dataTransferService.request(endpoint: endpoint)
+        
+        responseStore.deleter.deleteResponse()
+        
+        responseStore.saver.saveResponse(response, with: request)
+        
+        return response as? T
+    }
+    
+    @available(iOS 13.0.0, *)
+    func delete() async -> Void? {
+        
+        let endpoint = AuthRepository.signOut()
+        
+        responseStore.deleter.deleteResponse()
+        
+        return await dataTransferService.request(endpoint: endpoint)
     }
 }
 

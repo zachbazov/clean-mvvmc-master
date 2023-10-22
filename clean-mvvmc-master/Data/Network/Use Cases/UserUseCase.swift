@@ -9,10 +9,10 @@ import Foundation
 
 final class UserUseCase: UseCase {
     
-    lazy var repository: UserRepository = createRepository()
+    lazy var repository: Repository = createRepository()
     
     
-    private func createRepository() -> UserRepository {
+    private func createRepository() -> Repository {
         let server = Application.app.server
         let dataTransferService = server.dataTransferService
         

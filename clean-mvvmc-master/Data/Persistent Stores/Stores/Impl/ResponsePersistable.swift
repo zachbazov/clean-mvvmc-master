@@ -12,4 +12,8 @@ protocol ResponsePersistable {
     var fetcher: ResponseFetchable { get }
     var saver: ResponseSavable { get }
     var deleter: ResponseDeletable { get }
+    
+    init<E>(fetcher: ResponseFetcher<E>,
+            saver: ResponseSavable,
+            deleter: ResponseDeleter<E>)
 }

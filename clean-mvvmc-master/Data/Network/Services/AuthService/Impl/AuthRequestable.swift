@@ -18,4 +18,13 @@ protocol AuthRequestable {
     func signUp(with request: HTTPUserDTO.Request, completion: @escaping () -> Void)
     
     func signOut(completion: ((Bool) -> Void)?)
+    
+    @available(iOS 13.0.0, *)
+    func signUp(request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response?
+    
+    @available(iOS 13.0.0, *)
+    func signIn(request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response?
+    
+    @available(iOS 13.0.0, *)
+    func signOut() async -> Void?
 }

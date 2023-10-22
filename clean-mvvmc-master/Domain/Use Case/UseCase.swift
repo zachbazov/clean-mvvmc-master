@@ -9,7 +9,5 @@ import Foundation
 
 protocol UseCase: UseCaseRequestable {
     
-    associatedtype RepositoryType: Repository
-    
-    var repository: RepositoryType { get }
+    var repository: Repository { get }
 }

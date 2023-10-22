@@ -1,5 +1,5 @@
 //
-//  UserResponseStore.swift
+//  AuthResponseStore.swift
 //  clean-mvvmc-master
 //
 //  Created by Developer on 18/09/2023.
@@ -7,16 +7,16 @@
 
 import CoreData
 
-struct UserResponseStore: ResponsePersistable {
+struct AuthResponseStore: ResponsePersistable {
     
     let fetcher: ResponseFetchable
     let saver: ResponseSavable
     let deleter: ResponseDeletable
     
     
-    init<T>(fetcher: ResponseFetcher<T> = ResponseFetcher<UserResponseEntity>(),
+    init<E>(fetcher: ResponseFetcher<E> = ResponseFetcher<UserResponseEntity>(),
             saver: ResponseSavable = ResponseSaver(),
-            deleter: ResponseDeletable = ResponseDeleter()) {
+            deleter: ResponseDeleter<E> = ResponseDeleter<UserResponseEntity>()) {
         self.fetcher = fetcher
         self.saver = saver
         self.deleter = deleter

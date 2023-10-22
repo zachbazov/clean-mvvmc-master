@@ -1,5 +1,5 @@
 //
-//  AlphaViewController.swift
+//  HomeViewController.swift
 //  clean-mvvmc-master
 //
 //  Created by Developer on 15/09/2023.
@@ -8,9 +8,9 @@
 import UIKit
 import CodeBureau
 
-class AlphaViewController: UIViewController, ViewController {
+class HomeViewController: UIViewController, ViewController {
     
-    var viewModel: AlphaViewModel?
+    var viewModel: HomeViewModel?
     
     
     @IBOutlet weak var customViewContainer: UIView!
@@ -27,7 +27,7 @@ class AlphaViewController: UIViewController, ViewController {
 }
 
 
-extension AlphaViewController {
+extension HomeViewController {
     
     private func createCustomView() {
         let model = Profile(name: "iOS", image: "person.circle")

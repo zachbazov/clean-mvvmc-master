@@ -17,21 +17,19 @@ protocol UseCaseRequestable {
                        completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     where T: Decodable, U: Decodable
     
-    func request(endpoint: EndpointType,
-                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
+    func request(completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     
     @available(iOS 13.0.0, *)
     func request<T, U>(endpoint: EndpointType, request: U) async -> T? where T: Decodable, U: Decodable
     
     @available(iOS 13.0.0, *)
-    func request<U>(endpoint: EndpointType, request: U) async -> Void? where U: Decodable
+    func request() async -> Void?
 }
 
 
 extension UseCaseRequestable {
     
-    func request(endpoint: EndpointType,
-                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+    func request(completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }
     
@@ -41,7 +39,7 @@ extension UseCaseRequestable {
     }
     
     @available(iOS 13.0.0, *)
-    func request<U>(endpoint: EndpointType, request: U) async -> Void? where U: Decodable {
+    func request() async -> Void? {
         return nil
     }
 }

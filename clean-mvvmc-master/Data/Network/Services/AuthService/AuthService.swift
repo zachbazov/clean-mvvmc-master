@@ -13,7 +13,7 @@ final class AuthService {
     
     var user: User?
     
-    private let responseStore = UserResponseStore()
+    private let responseStore = AuthResponseStore()
     
     private let useCase = AuthUseCase()
 }
@@ -37,7 +37,7 @@ extension AuthService: AuthRequestable {
                     
                     self.verifyJWTIntegrity()
                     
-                    self.responseStore.deleter.deleteResponse(of: UserResponseEntity.self)
+                    self.responseStore.deleter.deleteResponse()
                     
                     self.responseStore.saver.saveResponse(response, with: request)
                     
@@ -80,7 +80,7 @@ extension AuthService: AuthRequestable {
                     
                     self.verifyJWTIntegrity()
                     
-                    self.responseStore.deleter.deleteResponse(of: UserResponseEntity.self)
+                    self.responseStore.deleter.deleteResponse()
                     
                     self.responseStore.saver.saveResponse(response, with: request)
                     
@@ -94,24 +94,59 @@ extension AuthService: AuthRequestable {
     
     func signOut(completion: ((Bool) -> Void)?) {
         
-        useCase.request(
-            endpoint: .signOut,
-            completion: { [weak self] result in
-                guard let self = self else { return }
+        useCase.request() { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
                 
-                switch result {
-                case .success:
-                    
-                    self.responseStore.deleter.deleteResponse(of: UserResponseEntity.self)
-                    
-                    completion?(true)
-                    
-                case .failure(let error):
-                    debugPrint(.error, error.localizedDescription)
-                    
-                    completion?(false)
-                }
-            })
+                self.responseStore.deleter.deleteResponse()
+                
+                completion?(true)
+                
+            case .failure(let error):
+                debugPrint(.error, error.localizedDescription)
+                
+                completion?(false)
+            }
+        }
+    }
+    
+    @available(iOS 13.0.0, *)
+    func signUp(request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response? {
+        
+        let response: HTTPUserDTO.Response? = await useCase.request(endpoint: .signUp, request: request)
+        
+        guard let response = response else {
+            return nil
+        }
+        
+        updateUser(for: response, withRequest: request)
+        
+        verifyJWTIntegrity()
+        
+        return response
+    }
+    
+    @available(iOS 13.0.0, *)
+    func signIn(request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response? {
+        
+        let response: HTTPUserDTO.Response? = await useCase.request(endpoint: .signIn, request: request)
+        
+        guard let response = response else {
+            return nil
+        }
+        
+        updateUser(for: response, withRequest: request)
+        
+        verifyJWTIntegrity()
+        
+        return response
+    }
+    
+    @available(iOS 13.0.0, *)
+    func signOut() async -> Void? {
+        return await useCase.request()
     }
 }
 
@@ -153,7 +188,7 @@ extension AuthService {
             switch payloadValidity {
             case .expired:
                 
-                responseStore.deleter.deleteResponse(of: UserResponseEntity.self)
+                responseStore.deleter.deleteResponse()
                 
             default:
                 break

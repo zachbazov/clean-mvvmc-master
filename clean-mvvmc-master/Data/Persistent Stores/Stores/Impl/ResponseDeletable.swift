@@ -9,5 +9,5 @@ import CoreData
 
 protocol ResponseDeletable {
     
-    func deleteResponse<T>(of type: T.Type) where T: NSManagedObject
+    func deleteResponse()
 }

@@ -25,4 +25,12 @@ extension SignUpViewModel {
         
         authService.signUp(with: request, completion: completion)
     }
+    
+    @available(iOS 13.0.0, *)
+    func signUp(with request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response? {
+        
+        let authService = Application.app.server.authService
+        
+        return await authService.signUp(request: request)
+    }
 }

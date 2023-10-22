@@ -13,7 +13,7 @@ struct ResponseSaver: ResponseSavable {
         
         let coreDataService = CoreDataService.shared
         
-        saveUserResponse(response, in: coreDataService.context())
+        saveResponse(response, in: coreDataService.context())
         
         coreDataService.saveContext()
     }
@@ -22,7 +22,7 @@ struct ResponseSaver: ResponseSavable {
 
 extension ResponseSaver {
     
-    private func saveUserResponse<T>(_ response: T, in context: NSManagedObjectContext) where T: Decodable {
+    private func saveResponse<T>(_ response: T, in context: NSManagedObjectContext) where T: Decodable {
         
         switch response {
         case let response as HTTPUserDTO.Response:
@@ -34,6 +34,22 @@ extension ResponseSaver {
             responseEntity.data = response.data
             responseEntity.userId = response.data?._id
             responseEntity.email = response.data?.email
+            
+        case let response as HTTPSectionDTO.Response:
+            
+            let responseEntity: SectionResponseEntity = response.toEntity(in: context)
+            
+            responseEntity.status = response.status
+            responseEntity.results = response.results.toInt32()
+            responseEntity.data = response.data
+            
+        case let response as HTTPMediaDTO.Response:
+            
+            let responseEntity: MediaResponseEntity = response.toEntity(in: context)
+            
+            responseEntity.status = response.status
+            responseEntity.results = response.results.toInt32()
+            responseEntity.data = response.data
             
         default:
             break

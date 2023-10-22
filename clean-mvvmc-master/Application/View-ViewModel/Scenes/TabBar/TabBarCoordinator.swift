@@ -16,15 +16,13 @@ final class TabBarCoordinator: Coordinator {
         }
     }
     
-    var alphaViewController: AlphaViewController?
+    var homeViewController: HomeViewController?
     
-    var betaViewController: BetaViewController?
+    var newsViewController: NewsViewController?
     
-    var gammaViewController: GammaViewController?
+    var myNetflixViewController: MyNetflixViewController?
     
-    var deltaViewController: DeltaViewController?
-    
-    var omegaViewController: OmegaViewController?
+    var detailViewController: DetailViewController?
 }
 
 
@@ -32,10 +30,10 @@ extension TabBarCoordinator {
     
     // MARK: Dependencies
     
-    private func createAlphaViewController() -> AlphaViewController? {
+    private func createHomeViewController() -> HomeViewController? {
         let navigation = viewController?.viewControllers?.first as? UINavigationController
-        let controller = navigation?.viewControllers.first as? AlphaViewController
-        let viewModel = AlphaViewModel()
+        let controller = navigation?.viewControllers.first as? HomeViewController
+        let viewModel = HomeViewModel()
         
         controller?.viewModel = viewModel
         controller?.viewModel?.coordinator = self
@@ -43,9 +41,9 @@ extension TabBarCoordinator {
         return controller
     }
     
-    private func createBetaViewController() -> BetaViewController? {
-        let controller = viewController?.viewControllers?[1] as? BetaViewController
-        let viewModel = BetaViewModel()
+    private func createNewsViewController() -> NewsViewController? {
+        let controller = viewController?.viewControllers?[1] as? NewsViewController
+        let viewModel = NewsViewModel()
         
         controller?.viewModel = viewModel
         controller?.viewModel?.coordinator = self
@@ -53,9 +51,9 @@ extension TabBarCoordinator {
         return controller
     }
     
-    private func createGammaViewController() -> GammaViewController? {
-        let controller = viewController?.viewControllers?.last as? GammaViewController
-        let viewModel = GammaViewModel()
+    private func createMyNetflixViewController() -> MyNetflixViewController? {
+        let controller = viewController?.viewControllers?.last as? MyNetflixViewController
+        let viewModel = MyNetflixViewModel()
         
         controller?.viewModel = viewModel
         controller?.viewModel?.coordinator = self
@@ -65,19 +63,9 @@ extension TabBarCoordinator {
     
     // MARK: External Scene Dependencies
     
-    func createDeltaViewController() -> DeltaViewController? {
-        let controller = DeltaViewController.xib as! DeltaViewController
-        let viewModel = DeltaViewModel()
-        
-        controller.viewModel = viewModel
-        controller.viewModel?.coordinator = self
-        
-        return controller
-    }
-    
-    func createOmegaViewController() -> OmegaViewController? {
-        let controller = OmegaViewController.xib as! OmegaViewController
-        let viewModel = OmegaViewModel()
+    func createDetailViewController() -> DetailViewController? {
+        let controller = DetailViewController.xib as! DetailViewController
+        let viewModel = DetailViewModel()
         
         controller.viewModel = viewModel
         controller.viewModel?.coordinator = self
@@ -90,9 +78,9 @@ extension TabBarCoordinator {
 extension TabBarCoordinator {
     
     func assignChildViewControllers() {
-        alphaViewController = createAlphaViewController()
-        betaViewController = createBetaViewController()
-        gammaViewController = createGammaViewController()
+        homeViewController = createHomeViewController()
+        newsViewController = createNewsViewController()
+        myNetflixViewController = createMyNetflixViewController()
     }
 }
 
@@ -101,24 +89,17 @@ extension TabBarCoordinator {
     
     enum Screen: Int {
         case detail
-        case search
     }
     
     
     func coordinate(to screen: Screen) {
         switch screen {
         case .detail:
-            guard let controller = createDeltaViewController() else { return }
+            guard let controller = createDetailViewController() else { return }
             
-            deltaViewController = controller
+            detailViewController = controller
             
             viewController?.present(controller, animated: true)
-        case .search:
-            guard let controller = createOmegaViewController() else { return }
-            
-            omegaViewController = controller
-            
-            alphaViewController?.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

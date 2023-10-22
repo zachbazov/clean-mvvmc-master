@@ -9,10 +9,10 @@ import Foundation
 
 final class AuthUseCase: UseCase {
     
-    lazy var repository: AuthRepository = createRepository()
+    lazy var repository: Repository = createRepository()
     
     
-    private func createRepository() -> AuthRepository {
+    private func createRepository() -> Repository {
         let server = Application.app.server
         let dataTransferService = server.dataTransferService
         
@@ -26,7 +26,6 @@ extension AuthUseCase {
     enum Endpoints {
         case signIn
         case signUp
-        case signOut
     }
 }
 
@@ -40,31 +39,48 @@ extension AuthUseCase {
                        completion: @escaping (Result<T, DataTransferError>) -> Void) -> URLSessionTaskCancellable?
     where T: Decodable, U: Decodable {
         
+        let repository = repository as! AuthRepository
+        
+        let request = request as! HTTPUserDTO.Request
+        let cached = cached as? (HTTPUserDTO.Response?) -> Void
+        let completion = completion as! (Result<HTTPUserDTO.Response, DataTransferError>) -> Void
+        
         switch endpoint {
-        case .signIn, .signUp:
-            let request = request as! HTTPUserDTO.Request
-            let cached = cached as? (HTTPUserDTO.Response?) -> Void
-            let completion = completion as! (Result<HTTPUserDTO.Response, DataTransferError>) -> Void
+        case .signIn:
+            return repository.find(request: request, cached: cached, completion: completion)
             
-            return repository.sign(endpoint: endpoint,
-                                   request: request,
-                                   cached: cached,
-                                   completion: completion)
-        default:
-            return nil
+        case .signUp:
+            return repository.create(request: request, completion: completion)
         }
     }
     
     @discardableResult
-    func request(endpoint: Endpoints,
-                 completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+    func request(completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
+        
+        let repository = repository as! AuthRepository
+        
+        return repository.delete(completion: completion)
+    }
+    
+    @available(iOS 13.0.0, *)
+    func request<T, U>(endpoint: Endpoints, request: U) async -> T? where T: Decodable, U: Decodable {
+        
+        let repository = repository as! AuthRepository
         
         switch endpoint {
-        case .signOut:
-            return repository.sign(endpoint: endpoint, completion: completion)
+        case .signIn:
+            return await repository.find(request: request)
             
-        default:
-            return nil
+        case .signUp:
+            return await repository.create(request: request)
         }
+    }
+    
+    @available(iOS 13.0.0, *)
+    func request() async -> Void? {
+        
+        let repository = repository as! AuthRepository
+        
+        return await repository.delete()
     }
 }

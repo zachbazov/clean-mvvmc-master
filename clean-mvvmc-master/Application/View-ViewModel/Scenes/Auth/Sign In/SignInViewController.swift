@@ -87,18 +87,7 @@ extension SignInViewController {
         let user = UserDTO(email: email, password: password)
         let request = HTTPUserDTO.Request(user: user)
         
-        viewModel?.signIn(
-            with: request,
-            completion: { [weak self] response in
-                guard let self = self,
-                      let _ = response.data else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.executeChainAnimation()
-                }
-            })
+        sendRequest(request)
     }
     
     @objc
@@ -229,6 +218,35 @@ extension SignInViewController {
                       animations: {
                     
                     tabBarController?.view.transform = .identity
+                })
+        }
+    }
+    
+    private func sendRequest(_ request: HTTPUserDTO.Request) {
+        
+        if #available(iOS 13.0.0, *) {
+            
+            Task {
+                guard let _ = await viewModel?.signIn(with: request) else {
+                    return
+                }
+                
+                executeChainAnimation()
+            }
+            
+        } else {
+            
+            viewModel?.signIn(
+                with: request,
+                completion: { [weak self] response in
+                    guard let self = self,
+                          let _ = response.data else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.executeChainAnimation()
+                    }
                 })
         }
     }
