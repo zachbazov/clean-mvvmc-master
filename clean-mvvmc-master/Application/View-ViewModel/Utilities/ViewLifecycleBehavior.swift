@@ -15,6 +15,7 @@ protocol ViewLifecycleBehavior {
     @objc optional func configureHierarchy()
     @objc optional func configureSubviews()
     @objc optional func targetSubviews()
+    @objc optional func deallocateSubviews()
 }
 
 // MARK: - ViewLifecycleBehavior Implementation

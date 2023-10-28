@@ -2,7 +2,7 @@
 //  URLImageRequestable.swift
 //  clean-mvvmc-master
 //
-//  Created by Developer on 21/10/2023.
+//  Created by Developer on 22/10/2023.
 //
 
 import UIKit

@@ -27,8 +27,8 @@ extension AppCoordinator {
         let viewModel = TabBarViewModel()
         let controller = TabBarController.xib as! TabBarController
         
-        controller.controllerViewModel = viewModel
-        controller.controllerViewModel?.coordinator = coordinator
+        controller.viewModel = viewModel
+        controller.viewModel?.coordinator = coordinator
         coordinator.viewController = controller
         
         return coordinator
@@ -40,8 +40,8 @@ extension AppCoordinator {
         let navigation = AuthViewController.xib as! NavigationController
         let controller = navigation.viewControllers.first as! AuthViewController
         
-        controller.controllerViewModel = viewModel
-        controller.controllerViewModel?.coordinator = coordinator
+        controller.viewModel = viewModel
+        controller.viewModel?.coordinator = coordinator
         coordinator.viewController = controller
         coordinator.navigationController = navigation
         
@@ -54,8 +54,8 @@ extension AppCoordinator {
         let navigation = ProfileViewController.xib as! NavigationController
         let controller = navigation.viewControllers.first as! ProfileViewController
         
-        controller.controllerViewModel = viewModel
-        controller.controllerViewModel?.coordinator = coordinator
+        controller.viewModel = viewModel
+        controller.viewModel?.coordinator = coordinator
         coordinator.viewController = controller
         coordinator.navigationController = navigation
         

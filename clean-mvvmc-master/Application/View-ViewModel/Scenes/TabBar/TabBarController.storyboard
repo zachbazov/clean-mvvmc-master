@@ -32,7 +32,7 @@
         <scene sceneID="5ca-oN-obg">
             <objects>
                 <navigationController title="Home Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="Eg8-jq-p06" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Alpha" image="house" catalog="system" selectedImage="house.fill" id="H1Z-bX-wCe"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="H1Z-bX-wCe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MYc-yf-B0r">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -90,7 +90,7 @@
                         <viewLayoutGuide key="safeArea" id="yav-eA-Kco"/>
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Beta" image="play.rectangle" catalog="system" selectedImage="play.rectangle.fill" id="cko-IX-MlK"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="News" image="play.rectangle" catalog="system" selectedImage="play.rectangle.fill" id="cko-IX-MlK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXC-CY-v3B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -106,7 +106,7 @@
                         <viewLayoutGuide key="safeArea" id="3ne-ed-pDi"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Gamma" image="person" catalog="system" selectedImage="person.fill" id="3hp-rO-Dq8"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="My Netflix" image="person" catalog="system" selectedImage="person.fill" id="3hp-rO-Dq8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgW-5E-32w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

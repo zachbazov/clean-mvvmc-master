@@ -8,6 +8,7 @@
 import Foundation
 
 struct User {
+    
     var _id: String?
     var name: String?
     var email: String?
@@ -23,6 +24,7 @@ struct User {
 
 
 extension User {
+    
     func toDTO() -> UserDTO {
         return UserDTO(
             _id: _id,

@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import CodeBureau
 
-class MyNetflixViewController: UIViewController, ViewController {
+final class MyNetflixViewController: UIViewController, ViewController {
     
     var viewModel: MyNetflixViewModel?
     

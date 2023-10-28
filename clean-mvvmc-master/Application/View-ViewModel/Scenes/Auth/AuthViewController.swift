@@ -10,7 +10,7 @@ import CodeBureau
 
 // MARK: - AuthViewController Type
 
-final class AuthViewController: UIViewController, CoordinatorViewController {
+final class AuthViewController: UIViewController, ViewController {
     
     @IBOutlet private weak var backgroundImageView: UIImageView!
     
@@ -27,7 +27,7 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
     @IBOutlet private weak var signUpButton: UIButton!
     
     
-    var controllerViewModel: AuthViewModel?
+    var viewModel: AuthViewModel?
     
     
     private let chainAnimator = ChainAnimator()
@@ -41,9 +41,13 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Theme.applyAppearance(for: navigationController)
-        
         executeChainAnimation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Theme.applyAppearance(for: navigationController, withBackgroundColor: .black.withAlphaComponent(0.66))
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -54,7 +58,7 @@ final class AuthViewController: UIViewController, CoordinatorViewController {
     }
     
     func viewDidDeallocate() {
-        controllerViewModel = nil
+        viewModel = nil
     }
 }
 
@@ -66,9 +70,9 @@ extension AuthViewController {
     private func buttonDidTap(_ sender: AnyObject) {
         switch sender.tag {
         case 0:
-            controllerViewModel?.coordinator?.coordinate(to: .signUp)
+            viewModel?.coordinator?.coordinate(to: .signUp)
         case 1:
-            controllerViewModel?.coordinator?.coordinate(to: .signIn)
+            viewModel?.coordinator?.coordinate(to: .signIn)
         default:
             break
         }

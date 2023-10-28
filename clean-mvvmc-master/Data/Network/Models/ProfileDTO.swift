@@ -11,7 +11,8 @@ import Foundation
 public final class ProfileDTO: NSObject, Codable, NSSecureCoding {
     
     struct Settings: Codable {
-        let _id: String
+        
+        var _id: String?
         var maturityRating: MaturityRating
         var displayLanguage: DisplayLanguage
         var audioAndSubtitles: AudioSubtitles
@@ -73,8 +74,11 @@ extension ProfileDTO {
 
 
 extension ProfileDTO {
+    
     func toDomain() -> Profile {
+        
         guard let id = _id else {
+            
             return Profile(name: name,
                            image: image,
                            active: active,
@@ -103,13 +107,13 @@ extension Array where Element == ProfileDTO {
 extension ProfileDTO.Settings {
     
     func toDomain() -> Profile.Settings {
-        return .init(_id: _id,
-                     maturityRating: maturityRating,
-                     displayLanguage: displayLanguage,
-                     audioAndSubtitles: audioAndSubtitles,
-                     autoplayNextEpisode: autoplayNextEpisode,
-                     autoplayPreviews: autoplayPreviews,
-                     profile: profile)
+        return Profile.Settings(_id: _id,
+                                maturityRating: maturityRating,
+                                displayLanguage: displayLanguage,
+                                audioAndSubtitles: audioAndSubtitles,
+                                autoplayNextEpisode: autoplayNextEpisode,
+                                autoplayPreviews: autoplayPreviews,
+                                profile: profile)
     }
 }
 

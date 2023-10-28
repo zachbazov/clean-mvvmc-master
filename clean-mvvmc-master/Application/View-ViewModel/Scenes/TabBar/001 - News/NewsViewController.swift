@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import CodeBureau
 
-class NewsViewController: UIViewController, ViewController {
+final class NewsViewController: UIViewController, ViewController {
     
     var viewModel: NewsViewModel?
     

@@ -6,15 +6,13 @@
 //
 
 import UIKit
-import CodeBureau
 
-class HomeViewController: UIViewController, ViewController {
+final class HomeViewController: UIViewController, ViewController {
+    
+    @IBOutlet private weak var customViewContainer: UIView!
+    
     
     var viewModel: HomeViewModel?
-    
-    
-    @IBOutlet weak var customViewContainer: UIView!
-    
     
     var customView: CustomView?
     
@@ -30,9 +28,12 @@ class HomeViewController: UIViewController, ViewController {
 extension HomeViewController {
     
     private func createCustomView() {
+        
         let model = Profile(name: "iOS", image: "person.circle")
         let customViewModel = CustomViewModel(with: model)
         
-        customView = CustomView(on: customViewContainer, with: customViewModel)
+        customView = CustomView(with: customViewModel)
+            .addToHierarchy(in: customViewContainer)
+            .constraint(to: customViewContainer)
     }
 }

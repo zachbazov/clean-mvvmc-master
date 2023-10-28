@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import CodeBureau
 
-struct CustomViewModel: ViewModel {
+struct CustomViewModel {
     
     let title: String
     

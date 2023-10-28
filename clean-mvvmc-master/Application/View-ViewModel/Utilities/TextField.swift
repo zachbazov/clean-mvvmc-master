@@ -116,6 +116,7 @@ extension TextField {
 extension TextField {
     
     private func constraintFloatingLabel() {
+        
         NSLayoutConstraint.activate([
             floatingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             floatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0)
@@ -123,13 +124,16 @@ extension TextField {
     }
     
     private func configureFloatingLabel() {
+        
         floatingLabel.translatesAutoresizingMaskIntoConstraints = false
         floatingLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .semibold)
         floatingLabel.textColor = UIColor.lightGray
     }
     
     private func animateFloatingLabel() {
+        
         UIView.animate(withDuration: 0.3) {
+            
             self.floatingLabel.transform = CGAffineTransform(
                 translationX: .zero,
                 y: -self.floatingLabel.frame.height + 2.0)
@@ -137,12 +141,14 @@ extension TextField {
     }
     
     private func hideFloatingLabel() {
+        
         UIView.animate(withDuration: 0.3) {
             self.floatingLabel.transform = CGAffineTransform.identity
         }
     }
     
     private func setFloatingPlaceholderText(_ placeholder: String) {
+        
         floatingLabel.text = placeholder
         floatingLabel.sizeToFit()
     }
@@ -153,20 +159,26 @@ extension TextField {
     
     @objc
     private func textFieldDidBeginEditing() {
+        
         animateFloatingLabel()
         
         setTextColor(.white)
         
         heightConstraint?.constant = 56.0
+        
+        setStroke()
     }
     
     @objc
     private func textFieldDidEndEditing() {
+        
         hideFloatingLabel()
         
         setTextColor(.clear)
         
         heightConstraint?.constant = 40.0
+        
+        removeStroke()
     }
 }
 
@@ -175,6 +187,7 @@ extension TextField {
 extension TextField {
     
     func setHeightConstraint(_ constraint: NSLayoutConstraint?) {
+        
         guard heightConstraint == nil else { return }
         
         heightConstraint = constraint
@@ -182,5 +195,22 @@ extension TextField {
     
     func checkForFirstResponder() {
         isFirstResponder ? textFieldDidBeginEditing() : textFieldDidEndEditing()
+    }
+}
+
+
+extension TextField {
+    
+    private func setStroke() {
+        
+        layer.cornerRadius = cornerRadius
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.white.cgColor
+    }
+    
+    private func removeStroke() {
+        
+        layer.borderWidth = .zero
+        layer.borderColor = UIColor.clear.cgColor
     }
 }

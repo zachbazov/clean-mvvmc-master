@@ -19,6 +19,7 @@ extension UIViewController: StoryboardInstantiable {
     
     public static var xib: UIViewController? {
         switch reuseIdentifier {
+            
         case AuthViewController.reuseIdentifier:
             return UIStoryboard(name: reuseIdentifier, bundle: nil)
                 .instantiateViewController(withIdentifier: reuseIdentifier)
@@ -40,6 +41,14 @@ extension UIViewController: StoryboardInstantiable {
                 .instantiateViewController(withIdentifier: reuseIdentifier)
             
         case EditProfileViewController.reuseIdentifier:
+            return UIStoryboard(name: ProfileViewController.reuseIdentifier, bundle: nil)
+                .instantiateViewController(withIdentifier: reuseIdentifier)
+            
+        case EditProfileSettingViewController.reuseIdentifier:
+            return UIStoryboard(name: ProfileViewController.reuseIdentifier, bundle: nil)
+                .instantiateViewController(withIdentifier: reuseIdentifier)
+            
+        case AvatarSelectorViewController.reuseIdentifier:
             return UIStoryboard(name: ProfileViewController.reuseIdentifier, bundle: nil)
                 .instantiateViewController(withIdentifier: reuseIdentifier)
             

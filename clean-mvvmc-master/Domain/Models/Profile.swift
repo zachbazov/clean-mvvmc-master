@@ -27,7 +27,8 @@ enum AudioSubtitles: String, Codable {
 struct Profile {
     
     struct Settings {
-        let _id: String
+        
+        var _id: String?
         var maturityRating: MaturityRating
         var displayLanguage: DisplayLanguage
         var audioAndSubtitles: AudioSubtitles
@@ -115,5 +116,30 @@ extension Profile.Settings {
             autoplayNextEpisode: autoplayNextEpisode,
             autoplayPreviews: autoplayPreviews,
             profile: profile)
+    }
+}
+
+
+extension Profile {
+    
+    static var addProfile: Profile {
+        
+        let authService = Application.app.server.authService
+        
+        guard let user = authService.user,
+              let userId = user._id else {
+            fatalError("Unexpected user credentials.")
+        }
+        
+        return Profile(_id: "addProfile",
+                       name: "Add Profile",
+                       image: "plus",
+                       active: false,
+                       user: userId,
+                       settings: .defaultValue)
+    }
+    
+    static var defaultValue: Profile {
+        return Profile(name: "", image: "")
     }
 }

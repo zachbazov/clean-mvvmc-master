@@ -9,7 +9,7 @@ import Foundation
 
 protocol AuthRequestable {
     
-    var user: User? { get }
+    var user: User? { get set }
     
     func signIn(with request: HTTPUserDTO.Request,
                 cached: ((HTTPUserDTO.Response) -> Void)?,

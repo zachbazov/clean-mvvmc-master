@@ -23,6 +23,7 @@ extension DataTransferService: DataTransferRequestable {
         return urlService.request(
             endpoint: endpoint,
             completion: { result in
+                
                 switch result {
                 case .success(let data):
                     
@@ -31,6 +32,7 @@ extension DataTransferService: DataTransferRequestable {
                     return completion(result)
                     
                 case .failure(let error):
+                    
                     logger.log(error: error)
                     
                     let error = resolver.resolve(urlRequestError: error)
@@ -46,12 +48,14 @@ extension DataTransferService: DataTransferRequestable {
         return urlService.request(
             endpoint: endpoint,
             completion: { result in
+                
                 switch result {
                 case .success:
                     
                     return completion(.success(()))
                     
                 case .failure(let error):
+                    
                     logger.log(error: error)
                     
                     let resolvedError = resolver.resolve(urlRequestError: error)
@@ -62,6 +66,7 @@ extension DataTransferService: DataTransferRequestable {
     }
     
     func request<T>(endpoint: Routable) async -> T? where T: Decodable {
+        
         guard let (data, _) = try? await urlService.request(endpoint: endpoint) else {
             return nil
         }
@@ -72,6 +77,7 @@ extension DataTransferService: DataTransferRequestable {
     }
     
     func request(endpoint: Routable) async -> Void? {
+        
         guard let _ = try? await urlService.request(endpoint: endpoint) else {
             return nil
         }
@@ -84,6 +90,7 @@ extension DataTransferService: DataTransferRequestable {
 extension DataTransferService {
     
     private func decode<T>(data: Data?, decoder: URLResponseDecoder) -> Result<T, DataTransferError> where T: Decodable {
+        
         do {
             guard let data = data else {
                 return .failure(.noResponse)
@@ -92,7 +99,9 @@ extension DataTransferService {
             let response: T = try decoder.json.decode(data)
             
             return .success(response)
+            
         } catch {
+            
             logger.log(error: error)
             
             return .failure(.parsing(error))
@@ -100,6 +109,7 @@ extension DataTransferService {
     }
     
     private func decode<T>(data: Data?, decoder: URLResponseDecoder) async -> T? where T: Decodable {
+        
         do {
             guard let data = data else {
                 return nil
@@ -108,7 +118,9 @@ extension DataTransferService {
             let response: T = try decoder.json.decode(data)
             
             return response
+            
         } catch {
+            
             logger.log(error: error)
             
             return nil

@@ -6,36 +6,32 @@
 //
 
 import UIKit
-import CodeBureau
 
-final class CustomView: UIView, View {
-    
-    var viewModel: CustomViewModel?
-    
+final class CustomView: UIView, ViewInstantiable {
     
     @IBOutlet private(set) weak var label: UILabel!
     
     
-    init(on parent: UIView, with viewModel: CustomViewModel) {
+    let viewModel: CustomViewModel
+    
+    
+    init(with viewModel: CustomViewModel) {
         self.viewModel = viewModel
         
-        super.init(frame: parent.bounds)
-        
-        parent.addSubview(self)
+        super.init(frame: .zero)
         
         self.nibDidLoad()
         
-        self.updateView(with: viewModel)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.nibDidLoad()
+        self.configureSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    func configureSubviews() {
+        setTitleText(viewModel.title)
     }
 }
 
@@ -44,6 +40,7 @@ extension CustomView {
     
     @IBAction
     private func viewDidTap() {
+        
         guard let coordinator = Application.app.coordinator.tabBarCoordinator else { return }
         
         coordinator.coordinate(to: .detail)
@@ -53,7 +50,7 @@ extension CustomView {
 
 extension CustomView {
     
-    func updateView(with viewModel: CustomViewModel?) {
-        label?.text = viewModel?.title
+    func setTitleText(_ text: String) {
+        label?.text = text
     }
 }

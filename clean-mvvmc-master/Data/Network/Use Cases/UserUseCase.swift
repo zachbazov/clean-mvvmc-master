@@ -24,7 +24,7 @@ final class UserUseCase: UseCase {
 extension UserUseCase {
     
     enum Endpoints {
-        case find
+        case updateUserData
     }
 }
 
@@ -38,13 +38,22 @@ extension UserUseCase {
     where T: Decodable, U: Decodable {
         
         switch endpoint {
-        case .find:
+        case .updateUserData:
             let request = request as! HTTPUserDTO.Request
             let completion = completion as! (Result<HTTPUserDTO.Response, DataTransferError>) -> Void
             
-            return repository.find(request: request,
-                                   cached: nil,
-                                   completion: completion)
+            return repository.update(request: request, completion: completion)
+        }
+    }
+    
+    @available(iOS 13.0.0, *)
+    func request<T, U>(endpoint: Endpoints, request: U) async -> T? where T: Decodable, U: Decodable {
+        
+        switch endpoint {
+        case .updateUserData:
+            let request = request as! HTTPUserDTO.Request
+            
+            return await repository.update(request: request)
         }
     }
 }

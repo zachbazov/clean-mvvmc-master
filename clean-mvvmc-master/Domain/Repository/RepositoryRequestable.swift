@@ -41,7 +41,7 @@ protocol RepositoryRequestable {
     func delete<T, U>(request: U) async -> T? where T: Decodable, U: Decodable
     
     @available(iOS 13.0.0, *)
-    func delete() async -> Void?
+    func delete<U>(request: U) async -> Void? where U: Decodable
 }
 
 
@@ -97,7 +97,7 @@ extension RepositoryRequestable {
     }
     
     @available(iOS 13.0.0, *)
-    func delete() async -> Void? {
+    func delete<U>(request: U) async -> Void? where U: Decodable {
         return nil
     }
 }

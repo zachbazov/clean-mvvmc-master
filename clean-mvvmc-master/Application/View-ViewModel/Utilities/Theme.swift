@@ -28,9 +28,9 @@ class Theme {
     static var navigationBarTitleTextAttributes: [NSAttributedString.Key: Any] {
         return currentTheme == .dark
             ? [.foregroundColor: UIColor.white,
-               .font: UIFont.systemFont(ofSize: 17.0, weight: .heavy)]
+               .font: UIFont.systemFont(ofSize: 17.0, weight: .bold)]
             : [.foregroundColor: UIColor.black,
-               .font: UIFont.systemFont(ofSize: 17.0, weight: .heavy)]
+               .font: UIFont.systemFont(ofSize: 17.0, weight: .bold)]
     }
     
     static var navigationBarBackgroundColor: UIColor {
@@ -54,12 +54,14 @@ class Theme {
     }
     
     static var textFieldPlaceholderTintColor: UIColor {
-        return currentTheme == .dark ? UIColor.hexColor("#CACACA") : UIColor.hexColor("#000")
+        return currentTheme == .dark ? UIColor.hexColor("#CACACA") : UIColor.hexColor("#000000")
     }
     
     
-    static func applyAppearance(for navigationController: UINavigationController? = nil) {
-        if #available(iOS 15, *) {
+    static func applyAppearance(for navigationController: UINavigationController? = nil, withBackgroundColor backgroundColor: UIColor? = nil) {
+        
+        if #available(iOS 15.0.0, *) {
+            
             let barButtonItemAppearance = UIBarButtonItemAppearance()
             barButtonItemAppearance.configureWithDefault(for: .plain)
             barButtonItemAppearance.normal.titleTextAttributes = barButtonTitleTextAttributes
@@ -67,25 +69,28 @@ class Theme {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithTransparentBackground()
             navigationBarAppearance.titleTextAttributes = navigationBarTitleTextAttributes
-            navigationBarAppearance.backgroundColor = navigationBarBackgroundColor.withAlphaComponent(0.1)
+            navigationBarAppearance.backgroundColor = backgroundColor ?? navigationBarBackgroundColor
             navigationBarAppearance.buttonAppearance = barButtonItemAppearance
-            navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .dark)
+//            navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .dark)
             
-            if let navigationController = navigationController {
-                navigationController.navigationBar.tintColor = navigationBarTintColor
-                navigationController.navigationBar.standardAppearance = navigationBarAppearance
-                navigationController.navigationBar.compactAppearance = navigationBarAppearance
-                navigationController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-                
-                return
-            }
+            navigationController?.navigationBar.isTranslucent = true
+            navigationController?.navigationBar.tintColor = navigationBarTintColor
+            navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+            navigationController?.navigationBar.compactAppearance = navigationBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
             
-            UINavigationBar.appearance().barTintColor = navigationBarTintColor
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+//            UINavigationBar.appearance().barTintColor = backgroundColor
+//            UINavigationBar.appearance().isTranslucent = true
+//            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+//            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+//            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            
         } else {
-            UINavigationBar.appearance().barTintColor = navigationBarTintColor
+            
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            UINavigationBar.appearance().shadowImage = UIImage()
+            UINavigationBar.appearance().isTranslucent = true
+            UINavigationBar.appearance().barTintColor = navigationBarBackgroundColor
             UINavigationBar.appearance().tintColor = tintColor
             UINavigationBar.appearance().titleTextAttributes = navigationBarTitleTextAttributes
         }

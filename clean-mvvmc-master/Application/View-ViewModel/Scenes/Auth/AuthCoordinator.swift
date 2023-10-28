@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CodeBureau
 
 final class AuthCoordinator: Coordinator {
     
@@ -25,7 +24,7 @@ final class AuthCoordinator: Coordinator {
 extension AuthCoordinator {
     
     private func createSignInViewController() -> SignInViewController {
-        let viewModel = SignInViewModel()
+        let viewModel = viewController?.viewModel
         let controller = SignInViewController.xib as! SignInViewController
         
         controller.viewModel = viewModel
@@ -35,7 +34,7 @@ extension AuthCoordinator {
     }
     
     private func createSignUpViewController() -> SignUpViewController {
-        let viewModel = SignUpViewModel()
+        let viewModel = viewController?.viewModel
         let controller = SignUpViewController.xib as! SignUpViewController
         
         controller.viewModel = viewModel
@@ -49,16 +48,14 @@ extension AuthCoordinator {
 extension AuthCoordinator {
     
     enum Screen {
-        case auth
         case signUp
         case signIn
     }
     
     
     func coordinate(to screen: Screen) {
+        
         switch screen {
-        case .auth:
-            break
         case .signUp:
             let controller = createSignUpViewController()
             

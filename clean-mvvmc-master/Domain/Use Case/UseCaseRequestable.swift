@@ -29,6 +29,7 @@ protocol UseCaseRequestable {
 
 extension UseCaseRequestable {
     
+    @discardableResult
     func request(completion: @escaping (Result<Void, DataTransferError>) -> Void) -> URLSessionTaskCancellable? {
         return nil
     }

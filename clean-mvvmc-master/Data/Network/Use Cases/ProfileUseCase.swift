@@ -58,10 +58,22 @@ extension ProfileUseCase {
             return repository.create(request: request, completion: completion)
             
         case .update:
-            let request = request as! HTTPProfileDTO.PATCH.Request
-            let completion = completion as! (Result<HTTPProfileDTO.PATCH.Response, DataTransferError>) -> Void
             
-            return repository.update(request: request, completion: completion)
+            switch request {
+                
+            case let request as HTTPProfileDTO.PATCH.Request:
+                let completion = completion as! (Result<HTTPProfileDTO.PATCH.Response, DataTransferError>) -> Void
+                
+                return repository.update(request: request, completion: completion)
+                
+            case let request as HTTPProfileDTO.Settings.PATCH.Request:
+                let completion = completion as! (Result<HTTPProfileDTO.Settings.PATCH.Response, DataTransferError>) -> Void
+                
+                return repository.update(request: request, completion: completion)
+                
+            default:
+                return nil
+            }
             
         case .delete:
             let request = request as! HTTPProfileDTO.DELETE.Request
@@ -86,14 +98,39 @@ extension ProfileUseCase {
             return await repository.create(request: request)
             
         case .update:
-            let request = request as! HTTPProfileDTO.PATCH.Request
             
-            return await repository.update(request: request)
+            switch request {
+                
+            case let request as HTTPProfileDTO.PATCH.Request:
+                return await repository.update(request: request)
+                
+            case let request as HTTPProfileDTO.Settings.PATCH.Request:
+                return await repository.update(request: request)
+                
+            default:
+                return nil
+            }
             
         case .delete:
             let request = request as! HTTPProfileDTO.DELETE.Request
             
             return await repository.delete(request: request)
+        }
+    }
+    
+    @available(iOS 13.0.0, *)
+    func request<U>(endpoint: Endpoints, request: U) async -> Void? where U: Decodable {
+        
+        switch endpoint {
+            
+        case .delete:
+            
+            let request = request as! HTTPProfileDTO.DELETE.Request
+            
+            return await repository.delete(request: request)
+            
+        default:
+            return nil
         }
     }
 }

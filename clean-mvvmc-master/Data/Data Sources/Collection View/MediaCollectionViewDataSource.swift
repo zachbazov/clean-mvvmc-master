@@ -7,14 +7,18 @@
 
 import UIKit
 
-final class MediaCollectionViewDataSource: NSObject, CollectionViewDataSource {
+final class MediaCollectionViewDataSource: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var viewModel: HomeViewModel
+    let viewModel: HomeViewModel
     
     weak var collectionView: UICollectionView?
     
     
-    init(_ collectionView: UICollectionView, with viewModel: HomeViewModel) {
+    init(_ collectionView: UICollectionView, with viewModel: HomeViewModel?) {
+        guard let viewModel = viewModel else {
+            fatalError()
+        }
+        
         self.viewModel = viewModel
         self.collectionView = collectionView
     }

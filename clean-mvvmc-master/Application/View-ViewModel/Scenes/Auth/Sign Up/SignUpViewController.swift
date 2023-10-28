@@ -31,7 +31,7 @@ final class SignUpViewController: UIViewController, ViewController {
     @IBOutlet private weak var stackViewCenterY: NSLayoutConstraint!
     
     
-    var viewModel: SignUpViewModel?
+    var viewModel: AuthViewModel?
     
     
     private let chainAnimator = ChainAnimator()
@@ -45,13 +45,25 @@ final class SignUpViewController: UIViewController, ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewDidConfigure()
         viewDidBindObservers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Theme.applyAppearance(for: navigationController, withBackgroundColor: .black)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         viewModel?.coordinator?.signUpViewController = nil
+    }
+    
+    
+    func viewDidConfigure() {
+        configureNavigationTitleView()
     }
     
     func viewDidBindObservers() {
@@ -262,5 +274,17 @@ extension SignUpViewController {
                     }
                 })
         }
+    }
+}
+
+
+extension SignUpViewController {
+    
+    private func configureNavigationTitleView() {
+        
+        let image = UIImage(named: "netflix-logo-2")
+        let imageView = UIImageView(image: image)
+        
+        navigationItem.titleView = imageView
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CodeBureau
 
 final class TabBarCoordinator: Coordinator {
     

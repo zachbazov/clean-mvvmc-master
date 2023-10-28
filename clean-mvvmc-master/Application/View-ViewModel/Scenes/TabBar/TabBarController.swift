@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import CodeBureau
 
-final class TabBarController: UITabBarController, CoordinatorViewController {
+final class TabBarController: UITabBarController, ViewController {
     
-    var controllerViewModel: TabBarViewModel?
+    var viewModel: TabBarViewModel?
 }
 
 

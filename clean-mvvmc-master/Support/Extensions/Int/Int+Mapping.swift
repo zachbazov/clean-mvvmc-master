@@ -20,4 +20,8 @@ extension Int {
     func toInt32() -> Int32 {
         return Int32(self)
     }
+    
+    func toCGFloat() -> CGFloat {
+        return CGFloat(self)
+    }
 }

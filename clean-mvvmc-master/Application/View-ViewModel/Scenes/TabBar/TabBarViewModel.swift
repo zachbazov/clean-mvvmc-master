@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import CodeBureau
 
-final class TabBarViewModel: CoordinatorViewModel {
+final class TabBarViewModel: ViewModel {
     
     var coordinator: TabBarCoordinator?
 }

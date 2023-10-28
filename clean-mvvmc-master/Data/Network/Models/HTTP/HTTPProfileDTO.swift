@@ -66,6 +66,7 @@ struct HTTPProfileDTO {
         
         struct Response: Decodable {
             let status: String
+            var message: String?
         }
     }
 }

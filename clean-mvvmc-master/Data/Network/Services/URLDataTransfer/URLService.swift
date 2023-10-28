@@ -24,6 +24,7 @@ extension URLService: URLRequestable {
         let dataTask = session.request(request: request) { data, response, requestError in
             
             if let requestError = requestError {
+                
                 let urlRequestError = resolver.resolve(requestError: requestError, response: response, with: data)
                 
                 logger.log(error: urlRequestError)
@@ -44,10 +45,13 @@ extension URLService: URLRequestable {
     func request(endpoint: Routable,
                  completion: @escaping (Result<Data?, URLRequestError>) -> Void) -> URLSessionTaskCancellable? {
         do {
+            
             let urlRequest: URLRequest = try endpoint.urlRequest(with: configuration)
             
             return request(request: urlRequest, completion: completion)
+            
         } catch {
+            
             completion(.failure(.urlGeneration))
             
             return nil
@@ -56,11 +60,19 @@ extension URLService: URLRequestable {
     
     @available(iOS 13.0.0, *)
     func request(request: URLRequest) async throws -> (Data, URLResponse)? {
-        return try await session.data(for: request)
+        
+        logger.log(request: request)
+        
+        let (data, response) = try await session.data(for: request)
+        
+        logger.log(responseData: data, response: response)
+        
+        return (data, response)
     }
     
     @available(iOS 13.0.0, *)
     func request(endpoint: Routable) async throws -> (Data, URLResponse)? {
+        
         let urlRequest: URLRequest = try endpoint.urlRequest(with: configuration)
         
         return try await request(request: urlRequest)

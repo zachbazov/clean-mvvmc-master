@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class MediaTableViewDataSource: NSObject, TableViewDataSource {
+final class MediaTableViewDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var tableView: UITableView?
     
     var viewModel: HomeViewModel
     
     
-    init(_ tableView: UITableView, with viewModel: T) {
+    init(_ tableView: UITableView, with viewModel: HomeViewModel) {
         self.tableView = tableView
         self.viewModel = viewModel
     }

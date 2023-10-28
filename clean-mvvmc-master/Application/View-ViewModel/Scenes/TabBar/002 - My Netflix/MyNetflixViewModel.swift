@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import CodeBureau
 
-final class MyNetflixViewModel: ControllerViewModel {
+final class MyNetflixViewModel: ViewModel {
     
     var coordinator: TabBarCoordinator?
 }

@@ -31,7 +31,8 @@ extension AuthRepository {
             
             guard !sessionTask.isCancelled else { return }
             
-            let endpoint = AuthRepository.signIn(with: request as! HTTPUserDTO.Request)
+            let request = request as! HTTPUserDTO.Request
+            let endpoint = AuthRepository.signIn(with: request)
             
             sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
         }
@@ -46,7 +47,8 @@ extension AuthRepository {
         
         guard !sessionTask.isCancelled else { return nil }
         
-        let endpoint = AuthRepository.signUp(with: request as! HTTPUserDTO.Request)
+        let request = request as! HTTPUserDTO.Request
+        let endpoint = AuthRepository.signUp(with: request)
         
         sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
         
@@ -73,7 +75,8 @@ extension AuthRepository {
             return cached as? T
         }
         
-        let endpoint = AuthRepository.signIn(with: request as! HTTPUserDTO.Request)
+        let request = request as! HTTPUserDTO.Request
+        let endpoint = AuthRepository.signIn(with: request)
         
         let response: HTTPUserDTO.Response? = await dataTransferService.request(endpoint: endpoint)
         

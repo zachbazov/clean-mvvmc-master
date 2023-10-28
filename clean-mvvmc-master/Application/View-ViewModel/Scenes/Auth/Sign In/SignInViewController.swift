@@ -25,7 +25,7 @@ final class SignInViewController: UIViewController, ViewController {
     @IBOutlet private weak var stackViewCenterY: NSLayoutConstraint!
     
     
-    var viewModel: SignInViewModel?
+    var viewModel: AuthViewModel?
     
     
     private let chainAnimator = ChainAnimator()
@@ -39,13 +39,25 @@ final class SignInViewController: UIViewController, ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewDidConfigure()
         viewDidBindObservers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Theme.applyAppearance(for: navigationController, withBackgroundColor: .black)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         viewModel?.coordinator?.signInViewController = nil
+    }
+    
+    
+    func viewDidConfigure() {
+        configureNavigationTitleView()
     }
     
     func viewDidBindObservers() {
@@ -239,6 +251,7 @@ extension SignInViewController {
             viewModel?.signIn(
                 with: request,
                 completion: { [weak self] response in
+                    
                     guard let self = self,
                           let _ = response.data else {
                         return
@@ -249,5 +262,17 @@ extension SignInViewController {
                     }
                 })
         }
+    }
+}
+
+
+extension SignInViewController {
+    
+    private func configureNavigationTitleView() {
+        
+        let image = UIImage(named: "netflix-logo-2")
+        let imageView = UIImageView(image: image)
+        
+        navigationItem.titleView = imageView
     }
 }
