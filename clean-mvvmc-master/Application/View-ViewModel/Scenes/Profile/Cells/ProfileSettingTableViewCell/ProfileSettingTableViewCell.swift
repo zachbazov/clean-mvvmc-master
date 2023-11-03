@@ -77,6 +77,8 @@ extension ProfileSettingTableViewCell {
         default:
             break
         }
+        
+        hasChanges()
     }
     
     @objc
@@ -153,5 +155,15 @@ extension ProfileSettingTableViewCell {
         }
         
         accessoryView = cellViewModel?.type == .switchable ? uiSwitch : imageView
+    }
+    
+    private func hasChanges() {
+        
+        guard let editingProfile = viewModel?.editingProfile,
+              let editingProfileIndex = viewModel?.editingProfileIndex else {
+            return
+        }
+        
+        viewModel?.hasChanges.value = editingProfile != viewModel?.profiles.value[editingProfileIndex]
     }
 }

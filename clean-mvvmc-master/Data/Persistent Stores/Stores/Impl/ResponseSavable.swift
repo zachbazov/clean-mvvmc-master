@@ -9,5 +9,5 @@ import Foundation
 
 protocol ResponseSavable {
     
-    func saveResponse<T, U>(_ response: T, with request: U) where T: Decodable, U: Decodable
+    func saveResponse<T>(_ response: T) where T: Decodable
 }

@@ -481,16 +481,6 @@
 			path = ProfileCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		8B40FF712AE5AE67003E388E /* MVVMC */ = {
-			isa = PBXGroup;
-			children = (
-				8B40FF782AE5AE91003E388E /* Coordinator.swift */,
-				8B40FF762AE5AE91003E388E /* ViewController.swift */,
-				8B40FF722AE5AE90003E388E /* ViewModel.swift */,
-			);
-			path = MVVMC;
-			sourceTree = "<group>";
-		};
 		8B5D97512AE964A1008C5C93 /* ProfileSettingTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,7 +600,9 @@
 		8B87E5472AB4098C009248EC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B40FF712AE5AE67003E388E /* MVVMC */,
+				8B40FF782AE5AE91003E388E /* Coordinator.swift */,
+				8B40FF762AE5AE91003E388E /* ViewController.swift */,
+				8B40FF722AE5AE90003E388E /* ViewModel.swift */,
 				8BA134AA2AC6265A00C50653 /* GradientView.swift */,
 				8BA134A32AC5AB6F00C50653 /* NavigationController.swift */,
 				8B9E5FE22AD59329003FDC04 /* TextField.swift */,

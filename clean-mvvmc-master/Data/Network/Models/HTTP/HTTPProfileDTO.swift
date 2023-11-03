@@ -72,49 +72,12 @@ struct HTTPProfileDTO {
 }
 
 
-extension HTTPProfileDTO {
-    
-    struct Settings {
-        
-        struct PATCH: HTTPRepresentable {
-            
-            struct Request: Decodable {
-                let user: UserDTO
-                let id: String
-                let settings: ProfileDTO.Settings
-            }
-            
-            
-            struct Response: Decodable {
-                let status: String
-                let data: ProfileDTO.Settings
-            }
-        }
-    }
-}
-
-
-extension HTTPProfileDTO.GET.Request {
-    
-    func toDomain() -> HTTPProfile.GET.Request {
-        return HTTPProfile.GET.Request(user: user.toDomain())
-    }
-}
-
 extension HTTPProfileDTO.GET.Response {
     
     func toDomain() -> HTTPProfile.GET.Response {
         return HTTPProfile.GET.Response(status: status,
                                         results: results,
                                         data: data.toDomain())
-    }
-}
-
-extension HTTPProfileDTO.POST.Request {
-    
-    func toDomain() -> HTTPProfile.POST.Request {
-        return HTTPProfile.POST.Request(user: user.toDomain(),
-                                        profile: profile.toDomain())
     }
 }
 
@@ -126,13 +89,6 @@ extension HTTPProfileDTO.POST.Response {
     }
 }
 
-extension HTTPProfileDTO.PATCH.Request {
-    
-    func toDomain() -> HTTPProfile.PATCH.Request {
-        return HTTPProfile.PATCH.Request(user: user.toDomain())
-    }
-}
-
 extension HTTPProfileDTO.PATCH.Response {
     
     func toDomain() -> HTTPProfile.PATCH.Response {
@@ -141,35 +97,9 @@ extension HTTPProfileDTO.PATCH.Response {
     }
 }
 
-extension HTTPProfileDTO.DELETE.Request {
-    
-    func toDomain() -> HTTPProfile.DELETE.Request {
-        return HTTPProfile.DELETE.Request(user: user.toDomain(),
-                                          id: id)
-    }
-}
-
 extension HTTPProfileDTO.DELETE.Response {
     
     func toDomain() -> HTTPProfile.DELETE.Response {
         return HTTPProfile.DELETE.Response(status: status)
-    }
-}
-
-
-extension HTTPProfileDTO.Settings.PATCH.Request {
-    
-    func toDomain() -> HTTPProfile.Settings.PATCH.Request {
-        return HTTPProfile.Settings.PATCH.Request(user: user.toDomain(),
-                                                  id: id,
-                                                  settings: settings.toDomain())
-    }
-}
-
-extension HTTPProfileDTO.Settings.PATCH.Response {
-    
-    func toDomain() -> HTTPProfile.Settings.PATCH.Response {
-        return HTTPProfile.Settings.PATCH.Response(status: status,
-                                                   data: data.toDomain())
     }
 }

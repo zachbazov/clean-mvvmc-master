@@ -181,6 +181,8 @@ extension SignInViewController {
         let authCoordinator = viewModel?.coordinator
         let appCoordinator = Application.app.coordinator
         let tabBarController = appCoordinator.tabBarCoordinator?.viewController
+        let profileNavigation = appCoordinator.profileCoordinator?.navigationController
+        let authService = Application.app.server.authService
         
         DispatchQueue.main.async {
             
@@ -220,16 +222,29 @@ extension SignInViewController {
                     
                     appCoordinator.authCoordinator = nil
                     
-                    appCoordinator.coordinate(to: tabBarController)
-                    
-                    tabBarController?.view.transform = CGAffineTransform(translationX: .zero, y: tabBarController?.view.bounds.height ?? .zero)
+                    if let _ = authService.user?.selectedProfile {
+                        
+                        appCoordinator.coordinate(to: tabBarController)
+                        
+                        tabBarController?.view.transform = CGAffineTransform(translationX: .zero, y: tabBarController?.view.bounds.height ?? .zero)
+                        
+                    } else {
+                        
+                        appCoordinator.coordinate(to: profileNavigation)
+                        
+                        profileNavigation?.view.transform = CGAffineTransform(translationX: .zero, y: profileNavigation?.view.bounds.height ?? .zero)
+                    }
                 })
                 .then(duration: 0.5,
                       delay: 4.0,
                       options: .curveEaseInOut,
                       animations: {
                     
-                    tabBarController?.view.transform = .identity
+                    if let _ = authService.user?.selectedProfile {
+                        tabBarController?.view.transform = .identity
+                    } else {
+                        profileNavigation?.view.transform = .identity
+                    }
                 })
         }
     }
@@ -239,9 +254,7 @@ extension SignInViewController {
         if #available(iOS 13.0.0, *) {
             
             Task {
-                guard let _ = await viewModel?.signIn(with: request) else {
-                    return
-                }
+                await viewModel?.signIn(with: request)
                 
                 executeChainAnimation()
             }

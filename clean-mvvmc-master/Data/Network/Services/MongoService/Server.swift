@@ -9,7 +9,7 @@ import Foundation
 
 final class Server {
     
-    private lazy var hostProvider: ServerHostProvidable = createHostProvider()
+    private(set) lazy var hostProvider: ServerHostProvidable = createHostProvider()
     
     lazy var dataTransferService: DataTransferRequestable = createDataTransferService()
     

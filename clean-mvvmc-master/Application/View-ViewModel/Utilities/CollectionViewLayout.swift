@@ -77,10 +77,17 @@ final class CollectionViewLayout: UICollectionViewFlowLayout {
             
             let numberOfItems = collectionView?.numberOfItems(inSection: .zero).toCGFloat() ?? .zero
             
-            let horizontalInset = size.width / itemsPerLine
-            var verticalInset: CGFloat
+            var horizontalInset = size.width / itemsPerLine
+            let verticalInset: CGFloat
             
             switch numberOfItems {
+                
+            case let n where n <= 1:
+                
+                horizontalInset = ((collectionView?.bounds.width ?? .zero) / itemsPerLine)
+                verticalInset = ((collectionView?.bounds.height ?? .zero) / itemsPerLine) - size.height + minimumLineSpacing + lineSpacing
+                
+                sectionInset = UIEdgeInsets(horizontal: horizontalInset, vertical: verticalInset)
                 
             case let n where n <= 6:
                 

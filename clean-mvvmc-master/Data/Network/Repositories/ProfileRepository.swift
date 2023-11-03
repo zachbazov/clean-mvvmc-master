@@ -54,20 +54,7 @@ extension ProfileRepository: Repository {
         
         guard !sessionTask.isCancelled else { return nil }
         
-        let endpoint: Routable
-        
-        switch request {
-            
-        case let request as HTTPProfileDTO.PATCH.Request:
-            endpoint = ProfileRepository.update(with: request)
-            
-            
-        case let request as HTTPProfileDTO.Settings.PATCH.Request:
-            endpoint = ProfileRepository.update(with: request)
-            
-        default:
-            return nil
-        }
+        let endpoint = ProfileRepository.update(with: request as! HTTPProfileDTO.PATCH.Request)
         
         sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
         
@@ -110,31 +97,8 @@ extension ProfileRepository: Repository {
     @available(iOS 13.0.0, *)
     func update<T, U>(request: U) async -> T? where T: Decodable, U: Decodable {
         
-        switch request {
-        case let request as HTTPProfileDTO.PATCH.Request:
-            
-            let endpoint = ProfileRepository.update(with: request)
-            let response: HTTPProfileDTO.PATCH.Response? = await dataTransferService.request(endpoint: endpoint)
-            
-            return response as? T
-            
-        case let request as HTTPProfileDTO.Settings.PATCH.Request:
-            
-            let endpoint = ProfileRepository.update(with: request)
-            let response: HTTPProfileDTO.Settings.PATCH.Response? = await dataTransferService.request(endpoint: endpoint)
-            
-            return response as? T
-            
-        default:
-            return nil
-        }
-    }
-    
-    @available(iOS 13.0.0, *)
-    func delete<T, U>(request: U) async -> T? where T: Decodable, U: Decodable {
-        
-        let endpoint = ProfileRepository.delete(with: request as! HTTPProfileDTO.DELETE.Request)
-        let response: Void? = await dataTransferService.request(endpoint: endpoint)
+        let endpoint = ProfileRepository.update(with: request as! HTTPProfileDTO.PATCH.Request)
+        let response: HTTPProfileDTO.PATCH.Response? = await dataTransferService.request(endpoint: endpoint)
         
         return response as? T
     }
@@ -180,19 +144,6 @@ extension ProfileRepository {
         let queryParams: [String: Any] = ["user": request.user._id ?? "",
                                           "id": request.id ?? ""]
         let encodedBodyParams = request.profile
-        
-        return Endpoint(method: .patch,
-                        path: path,
-                        queryParameters: queryParams,
-                        bodyParametersEncodable: encodedBodyParams)
-    }
-    
-    static func update(with request: HTTPProfileDTO.Settings.PATCH.Request) -> Routable {
-        
-        let path = "api/v1/users/profiles/settings"
-        let queryParams: [String: Any] = ["user": request.user._id ?? "",
-                                          "id": request.id]
-        let encodedBodyParams = request.settings
         
         return Endpoint(method: .patch,
                         path: path,

@@ -43,6 +43,7 @@ extension ProfileUseCase {
         
         switch endpoint {
         case .find:
+            
             let request = request as! HTTPProfileDTO.GET.Request
             let cached = cached as! (HTTPProfileDTO.GET.Response?) -> Void
             let completion = completion as! (Result<HTTPProfileDTO.GET.Response, DataTransferError>) -> Void
@@ -52,6 +53,7 @@ extension ProfileUseCase {
                                    completion: completion)
             
         case .create:
+            
             let request = request as! HTTPProfileDTO.POST.Request
             let completion = completion as! (Result<HTTPProfileDTO.POST.Response, DataTransferError>) -> Void
             
@@ -59,23 +61,13 @@ extension ProfileUseCase {
             
         case .update:
             
-            switch request {
-                
-            case let request as HTTPProfileDTO.PATCH.Request:
-                let completion = completion as! (Result<HTTPProfileDTO.PATCH.Response, DataTransferError>) -> Void
-                
-                return repository.update(request: request, completion: completion)
-                
-            case let request as HTTPProfileDTO.Settings.PATCH.Request:
-                let completion = completion as! (Result<HTTPProfileDTO.Settings.PATCH.Response, DataTransferError>) -> Void
-                
-                return repository.update(request: request, completion: completion)
-                
-            default:
-                return nil
-            }
+            let request = request as! HTTPProfileDTO.PATCH.Request
+            let completion = completion as! (Result<HTTPProfileDTO.PATCH.Response, DataTransferError>) -> Void
+            
+            return repository.update(request: request, completion: completion)
             
         case .delete:
+            
             let request = request as! HTTPProfileDTO.DELETE.Request
             let completion = completion as! (Result<HTTPProfileDTO.DELETE.Response, DataTransferError>) -> Void
             
@@ -88,30 +80,25 @@ extension ProfileUseCase {
         
         switch endpoint {
         case .find:
+            
             let request = request as! HTTPProfileDTO.GET.Request
             
             return await repository.find(request: request)
             
         case .create:
+            
             let request = request as! HTTPProfileDTO.POST.Request
             
             return await repository.create(request: request)
             
         case .update:
             
-            switch request {
-                
-            case let request as HTTPProfileDTO.PATCH.Request:
-                return await repository.update(request: request)
-                
-            case let request as HTTPProfileDTO.Settings.PATCH.Request:
-                return await repository.update(request: request)
-                
-            default:
-                return nil
-            }
+            let request = request as! HTTPProfileDTO.PATCH.Request
+            
+            return await repository.update(request: request)
             
         case .delete:
+            
             let request = request as! HTTPProfileDTO.DELETE.Request
             
             return await repository.delete(request: request)

@@ -95,7 +95,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Who's Watching?" id="CKP-ei-KRc">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="tF0-7e-Im0">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Edit" id="tF0-7e-Im0">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="editBarButtonDidTap" destination="Y6W-OH-hqX" id="XwS-lv-sBo"/>
@@ -136,7 +136,7 @@
                                                 <action selector="cancelDidTap" destination="Jpj-bj-iOP" id="KNl-zR-RD3"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="8dk-aT-hl7">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="8dk-aT-hl7">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="saveDidTap" destination="Jpj-bj-iOP" id="Vin-WD-KLJ"/>
@@ -206,6 +206,9 @@
                                         <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldValueDidChange:" destination="Jpj-bj-iOP" eventType="editingChanged" id="YTA-9e-BeD"/>
+                                </connections>
                             </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XWL-og-up0">
                                 <rect key="frame" x="173" y="339" width="49" height="31"/>
@@ -264,7 +267,7 @@
                         <outlet property="badgeViewContainer" destination="AcF-BY-ZlC" id="lsm-em-4JA"/>
                         <outlet property="kidsProfileSwitch" destination="XWL-og-up0" id="OnH-cS-omO"/>
                         <outlet property="nameTextField" destination="gmR-h7-9X1" id="gm2-cT-6CS"/>
-                        <outlet property="navigationBar" destination="bVQ-i8-fpk" id="cs1-ct-vz3"/>
+                        <outlet property="saveBarButton" destination="8dk-aT-hl7" id="Kw3-oD-51p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5e-sV-dYM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -365,7 +368,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldDidChange:" destination="D3d-sx-tiM" eventType="editingChanged" id="bha-CX-TZR"/>
+                                    <action selector="textFieldEditingValueDidChange:" destination="D3d-sx-tiM" eventType="editingChanged" id="0un-XO-BQh"/>
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="F7v-aF-Tq5" userLabel="Profile Settings Table View">
@@ -409,7 +412,7 @@
                                 <action selector="cancelDidTap" destination="D3d-sx-tiM" id="62p-mE-lqV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Dth-Zb-teQ">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="Dth-Zb-teQ">
                             <connections>
                                 <action selector="doneDidTap" destination="D3d-sx-tiM" id="mcH-7X-aYT"/>
                             </connections>
@@ -418,6 +421,7 @@
                     <connections>
                         <outlet property="avatarButton" destination="jku-wS-WVy" id="KXa-jq-Q6O"/>
                         <outlet property="badgeViewContainer" destination="rpG-fb-JUk" id="Ll4-vi-84p"/>
+                        <outlet property="doneBarButton" destination="Dth-Zb-teQ" id="Pt5-ml-4nN"/>
                         <outlet property="nameTextField" destination="fdZ-kO-IJO" id="TW5-1i-uRe"/>
                         <outlet property="tableView" destination="F7v-aF-Tq5" id="ctR-7H-xuT"/>
                         <outlet property="tableViewHeight" destination="sDC-x6-y1H" id="i3j-DU-gMR"/>
@@ -516,10 +520,10 @@
     </scenes>
     <designables>
         <designable name="fdZ-kO-IJO">
-            <size key="intrinsicContentSize" width="20" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="20" height="30.666666666666668"/>
         </designable>
         <designable name="gmR-h7-9X1">
-            <size key="intrinsicContentSize" width="20" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="20" height="30.666666666666668"/>
         </designable>
     </designables>
     <resources>

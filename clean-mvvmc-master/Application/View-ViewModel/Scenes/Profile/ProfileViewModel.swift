@@ -23,14 +23,7 @@ final class ProfileViewModel: ViewModel {
     
     var editingProfileIndex: Int?
     
-    var hasChanges: Bool {
-        
-        guard let index = editingProfileIndex else {
-            return false
-        }
-        
-        return editingProfile != profiles.value[index]
-    }
+    let hasChanges: ObservedValue<Bool> = ObservedValue(false)
     
     var avatars: [String] {
         return ["av-dark-red",
@@ -63,6 +56,7 @@ extension ProfileViewModel {
         }
         
         let useCase = ProfileUseCase()
+        
         let request = HTTPProfileDTO.GET.Request(user: user.toDTO())
         
         if #available(iOS 13.0.0, *) {
@@ -137,7 +131,7 @@ extension ProfileViewModel {
         }
     }
     
-    func updateProfile(request: HTTPProfileDTO.PATCH.Request, with settingsRequest: HTTPProfileDTO.Settings.PATCH.Request) {
+    func updateProfile(request: HTTPProfileDTO.PATCH.Request) {
         
         let useCase = ProfileUseCase()
         
@@ -146,60 +140,14 @@ extension ProfileViewModel {
             Task {
                 
                 let _: HTTPProfileDTO.PATCH.Response? = await useCase.request(endpoint: .update, request: request)
-                let _: HTTPProfileDTO.Settings.PATCH.Response? = await useCase.request(endpoint: .update, request: settingsRequest)
             }
             
         } else {
-            
-            let dispatchGroup = DispatchGroup()
-            
-            dispatchGroup.enter()
             
             useCase.request(
                 endpoint: .update,
                 request: request,
                 cached: nil) { (result: Result<HTTPProfileDTO.PATCH.Response, DataTransferError>) in
-                    
-                    if case let .failure(error) = result {
-                        debugPrint(.error, error.localizedDescription)
-                    }
-                    
-                    dispatchGroup.leave()
-                }
-            
-            dispatchGroup.enter()
-            
-            useCase.request(
-                endpoint: .update,
-                request: settingsRequest,
-                cached: nil) { (result: Result<HTTPProfileDTO.Settings.PATCH.Response, DataTransferError>) in
-                    
-                    if case let .failure(error) = result {
-                        debugPrint(.error, error.localizedDescription)
-                    }
-                    
-                    dispatchGroup.leave()
-                }
-        }
-    }
-    
-    func updateProfileSettings(with request: HTTPProfileDTO.Settings.PATCH.Request) {
-        
-        let useCase = ProfileUseCase()
-        
-        if #available(iOS 13.0.0, *) {
-            
-            Task {
-                
-                let _: HTTPProfileDTO.Settings.PATCH.Response? = await useCase.request(endpoint: .update, request: request)
-            }
-            
-        } else {
-            
-            useCase.request(
-                endpoint: .update,
-                request: request,
-                cached: nil) { (result: Result<HTTPProfileDTO.Settings.PATCH.Response, DataTransferError>) in
                     
                     if case let .failure(error) = result {
                         debugPrint(.error, error.localizedDescription)

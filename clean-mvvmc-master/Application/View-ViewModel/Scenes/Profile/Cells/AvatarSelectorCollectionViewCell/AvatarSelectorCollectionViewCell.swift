@@ -86,6 +86,8 @@ extension AvatarSelectorCollectionViewCell {
                             .withRenderingMode(.alwaysOriginal)
                         
                         self.viewModel?.coordinator?.editProfileViewController?.avatarButton.setImage(image, for: .normal)
+                        
+                        hasChanges()
                     }
                     
                     if let addProfileViewController = self.viewModel?.coordinator?.addProfileViewController {
@@ -121,5 +123,18 @@ extension AvatarSelectorCollectionViewCell {
     func removeStroke() {
         button.layer.borderColor = nil
         button.layer.borderWidth = .zero
+    }
+}
+
+extension AvatarSelectorCollectionViewCell {
+    
+    private func hasChanges() {
+        
+        guard let editingProfile = viewModel?.editingProfile,
+              let editingProfileIndex = viewModel?.editingProfileIndex else {
+            return
+        }
+        
+        viewModel?.hasChanges.value = editingProfile != viewModel?.profiles.value[editingProfileIndex]
     }
 }

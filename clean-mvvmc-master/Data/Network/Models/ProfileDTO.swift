@@ -18,7 +18,6 @@ public final class ProfileDTO: NSObject, Codable, NSSecureCoding {
         var audioAndSubtitles: AudioSubtitles
         var autoplayNextEpisode: Bool
         var autoplayPreviews: Bool
-        let profile: String
     }
     
     
@@ -112,8 +111,7 @@ extension ProfileDTO.Settings {
                                 displayLanguage: displayLanguage,
                                 audioAndSubtitles: audioAndSubtitles,
                                 autoplayNextEpisode: autoplayNextEpisode,
-                                autoplayPreviews: autoplayPreviews,
-                                profile: profile)
+                                autoplayPreviews: autoplayPreviews)
     }
 }
 
@@ -127,7 +125,6 @@ extension ProfileDTO.Settings {
             displayLanguage: .english,
             audioAndSubtitles: .english,
             autoplayNextEpisode: true,
-            autoplayPreviews: true,
-            profile: "")
+            autoplayPreviews: true)
     }
 }

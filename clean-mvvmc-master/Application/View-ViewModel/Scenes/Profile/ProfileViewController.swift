@@ -44,10 +44,13 @@ final class ProfileViewController: UIViewController, ViewController {
         viewModel?.isEditing.observe(on: self) { isEditing in
             
             self.configureNavigationTitle(isEditing)
+            
             self.configureBarButtonItem(isEditing)
         }
         
         viewModel?.profiles.observe(on: self) { profiles in
+            
+            self.shouldEnableEditBarButton()
             
             self.dataSource?.dataSourceDidChange()
         }
@@ -66,6 +69,7 @@ final class ProfileViewController: UIViewController, ViewController {
     }
     
     func viewDidDeallocate() {
+        
         viewDidUnbindObservers()
         
         viewModel = nil
@@ -104,6 +108,10 @@ extension ProfileViewController {
         let layout = CollectionViewLayout(layout: .profile, scrollDirection: .vertical)
         
         collectionView.setCollectionViewLayout(layout, animated: true)
+    }
+    
+    private func shouldEnableEditBarButton() {
+        editBarButton.isEnabled = viewModel?.profiles.value.count ?? .zero <= 1 ? false : true
     }
     
     private func shouldPresentOverlays() {

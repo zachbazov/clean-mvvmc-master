@@ -16,6 +16,10 @@ final class AuthService {
     private let responseStore = AuthResponseStore()
     
     private let useCase = AuthUseCase()
+    
+    
+    
+//    var cookie: HTTPCookie?
 }
 
 
@@ -28,18 +32,20 @@ extension AuthService: AuthRequestable {
             request: request,
             cached: nil,
             completion: { [weak self] (result: Result<HTTPUserDTO.Response, DataTransferError>) in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 
                 switch result {
                 case .success(let response):
                     
-                    self.updateUser(for: response, withRequest: request)
+                    self.updateUser(for: response)
                     
                     self.verifyJWTIntegrity()
                     
                     self.responseStore.deleter.deleteResponse()
                     
-                    self.responseStore.saver.saveResponse(response, with: request)
+                    self.responseStore.saver.saveResponse(response)
                     
                     DispatchQueue.main.async {
                         completion()
@@ -59,11 +65,13 @@ extension AuthService: AuthRequestable {
             endpoint: .signIn,
             request: request,
             cached: { [weak self] response in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 
                 if let response = response {
                     
-                    self.updateUser(for: response, withRequest: request)
+                    self.updateUser(for: response)
                     
                     self.verifyJWTIntegrity()
                     
@@ -71,18 +79,20 @@ extension AuthService: AuthRequestable {
                 }
             },
             completion: { [weak self] (result: Result<HTTPUserDTO.Response, DataTransferError>) in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 
                 switch result {
                 case .success(let response):
                     
-                    self.updateUser(for: response, withRequest: request)
+                    self.updateUser(for: response)
                     
                     self.verifyJWTIntegrity()
                     
                     self.responseStore.deleter.deleteResponse()
                     
-                    self.responseStore.saver.saveResponse(response, with: request)
+                    self.responseStore.saver.saveResponse(response)
                     
                     completion?(response) ?? Void()
                     
@@ -95,7 +105,9 @@ extension AuthService: AuthRequestable {
     func signOut(completion: ((Bool) -> Void)?) {
         
         useCase.request() { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             
             switch result {
             case .success:
@@ -117,11 +129,11 @@ extension AuthService: AuthRequestable {
         
         let response: HTTPUserDTO.Response? = await useCase.request(endpoint: .signUp, request: request)
         
-        guard let response = response else {
+        guard response?.status == "success" else {
             return nil
         }
         
-        updateUser(for: response, withRequest: request)
+        updateUser(for: response)
         
         verifyJWTIntegrity()
         
@@ -133,11 +145,11 @@ extension AuthService: AuthRequestable {
         
         let response: HTTPUserDTO.Response? = await useCase.request(endpoint: .signIn, request: request)
         
-        guard let response = response else {
+        guard response?.status == "success" else {
             return nil
         }
         
-        updateUser(for: response, withRequest: request)
+        updateUser(for: response)
         
         verifyJWTIntegrity()
         
@@ -155,27 +167,24 @@ extension AuthService {
     
     private var secretKeyData: Data {
         let key = Bundle.main.object(forInfoDictionaryKey: "JWT Secret") as! String
+        
         return key.data(using: .utf8)!
     }
     
     
-    func updateUser(for response: HTTPUserDTO.Response, withRequest request: HTTPUserDTO.Request?) {
-        guard let responseData = response.data else { return }
+    func updateUser(for response: HTTPUserDTO.Response?) {
         
-        user = responseData.toDomain()
-        user?._id = responseData._id
-        
-        if let request = request {
-            user?.password = request.user.password
+        guard let user = response?.data else {
+            return
         }
         
-        if let token = response.token {
-            user?.token = token
-        }
+        self.user = user.toDomain()
     }
     
     func verifyJWTIntegrity() {
-        guard let token = user?.token else { return }
+        guard let token = user?.token else {
+            return
+        }
         
         do {
             let jwt = try JWT<PayloadStandardJWT>(jwtString: token,

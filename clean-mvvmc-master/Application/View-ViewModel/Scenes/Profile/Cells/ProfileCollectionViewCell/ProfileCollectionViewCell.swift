@@ -140,11 +140,66 @@ extension ProfileCollectionViewCell {
                     cell.isSelected = true
                     cell.setStroke()
                     
-                    UIView.animate(withDuration: 0.25, animations: {
-                        cell.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                    }, completion: { _ in
-                        UIView.animate(withDuration: 0.25) {
-                            cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    }, completion: { [weak self] _ in
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        UIView.animate(withDuration: 0.2) {
+                            
+                            cell.button.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                            
+                            let authService = Application.app.server.authService
+                            
+                            guard var user = authService.user,
+                                  let indexPath = self.indexPath else {
+                                return
+                            }
+                            
+                            self.viewModel?.editingProfile = self.viewModel?.profiles.value[indexPath.row]
+                            user.selectedProfile = self.viewModel?.editingProfile?._id
+                            
+//                            let userResponseStore = AuthResponseStore()
+//                            var currentResponse: HTTPUserDTO.Response? = userResponseStore.fetcher.fetchResponse()
+                            let request = HTTPUserDTO.Request(user: user.toDTO())
+//                            currentResponse?.data = user.toDTO()
+//                            userResponseStore.deleter.deleteResponse()
+//                            userResponseStore.saver.saveResponse(currentResponse)
+                            
+                            let server = Application.app.server
+                            let userUseCase = UserUseCase()
+                            let req = HTTPUserDTO.Request(user: authService.user!.toDTO())
+                            
+                            let sessionTask = URLSessionTask()
+                            
+                            guard !sessionTask.isCancelled else { return }
+                            
+                            
+                            
+                            _ = userUseCase.repository.update(request: request) { (result: Result<HTTPUserDTO.Response, DataTransferError>) in
+                                
+                                switch result {
+                                case .success(let response):
+                                    
+                                    print(response.message)
+                                    
+//                                    let appCoordinator = Application.app.coordinator
+//                                    let profileCoordinator = self.viewModel?.coordinator
+//                                    let tabBarCoordinator = appCoordinator.tabBarCoordinator
+//                                    
+//                                    DispatchQueue.main.async {
+//                                        
+//                                        self.viewModel?.coordinator?.viewController?.dismiss(animated: true) {
+//                                            appCoordinator.coordinate(to: tabBarCoordinator?.viewController)
+//                                        }
+//                                    }
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
                         }
                     })
                     

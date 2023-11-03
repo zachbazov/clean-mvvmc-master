@@ -11,6 +11,8 @@ protocol AuthRequestable {
     
     var user: User? { get set }
     
+//    var cookie: HTTPCookie? { get set }
+    
     func signIn(with request: HTTPUserDTO.Request,
                 cached: ((HTTPUserDTO.Response) -> Void)?,
                 completion: ((HTTPUserDTO.Response) -> Void)?)

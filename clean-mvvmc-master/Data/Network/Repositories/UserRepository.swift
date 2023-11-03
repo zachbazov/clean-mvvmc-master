@@ -25,7 +25,7 @@ extension UserRepository: Repository {
         }
         
         let request = request as! HTTPUserDTO.Request
-        let endpoint = UserRepository.updateUserData(with: request)
+        let endpoint = UserRepository.update(with: request)
         
         sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
         
@@ -36,7 +36,7 @@ extension UserRepository: Repository {
     func update<T, U>(request: U) async -> T? where T: Decodable, U: Decodable {
         
         let request = request as! HTTPUserDTO.Request
-        let endpoint = UserRepository.updateUserData(with: request)
+        let endpoint = UserRepository.update(with: request)
         
         return await dataTransferService.request(endpoint: endpoint)
     }
@@ -45,14 +45,15 @@ extension UserRepository: Repository {
 
 extension UserRepository {
     
-    static func updateUserData(with request: HTTPUserDTO.Request) -> Routable {
+    static func update(with request: HTTPUserDTO.Request) -> Routable {
         
         let path = "api/v1/users"
-        let bodyParams: [String: Any] = ["name": request.user.name ?? "",
-                                         "selectedProfile": request.selectedProfile ?? ""]
+        let queryParams: [String: Any] = ["id": request.user._id ?? ""]
+        let encodedBodyParams = request.user
         
         return Endpoint(method: .patch,
                         path: path,
-                        bodyParameters: bodyParams)
+                        queryParameters: queryParams,
+                        bodyParametersEncodable: encodedBodyParams)
     }
 }

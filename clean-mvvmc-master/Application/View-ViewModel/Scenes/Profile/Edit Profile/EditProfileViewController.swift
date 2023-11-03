@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import CodeBureau
 
-final class EditProfileViewController: UIViewController {
+final class EditProfileViewController: UIViewController, ViewController {
     
     @IBOutlet private weak var tableView: UITableView!
+    
+    @IBOutlet private weak var doneBarButton: UIBarButtonItem!
     
     @IBOutlet private(set) weak var avatarButton: UIButton!
     
@@ -32,6 +35,7 @@ final class EditProfileViewController: UIViewController {
         
         viewDidDeploySubviews()
         viewDidConfigure()
+        viewDidBindObservers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,6 +54,32 @@ final class EditProfileViewController: UIViewController {
         configureButton()
         configureTextField()
     }
+    
+    func viewDidBindObservers() {
+        
+        viewModel?.hasChanges.observe(on: self) { hasChanges in
+            
+            self.shouldEnableDoneBarButton(hasChanges)
+        }
+    }
+    
+    func viewDidUnbindObservers() {
+        
+        guard let viewModel = viewModel else {
+            return
+        }
+        
+        viewModel.hasChanges.remove(observer: self)
+        
+        debugPrint(.success, "`Removed \(Self.self)` observers.")
+    }
+    
+    func viewDidDeallocate() {
+        
+        viewDidUnbindObservers()
+        
+        viewModel = nil
+    }
 }
 
 
@@ -65,11 +95,12 @@ extension EditProfileViewController {
         
         dismiss(animated: true)
         
-        if viewModel?.hasChanges ?? false {
-            
-            guard let updatedProfile = viewModel?.editingProfile else {
-                return
-            }
+        guard let index = viewModel?.editingProfileIndex,
+              let updatedProfile = viewModel?.editingProfile else {
+            return
+        }
+        
+        if updatedProfile != viewModel?.profiles.value[index] {
             
             if let index = viewModel?.profiles.value.firstIndex(where: { $0._id == updatedProfile._id ?? "" }) as? Int {
                 
@@ -88,11 +119,7 @@ extension EditProfileViewController {
                                                        id: updatedProfile._id ?? "",
                                                        profile: updatedProfile.toDTO())
             
-            let settingsRequest = HTTPProfileDTO.Settings.PATCH.Request(user: user.toDTO(),
-                                                                        id: updatedProfile.settings?._id ?? "",
-                                                                        settings: updatedProfile.toDTO().settings ?? .defaultValue)
-            
-            viewModel?.updateProfile(request: request, with: settingsRequest)
+            viewModel?.updateProfile(request: request)
         }
     }
     
@@ -143,10 +170,13 @@ extension EditProfileViewController {
     
     private func configureTextField() {
         
-        nameTextField.delegate = self
         nameTextField.text = viewModel?.editingProfile?.name ?? ""
         
         nameTextField.checkForFirstResponder()
+    }
+    
+    private func shouldEnableDoneBarButton(_ hasChanges: Bool) {
+        doneBarButton.isEnabled = hasChanges
     }
 }
 
@@ -164,10 +194,27 @@ extension EditProfileViewController: BadgeViewDelegate {
 }
 
 
-extension EditProfileViewController: UITextFieldDelegate {
+extension EditProfileViewController {
     
     @IBAction
-    private func textFieldDidChange(_ textField: TextField) {
+    private func textFieldEditingValueDidChange(_ textField: TextField) {
+        
         viewModel?.editingProfile?.name = textField.text ?? ""
+        
+        hasChanges()
+    }
+}
+
+
+extension EditProfileViewController {
+    
+    private func hasChanges() {
+        
+        guard let index = viewModel?.editingProfileIndex,
+              let updatedProfile = viewModel?.editingProfile else {
+            return
+        }
+        
+        viewModel?.hasChanges.value = updatedProfile != viewModel?.profiles.value[index] ?? .defaultValue
     }
 }

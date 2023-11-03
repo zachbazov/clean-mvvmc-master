@@ -24,7 +24,7 @@ final class UserUseCase: UseCase {
 extension UserUseCase {
     
     enum Endpoints {
-        case updateUserData
+        case update
     }
 }
 
@@ -38,7 +38,9 @@ extension UserUseCase {
     where T: Decodable, U: Decodable {
         
         switch endpoint {
-        case .updateUserData:
+            
+        case .update:
+            
             let request = request as! HTTPUserDTO.Request
             let completion = completion as! (Result<HTTPUserDTO.Response, DataTransferError>) -> Void
             
@@ -50,7 +52,8 @@ extension UserUseCase {
     func request<T, U>(endpoint: Endpoints, request: U) async -> T? where T: Decodable, U: Decodable {
         
         switch endpoint {
-        case .updateUserData:
+        case .update:
+            
             let request = request as! HTTPUserDTO.Request
             
             return await repository.update(request: request)

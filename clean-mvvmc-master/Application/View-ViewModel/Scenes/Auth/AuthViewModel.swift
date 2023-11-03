@@ -24,6 +24,7 @@ extension AuthViewModel {
     }
     
     @available(iOS 13.0.0, *)
+    @discardableResult
     func signUp(with request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response? {
         
         let authService = Application.app.server.authService
@@ -40,6 +41,7 @@ extension AuthViewModel {
     }
     
     @available(iOS 13.0.0, *)
+    @discardableResult
     func signIn(with request: HTTPUserDTO.Request) async -> HTTPUserDTO.Response? {
         
         let authService = Application.app.server.authService

@@ -18,7 +18,7 @@ public final class UserDTO: NSObject, Codable, NSSecureCoding {
     var role: String?
     var active: Bool?
     var token: String?
-    var mylist: [String]?
+    var mylist: String?
     var profiles: [String]?
     var selectedProfile: String?
     
@@ -31,7 +31,7 @@ public final class UserDTO: NSObject, Codable, NSSecureCoding {
          role: String? = nil,
          active: Bool? = nil,
          token: String? = nil,
-         mylist: [String]? = [],
+         mylist: String? = nil,
          profiles: [String]? = [],
          selectedProfile: String? = nil) {
         self._id = _id
@@ -81,8 +81,8 @@ public final class UserDTO: NSObject, Codable, NSSecureCoding {
             forKey: Key.token.rawValue) as? String
         
         self.mylist = coder.decodeObject(
-            of: [UserDTO.self, NSArray.self, NSString.self],
-            forKey: Key.mylist.rawValue) as? [String]
+            of: [UserDTO.self, NSString.self],
+            forKey: Key.mylist.rawValue) as? String
         
         self.profiles = coder.decodeObject(
             of: [UserDTO.self, NSArray.self, NSString.self],

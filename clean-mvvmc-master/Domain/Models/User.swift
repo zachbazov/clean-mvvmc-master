@@ -17,7 +17,7 @@ struct User {
     var role: String?
     var active: Bool?
     var token: String?
-    var mylist: [String]?
+    var mylist: String?
     var profiles: [String]?
     var selectedProfile: String?
 }

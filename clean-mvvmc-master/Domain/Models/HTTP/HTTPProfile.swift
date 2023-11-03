@@ -59,25 +59,3 @@ struct HTTPProfile {
         }
     }
 }
-
-
-extension HTTPProfile {
-    
-    struct Settings {
-        
-        struct PATCH: HTTPRepresentable {
-            
-            struct Request {
-                let user: User
-                let id: String
-                let settings: Profile.Settings
-            }
-            
-            
-            struct Response {
-                let status: String
-                let data: Profile.Settings
-            }
-        }
-    }
-}

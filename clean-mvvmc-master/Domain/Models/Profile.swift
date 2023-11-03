@@ -34,7 +34,6 @@ struct Profile {
         var audioAndSubtitles: AudioSubtitles
         var autoplayNextEpisode: Bool
         var autoplayPreviews: Bool
-        let profile: String
     }
     
     
@@ -79,8 +78,7 @@ extension Profile.Settings {
             displayLanguage: .english,
             audioAndSubtitles: .english,
             autoplayNextEpisode: true,
-            autoplayPreviews: true,
-            profile: "")
+            autoplayPreviews: true)
     }
 }
 
@@ -114,8 +112,7 @@ extension Profile.Settings {
             displayLanguage: displayLanguage,
             audioAndSubtitles: audioAndSubtitles,
             autoplayNextEpisode: autoplayNextEpisode,
-            autoplayPreviews: autoplayPreviews,
-            profile: profile)
+            autoplayPreviews: autoplayPreviews)
     }
 }
 

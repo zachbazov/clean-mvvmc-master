@@ -9,7 +9,7 @@ import UIKit
 
 final class AddProfileViewController: UIViewController, ViewController {
     
-    @IBOutlet private weak var navigationBar: UINavigationBar!
+    @IBOutlet private weak var saveBarButton: UIBarButtonItem!
     
     @IBOutlet private(set) weak var avatarButton: UIButton!
     
@@ -112,5 +112,10 @@ extension AddProfileViewController {
         viewModel?.createProfile(with: request)
         
         dismiss(animated: true)
+    }
+    
+    @IBAction
+    private func textFieldValueDidChange(_ textField: TextField) {
+        saveBarButton.isEnabled = !(textField.text?.isEmpty ?? false) ? true : false
     }
 }

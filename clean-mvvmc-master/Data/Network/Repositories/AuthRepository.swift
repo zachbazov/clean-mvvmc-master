@@ -82,7 +82,7 @@ extension AuthRepository {
         
         responseStore.deleter.deleteResponse()
         
-        responseStore.saver.saveResponse(response, with: request)
+        responseStore.saver.saveResponse(response)
         
         return response as? T
     }
@@ -96,7 +96,7 @@ extension AuthRepository {
         
         responseStore.deleter.deleteResponse()
         
-        responseStore.saver.saveResponse(response, with: request)
+        responseStore.saver.saveResponse(response)
         
         return response as? T
     }
