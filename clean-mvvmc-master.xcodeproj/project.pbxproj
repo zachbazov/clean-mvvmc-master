@@ -113,6 +113,9 @@
 		8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B02AB697C5009248EC /* AuthUseCase.swift */; };
 		8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B42AB73555009248EC /* UserDTO.swift */; };
 		8B87E5BA2AB735C9009248EC /* HTTPUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */; };
+		8B8E953C2B00A8A0001CD27D /* ResponseUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E953B2B00A8A0001CD27D /* ResponseUpdatable.swift */; };
+		8B8E953E2B00E0EC001CD27D /* ResponseUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E953D2B00E0EC001CD27D /* ResponseUpdater.swift */; };
+		8B8E95402B00E6A2001CD27D /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E953F2B00E6A2001CD27D /* ActivityIndicatorView.swift */; };
 		8B8F81B62ABF2B25006B72CB /* CodeBureau in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81B52ABF2B25006B72CB /* CodeBureau */; };
 		8B8F81B92ABF3264006B72CB /* URLRequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */; };
 		8B8F81BB2ABF32B1006B72CB /* URLSessionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */; };
@@ -121,7 +124,6 @@
 		8B8F81C32ABF43D6006B72CB /* URLRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81C22ABF43D6006B72CB /* URLRequestLogger.swift */; };
 		8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81DA2ABF59CC006B72CB /* DataTransferErrorLogger.swift */; };
 		8B8F81DD2ABF59CD006B72CB /* DataTransferErrorResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F81DB2ABF59CC006B72CB /* DataTransferErrorResolver.swift */; };
-		8B8F81E32ABFB82C006B72CB /* Cryptographic in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8F81E22ABFB82C006B72CB /* Cryptographic */; };
 		8B935FDD2AD89FB2000268CB /* UIBarButton+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B935FDC2AD89FB2000268CB /* UIBarButton+View.swift */; };
 		8B935FE22AD957F3000268CB /* UIView+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B935FE12AD957F3000268CB /* UIView+Visibility.swift */; };
 		8B953C1A2AE1360600CF411E /* HTTPUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B953C192AE1360600CF411E /* HTTPUser.swift */; };
@@ -159,7 +161,7 @@
 		8B99A6622AEA647A00522426 /* AvatarSelectorCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A6612AEA647A00522426 /* AvatarSelectorCollectionViewCellViewModel.swift */; };
 		8B99A6642AEA648100522426 /* AvatarSelectorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B99A6632AEA648100522426 /* AvatarSelectorCollectionViewCell.xib */; };
 		8B99A6662AEA64BE00522426 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A6652AEA64BE00522426 /* Avatar.swift */; };
-		8B99A6682AEAC14600522426 /* UICollectionTypeSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A6672AEAC14600522426 /* UICollectionTypeSpacer.swift */; };
+		8B99A6682AEAC14600522426 /* UISpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A6672AEAC14600522426 /* UISpacerView.swift */; };
 		8B9C93B72AE3B53200B7AD52 /* RepositoryRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */; };
 		8B9C93B92AE3BFC200B7AD52 /* UseCaseRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */; };
 		8B9C93BD2AE3C91300B7AD52 /* ServerHostProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */; };
@@ -179,6 +181,25 @@
 		8BA134A92AC5CAC900C50653 /* UIColor+HEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */; };
 		8BA134AB2AC6265A00C50653 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA134AA2AC6265A00C50653 /* GradientView.swift */; };
 		8BA5210B2AB7715D00DAE2F7 /* URLImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA5210A2AB7715D00DAE2F7 /* URLImageService.swift */; };
+		8BA94C1A2AF618A2009F715E /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C072AF618A0009F715E /* HMAC.swift */; };
+		8BA94C1B2AF618A2009F715E /* JWTEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C082AF618A0009F715E /* JWTEncoder.swift */; };
+		8BA94C1C2AF618A2009F715E /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C092AF618A0009F715E /* Payload.swift */; };
+		8BA94C1D2AF618A2009F715E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C0A2AF618A0009F715E /* Status.swift */; };
+		8BA94C1E2AF618A2009F715E /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C0B2AF618A0009F715E /* JWT.swift */; };
+		8BA94C1F2AF618A2009F715E /* NoneAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C0C2AF618A0009F715E /* NoneAlgorithm.swift */; };
+		8BA94C202AF618A2009F715E /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C0D2AF618A1009F715E /* JWTDecoder.swift */; };
+		8BA94C212AF618A2009F715E /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C0E2AF618A1009F715E /* Updatable.swift */; };
+		8BA94C222AF618A2009F715E /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C0F2AF618A1009F715E /* Header.swift */; };
+		8BA94C232AF618A2009F715E /* VerifierAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C102AF618A1009F715E /* VerifierAlgorithm.swift */; };
+		8BA94C242AF618A2009F715E /* SignerAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C112AF618A1009F715E /* SignerAlgorithm.swift */; };
+		8BA94C252AF618A2009F715E /* JWTLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C122AF618A1009F715E /* JWTLogger.swift */; };
+		8BA94C262AF618A2009F715E /* BlueHMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C132AF618A1009F715E /* BlueHMAC.swift */; };
+		8BA94C272AF618A2009F715E /* JWTVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C142AF618A1009F715E /* JWTVerifier.swift */; };
+		8BA94C282AF618A2009F715E /* JWTSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C152AF618A1009F715E /* JWTSigner.swift */; };
+		8BA94C292AF618A2009F715E /* ValidatePayloadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C162AF618A2009F715E /* ValidatePayloadResult.swift */; };
+		8BA94C2A2AF618A2009F715E /* PayloadStandardJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C172AF618A2009F715E /* PayloadStandardJWT.swift */; };
+		8BA94C2B2AF618A2009F715E /* JWTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C182AF618A2009F715E /* JWTError.swift */; };
+		8BA94C2C2AF618A2009F715E /* Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA94C192AF618A2009F715E /* Digest.swift */; };
 		8BB692972AB7B9660076207C /* CoreDataStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BB692952AB7B9660076207C /* CoreDataStore.xcdatamodeld */; };
 		8BB692992AB7BD350076207C /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB692982AB7BD350076207C /* Media.swift */; };
 		8BB6929B2AB7BD380076207C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6929A2AB7BD380076207C /* Section.swift */; };
@@ -303,6 +324,9 @@
 		8B87E5B02AB697C5009248EC /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		8B87E5B42AB73555009248EC /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		8B87E5B92AB735C9009248EC /* HTTPUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUserDTO.swift; sourceTree = "<group>"; };
+		8B8E953B2B00A8A0001CD27D /* ResponseUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseUpdatable.swift; sourceTree = "<group>"; };
+		8B8E953D2B00E0EC001CD27D /* ResponseUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseUpdater.swift; sourceTree = "<group>"; };
+		8B8E953F2B00E6A2001CD27D /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		8B8F81B82ABF3264006B72CB /* URLRequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConfiguration.swift; sourceTree = "<group>"; };
 		8B8F81BA2ABF32B1006B72CB /* URLSessionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTask.swift; sourceTree = "<group>"; };
 		8B8F81BC2ABF437C006B72CB /* URLResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseDecoder.swift; sourceTree = "<group>"; };
@@ -347,7 +371,7 @@
 		8B99A6612AEA647A00522426 /* AvatarSelectorCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSelectorCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		8B99A6632AEA648100522426 /* AvatarSelectorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarSelectorCollectionViewCell.xib; sourceTree = "<group>"; };
 		8B99A6652AEA64BE00522426 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
-		8B99A6672AEAC14600522426 /* UICollectionTypeSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionTypeSpacer.swift; sourceTree = "<group>"; };
+		8B99A6672AEAC14600522426 /* UISpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISpacerView.swift; sourceTree = "<group>"; };
 		8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRequestable.swift; sourceTree = "<group>"; };
 		8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseRequestable.swift; sourceTree = "<group>"; };
 		8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerHostProvidable.swift; sourceTree = "<group>"; };
@@ -367,6 +391,25 @@
 		8BA134A82AC5CAC900C50653 /* UIColor+HEX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HEX.swift"; sourceTree = "<group>"; };
 		8BA134AA2AC6265A00C50653 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8BA5210A2AB7715D00DAE2F7 /* URLImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageService.swift; sourceTree = "<group>"; };
+		8BA94C072AF618A0009F715E /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		8BA94C082AF618A0009F715E /* JWTEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTEncoder.swift; sourceTree = "<group>"; };
+		8BA94C092AF618A0009F715E /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
+		8BA94C0A2AF618A0009F715E /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		8BA94C0B2AF618A0009F715E /* JWT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		8BA94C0C2AF618A0009F715E /* NoneAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoneAlgorithm.swift; sourceTree = "<group>"; };
+		8BA94C0D2AF618A1009F715E /* JWTDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTDecoder.swift; sourceTree = "<group>"; };
+		8BA94C0E2AF618A1009F715E /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
+		8BA94C0F2AF618A1009F715E /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		8BA94C102AF618A1009F715E /* VerifierAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifierAlgorithm.swift; sourceTree = "<group>"; };
+		8BA94C112AF618A1009F715E /* SignerAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignerAlgorithm.swift; sourceTree = "<group>"; };
+		8BA94C122AF618A1009F715E /* JWTLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTLogger.swift; sourceTree = "<group>"; };
+		8BA94C132AF618A1009F715E /* BlueHMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueHMAC.swift; sourceTree = "<group>"; };
+		8BA94C142AF618A1009F715E /* JWTVerifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTVerifier.swift; sourceTree = "<group>"; };
+		8BA94C152AF618A1009F715E /* JWTSigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTSigner.swift; sourceTree = "<group>"; };
+		8BA94C162AF618A2009F715E /* ValidatePayloadResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatePayloadResult.swift; sourceTree = "<group>"; };
+		8BA94C172AF618A2009F715E /* PayloadStandardJWT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadStandardJWT.swift; sourceTree = "<group>"; };
+		8BA94C182AF618A2009F715E /* JWTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTError.swift; sourceTree = "<group>"; };
+		8BA94C192AF618A2009F715E /* Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Digest.swift; sourceTree = "<group>"; };
 		8BB692962AB7B9660076207C /* CoreDataStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStore.xcdatamodel; sourceTree = "<group>"; };
 		8BB692982AB7BD350076207C /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		8BB6929A2AB7BD380076207C /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -388,7 +431,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8F81B62ABF2B25006B72CB /* CodeBureau in Frameworks */,
-				8B8F81E32ABFB82C006B72CB /* Cryptographic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +450,7 @@
 		8B23AD762AB7824E0008EECC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8BA94C062AF6188E009F715E /* JWT */,
 				8B8F81B72ABF3247006B72CB /* URLDataTransfer */,
 				8B9C93C32AE41D8C00B7AD52 /* URLImageService */,
 				8B9C93C02AE41D3C00B7AD52 /* AuthService */,
@@ -621,7 +664,8 @@
 				8B5D974F2AE94DAF008C5C93 /* TableViewCell.swift */,
 				8B40FF902AE710E1003E388E /* CollectionViewCell.swift */,
 				8B40FF942AE71527003E388E /* CollectionViewLayout.swift */,
-				8B99A6672AEAC14600522426 /* UICollectionTypeSpacer.swift */,
+				8B99A6672AEAC14600522426 /* UISpacerView.swift */,
+				8B8E953F2B00E6A2001CD27D /* ActivityIndicatorView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1029,6 +1073,7 @@
 			children = (
 				8B64B8C52ADC649100A272C5 /* ResponseFetchable.swift */,
 				8B64B8C72ADC64A200A272C5 /* ResponseSavable.swift */,
+				8B8E953B2B00A8A0001CD27D /* ResponseUpdatable.swift */,
 				8B64B8C92ADC64A700A272C5 /* ResponseDeletable.swift */,
 				8B64B8D22ADC661100A272C5 /* ResponsePersistable.swift */,
 			);
@@ -1080,6 +1125,32 @@
 			path = UIColor;
 			sourceTree = "<group>";
 		};
+		8BA94C062AF6188E009F715E /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				8BA94C132AF618A1009F715E /* BlueHMAC.swift */,
+				8BA94C192AF618A2009F715E /* Digest.swift */,
+				8BA94C0F2AF618A1009F715E /* Header.swift */,
+				8BA94C072AF618A0009F715E /* HMAC.swift */,
+				8BA94C0B2AF618A0009F715E /* JWT.swift */,
+				8BA94C0D2AF618A1009F715E /* JWTDecoder.swift */,
+				8BA94C082AF618A0009F715E /* JWTEncoder.swift */,
+				8BA94C182AF618A2009F715E /* JWTError.swift */,
+				8BA94C122AF618A1009F715E /* JWTLogger.swift */,
+				8BA94C152AF618A1009F715E /* JWTSigner.swift */,
+				8BA94C142AF618A1009F715E /* JWTVerifier.swift */,
+				8BA94C0C2AF618A0009F715E /* NoneAlgorithm.swift */,
+				8BA94C092AF618A0009F715E /* Payload.swift */,
+				8BA94C172AF618A2009F715E /* PayloadStandardJWT.swift */,
+				8BA94C112AF618A1009F715E /* SignerAlgorithm.swift */,
+				8BA94C0A2AF618A0009F715E /* Status.swift */,
+				8BA94C0E2AF618A1009F715E /* Updatable.swift */,
+				8BA94C162AF618A2009F715E /* ValidatePayloadResult.swift */,
+				8BA94C102AF618A1009F715E /* VerifierAlgorithm.swift */,
+			);
+			path = JWT;
+			sourceTree = "<group>";
+		};
 		8BB79E6B2AB79E51000E191A /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1106,6 +1177,7 @@
 				8B9C93CC2AE42B4B00B7AD52 /* Impl */,
 				8B64B8C32ADC648700A272C5 /* ResponseFetcher.swift */,
 				8B64B8CB2ADC64DE00A272C5 /* ResponseSaver.swift */,
+				8B8E953D2B00E0EC001CD27D /* ResponseUpdater.swift */,
 				8B64B8CD2ADC650300A272C5 /* ResponseDeleter.swift */,
 				8BD210FD2AB7CEB000030A89 /* AuthResponseStore.swift */,
 				8B40FF482AE4883D003E388E /* SectionResponseStore.swift */,
@@ -1132,7 +1204,6 @@
 			name = "clean-mvvmc-master";
 			packageProductDependencies = (
 				8B8F81B52ABF2B25006B72CB /* CodeBureau */,
-				8B8F81E22ABFB82C006B72CB /* Cryptographic */,
 			);
 			productName = "clean-mvvmc-master";
 			productReference = 8B87E5282AB408A0009248EC /* clean-mvvmc-master.app */;
@@ -1164,7 +1235,6 @@
 			mainGroup = 8B87E51F2AB408A0009248EC;
 			packageReferences = (
 				8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */,
-				8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */,
 			);
 			productRefGroup = 8B87E5292AB408A0009248EC /* Products */;
 			projectDirPath = "";
@@ -1204,6 +1274,7 @@
 			files = (
 				8B4697432AB7C75C00CC8131 /* HTTPMediaDTO.swift in Sources */,
 				8B953C222AE1361C00CF411E /* HTTPSeason.swift in Sources */,
+				8BA94C202AF618A2009F715E /* JWTDecoder.swift in Sources */,
 				8B87E5622AB40A26009248EC /* TabBarViewModel.swift in Sources */,
 				8B40FF7D2AE5AE91003E388E /* ViewController.swift in Sources */,
 				8B953C512AE2A27D00CF411E /* DataTransferErrorResolvable.swift in Sources */,
@@ -1226,6 +1297,7 @@
 				8B46973D2AB7BFFD00CC8131 /* ProfileDTO.swift in Sources */,
 				8B40FF8F2AE7108A003E388E /* PathIndexable.swift in Sources */,
 				8B87E5A92AB693D9009248EC /* Repository.swift in Sources */,
+				8BA94C1B2AF618A2009F715E /* JWTEncoder.swift in Sources */,
 				8B64B8CC2ADC64DE00A272C5 /* ResponseSaver.swift in Sources */,
 				8BB692A32AB7BD8A0076207C /* Season.swift in Sources */,
 				8B8F81C32ABF43D6006B72CB /* URLRequestLogger.swift in Sources */,
@@ -1234,11 +1306,14 @@
 				8B87E5602AB40A1F009248EC /* TabBarCoordinator.swift in Sources */,
 				8B953C202AE1361600CF411E /* HTTPMedia.swift in Sources */,
 				8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */,
+				8BA94C1F2AF618A2009F715E /* NoneAlgorithm.swift in Sources */,
 				8B64B8D32ADC661100A272C5 /* ResponsePersistable.swift in Sources */,
 				8B5D97502AE94DAF008C5C93 /* TableViewCell.swift in Sources */,
 				8B64B8CA2ADC64A700A272C5 /* ResponseDeletable.swift in Sources */,
 				8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */,
+				8BA94C252AF618A2009F715E /* JWTLogger.swift in Sources */,
 				8B5D975C2AE99DD2008C5C93 /* EditProfileSettingViewController.swift in Sources */,
+				8BA94C292AF618A2009F715E /* ValidatePayloadResult.swift in Sources */,
 				8B5D97552AE964C8008C5C93 /* ProfileSettingTableViewCellViewModel.swift in Sources */,
 				8BB692972AB7B9660076207C /* CoreDataStore.xcdatamodeld in Sources */,
 				8B40FF812AE5BA08003E388E /* ViewInstantiable.swift in Sources */,
@@ -1248,10 +1323,12 @@
 				8BA134AB2AC6265A00C50653 /* GradientView.swift in Sources */,
 				8B953C322AE1B4A900CF411E /* ProfileUseCase.swift in Sources */,
 				8B9D81C42AE843570088D84A /* UIEdgeInsets+Init.swift in Sources */,
+				8BA94C2C2AF618A2009F715E /* Digest.swift in Sources */,
 				8BF4DD522AB7A08B00536F7E /* CoreDataService.swift in Sources */,
 				8BB692992AB7BD350076207C /* Media.swift in Sources */,
 				8B64B8D92ADC778500A272C5 /* CoreDataValueTransformable.swift in Sources */,
 				8B9E5FE32AD59329003FDC04 /* TextField.swift in Sources */,
+				8BA94C1D2AF618A2009F715E /* Status.swift in Sources */,
 				8BA5210B2AB7715D00DAE2F7 /* URLImageService.swift in Sources */,
 				8B40FF5E2AE5812A003E388E /* URLImageRequestable.swift in Sources */,
 				8B40FF4B2AE48A0B003E388E /* MediaResponseStore.swift in Sources */,
@@ -1259,6 +1336,7 @@
 				8B06BA5B2AD9C51A00DFF745 /* UIViewController+Layout.swift in Sources */,
 				8B64B8F02AE0616200A272C5 /* AddProfileViewController.swift in Sources */,
 				8B64B8C22ADC2B5A00A272C5 /* ViewLifecycleBehavior.swift in Sources */,
+				8BA94C232AF618A2009F715E /* VerifierAlgorithm.swift in Sources */,
 				8B953C4C2AE2A27D00CF411E /* URLRequestable.swift in Sources */,
 				8B87E56E2AB40A6F009248EC /* NewsViewController.swift in Sources */,
 				8B40FF682AE59683003E388E /* Observable.swift in Sources */,
@@ -1278,16 +1356,20 @@
 				8B40FF582AE49A78003E388E /* CollectionViewDataSource.swift in Sources */,
 				8B87E57D2AB40AB7009248EC /* DetailViewModel.swift in Sources */,
 				8B87E5772AB40A92009248EC /* CustomViewModel.swift in Sources */,
+				8B8E953E2B00E0EC001CD27D /* ResponseUpdater.swift in Sources */,
 				8B64B8DD2ADC792500A272C5 /* ValueTransformerValue.swift in Sources */,
+				8BA94C1C2AF618A2009F715E /* Payload.swift in Sources */,
 				8BA1348E2AC2293400C50653 /* AuthCoordinator.swift in Sources */,
-				8B99A6682AEAC14600522426 /* UICollectionTypeSpacer.swift in Sources */,
+				8B99A6682AEAC14600522426 /* UISpacerView.swift in Sources */,
 				8B40FF912AE710E1003E388E /* CollectionViewCell.swift in Sources */,
 				8B87E5A22AB5CE0C009248EC /* URLService.swift in Sources */,
 				8B9C93C82AE41E9100B7AD52 /* URLImageProtocol.swift in Sources */,
 				8B6BA72D2ADBF9B900B7FD8A /* BorderedButton.swift in Sources */,
 				8BF4DD552AB7A61F00536F7E /* ValueTransformer.swift in Sources */,
 				8B40FF502AE48C77003E388E /* Int+Mapping.swift in Sources */,
+				8BA94C272AF618A2009F715E /* JWTVerifier.swift in Sources */,
 				8B64B8C82ADC64A200A272C5 /* ResponseSavable.swift in Sources */,
+				8BA94C1E2AF618A2009F715E /* JWT.swift in Sources */,
 				8B87E5722AB40A79009248EC /* MyNetflixViewController.swift in Sources */,
 				8B40FF7F2AE5AE91003E388E /* Coordinator.swift in Sources */,
 				8B64B8C42ADC648700A272C5 /* ResponseFetcher.swift in Sources */,
@@ -1296,9 +1378,11 @@
 				8B953C572AE2A27E00CF411E /* URLRequestError.swift in Sources */,
 				8B64B8E22AE0593E00A272C5 /* ProfileViewModel.swift in Sources */,
 				8B87E57F2AB40ABC009248EC /* DetailViewController.swift in Sources */,
+				8BA94C222AF618A2009F715E /* Header.swift in Sources */,
 				8B64B8EE2AE0614D00A272C5 /* EditProfileViewController.swift in Sources */,
 				8B40FF872AE6CE7F003E388E /* Reusable.swift in Sources */,
 				8B953C4A2AE2A27D00CF411E /* URLSessionRequestable.swift in Sources */,
+				8BA94C262AF618A2009F715E /* BlueHMAC.swift in Sources */,
 				8BB692A52AB7BD970076207C /* Trailer.swift in Sources */,
 				8B9C93BF2AE41D2700B7AD52 /* AuthRequestable.swift in Sources */,
 				8B953C262AE1367700CF411E /* HTTPRepresentable.swift in Sources */,
@@ -1318,6 +1402,7 @@
 				8B87E5682AB40A61009248EC /* HomeViewModel.swift in Sources */,
 				8B40FF602AE5841F003E388E /* SectionRepository.swift in Sources */,
 				8B8F81BF2ABF43A4006B72CB /* URLRequestErrorResolver.swift in Sources */,
+				8BA94C282AF618A2009F715E /* JWTSigner.swift in Sources */,
 				8BA134A42AC5AB6F00C50653 /* NavigationController.swift in Sources */,
 				8B87E5B12AB697C5009248EC /* AuthUseCase.swift in Sources */,
 				8B4697512AB7C7BC00CC8131 /* HTTPSeasonDTO.swift in Sources */,
@@ -1328,11 +1413,13 @@
 				8B40FF8D2AE71061003E388E /* UIView+Hierarchy.swift in Sources */,
 				8B5D974A2AE93BED008C5C93 /* ViewControllerLifecycleBehavior.swift in Sources */,
 				8BA134A62AC5CA6900C50653 /* Theme.swift in Sources */,
+				8BA94C2A2AF618A2009F715E /* PayloadStandardJWT.swift in Sources */,
 				8B87E56C2AB40A6B009248EC /* NewsViewModel.swift in Sources */,
 				8B40FF492AE4883D003E388E /* SectionResponseStore.swift in Sources */,
 				8B953C1A2AE1360600CF411E /* HTTPUser.swift in Sources */,
 				8BB6929F2AB7BD780076207C /* ProfileSetting.swift in Sources */,
 				8B953C242AE1363700CF411E /* HTTPList.swift in Sources */,
+				8B8E953C2B00A8A0001CD27D /* ResponseUpdatable.swift in Sources */,
 				8B46973F2AB7C1BE00CC8131 /* SectionDTO.swift in Sources */,
 				8B953C4F2AE2A27D00CF411E /* URLResponseDecodable.swift in Sources */,
 				8B40FF832AE5CCF9003E388E /* ProfileCollectionViewDataSource.swift in Sources */,
@@ -1341,9 +1428,11 @@
 				8BA134A92AC5CAC900C50653 /* UIColor+HEX.swift in Sources */,
 				8B953C4D2AE2A27D00CF411E /* DataTransferError.swift in Sources */,
 				8B8F81B92ABF3264006B72CB /* URLRequestConfiguration.swift in Sources */,
+				8BA94C212AF618A2009F715E /* Updatable.swift in Sources */,
 				8B87E5AB2AB693DD009248EC /* UseCase.swift in Sources */,
 				8B953C4E2AE2A27D00CF411E /* URLRequestErrorResolvable.swift in Sources */,
 				8B40FF702AE5AB88003E388E /* ProfileCollectionViewCellViewModel.swift in Sources */,
+				8BA94C1A2AF618A2009F715E /* HMAC.swift in Sources */,
 				8B953C5A2AE2A27E00CF411E /* DataTransferRequestable.swift in Sources */,
 				8B4697412AB7C1C200CC8131 /* MediaDTO.swift in Sources */,
 				8B953C592AE2A27E00CF411E /* URLSessionTaskable.swift in Sources */,
@@ -1366,11 +1455,14 @@
 				8B99A6662AEA64BE00522426 /* Avatar.swift in Sources */,
 				8B40FF5A2AE49A84003E388E /* MediaCollectionViewDataSource.swift in Sources */,
 				8B99A6602AEA647200522426 /* AvatarSelectorCollectionViewCell.swift in Sources */,
+				8BA94C2B2AF618A2009F715E /* JWTError.swift in Sources */,
 				8B64B8C62ADC649100A272C5 /* ResponseFetchable.swift in Sources */,
 				8B8F81BD2ABF437C006B72CB /* URLResponseDecoder.swift in Sources */,
 				8B953C2E2AE14C8900CF411E /* UserUseCase.swift in Sources */,
+				8B8E95402B00E6A2001CD27D /* ActivityIndicatorView.swift in Sources */,
 				8BD210FE2AB7CEB000030A89 /* AuthResponseStore.swift in Sources */,
 				8B953C532AE2A27E00CF411E /* EncodableDictionary.swift in Sources */,
+				8BA94C242AF618A2009F715E /* SignerAlgorithm.swift in Sources */,
 				8B4697532AB7C7C900CC8131 /* HTTPListDTO.swift in Sources */,
 				8B64B8D52ADC668700A272C5 /* AuthService.swift in Sources */,
 			);
@@ -1602,14 +1694,6 @@
 				kind = branch;
 			};
 		};
-		8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/zachbazov/Cryptographic.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1617,11 +1701,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B8F81B42ABF2B25006B72CB /* XCRemoteSwiftPackageReference "CodeBureau" */;
 			productName = CodeBureau;
-		};
-		8B8F81E22ABFB82C006B72CB /* Cryptographic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B8F81E12ABFB82C006B72CB /* XCRemoteSwiftPackageReference "Cryptographic" */;
-			productName = Cryptographic;
 		};
 /* End XCSwiftPackageProductDependency section */
 

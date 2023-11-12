@@ -129,11 +129,14 @@ extension AuthRepository {
     static func signUp(with request: HTTPUserDTO.Request) -> Routable {
         
         let path = "api/v1/users/signup"
-        let encodedBodyParams = request.user
+        let bodyParams: [String: Any] = ["name": request.user.name ?? "",
+                                         "email": request.user.email ?? "",
+                                         "password": request.user.password ?? "",
+                                         "passwordConfirm": request.user.passwordConfirm ?? ""]
         
         return Endpoint(method: .post,
                         path: path,
-                        bodyParametersEncodable: encodedBodyParams)
+                        bodyParameters: bodyParams)
     }
     
     static func signOut() -> Routable {

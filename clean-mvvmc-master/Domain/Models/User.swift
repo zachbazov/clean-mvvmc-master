@@ -25,6 +25,14 @@ struct User {
 
 extension User {
     
+    mutating func setSelectedProfile(_ profile: Profile) {
+        selectedProfile = profile._id
+    }
+}
+
+
+extension User {
+    
     func toDTO() -> UserDTO {
         return UserDTO(
             _id: _id,

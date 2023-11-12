@@ -9,10 +9,6 @@ import Foundation
 
 protocol AuthRequestable {
     
-    var user: User? { get set }
-    
-//    var cookie: HTTPCookie? { get set }
-    
     func signIn(with request: HTTPUserDTO.Request,
                 cached: ((HTTPUserDTO.Response) -> Void)?,
                 completion: ((HTTPUserDTO.Response) -> Void)?)
@@ -29,4 +25,18 @@ protocol AuthRequestable {
     
     @available(iOS 13.0.0, *)
     func signOut() async -> Void?
+    
+    
+    var user: User? { get set }
+    
+    var cookie: HTTPCookie? { get set }
+    
+    var jwt: JWT<PayloadStandardJWT>? { get set }
+    
+    func updateUser(for response: HTTPUserDTO.Response?)
+    
+    func validateToken(success: (() -> Void)?, expired: (() -> Void)?)
+    
+    @available(iOS 13.0.0, *)
+    func validateToken() async -> ValidatePayloadResult?
 }

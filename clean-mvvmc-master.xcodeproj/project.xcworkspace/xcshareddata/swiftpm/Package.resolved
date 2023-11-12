@@ -8,15 +8,6 @@
         "branch" : "main",
         "revision" : "df502b5ca472355b0be712fce6b810178bdda5bf"
       }
-    },
-    {
-      "identity" : "cryptographic",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zachbazov/Cryptographic.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "f22e985ed3b5364c57b4a0be3ed9bba169ce07f2"
-      }
     }
   ],
   "version" : 2

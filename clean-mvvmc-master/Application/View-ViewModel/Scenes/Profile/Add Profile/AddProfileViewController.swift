@@ -101,7 +101,7 @@ extension AddProfileViewController {
         
         let authService = Application.app.server.authService
         
-        guard let user = authService.user else {
+        guard var user = authService.user else {
             return
         }
         

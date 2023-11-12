@@ -21,6 +21,8 @@ final class HomeViewController: UIViewController, ViewController {
         super.viewDidLoad()
         
         createCustomView()
+        
+//        removeSelectedProfile()
     }
 }
 
@@ -35,5 +37,27 @@ extension HomeViewController {
         customView = CustomView(with: customViewModel)
             .addToHierarchy(in: customViewContainer)
             .constraint(to: customViewContainer)
+    }
+    
+    private func removeSelectedProfile() {
+        
+        let userResponseStore = AuthResponseStore()
+        
+        var currentResponse: HTTPUserDTO.Response? = userResponseStore.fetcher.fetchResponse()
+        
+        let user = currentResponse?.data
+        
+        user?.selectedProfile = nil
+        
+        currentResponse?.data = nil
+        
+        userResponseStore.updater.updateResponse(currentResponse)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            
+            currentResponse?.data = user
+            
+            userResponseStore.updater.updateResponse(currentResponse)
+        }
     }
 }

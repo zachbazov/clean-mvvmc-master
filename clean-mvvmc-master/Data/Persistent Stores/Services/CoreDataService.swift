@@ -28,6 +28,7 @@ final class CoreDataService: CoreDataPersistable {
 extension CoreDataService: CoreDataValueTransformable {
     
     func addTransformer<T>(of type: T.Type, for name: NSValueTransformerName) where T: NSObject {
+        
         let valueTransformer = ValueTransformer<T>()
         
         ValueTransformer.setValueTransformer(valueTransformer, forName: name)
@@ -54,6 +55,7 @@ extension CoreDataService {
     }
     
     private func createMainContext() -> NSManagedObjectContext {
+        
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
         context.parent = privateContext
@@ -62,6 +64,7 @@ extension CoreDataService {
     }
     
     private func createPrivateContext() -> NSManagedObjectContext {
+        
         let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         
         context.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
@@ -81,6 +84,7 @@ extension CoreDataService {
     
     
     private func logStoreUrl(for container: NSPersistentContainer) {
+        
         guard let persistentStore = container.persistentStoreCoordinator.persistentStores.first else { return }
         
         let url = container.persistentStoreCoordinator.url(for: persistentStore)

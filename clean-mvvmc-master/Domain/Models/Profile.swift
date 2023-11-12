@@ -117,6 +117,14 @@ extension Profile.Settings {
 }
 
 
+extension Array where Element == Profile {
+    
+    func toObjectIDs() -> [String] {
+        return map { String($0._id ?? "") }
+    }
+}
+
+
 extension Profile {
     
     static var addProfile: Profile {

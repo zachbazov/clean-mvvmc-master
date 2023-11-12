@@ -51,7 +51,7 @@ final class ProfileSettingsTableViewDataSource: NSObject, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UICollectionTypeSpacer()
+        return UITableView.UISpacerView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -59,7 +59,7 @@ final class ProfileSettingsTableViewDataSource: NSObject, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UICollectionTypeSpacer()
+        return UITableView.UISpacerView()
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

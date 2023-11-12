@@ -20,6 +20,7 @@ protocol URLSessionRequestable {
 extension URLSession: URLSessionRequestable {
     
     func request(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTaskCancellable {
+        
         let task = dataTask(with: request, completionHandler: completion)
         
         task.resume()

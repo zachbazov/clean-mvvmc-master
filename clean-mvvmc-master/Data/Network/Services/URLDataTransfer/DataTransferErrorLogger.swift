@@ -12,6 +12,7 @@ public struct DataTransferErrorLogger: DataTransferErrorLoggable {
     
     public func log(error: Error) {
         debugPrint(.linebreak, "------------")
-        debugPrint(.error, error.localizedDescription)
+//        debugPrint(.error, error.localizedDescription)
+        debugPrint(.error, "\(error)")
     }
 }

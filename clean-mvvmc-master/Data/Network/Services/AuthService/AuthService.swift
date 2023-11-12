@@ -7,19 +7,19 @@
 
 import Foundation
 import CodeBureau
-import Cryptographic
 
 final class AuthService {
-    
-    var user: User?
     
     private let responseStore = AuthResponseStore()
     
     private let useCase = AuthUseCase()
     
     
+    var user: User?
     
-//    var cookie: HTTPCookie?
+    var cookie: HTTPCookie?
+    
+    var jwt: JWT<PayloadStandardJWT>?
 }
 
 
@@ -41,7 +41,7 @@ extension AuthService: AuthRequestable {
                     
                     self.updateUser(for: response)
                     
-                    self.verifyJWTIntegrity()
+                    self.validateToken()
                     
                     self.responseStore.deleter.deleteResponse()
                     
@@ -73,7 +73,7 @@ extension AuthService: AuthRequestable {
                     
                     self.updateUser(for: response)
                     
-                    self.verifyJWTIntegrity()
+                    self.validateToken()
                     
                     return cached?(response) ?? Void()
                 }
@@ -88,7 +88,7 @@ extension AuthService: AuthRequestable {
                     
                     self.updateUser(for: response)
                     
-                    self.verifyJWTIntegrity()
+                    self.validateToken()
                     
                     self.responseStore.deleter.deleteResponse()
                     
@@ -135,7 +135,7 @@ extension AuthService: AuthRequestable {
         
         updateUser(for: response)
         
-        verifyJWTIntegrity()
+        await validateToken()
         
         return response
     }
@@ -151,7 +151,7 @@ extension AuthService: AuthRequestable {
         
         updateUser(for: response)
         
-        verifyJWTIntegrity()
+        await validateToken()
         
         return response
     }
@@ -179,25 +179,35 @@ extension AuthService {
         }
         
         self.user = user.toDomain()
+        self.user?.token = response?.token
     }
     
-    func verifyJWTIntegrity() {
+    func validateToken(success: (() -> Void)? = nil, expired: (() -> Void)? = nil) {
+        
         guard let token = user?.token else {
             return
         }
         
         do {
-            let jwt = try JWT<PayloadStandardJWT>(jwtString: token,
-                                                  verifier: .hs256(key: secretKeyData))
             
-            jwt.payload.log()
+            jwt = try JWT<PayloadStandardJWT>(jwtString: token, verifier: .hs256(key: secretKeyData))
             
-            let payloadValidity = jwt.validatePayload()
+            jwt?.payload.log()
+            
+            guard let payloadValidity = jwt?.validatePayload() else {
+                return
+            }
             
             switch payloadValidity {
             case .expired:
                 
                 responseStore.deleter.deleteResponse()
+                
+                expired?()
+                
+            case .success:
+                
+                success?()
                 
             default:
                 break
@@ -205,5 +215,41 @@ extension AuthService {
         } catch {
             debugPrint(.debug, "AuthService JWT Error \(error)")
         }
+    }
+    
+    @available(iOS 13.0.0, *)
+    @discardableResult
+    func validateToken() async -> ValidatePayloadResult? {
+        
+        guard let token = user?.token else {
+            return nil
+        }
+
+        do {
+            jwt = try JWT<PayloadStandardJWT>(jwtString: token, verifier: .hs256(key: secretKeyData))
+            
+            jwt?.payload.log()
+
+            guard let payloadValidity = try await jwt?.validatePayload() else {
+                return nil
+            }
+            
+            switch payloadValidity {
+            case .expired:
+                
+                responseStore.deleter.deleteResponse()
+                
+                return .expired
+                
+            case .success:
+                return .success
+            default:
+                return nil
+            }
+        } catch {
+            debugPrint(.debug, "AuthService JWT Error \(error)")
+        }
+        
+        return nil
     }
 }

@@ -78,18 +78,3 @@ extension URLService: URLRequestable {
         return try await request(request: urlRequest)
     }
 }
-
-
-/*
- @available(iOS 13.0.0, *)
- func request(endpoint: Routable) async throws -> (Data, URLResponse)? {
-     
-     var urlRequest: URLRequest = try endpoint.urlRequest(with: configuration)
-     
-//        let authService = Application.app.server.authService
-//        print(22, authService.user!.token)
-     urlRequest.addValue("jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NDUxNGE2NDZiODIzMDNkZWI2OWYzZCIsImlhdCI6MTY5OTAyOTY2MiwiZXhwIjoxNjk5NjM0NDYyfQ.T4DRjhwC2B75s9Me79rMjjNXwgXmxuqHAbLwH7ucl70", forHTTPHeaderField: "Cookie")
-     
-     return try await request(request: urlRequest)
- }
- */

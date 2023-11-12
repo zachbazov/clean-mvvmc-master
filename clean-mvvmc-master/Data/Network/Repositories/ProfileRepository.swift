@@ -130,12 +130,13 @@ extension ProfileRepository {
         
         let path = "api/v1/users/profiles"
         let queryParams: [String: Any] = ["user": request.user._id ?? ""]
-        let encodedBodyParams = request.profile
+        let bodyParams: [String: Any] = ["name": request.profile.name,
+                                         "image": request.profile.image]
         
         return Endpoint(method: .post,
                         path: path,
                         queryParameters: queryParams,
-                        bodyParametersEncodable: encodedBodyParams)
+                        bodyParameters: bodyParams)
     }
     
     static func update(with request: HTTPProfileDTO.PATCH.Request) -> Routable {

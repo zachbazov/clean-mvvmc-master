@@ -59,6 +59,7 @@ extension Routable {
     }
     
     func urlRequest(with config: URLRequestConfigurable) throws -> URLRequest {
+        
         let url = try self.url(with: config)
         var urlRequest = URLRequest(url: url)
         var headers = config.headers
@@ -84,6 +85,7 @@ extension Routable {
 extension Routable {
     
     private func encodeBodyParameters(bodyParameters: [String: Any], bodyEncoding: BodyEndcoding) -> Data? {
+        
         switch bodyEncoding {
         case .jsonSerializationData:
             return try? JSONSerialization.data(withJSONObject: bodyParameters)

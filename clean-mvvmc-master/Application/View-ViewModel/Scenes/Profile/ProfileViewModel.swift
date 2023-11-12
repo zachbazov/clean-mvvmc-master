@@ -47,6 +47,14 @@ final class ProfileViewModel: ViewModel {
 
 extension ProfileViewModel {
     
+    func setEditingProfile(_ profile: Profile) {
+        editingProfile = profile
+    }
+}
+
+
+extension ProfileViewModel {
+    
     func fetchProfiles() {
         
         let authService = Application.app.server.authService
@@ -104,7 +112,22 @@ extension ProfileViewModel {
                 
                 if let response: HTTPProfileDTO.POST.Response? = await useCase.request(endpoint: .create, request: request) {
                     
-                    profiles.value.insert(response!.data.toDomain(), at: profiles.value.count - 1)
+                    guard let profile = response?.data else {
+                        return
+                    }
+                    
+                    profiles.value.insert(profile.toDomain(), at: profiles.value.count - 1)
+                    
+                    let authResponseStore = AuthResponseStore()
+                    let authService = Application.app.server.authService
+                    var user = authService.user
+                    
+                    user?.profiles = profiles.value.toObjectIDs()
+                    var currentResponse: HTTPUserDTO.Response? = authResponseStore.fetcher.fetchResponse()
+                    currentResponse?.data?.profiles = user?.profiles
+                    
+                    authResponseStore.deleter.deleteResponse()
+                    authResponseStore.saver.saveResponse(currentResponse)
                 }
             }
             
@@ -139,7 +162,36 @@ extension ProfileViewModel {
             
             Task {
                 
-                let _: HTTPProfileDTO.PATCH.Response? = await useCase.request(endpoint: .update, request: request)
+                if let response: HTTPProfileDTO.PATCH.Response? = await useCase.request(endpoint: .update, request: request) {
+                    
+                    guard let profile = response?.data else {
+                        return
+                    }
+                    
+                    guard var toBeUpdatedProfile = profiles.value.first(where: { $0._id == profile._id }) else {
+                        return
+                    }
+                    guard var index = profiles.value.firstIndex(of: toBeUpdatedProfile) else {
+                        return
+                    }
+                    
+                    toBeUpdatedProfile = profile.toDomain()
+                    
+                    profiles.value[index] = toBeUpdatedProfile
+                    
+                    let authResponseStore = AuthResponseStore()
+                    let authService = Application.app.server.authService
+                    var user = authService.user
+                    
+                    user?.profiles = profiles.value.toObjectIDs()
+                    user?.selectedProfile = response?.data._id
+                    
+                    var currentResponse: HTTPUserDTO.Response? = authResponseStore.fetcher.fetchResponse()
+                    currentResponse?.data?.profiles = user?.profiles
+                    
+                    authResponseStore.deleter.deleteResponse()
+                    authResponseStore.saver.saveResponse(currentResponse)
+                }
             }
             
         } else {

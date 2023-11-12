@@ -29,6 +29,7 @@ extension ResponseDeleter {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = E.fetchRequest()
             
             if let result = try context.fetch(fetchRequest).first {
+                
                 context.delete(result as! NSManagedObject)
             }
         } catch {
