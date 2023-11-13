@@ -9,9 +9,7 @@ import CoreData
 
 struct HTTPSectionDTO: HTTPRepresentable {
     
-    struct Request: Decodable {
-        let user: UserDTO
-    }
+    struct Request: Decodable {}
     
     
     struct Response: Decodable {

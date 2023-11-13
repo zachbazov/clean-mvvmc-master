@@ -28,6 +28,10 @@ final class ProfileCollectionViewCell: UICollectionViewCell, CollectionViewCell 
     
     private(set) var deleteBadge: BadgeView?
     
+    private var activityIndicator: ActivityIndicatorView?
+    
+    private var snapshot: UIView?
+    
     
     func deploySubviews() {
         createEditOverlayView()
@@ -145,7 +149,7 @@ extension ProfileCollectionViewCell {
                             return
                         }
                         
-                        self.animateCell(cell)
+                        self.animateCell()
                     }
                     
                 } else {
@@ -243,9 +247,9 @@ extension ProfileCollectionViewCell {
 
 extension ProfileCollectionViewCell {
     
-    private func animateCell(_ cell: ProfileCollectionViewCell) {
+    private func animateCell() {
         
-        let authService = Application.app.server.authService
+        var authService = Application.app.server.authService
         
         guard var user = authService.user,
               let indexPath = indexPath,
@@ -257,85 +261,217 @@ extension ProfileCollectionViewCell {
         
         user.setSelectedProfile(profile)
         
-        let request = HTTPUserDTO.Request(user: user.toDTO())
+        authService.user = user
         
-        let userUseCase = UserUseCase()
+        guard let profileController = viewModel?.coordinator?.viewController else {
+            return
+        }
         
-        var activityIndicator: ActivityIndicatorView?
+        profileController.collectionView.isHidden = true
         
-        DispatchQueue.main.async { [weak self] in
+        titleLabel.isHidden = true
+        
+        let centerPoint = CGPoint(x: profileController.view.center.x,
+                                  y: profileController.view.center.y - bounds.height - 48)
+        
+        cellViewModel?.centerPoint = centerPoint
+        
+        let cellFrameInCollectionView = profileController.collectionView.convert(frame, to: profileController.view)
+        
+        snapshot = snapshotView(afterScreenUpdates: true)
+        
+        guard let snapshot = snapshot else {
+            return
+        }
+        
+        snapshot.frame = cellFrameInCollectionView
+        
+        profileController.view.addSubview(snapshot)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            
+            profileController.navigationController?.navigationBar.alpha = .zero
+            
+            snapshot.center = centerPoint
+            
+        }) { [weak self] _ in
             guard let self = self else {
                 return
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            createActivityIndicatorView()
+            
+            sendRequests()
+        }
+    }
+    
+    private func createActivityIndicatorView() {
+        
+        activityIndicator = ActivityIndicatorView(frame: CGRect(x: .zero, y: .zero, width: 48, height: 48))
+        
+        guard let activityIndicator = activityIndicator else {
+            return
+        }
+        
+        activityIndicator.center = snapshot?.center ?? .zero
+        activityIndicator.center.y += 96.0
+        
+        viewModel?.coordinator?.viewController?.view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+    }
+    
+    private func sendRequests() {
+        
+        let authService = Application.app.server.authService
+        
+        guard let user = authService.user else {
+            return
+        }
+        
+        let sectionRequest = HTTPSectionDTO.Request()
+        let mediaRequest = HTTPMediaDTO.Request()
+        let userRequest = HTTPUserDTO.Request(user: user.toDTO())
+        
+        let sectionUseCase = SectionUseCase()
+        let mediaUseCase = MediaUseCase()
+        let userUseCase = UserUseCase()
+        
+        let sectionResponseStore = SectionResponseStore()
+        let mediaResponseStore = SectionResponseStore()
+        
+        if #available(iOS 13.0.0, *) {
+            
+            Task {
                 
-                self.viewModel?.coordinator?.viewController?.collectionView.isHidden = true
+                let _: HTTPSectionDTO.Response? = await sectionUseCase.request(endpoint: .find, request: sectionRequest)
                 
-                cell.titleLabel.isHidden = true
+                let _: HTTPMediaDTO.Response? = await mediaUseCase.request(endpoint: .find, request: mediaRequest)
                 
-                let targetPoint = CGPoint(x: self.viewModel?.coordinator?.viewController?.view.center.x ?? .zero, y: (self.viewModel?.coordinator?.viewController?.view.center.y ?? .zero) - cell.bounds.height - 48)
-                
-                let cellFrameInCollectionView = self.viewModel?.coordinator?.viewController?.collectionView.convert(cell.frame, to: self.viewModel?.coordinator!.viewController!.view)
-                
-                guard let snapshot = cell.snapshotView(afterScreenUpdates: true) else {
-                    return
-                }
-                
-                snapshot.frame = cellFrameInCollectionView ?? .zero
-                
-                self.viewModel?.coordinator?.viewController?.view.addSubview(snapshot)
-                
-                UIView.animate(withDuration: 0.5, animations: {
+                if let _: HTTPUserDTO.Response? = await userUseCase.request(endpoint: .update, request: userRequest) {
                     
-                    snapshot.center = targetPoint
+                    updateUserResponseStorage(user.toDTO())
                     
-                }) { _ in
-                    
-                    activityIndicator = ActivityIndicatorView(frame: CGRect(x: .zero, y: .zero, width: 48, height: 48))
-                    
-                    guard let activityIndicator = activityIndicator else {
-                        return
-                    }
-                    
-                    activityIndicator.center = snapshot.center
-                    activityIndicator.center.y += 96.0
-                    
-                    self.viewModel?.coordinator?.viewController?.view.addSubview(activityIndicator)
-                    
-                    activityIndicator.startAnimating()
-                    
-                    _ = userUseCase.repository.update(request: request) { (result: Result<HTTPUserDTO.Response, DataTransferError>) in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                        guard let self = self else {
+                            return
+                        }
                         
-                        switch result {
-                        case .success:
+                        activityIndicator?.stopAnimating()
+                        activityIndicator?.removeFromSuperview()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             
-                            self.updateUserResponseStorage(user.toDTO())
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            UIView.animate(withDuration: 2.0,
+                                           delay: .zero,
+                                           usingSpringWithDamping: 1.0,
+                                           initialSpringVelocity: 1.0,
+                                           options: []) {
                                 
-                                activityIndicator.stopAnimating()
-                                activityIndicator.removeFromSuperview()
+                                self.animateSnapshot()
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                    
-                                    UIView.animate(withDuration: 2.0, delay: .zero, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: []) {
-                                        
-                                        self.animateSnapshot(snapshot, targetingPoint: targetPoint)
-                                        
-                                    } completion: { _ in
-                                        
-                                        self.cellDidFinishAnimating()
-                                    }
-                                }
+                            } completion: { _ in
+                                
+                                self.cellDidFinishAnimating()
                             }
-                            
-                        case .failure(let error):
-                            print(error)
                         }
                     }
                 }
+                
             }
+            
+        } else {
+            
+            let dispatchGroup = DispatchGroup()
+            
+            dispatchGroup.enter()
+            
+            _ = sectionUseCase.repository.find(
+                request: sectionRequest,
+                cached: { (response: HTTPSectionDTO.Response?) in
+                    
+                    dispatchGroup.leave()
+                },
+                completion: { (result: Result<HTTPSectionDTO.Response, DataTransferError>) in
+                    
+                    switch result {
+                    case .success(let response):
+                        
+                        sectionResponseStore.saver.saveResponse(response)
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
+                    dispatchGroup.leave()
+                })
+            
+            dispatchGroup.enter()
+            
+            _ = mediaUseCase.repository.find(
+                request: mediaRequest,
+                cached: { (response: HTTPMediaDTO.Response?) in
+                    
+                    dispatchGroup.leave()
+                },
+                completion: { (result: Result<HTTPMediaDTO.Response, DataTransferError>) in
+                    
+                    switch result {
+                    case .success(let response):
+                        
+                        mediaResponseStore.saver.saveResponse(response)
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
+                    dispatchGroup.leave()
+                })
+            
+            dispatchGroup.enter()
+            
+            _ = userUseCase.request(
+                endpoint: .update,
+                request: userRequest,
+                cached: nil,
+                completion: { [weak self] (result: Result<HTTPUserDTO.Response, DataTransferError>) in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    switch result {
+                    case .success:
+                        
+                        self.updateUserResponseStorage(user.toDTO())
+                         
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            
+                            self.activityIndicator?.stopAnimating()
+                            self.activityIndicator?.removeFromSuperview()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                
+                                UIView.animate(withDuration: 2.0,
+                                               delay: .zero,
+                                               usingSpringWithDamping: 1.0,
+                                               initialSpringVelocity: 1.0,
+                                               options: []) {
+                                    
+                                    self.animateSnapshot()
+                                    
+                                } completion: { _ in
+                                    
+                                    self.cellDidFinishAnimating()
+                                    
+                                    dispatchGroup.leave()
+                                }
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                })
         }
     }
     
@@ -350,25 +486,29 @@ extension ProfileCollectionViewCell {
         userResponseStore.updater.updateResponse(currentResponse)
     }
     
-    private func animateSnapshot(_ snapshot: UIView, targetingPoint targetPoint: CGPoint) {
+    private func animateSnapshot() {
         
-        let profileCoordinator = viewModel?.coordinator
+        guard let snapshot = snapshot,
+              let profileCoordinator = viewModel?.coordinator,
+              let view = profileCoordinator.navigationController?.view,
+              let centerPoint = cellViewModel?.centerPoint else {
+            return
+        }
         
         snapshot.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
         
-        let rect = profileCoordinator!.navigationController!.view.frame
-        
         let path = UIBezierPath()
+        let rect = view.frame
         
-        path.move(to: CGPoint(x: targetPoint.x, y: targetPoint.y))
+        path.move(to: CGPoint(x: centerPoint.x, y: centerPoint.y))
         
         path.addCurve(to: CGPoint(x: rect.midX, y: rect.midY),
-                      controlPoint1: CGPoint(x: rect.midX - 50, y: rect.minY + 50),
-                      controlPoint2: CGPoint(x: rect.minX, y: rect.midY - 50))
+                      controlPoint1: CGPoint(x: rect.midX - 48.0, y: rect.minY + 48.0),
+                      controlPoint2: CGPoint(x: rect.minX, y: rect.midY - 48.0))
         
-        path.addCurve(to: CGPoint(x: rect.midX + (rect.midX / 2), y: rect.maxY - snapshot.bounds.height - 48),
-                      controlPoint1: CGPoint(x: rect.maxX - 50, y: rect.midY + 50),
-                      controlPoint2: CGPoint(x: rect.midX + 50, y: rect.midY))
+        path.addCurve(to: CGPoint(x: rect.midX + (rect.midX / 2.0), y: rect.maxY - snapshot.bounds.height - 48.0),
+                      controlPoint1: CGPoint(x: rect.maxX - 48.0, y: rect.midY + 48.0),
+                      controlPoint2: CGPoint(x: rect.midX + 48.0, y: rect.midY))
         
         let pathAnimation = CAKeyframeAnimation(keyPath: "position")
         pathAnimation.path = path.cgPath
@@ -378,7 +518,10 @@ extension ProfileCollectionViewCell {
         
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        snapshot.layer.position = CGPoint(x: rect.midX + (rect.midX / 2), y: (profileCoordinator?.navigationController?.view.bounds.maxY ?? 0) - snapshot.bounds.height - 16.0)
+        
+        snapshot.layer.position = CGPoint(x: rect.midX + (rect.midX / 2.0),
+                                          y: view.bounds.maxY - snapshot.bounds.height - 16.0)
+        
         CATransaction.commit()
     }
     
@@ -397,36 +540,5 @@ extension ProfileCollectionViewCell {
                 appCoordinator.tabBarCoordinator?.viewController?.view.alpha = 1.0
             }
         }
-    }
-}
-
-
-
-
-extension UIButton {
-    
-    func scalingEffect(_ completion: (() -> Void)? = nil) {
-        
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            
-        }, completion: { [weak self] _ in
-            guard let self = self else {
-                return
-            }
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                
-                self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                
-            }, completion: { _ in
-                
-                completion?()
-            })
-        })
     }
 }

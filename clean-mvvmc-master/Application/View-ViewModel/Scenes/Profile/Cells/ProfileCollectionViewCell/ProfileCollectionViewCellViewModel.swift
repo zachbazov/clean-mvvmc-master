@@ -14,6 +14,8 @@ struct ProfileCollectionViewCellViewModel {
     let name: String
     var isLongPressed: Bool = false
     
+    var centerPoint: CGPoint?
+    
     
     init(with model: Profile) {
         self.id = model._id ?? ""

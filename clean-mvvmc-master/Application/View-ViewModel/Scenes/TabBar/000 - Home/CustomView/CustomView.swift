@@ -44,6 +44,14 @@ extension CustomView {
         guard let coordinator = Application.app.coordinator.tabBarCoordinator else { return }
         
         coordinator.coordinate(to: .detail)
+        
+        /*
+         coordinator.coordinate(to: .search)
+         
+         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+             coordinator.searchNavigationController?.removeChild()
+         }
+         */
     }
 }
 

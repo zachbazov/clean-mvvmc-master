@@ -22,6 +22,9 @@ final class TabBarCoordinator: Coordinator {
     var myNetflixViewController: MyNetflixViewController?
     
     var detailViewController: DetailViewController?
+    
+//    var searchNavigationController: UINavigationController?
+//    var searchViewController: SearchViewController?
 }
 
 
@@ -71,6 +74,13 @@ extension TabBarCoordinator {
         
         return controller
     }
+    
+//    func createSearchViewController() -> UINavigationController {
+//        let controller = SearchViewController()
+//        let navigation = UINavigationController(rootViewController: controller)
+//        
+//        return navigation
+//    }
 }
 
 
@@ -88,17 +98,73 @@ extension TabBarCoordinator {
     
     enum Screen: Int {
         case detail
+//        case search
     }
     
     
     func coordinate(to screen: Screen) {
+        
         switch screen {
+            
         case .detail:
+            
             guard let controller = createDetailViewController() else { return }
             
             detailViewController = controller
             
             viewController?.present(controller, animated: true)
+            
+//        case .search:
+//            
+//            searchNavigationController = createSearchViewController()
+//            searchViewController = searchNavigationController?.viewControllers.first as? SearchViewController
+//            
+//            guard let navigation = searchNavigationController,
+//                  let container = viewController?.view else {
+//                return
+//            }
+//            
+//            viewController?.add(navigation, in: container)
         }
+    }
+}
+
+
+
+
+
+
+extension UIViewController {
+    
+    func add(_ childController: UIViewController, in container: UIView) {
+        
+        addChild(childController)
+        
+        container.addSubview(childController.view)
+        
+        childController.didMove(toParent: self)
+    }
+    
+    func removeChild() {
+        
+        guard parent != nil else {
+            return
+        }
+        
+        willMove(toParent: nil)
+        
+        removeFromParent()
+        
+        view.removeFromSuperview()
+    }
+}
+
+
+final class SearchViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .blue
     }
 }
