@@ -123,7 +123,7 @@ extension ProfileViewModel {
                     var user = authService.user
                     
                     user?.profiles = profiles.value.toObjectIDs()
-                    var currentResponse: HTTPUserDTO.Response? = authResponseStore.fetcher.fetchResponse()
+                    let currentResponse: HTTPUserDTO.Response? = authResponseStore.fetcher.fetchResponse()
                     currentResponse?.data?.profiles = user?.profiles
                     
                     authResponseStore.deleter.deleteResponse()
@@ -171,7 +171,7 @@ extension ProfileViewModel {
                     guard var toBeUpdatedProfile = profiles.value.first(where: { $0._id == profile._id }) else {
                         return
                     }
-                    guard var index = profiles.value.firstIndex(of: toBeUpdatedProfile) else {
+                    guard let index = profiles.value.firstIndex(of: toBeUpdatedProfile) else {
                         return
                     }
                     
@@ -186,7 +186,7 @@ extension ProfileViewModel {
                     user?.profiles = profiles.value.toObjectIDs()
                     user?.selectedProfile = response?.data._id
                     
-                    var currentResponse: HTTPUserDTO.Response? = authResponseStore.fetcher.fetchResponse()
+                    let currentResponse: HTTPUserDTO.Response? = authResponseStore.fetcher.fetchResponse()
                     currentResponse?.data?.profiles = user?.profiles
                     
                     authResponseStore.deleter.deleteResponse()

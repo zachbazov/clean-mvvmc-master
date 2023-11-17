@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailViewController: UIViewController, ViewController {
     
-    var viewModel: DetailViewModel?
+    var viewModel: DetailViewModel!
     
     
     deinit {

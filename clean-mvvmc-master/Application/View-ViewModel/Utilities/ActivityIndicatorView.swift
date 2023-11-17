@@ -32,6 +32,7 @@ class ActivityIndicatorView: UIView {
     
     func stopAnimating() {
         layer.removeAnimation(forKey: "rotationAnimation")
+        
         isAnimating = false
     }
     

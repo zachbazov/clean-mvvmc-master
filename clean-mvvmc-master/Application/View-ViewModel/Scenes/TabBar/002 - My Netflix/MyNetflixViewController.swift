@@ -9,7 +9,7 @@ import UIKit
 
 final class MyNetflixViewController: UIViewController, ViewController {
     
-    var viewModel: MyNetflixViewModel?
+    var viewModel: MyNetflixViewModel!
     
     
     override func viewDidLoad() {

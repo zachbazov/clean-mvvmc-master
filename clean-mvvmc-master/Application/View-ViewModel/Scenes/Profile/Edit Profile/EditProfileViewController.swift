@@ -23,7 +23,7 @@ final class EditProfileViewController: UIViewController, ViewController {
     @IBOutlet private weak var tableViewHeight: NSLayoutConstraint!
     
     
-    var viewModel: ProfileViewModel?
+    var viewModel: ProfileViewModel!
     
     private var editBadge: BadgeView?
     

@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController, ViewController {
     @IBOutlet private weak var editBarButton: UIBarButtonItem!
     
     
-    var viewModel: ProfileViewModel?
+    var viewModel: ProfileViewModel!
     
     private(set) lazy var dataSource: ProfileCollectionViewDataSource? = createDataSource()
     

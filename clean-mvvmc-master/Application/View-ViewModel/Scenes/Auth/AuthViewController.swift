@@ -27,7 +27,7 @@ final class AuthViewController: UIViewController, ViewController {
     @IBOutlet private weak var signUpButton: UIButton!
     
     
-    var viewModel: AuthViewModel?
+    var viewModel: AuthViewModel!
     
     
     private let chainAnimator = ChainAnimator()

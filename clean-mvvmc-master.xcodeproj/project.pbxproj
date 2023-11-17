@@ -88,7 +88,6 @@
 		8B87E5602AB40A1F009248EC /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E55F2AB40A1F009248EC /* TabBarCoordinator.swift */; };
 		8B87E5622AB40A26009248EC /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5612AB40A26009248EC /* TabBarViewModel.swift */; };
 		8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5632AB40A2B009248EC /* TabBarController.swift */; };
-		8B87E5662AB40A3E009248EC /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B87E5652AB40A3E009248EC /* TabBarController.storyboard */; };
 		8B87E5682AB40A61009248EC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5672AB40A61009248EC /* HomeViewModel.swift */; };
 		8B87E56A2AB40A66009248EC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E5692AB40A66009248EC /* HomeViewController.swift */; };
 		8B87E56C2AB40A6B009248EC /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87E56B2AB40A6B009248EC /* NewsViewModel.swift */; };
@@ -163,6 +162,7 @@
 		8B99A6642AEA648100522426 /* AvatarSelectorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B99A6632AEA648100522426 /* AvatarSelectorCollectionViewCell.xib */; };
 		8B99A6662AEA64BE00522426 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A6652AEA64BE00522426 /* Avatar.swift */; };
 		8B99A6682AEAC14600522426 /* UISpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A6672AEAC14600522426 /* UISpacerView.swift */; };
+		8B9C325A2B02AF2A00615EC4 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9C32592B02AF2A00615EC4 /* TabBarController.storyboard */; };
 		8B9C93B72AE3B53200B7AD52 /* RepositoryRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */; };
 		8B9C93B92AE3BFC200B7AD52 /* UseCaseRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */; };
 		8B9C93BD2AE3C91300B7AD52 /* ServerHostProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */; };
@@ -300,7 +300,6 @@
 		8B87E55F2AB40A1F009248EC /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		8B87E5612AB40A26009248EC /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		8B87E5632AB40A2B009248EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		8B87E5652AB40A3E009248EC /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
 		8B87E5672AB40A61009248EC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		8B87E5692AB40A66009248EC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8B87E56B2AB40A6B009248EC /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
@@ -374,6 +373,7 @@
 		8B99A6632AEA648100522426 /* AvatarSelectorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarSelectorCollectionViewCell.xib; sourceTree = "<group>"; };
 		8B99A6652AEA64BE00522426 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		8B99A6672AEAC14600522426 /* UISpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISpacerView.swift; sourceTree = "<group>"; };
+		8B9C32592B02AF2A00615EC4 /* TabBarController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
 		8B9C93B62AE3B53200B7AD52 /* RepositoryRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRequestable.swift; sourceTree = "<group>"; };
 		8B9C93B82AE3BFC200B7AD52 /* UseCaseRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseRequestable.swift; sourceTree = "<group>"; };
 		8B9C93BC2AE3C91300B7AD52 /* ServerHostProvidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerHostProvidable.swift; sourceTree = "<group>"; };
@@ -688,7 +688,7 @@
 				8B87E55F2AB40A1F009248EC /* TabBarCoordinator.swift */,
 				8B87E5612AB40A26009248EC /* TabBarViewModel.swift */,
 				8B87E5632AB40A2B009248EC /* TabBarController.swift */,
-				8B87E5652AB40A3E009248EC /* TabBarController.storyboard */,
+				8B9C32592B02AF2A00615EC4 /* TabBarController.storyboard */,
 				8B87E55C2AB409F5009248EC /* 000 - Home */,
 				8B87E55D2AB40A09009248EC /* 001 - News */,
 				8B87E55E2AB40A0F009248EC /* 002 - My Netflix */,
@@ -1263,11 +1263,11 @@
 			files = (
 				8B99A6642AEA648100522426 /* AvatarSelectorCollectionViewCell.xib in Resources */,
 				8B40FF9B2AE7DFC6003E388E /* BadgeView.xib in Resources */,
-				8B87E5662AB40A3E009248EC /* TabBarController.storyboard in Resources */,
 				8B87E5792AB40A97009248EC /* CustomView.xib in Resources */,
 				8B87E5972AB480A0009248EC /* DetailViewController.storyboard in Resources */,
 				8B87E5382AB408A1009248EC /* LaunchScreen.storyboard in Resources */,
 				8B87E5352AB408A1009248EC /* Assets.xcassets in Resources */,
+				8B9C325A2B02AF2A00615EC4 /* TabBarController.storyboard in Resources */,
 				8B64B8E82AE05F5200A272C5 /* ProfileViewController.storyboard in Resources */,
 				8B40FF6E2AE5AB80003E388E /* ProfileCollectionViewCell.xib in Resources */,
 				8B40FF972AE7BC8A003E388E /* OverlayView.xib in Resources */,

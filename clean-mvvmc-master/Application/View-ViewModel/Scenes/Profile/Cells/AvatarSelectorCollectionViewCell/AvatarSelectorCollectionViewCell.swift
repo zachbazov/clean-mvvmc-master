@@ -79,7 +79,7 @@ extension AvatarSelectorCollectionViewCell {
                     
                     self.viewModel?.coordinator?.avatarSelectorViewController?.dismiss(animated: true)
                     
-                    if let editProfileViewController = self.viewModel?.coordinator?.editProfileViewController {
+                    if let _ = self.viewModel?.coordinator?.editProfileViewController {
                         
                         let imageName = viewModel?.editingProfile?.image ?? ""
                         let image = UIImage(named: imageName)?
@@ -90,7 +90,7 @@ extension AvatarSelectorCollectionViewCell {
                         hasChanges()
                     }
                     
-                    if let addProfileViewController = self.viewModel?.coordinator?.addProfileViewController {
+                    if let _ = self.viewModel?.coordinator?.addProfileViewController {
                         
                         let imageName = viewModel?.addingAvatar?.image ?? ""
                         let image = UIImage(named: imageName)?

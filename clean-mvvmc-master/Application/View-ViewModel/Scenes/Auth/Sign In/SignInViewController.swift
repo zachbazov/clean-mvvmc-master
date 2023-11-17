@@ -25,7 +25,7 @@ final class SignInViewController: UIViewController, ViewController {
     @IBOutlet private weak var stackViewCenterY: NSLayoutConstraint!
     
     
-    var viewModel: AuthViewModel?
+    var viewModel: AuthViewModel!
     
     
     private let chainAnimator = ChainAnimator()

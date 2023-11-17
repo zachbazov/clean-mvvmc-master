@@ -20,7 +20,7 @@ final class AddProfileViewController: UIViewController, ViewController {
     @IBOutlet private weak var kidsProfileSwitch: UISwitch!
     
     
-    var viewModel: ProfileViewModel?
+    var viewModel: ProfileViewModel!
     
     private var editBadge: BadgeView?
     
@@ -101,7 +101,7 @@ extension AddProfileViewController {
         
         let authService = Application.app.server.authService
         
-        guard var user = authService.user else {
+        guard let user = authService.user else {
             return
         }
         

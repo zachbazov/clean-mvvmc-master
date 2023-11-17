@@ -6,38 +6,82 @@
 //
 
 import UIKit
+import CodeBureau
 
 final class HomeViewController: UIViewController, ViewController {
     
-    @IBOutlet private weak var customViewContainer: UIView!
+    @IBOutlet private weak var tableView: UITableView!
     
     
-    var viewModel: HomeViewModel?
+    var viewModel: HomeViewModel!
     
-    var customView: CustomView?
+    lazy var dataSource: MediaTableViewDataSource? = createDataSource()
+    
+    
+    deinit {
+        debugPrint(.debug, "deinit \(Self.self)")
+        
+        viewDidDeallocate()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createCustomView()
+        viewDidBindObservers()
+        
+        viewModel.fetchData()
         
 //        removeSelectedProfile()
+    }
+    
+    func viewDidDeploySubviews() {
+        
+    }
+    
+    func viewDidBindObservers() {
+        
+        viewModel.dataSourceState.observe(on: self) { [weak self] state in
+            guard let self = self else {
+                return
+            }
+            
+            self.dataSource?.dataSourceDidChange()
+        }
+    }
+    
+    func viewDidUnbindObservers() {
+        
+        guard let viewModel = viewModel else {
+            return
+        }
+        
+        viewModel.dataSourceState.remove(observer: self)
+        
+        debugPrint(.success, "Removed `\(Self.self)` observers.")
+    }
+    
+    func viewDidDeallocate() {
+        viewDidUnbindObservers()
     }
 }
 
 
 extension HomeViewController {
     
-    private func createCustomView() {
-        
-        let model = Profile(name: "iOS", image: "person.circle")
-        let customViewModel = CustomViewModel(with: model)
-        
-        customView = CustomView(with: customViewModel)
-            .addToHierarchy(in: customViewContainer)
-            .constraint(to: customViewContainer)
+    private func createDataSource() -> MediaTableViewDataSource {
+        return MediaTableViewDataSource(tableView, with: viewModel)
     }
+    
+//    private func createCustomView() {
+//        
+//        let model = Profile(name: "iOS", image: "person.circle")
+//        let customViewModel = CustomViewModel(with: model)
+//        
+//        customView = CustomView(with: customViewModel)
+//            .addToHierarchy(in: customViewContainer)
+//            .constraint(to: customViewContainer)
+//    }
     
     private func removeSelectedProfile() {
         
@@ -59,5 +103,41 @@ extension HomeViewController {
             
             userResponseStore.updater.updateResponse(currentResponse)
         }
+    }
+}
+
+
+extension UIImage {
+    
+    func scale(newWidth: CGFloat,
+               cornerRadius: CGFloat = 0.0,
+               borderWidth: CGFloat = 1.0,
+               borderColor: UIColor = .white) -> UIImage {
+        guard self.size.width != newWidth else { return self }
+        
+        let scaleFactor = newWidth / self.size.width
+        let newHeight = self.size.height * scaleFactor
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        let context = UIGraphicsGetCurrentContext()
+        
+        let roundedRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+        let roundedPath = UIBezierPath(roundedRect: roundedRect, cornerRadius: cornerRadius).cgPath
+        
+        context?.addPath(roundedPath)
+        context?.clip()
+        
+        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        
+        context?.setStrokeColor(borderColor.cgColor)
+        context?.setLineWidth(borderWidth)
+        context?.addPath(roundedPath)
+        context?.strokePath()
+        
+        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage ?? self
     }
 }

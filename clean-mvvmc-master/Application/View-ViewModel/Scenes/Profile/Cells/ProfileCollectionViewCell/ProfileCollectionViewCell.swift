@@ -357,10 +357,14 @@ extension ProfileCollectionViewCell {
                             return
                         }
                         
-                        activityIndicator?.stopAnimating()
-                        activityIndicator?.removeFromSuperview()
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        UIView.animate(withDuration: 0.5, delay: .zero, animations: {
+                            
+                            self.activityIndicator?.alpha = .zero
+                            
+                        }) { _ in
+                            
+                            self.activityIndicator?.stopAnimating()
+                            self.activityIndicator?.removeFromSuperview()
                             
                             UIView.animate(withDuration: 2.0,
                                            delay: .zero,
@@ -446,10 +450,14 @@ extension ProfileCollectionViewCell {
                          
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                             
-                            self.activityIndicator?.stopAnimating()
-                            self.activityIndicator?.removeFromSuperview()
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            UIView.animate(withDuration: 0.5, delay: .zero, animations: {
+                                
+                                self.activityIndicator?.alpha = .zero
+                                
+                            }) { _ in
+                                
+                                self.activityIndicator?.stopAnimating()
+                                self.activityIndicator?.removeFromSuperview()
                                 
                                 UIView.animate(withDuration: 2.0,
                                                delay: .zero,
@@ -500,15 +508,23 @@ extension ProfileCollectionViewCell {
         let path = UIBezierPath()
         let rect = view.frame
         
+        let safeAreaBottomInset: CGFloat = profileCoordinator.navigationController?.view.safeAreaInsets.bottom ?? .zero
+        let tabBarHeight: CGFloat = 49.0
+        let tabBarMaxY: CGFloat = tabBarHeight + safeAreaBottomInset
+        let tabBarItemImageSize: CGFloat = 20.0
+        let numberOfTabBarItems: CGFloat = 3.0
+        let spacingFromItemTabBarImageMinYToTabBarMinY: CGFloat = 6.0
+        let spacingBetweenTabBarItems: CGFloat = 2.0
+        
         path.move(to: CGPoint(x: centerPoint.x, y: centerPoint.y))
         
         path.addCurve(to: CGPoint(x: rect.midX, y: rect.midY),
-                      controlPoint1: CGPoint(x: rect.midX - 48.0, y: rect.minY + 48.0),
-                      controlPoint2: CGPoint(x: rect.minX, y: rect.midY - 48.0))
+                      controlPoint1: CGPoint(x: rect.midX - tabBarHeight, y: rect.minY + tabBarHeight),
+                      controlPoint2: CGPoint(x: rect.minX, y: rect.midY - tabBarHeight))
         
-        path.addCurve(to: CGPoint(x: rect.midX + (rect.midX / 2.0), y: rect.maxY - snapshot.bounds.height - 48.0),
-                      controlPoint1: CGPoint(x: rect.maxX - 48.0, y: rect.midY + 48.0),
-                      controlPoint2: CGPoint(x: rect.midX + 48.0, y: rect.midY))
+        path.addCurve(to: CGPoint(x: rect.midX + (rect.midX / 2.0) + (tabBarItemImageSize + (spacingBetweenTabBarItems * (numberOfTabBarItems - 1.0))), y: rect.maxY - snapshot.bounds.height - tabBarHeight),
+                      controlPoint1: CGPoint(x: rect.maxX - tabBarHeight, y: rect.midY + tabBarHeight),
+                      controlPoint2: CGPoint(x: rect.midX + tabBarHeight, y: rect.midY))
         
         let pathAnimation = CAKeyframeAnimation(keyPath: "position")
         pathAnimation.path = path.cgPath
@@ -519,8 +535,9 @@ extension ProfileCollectionViewCell {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
-        snapshot.layer.position = CGPoint(x: rect.midX + (rect.midX / 2.0),
-                                          y: view.bounds.maxY - snapshot.bounds.height - 16.0)
+        snapshot.layer.position = CGPoint(
+            x: rect.maxX - (tabBarItemImageSize * numberOfTabBarItems) - (spacingBetweenTabBarItems * numberOfTabBarItems),
+            y: rect.maxY - tabBarMaxY - tabBarHeight - tabBarItemImageSize - spacingFromItemTabBarImageMinYToTabBarMinY)
         
         CATransaction.commit()
     }
@@ -529,16 +546,21 @@ extension ProfileCollectionViewCell {
         
         let appCoordinator = Application.app.coordinator
         
-        appCoordinator.profileCoordinator?.navigationController?.dismiss(animated: true) {
+        appCoordinator.tabBarCoordinator?.viewController?.view.alpha = .zero
+        
+        appCoordinator.coordinate(to: appCoordinator.tabBarCoordinator?.viewController)
+        
+        guard let profile = viewModel?.editingProfile else {
+            return
+        }
+        
+        appCoordinator.tabBarCoordinator?.viewController?.viewModel.profile.value = viewModel?.editingProfile
+        
+        UIView.animate(withDuration: 0.5) {
             
-            appCoordinator.tabBarCoordinator?.viewController?.view.alpha = .zero
+            appCoordinator.profileCoordinator?.navigationController?.view.alpha = .zero
             
-            appCoordinator.coordinate(to: appCoordinator.tabBarCoordinator?.viewController)
-            
-            UIView.animate(withDuration: 0.5) {
-                
-                appCoordinator.tabBarCoordinator?.viewController?.view.alpha = 1.0
-            }
+            appCoordinator.tabBarCoordinator?.viewController?.view.alpha = 1.0
         }
     }
 }

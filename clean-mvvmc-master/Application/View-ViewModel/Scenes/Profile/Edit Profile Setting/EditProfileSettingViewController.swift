@@ -12,7 +12,7 @@ final class EditProfileSettingViewController: UIViewController, ViewController {
     @IBOutlet private weak var closeButton: UIButton!
     
     
-    var viewModel: ProfileViewModel?
+    var viewModel: ProfileViewModel!
     
     
     deinit {

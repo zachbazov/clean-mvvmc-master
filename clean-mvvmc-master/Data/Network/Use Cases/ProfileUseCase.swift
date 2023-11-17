@@ -45,7 +45,7 @@ extension ProfileUseCase {
         case .find:
             
             let request = request as! HTTPProfileDTO.GET.Request
-            let cached = cached as! (HTTPProfileDTO.GET.Response?) -> Void
+            let cached = cached as? (HTTPProfileDTO.GET.Response?) -> Void
             let completion = completion as! (Result<HTTPProfileDTO.GET.Response, DataTransferError>) -> Void
             
             return repository.find(request: request,

@@ -9,7 +9,7 @@ import UIKit
 
 final class NewsViewController: UIViewController, ViewController {
     
-    var viewModel: NewsViewModel?
+    var viewModel: NewsViewModel!
     
     
     override func viewDidLoad() {

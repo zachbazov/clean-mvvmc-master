@@ -21,16 +21,18 @@ final class MediaTableViewDataSource: NSObject, UITableViewDelegate, UITableView
     
     
     func dataSourceDidChange() {
-        
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.reloadData()
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return .zero
+        return viewModel.sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return .zero
+        return viewModel.numberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,5 +41,59 @@ final class MediaTableViewDataSource: NSObject, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return .init()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44.0
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+}
+
+// MARK: - Index Type
+
+extension MediaTableViewDataSource {
+    
+    /// Section index representation type.
+    enum Index: Int, CaseIterable {
+        case display
+        case newRelease
+        case resumable
+        case action
+        case rated
+        case sciFi
+        case myList
+        case blockbuster
+        case crime
+        case thriller
+        case adventure
+        case comedy
+        case drama
+        case horror
+        case anime
+        case familyNchildren
+        case documentary
+    }
+}
+
+// MARK: - State Type
+
+extension MediaTableViewDataSource {
+    
+    /// Section state representation type.
+    enum State: Int, CaseIterable {
+        case all
+        case tvShows
+        case movies
     }
 }

@@ -13,5 +13,5 @@ protocol ViewController: ViewControllerLifecycleBehavior {
     
     associatedtype ViewModelType: ViewModel
     
-    var viewModel: ViewModelType? { get }
+    var viewModel: ViewModelType! { get }
 }

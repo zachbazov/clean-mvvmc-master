@@ -14,7 +14,7 @@ final class AvatarSelectorViewController: UIViewController, ViewController {
     @IBOutlet private(set) weak var collectionView: UICollectionView!
     
     
-    var viewModel: ProfileViewModel?
+    var viewModel: ProfileViewModel!
     
     private var dataSource: AvatarSelectorCollectionViewDataSource?
     
