@@ -51,9 +51,6 @@ extension HTTPUserDTO.Response {
         entity.token = token
         entity.data = data
         
-        entity.userId = data?._id
-        entity.email = data?.email
-        
         return entity
     }
 }

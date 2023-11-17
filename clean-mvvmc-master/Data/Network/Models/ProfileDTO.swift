@@ -10,14 +10,66 @@ import Foundation
 @objc
 public final class ProfileDTO: NSObject, Codable, NSSecureCoding {
     
-    struct Settings: Codable {
+    @objc(Settings)
+    public final class Settings: NSObject, Codable, NSSecureCoding {
         
         var _id: String?
-        var maturityRating: MaturityRating
-        var displayLanguage: DisplayLanguage
-        var audioAndSubtitles: AudioSubtitles
+        var maturityRating: String
+        var displayLanguage: String
+        var audioAndSubtitles: String
         var autoplayNextEpisode: Bool
         var autoplayPreviews: Bool
+        
+        public static var supportsSecureCoding: Bool {
+            return true
+        }
+        
+        
+        init(_id: String?,
+             maturityRating: String,
+             displayLanguage: String,
+             audioAndSubtitles: String,
+             autoplayNextEpisode: Bool,
+             autoplayPreviews: Bool) {
+            self._id = _id
+            self.maturityRating = maturityRating
+            self.displayLanguage = displayLanguage
+            self.audioAndSubtitles = audioAndSubtitles
+            self.autoplayNextEpisode = autoplayNextEpisode
+            self.autoplayPreviews = autoplayPreviews
+        }
+        
+        public required init?(coder: NSCoder) {
+            
+            self._id = coder.decodeObject(
+                of: [ProfileDTO.self, NSString.self],
+                forKey: "_id") as? String ?? ""
+            
+            self.maturityRating = coder.decodeObject(
+                of: [ProfileDTO.self, NSString.self],
+                forKey: "maturityRating") as? String ?? ""
+            
+            self.displayLanguage = coder.decodeObject(
+                of: [ProfileDTO.self, NSString.self],
+                forKey: "displayLanguage") as? String ?? ""
+            
+            self.audioAndSubtitles = coder.decodeObject(
+                of: [ProfileDTO.self, NSString.self],
+                forKey: "audioAndSubtitles") as? String ?? ""
+            
+            self.autoplayNextEpisode = coder.decodeBool(forKey: "autoplayNextEpisode")
+            
+            self.autoplayPreviews = coder.decodeBool(forKey: "autoplayPreviews")
+        }
+        
+        public func encode(with coder: NSCoder) {
+            coder.encode(_id, forKey: "_id")
+            coder.encode(maturityRating, forKey: "maturityRating")
+            coder.encode(displayLanguage, forKey: "displayLanguage")
+            coder.encode(audioAndSubtitles, forKey: "audioAndSubtitles")
+            coder.encode(autoplayNextEpisode, forKey: "autoplayNextEpisode")
+            coder.encode(autoplayPreviews, forKey: "autoplayPreviews")
+        }
     }
     
     
@@ -49,7 +101,7 @@ public final class ProfileDTO: NSObject, Codable, NSSecureCoding {
         self.image = coder.decodeObject(of: [ProfileDTO.self, NSString.self], forKey: "image") as? String ?? ""
         self.active = coder.decodeBool(forKey: "active")
         self.user = coder.decodeObject(of: [ProfileDTO.self, NSString.self], forKey: "user") as? String ?? ""
-        self.settings = coder.decodeObject(of: [ProfileDTO.self, NSString.self], forKey: "settings") as? Settings ?? .defaultValue
+        self.settings = coder.decodeObject(of: [ProfileDTO.self, Settings.self], forKey: "settings") as? Settings ?? .defaultValue
     }
 }
 
@@ -107,7 +159,7 @@ extension ProfileDTO.Settings {
     
     func toDomain() -> Profile.Settings {
         return Profile.Settings(_id: _id,
-                                maturityRating: maturityRating,
+                                maturityRating: MaturityRating(rawValue: maturityRating) ?? .none,
                                 displayLanguage: displayLanguage,
                                 audioAndSubtitles: audioAndSubtitles,
                                 autoplayNextEpisode: autoplayNextEpisode,
@@ -121,9 +173,9 @@ extension ProfileDTO.Settings {
     static var defaultValue: ProfileDTO.Settings {
         return ProfileDTO.Settings(
             _id: "",
-            maturityRating: .none,
-            displayLanguage: .english,
-            audioAndSubtitles: .english,
+            maturityRating: "none",
+            displayLanguage: "en",
+            audioAndSubtitles: "en",
             autoplayNextEpisode: true,
             autoplayPreviews: true)
     }

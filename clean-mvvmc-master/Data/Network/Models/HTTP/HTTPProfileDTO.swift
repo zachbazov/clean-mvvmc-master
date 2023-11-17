@@ -5,7 +5,7 @@
 //  Created by Developer on 18/09/2023.
 //
 
-import Foundation
+import CoreData
 
 struct HTTPProfileDTO {
     
@@ -101,5 +101,20 @@ extension HTTPProfileDTO.DELETE.Response {
     
     func toDomain() -> HTTPProfile.DELETE.Response {
         return HTTPProfile.DELETE.Response(status: status)
+    }
+}
+
+
+extension HTTPProfileDTO.GET.Response {
+    
+    func toEntity(in context: NSManagedObjectContext) -> ProfileResponseEntity {
+        
+        let entity = ProfileResponseEntity(context: context)
+        
+        entity.status = status
+        entity.results = results.toInt32()
+        entity.data = data
+        
+        return entity
     }
 }

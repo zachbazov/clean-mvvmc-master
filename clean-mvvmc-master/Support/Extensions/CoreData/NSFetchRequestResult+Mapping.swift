@@ -11,10 +11,16 @@ extension NSFetchRequestResult {
     
     func toDTO<T: Decodable>() -> T? {
         switch self {
+            
         case let entity as UserResponseEntity:
             return HTTPUserDTO.Response(status: entity.status,
                                         token: entity.token ?? "",
                                         data: entity.data) as? T
+            
+        case let entity as ProfileResponseEntity:
+            return HTTPProfileDTO.GET.Response(status: entity.status ?? "",
+                                               results: entity.results.toInt(),
+                                               data: entity.data ?? []) as? T
             
         case let entity as SectionResponseEntity:
             return HTTPSectionDTO.Response(status: entity.status ?? "",

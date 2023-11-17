@@ -32,8 +32,14 @@ extension ResponseSaver {
             responseEntity.status = response.status
             responseEntity.token = response.token
             responseEntity.data = response.data
-            responseEntity.userId = response.data?._id
-            responseEntity.email = response.data?.email
+            
+        case let response as HTTPProfileDTO.GET.Response:
+            
+            let responseEntity: ProfileResponseEntity = response.toEntity(in: context)
+            
+            responseEntity.status = response.status
+            responseEntity.results = response.results.toInt32()
+            responseEntity.data = response.data
             
         case let response as HTTPSectionDTO.Response:
             

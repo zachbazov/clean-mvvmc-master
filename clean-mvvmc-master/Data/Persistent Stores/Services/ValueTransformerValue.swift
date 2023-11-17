@@ -10,6 +10,7 @@ import Foundation
 enum ValueTransformerValue: String {
     
     case user = "UserTransformer"
+    case profile = "ProfileTransformer"
     case media = "MediaTransformer"
     case section = "SectionTransformer"
 }
@@ -18,6 +19,8 @@ enum ValueTransformerValue: String {
 extension NSValueTransformerName {
     
     static let user = NSValueTransformerName(rawValue: ValueTransformerValue.user.rawValue)
+    
+    static let profile = NSValueTransformerName(rawValue: ValueTransformerValue.profile.rawValue)
     
     static let section = NSValueTransformerName(rawValue: ValueTransformerValue.section.rawValue)
     

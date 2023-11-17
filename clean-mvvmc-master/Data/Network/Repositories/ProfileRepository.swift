@@ -10,6 +10,8 @@ import Foundation
 struct ProfileRepository {
     
     let dataTransferService: DataTransferRequestable
+    
+    private let responseStore = ProfileResponseStore()
 }
 
 
@@ -22,11 +24,20 @@ extension ProfileRepository: Repository {
         
         let sessionTask = URLSessionTask()
         
-        guard !sessionTask.isCancelled else { return nil }
-        
-        let endpoint = ProfileRepository.find(with: request as! HTTPProfileDTO.GET.Request)
-        
-        sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
+        responseStore.fetcher.fetchResponse() { (result: Result<HTTPProfileDTO.GET.Response?, CoreDataError>) in
+            
+            if case let .success(response?) = result {
+                return cached?(response as? T) ?? Void()
+            }
+            
+            guard !sessionTask.isCancelled else {
+                return
+            }
+            
+            let endpoint = ProfileRepository.find(with: request as! HTTPProfileDTO.GET.Request)
+            
+            sessionTask.task = dataTransferService.request(endpoint: endpoint, completion: completion)
+        }
         
         return sessionTask
     }
@@ -79,8 +90,14 @@ extension ProfileRepository: Repository {
     @available(iOS 13.0.0, *)
     func find<T, U>(request: U) async -> T? where T: Decodable, U: Decodable {
         
+        if let cached: HTTPProfileDTO.GET.Response? = responseStore.fetcher.fetchResponse() {
+            return cached as? T
+        }
+        
         let endpoint = ProfileRepository.find(with: request as! HTTPProfileDTO.GET.Request)
         let response: HTTPProfileDTO.GET.Response? = await dataTransferService.request(endpoint: endpoint)
+        
+        responseStore.saver.saveResponse(response)
         
         return response as? T
     }

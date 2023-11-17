@@ -30,8 +30,8 @@ struct Profile {
         
         var _id: String?
         var maturityRating: MaturityRating
-        var displayLanguage: DisplayLanguage
-        var audioAndSubtitles: AudioSubtitles
+        var displayLanguage: String
+        var audioAndSubtitles: String
         var autoplayNextEpisode: Bool
         var autoplayPreviews: Bool
     }
@@ -75,8 +75,8 @@ extension Profile.Settings {
         return Profile.Settings(
             _id: "",
             maturityRating: .none,
-            displayLanguage: .english,
-            audioAndSubtitles: .english,
+            displayLanguage: "english",
+            audioAndSubtitles: "english",
             autoplayNextEpisode: true,
             autoplayPreviews: true)
     }
@@ -108,7 +108,7 @@ extension Profile.Settings {
     func toDTO() -> ProfileDTO.Settings {
         return ProfileDTO.Settings(
             _id: _id,
-            maturityRating: maturityRating,
+            maturityRating: maturityRating.rawValue,
             displayLanguage: displayLanguage,
             audioAndSubtitles: audioAndSubtitles,
             autoplayNextEpisode: autoplayNextEpisode,

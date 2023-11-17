@@ -5,6 +5,11 @@
         <attribute name="results" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="ProfileResponseEntity" representedClassName="ProfileResponseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Transformable" valueTransformerName="ProfileTransformer" customClassName="[ProfileDTO]"/>
+        <attribute name="results" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="SectionResponseEntity" representedClassName="SectionResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="data" optional="YES" attributeType="Transformable" valueTransformerName="SectionTransformer" customClassName="[SectionDTO]"/>
         <attribute name="results" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -12,9 +17,7 @@
     </entity>
     <entity name="UserResponseEntity" representedClassName="UserResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="data" optional="YES" attributeType="Transformable" valueTransformerName="UserTransformer" customClassName="UserDTO"/>
-        <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="token" optional="YES" attributeType="String"/>
-        <attribute name="userId" optional="YES" attributeType="String"/>
     </entity>
 </model>

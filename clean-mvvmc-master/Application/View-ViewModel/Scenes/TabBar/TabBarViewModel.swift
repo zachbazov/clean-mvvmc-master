@@ -27,22 +27,48 @@ extension TabBarViewModel {
         }
         
         let profileUseCase = ProfileUseCase()
+        let profileResponseStore = ProfileResponseStore()
         
         let request = HTTPProfileDTO.GET.Request(user: user.toDTO(), _id: selectedProfileId)
         
-        profileUseCase.request(endpoint: .find, request: request, cached: nil) { [weak self] (result: Result<HTTPProfileDTO.GET.Response, DataTransferError>) in
-            guard let self = self else {
-                return
+        if #available(iOS 13.0.0, *) {
+            
+            Task {
+                
+                if let response: HTTPProfileDTO.GET.Response? = await profileUseCase.request(endpoint: .find, request: request) {
+                    
+                    profile.value = response?.data.first?.toDomain()
+                }
             }
             
-            switch result {
-            case .success(let response):
-                
-                self.profile.value = response.data.first?.toDomain()
-                
-            case .failure(let error):
-                print(error)
-            }
+        } else {
+            
+            profileUseCase.request(
+                endpoint: .find,
+                request: request,
+                cached: { [weak self] (response: HTTPProfileDTO.GET.Response?) in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.profile.value = response?.data.first?.toDomain()
+                    
+                }) { [weak self] (result: Result<HTTPProfileDTO.GET.Response, DataTransferError>) in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    switch result {
+                    case .success(let response):
+                        
+                        self.profile.value = response.data.first?.toDomain()
+                        
+                        profileResponseStore.saver.saveResponse(response)
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
         }
     }
 }

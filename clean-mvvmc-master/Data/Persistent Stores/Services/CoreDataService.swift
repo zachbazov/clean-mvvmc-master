@@ -39,6 +39,7 @@ extension CoreDataService: CoreDataValueTransformable {
 extension CoreDataService {
     
     private func createPersistentContainer() -> NSPersistentContainer {
+        
         setTransformers()
         
         let container = NSPersistentContainer(name: "CoreDataStore")
@@ -78,6 +79,7 @@ extension CoreDataService {
     
     private func setTransformers() {
         addTransformer(of: UserDTO.self, for: .user)
+        addTransformer(of: ProfileDTO.self, for: .profile)
         addTransformer(of: SectionDTO.self, for: .section)
         addTransformer(of: MediaDTO.self, for: .media)
     }

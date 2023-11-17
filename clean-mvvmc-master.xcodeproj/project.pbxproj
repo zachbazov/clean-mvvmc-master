@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8B049D972ABFC1BC004DC481 /* ServerHostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B049D962ABFC1BC004DC481 /* ServerHostProvider.swift */; };
 		8B06BA5B2AD9C51A00DFF745 /* UIViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B06BA5A2AD9C51A00DFF745 /* UIViewController+Layout.swift */; };
+		8B3F26C52B07BA1100AE24AA /* ProfileResponseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F26C42B07BA1100AE24AA /* ProfileResponseStore.swift */; };
+		8B3F26C82B07DD9400AE24AA /* UIImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F26C72B07DD9400AE24AA /* UIImage+Drawing.swift */; };
 		8B40FF492AE4883D003E388E /* SectionResponseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40FF482AE4883D003E388E /* SectionResponseStore.swift */; };
 		8B40FF4B2AE48A0B003E388E /* MediaResponseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40FF4A2AE48A0B003E388E /* MediaResponseStore.swift */; };
 		8B40FF502AE48C77003E388E /* Int+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40FF4F2AE48C77003E388E /* Int+Mapping.swift */; };
@@ -219,6 +221,8 @@
 /* Begin PBXFileReference section */
 		8B049D962ABFC1BC004DC481 /* ServerHostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHostProvider.swift; sourceTree = "<group>"; };
 		8B06BA5A2AD9C51A00DFF745 /* UIViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Layout.swift"; sourceTree = "<group>"; };
+		8B3F26C42B07BA1100AE24AA /* ProfileResponseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseStore.swift; sourceTree = "<group>"; };
+		8B3F26C72B07DD9400AE24AA /* UIImage+Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Drawing.swift"; sourceTree = "<group>"; };
 		8B40FF482AE4883D003E388E /* SectionResponseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionResponseStore.swift; sourceTree = "<group>"; };
 		8B40FF4A2AE48A0B003E388E /* MediaResponseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaResponseStore.swift; sourceTree = "<group>"; };
 		8B40FF4F2AE48C77003E388E /* Int+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Mapping.swift"; sourceTree = "<group>"; };
@@ -459,6 +463,14 @@
 				8B049D982ABFC1FA004DC481 /* MongoService */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8B3F26C62B07DD7900AE24AA /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				8B3F26C72B07DD9400AE24AA /* UIImage+Drawing.swift */,
+			);
+			path = UIImage;
 			sourceTree = "<group>";
 		};
 		8B40FF4C2AE48AC1003E388E /* Collection View */ = {
@@ -828,9 +840,10 @@
 				8B40FF4E2AE48C4A003E388E /* Int */,
 				8B935FDB2AD89F8A000268CB /* UIBarButton */,
 				8B8E95412B029726001CD27D /* UIButton */,
+				8BC71C982AECE32D005DC1F9 /* UICollectionViewCell */,
 				8BA134A72AC5CA8B00C50653 /* UIColor */,
 				8B9D81C22AE843250088D84A /* UIEdgeInsets */,
-				8BC71C982AECE32D005DC1F9 /* UICollectionViewCell */,
+				8B3F26C62B07DD7900AE24AA /* UIImage */,
 				8B935FE02AD957DB000268CB /* UIView */,
 				8B87E58F2AB40B15009248EC /* UIViewController */,
 			);
@@ -1191,6 +1204,7 @@
 				8B8E953D2B00E0EC001CD27D /* ResponseUpdater.swift */,
 				8B64B8CD2ADC650300A272C5 /* ResponseDeleter.swift */,
 				8BD210FD2AB7CEB000030A89 /* AuthResponseStore.swift */,
+				8B3F26C42B07BA1100AE24AA /* ProfileResponseStore.swift */,
 				8B40FF482AE4883D003E388E /* SectionResponseStore.swift */,
 				8B40FF4A2AE48A0B003E388E /* MediaResponseStore.swift */,
 			);
@@ -1359,6 +1373,7 @@
 				8B87E5432AB4096B009248EC /* Application.swift in Sources */,
 				8B87E5B52AB73555009248EC /* UserDTO.swift in Sources */,
 				8BA134902AC2293B00C50653 /* AuthViewController.swift in Sources */,
+				8B3F26C82B07DD9400AE24AA /* UIImage+Drawing.swift in Sources */,
 				8BA1349C2AC255E800C50653 /* SignInViewController.swift in Sources */,
 				8B99A65D2AEA643A00522426 /* AvatarSelectorCollectionViewDataSource.swift in Sources */,
 				8BB6929D2AB7BD630076207C /* List.swift in Sources */,
@@ -1476,6 +1491,7 @@
 				8B953C532AE2A27E00CF411E /* EncodableDictionary.swift in Sources */,
 				8BA94C242AF618A2009F715E /* SignerAlgorithm.swift in Sources */,
 				8B4697532AB7C7C900CC8131 /* HTTPListDTO.swift in Sources */,
+				8B3F26C52B07BA1100AE24AA /* ProfileResponseStore.swift in Sources */,
 				8B64B8D52ADC668700A272C5 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
