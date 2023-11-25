@@ -13,7 +13,6 @@ final class ProfileCollectionViewDataSource: NSObject, UICollectionViewDelegate,
     
     weak var collectionView: UICollectionView?
     
-    
     init(_ collectionView: UICollectionView, with viewModel: ProfileViewModel?) {
         guard let viewModel = viewModel else {
             fatalError()
@@ -23,13 +22,11 @@ final class ProfileCollectionViewDataSource: NSObject, UICollectionViewDelegate,
         self.collectionView = collectionView
     }
     
-    
     func dataSourceDidChange() {
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.reloadData()
     }
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -40,11 +37,10 @@ final class ProfileCollectionViewDataSource: NSObject, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell: ProfileCollectionViewCell = ProfileCollectionViewCell
-            .create(in: collectionView, for: indexPath, with: viewModel)
-        
-        return cell
+        return ProfileCollectionViewCell.create(in: collectionView,
+                                                for: indexPath,
+                                                typeOf: ProfileCollectionViewCell.self,
+                                                with: viewModel)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

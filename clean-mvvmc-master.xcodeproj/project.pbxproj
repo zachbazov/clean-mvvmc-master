@@ -77,7 +77,7 @@
 		8B5B714F2B1136640048EE72 /* DisplayTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B714E2B1136640048EE72 /* DisplayTableViewCellViewModel.swift */; };
 		8B5D974A2AE93BED008C5C93 /* ViewControllerLifecycleBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D97492AE93BED008C5C93 /* ViewControllerLifecycleBehavior.swift */; };
 		8B5D974E2AE94B54008C5C93 /* ProfileSettingsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D974D2AE94B54008C5C93 /* ProfileSettingsTableViewDataSource.swift */; };
-		8B5D97502AE94DAF008C5C93 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D974F2AE94DAF008C5C93 /* TableViewCell.swift */; };
+		8B5D97502AE94DAF008C5C93 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D974F2AE94DAF008C5C93 /* UITableViewCell.swift */; };
 		8B5D97532AE964C3008C5C93 /* ProfileSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D97522AE964C3008C5C93 /* ProfileSettingTableViewCell.swift */; };
 		8B5D97552AE964C8008C5C93 /* ProfileSettingTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D97542AE964C8008C5C93 /* ProfileSettingTableViewCellViewModel.swift */; };
 		8B5D97572AE964CC008C5C93 /* ProfileSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B5D97562AE964CC008C5C93 /* ProfileSettingTableViewCell.xib */; };
@@ -312,7 +312,7 @@
 		8B5B714E2B1136640048EE72 /* DisplayTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		8B5D97492AE93BED008C5C93 /* ViewControllerLifecycleBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLifecycleBehavior.swift; sourceTree = "<group>"; };
 		8B5D974D2AE94B54008C5C93 /* ProfileSettingsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsTableViewDataSource.swift; sourceTree = "<group>"; };
-		8B5D974F2AE94DAF008C5C93 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		8B5D974F2AE94DAF008C5C93 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		8B5D97522AE964C3008C5C93 /* ProfileSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingTableViewCell.swift; sourceTree = "<group>"; };
 		8B5D97542AE964C8008C5C93 /* ProfileSettingTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		8B5D97562AE964CC008C5C93 /* ProfileSettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSettingTableViewCell.xib; sourceTree = "<group>"; };
@@ -852,13 +852,13 @@
 				8B40FF982AE7DFC0003E388E /* BadgeView.swift */,
 				8B40FF9A2AE7DFC6003E388E /* BadgeView.xib */,
 				8B40FF8E2AE7108A003E388E /* PathIndexable.swift */,
-				8B5D974F2AE94DAF008C5C93 /* TableViewCell.swift */,
 				8B40FF902AE710E1003E388E /* UICollectionViewCell.swift */,
+				8B5D974F2AE94DAF008C5C93 /* UITableViewCell.swift */,
+				8B3F26DF2B0922D300AE24AA /* HybridCell.swift */,
 				8B40FF942AE71527003E388E /* CollectionViewLayout.swift */,
 				8B99A6672AEAC14600522426 /* UISpacerView.swift */,
 				8B8E953F2B00E6A2001CD27D /* ActivityIndicatorView.swift */,
 				8B3F26D72B08D9BA00AE24AA /* ShimmerView.swift */,
-				8B3F26DF2B0922D300AE24AA /* HybridCell.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1517,7 +1517,7 @@
 				8B87E5642AB40A2B009248EC /* TabBarController.swift in Sources */,
 				8BA94C1F2AF618A2009F715E /* NoneAlgorithm.swift in Sources */,
 				8B64B8D32ADC661100A272C5 /* ResponsePersistable.swift in Sources */,
-				8B5D97502AE94DAF008C5C93 /* TableViewCell.swift in Sources */,
+				8B5D97502AE94DAF008C5C93 /* UITableViewCell.swift in Sources */,
 				8B64B8CA2ADC64A700A272C5 /* ResponseDeletable.swift in Sources */,
 				8B8F81DC2ABF59CD006B72CB /* DataTransferErrorLogger.swift in Sources */,
 				8BA94C252AF618A2009F715E /* JWTLogger.swift in Sources */,

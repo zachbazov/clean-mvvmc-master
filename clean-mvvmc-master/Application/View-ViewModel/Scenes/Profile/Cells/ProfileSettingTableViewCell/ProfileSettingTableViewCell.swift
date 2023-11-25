@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileSettingTableViewCell: UITableViewCell, TableViewCell {
+final class ProfileSettingTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var symbolImageView: UIImageView!
     @IBOutlet private weak var headerTitleLabel: UILabel!

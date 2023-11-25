@@ -13,7 +13,6 @@ final class AvatarSelectorCollectionViewDataSource: NSObject, UICollectionViewDe
     
     weak var collectionView: UICollectionView?
     
-    
     init(_ collectionView: UICollectionView, with viewModel: ProfileViewModel?) {
         guard let viewModel = viewModel else {
             fatalError()
@@ -23,13 +22,11 @@ final class AvatarSelectorCollectionViewDataSource: NSObject, UICollectionViewDe
         self.collectionView = collectionView
     }
     
-    
     func dataSourceDidChange() {
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.reloadData()
     }
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -40,17 +37,14 @@ final class AvatarSelectorCollectionViewDataSource: NSObject, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell: AvatarSelectorCollectionViewCell = AvatarSelectorCollectionViewCell
-            .create(in: collectionView, for: indexPath, with: viewModel)
-        
-        return cell
+        return AvatarSelectorCollectionViewCell.create(in: collectionView,
+                                                       for: indexPath,
+                                                       typeOf: AvatarSelectorCollectionViewCell.self,
+                                                       with: viewModel)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if let cell = collectionView.cellForItem(at: indexPath) as? AvatarSelectorCollectionViewCell {
-            
             cell.cellDidTap()
         }
     }

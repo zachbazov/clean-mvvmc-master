@@ -13,7 +13,6 @@ final class ProfileSettingsTableViewDataSource: NSObject, UITableViewDelegate, U
     
     weak var tableView: UITableView?
     
-    
     init(_ tableView: UITableView, with viewModel: ProfileViewModel?) {
         guard let viewModel = viewModel else {
             fatalError()
@@ -23,13 +22,11 @@ final class ProfileSettingsTableViewDataSource: NSObject, UITableViewDelegate, U
         self.tableView = tableView
     }
     
-    
     func dataSourceDidChange() {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.reloadData()
     }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.settings.count
@@ -40,10 +37,10 @@ final class ProfileSettingsTableViewDataSource: NSObject, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell: ProfileSettingTableViewCell = ProfileSettingTableViewCell.create(in: tableView, for: indexPath, with: viewModel)
-        
-        return cell
+        return ProfileSettingTableViewCell.create(in: tableView,
+                                                  for: indexPath,
+                                                  typeOf: ProfileSettingTableViewCell.self,
+                                                  with: viewModel)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

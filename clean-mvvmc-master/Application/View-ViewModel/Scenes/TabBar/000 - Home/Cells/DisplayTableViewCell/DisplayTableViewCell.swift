@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DisplayTableViewCell: UITableViewCell, TableViewCell {
+final class DisplayTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var logoImageView: UIImageView!

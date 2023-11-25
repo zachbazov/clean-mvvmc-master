@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SkeletonDisplayTableViewCell: UITableViewCell, TableViewCell {
+final class SkeletonDisplayTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var rootContainer: UIView!
     @IBOutlet private weak var typeContainer: UIView!

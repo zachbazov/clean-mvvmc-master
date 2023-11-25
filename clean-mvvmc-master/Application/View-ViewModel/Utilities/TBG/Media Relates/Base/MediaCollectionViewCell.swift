@@ -19,10 +19,10 @@ class MediaCollectionViewCell: UICollectionViewCell {
     var indexPath: IndexPath!
     
     func deploySubviews() {
-        fetch()
+        loadImages()
     }
     
-    func fetch() {
+    func loadImages() {
         let group = DispatchGroup()
         let imageService = Application.app.server.imageService
         
