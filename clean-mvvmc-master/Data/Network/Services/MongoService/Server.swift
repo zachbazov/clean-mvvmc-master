@@ -15,6 +15,8 @@ final class Server {
     
     lazy var authService: AuthRequestable = createAuthService()
     
+    lazy var imageService: URLImageService = createImageService()
+    
     
     weak var delegate: ServerDelegate? {
         didSet {
@@ -41,5 +43,9 @@ extension Server {
     
     private func createAuthService() -> AuthRequestable {
         return AuthService()
+    }
+    
+    private func createImageService() -> URLImageService {
+        return URLImageService()
     }
 }

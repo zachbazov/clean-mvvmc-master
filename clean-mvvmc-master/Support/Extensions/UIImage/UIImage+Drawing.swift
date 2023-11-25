@@ -43,4 +43,3 @@ extension UIImage {
         return newImage ?? self
     }
 }
-

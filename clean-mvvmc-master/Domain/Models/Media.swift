@@ -7,14 +7,7 @@
 
 import Foundation
 
-protocol MediaRepresentable {
-    var id: String? { get }
-    var title: String { get }
-    var slug: String { get }
-}
-
-
-struct Media: MediaRepresentable {
+struct Media {
     
     struct Resources {
         let posters: [String]
@@ -30,7 +23,6 @@ struct Media: MediaRepresentable {
         let presentedSearchLogo: String
         let presentedSearchLogoAlignment: String
     }
-    
     
     var id: String?
     let type: String
@@ -54,18 +46,19 @@ struct Media: MediaRepresentable {
     let timesSearched: Int
 }
 
-
 extension Media: Equatable {
     
-    static func ==(lhs: Media, rhs: Media) -> Bool { lhs.id == rhs.id }
+    static func ==(lhs: Media, rhs: Media) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
-
 
 extension Media: Hashable {
     
-    func hash(into hasher: inout Hasher) { hasher.combine(id) }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
-
 
 extension Media {
     
@@ -74,8 +67,144 @@ extension Media {
         case series
         case film
     }
+    
+    enum PresentedLogoAlignment: String {
+        case top
+        case midTop = "mid-top"
+        case mid
+        case midBottom = "mid-bottom"
+        case bottom
+    }
+    
+    enum PresentedSearchLogoAlignment: String {
+        case minXminY, minXmidY, minXmaxY
+        case midXminY, midXmidY, midXmaxY
+        case maxXminY, maxXmidY, maxXmaxY
+    }
+    
+    enum PresentedPoster: String {
+        case first = "0"
+        case second = "1"
+        case third = "2"
+        case fourth = "3"
+        case fifth = "4"
+        case sixth = "5"
+    }
+    
+    enum PresentedLogo: String {
+        case first = "0"
+        case second = "1"
+        case third = "2"
+        case fourth = "3"
+        case fifth = "4"
+        case sixth = "5"
+        case seventh = "6"
+    }
+    
+    enum PresentedDisplayLogo: String {
+        case first = "0"
+        case second = "1"
+        case third = "2"
+        case fourth = "3"
+        case fifth = "4"
+        case sixth = "5"
+        case seventh = "6"
+    }
+    
+    enum PresentedSearchLogo: String {
+        case first = "0"
+        case second = "1"
+        case third = "2"
+        case fourth = "3"
+        case fifth = "4"
+        case sixth = "5"
+        case seventh = "6"
+    }
+    
+    func path<T>(forResourceOfType type: T.Type) -> String {
+        switch type {
+        case is PresentedPoster.Type:
+            
+            switch PresentedPoster(rawValue: resources.presentedPoster) {
+            case .first: return resources.posters[0]
+            case .second: return resources.posters[1]
+            case .third: return resources.posters[2]
+            case .fourth: return resources.posters[3]
+            case .fifth: return resources.posters[4]
+            case .sixth: return resources.posters[5]
+            case nil: return ""
+            }
+            
+        case is PresentedLogo.Type:
+            
+            switch PresentedLogo(rawValue: resources.presentedLogo) {
+            case .first: return resources.logos[0]
+            case .second: return resources.logos[1]
+            case .third: return resources.logos[2]
+            case .fourth: return resources.logos[3]
+            case .fifth: return resources.logos[4]
+            case .sixth: return resources.logos[5]
+            case .seventh: return resources.logos[6]
+            case nil: return ""
+            }
+            
+        case is PresentedDisplayLogo.Type:
+            
+            switch PresentedDisplayLogo(rawValue: resources.presentedDisplayLogo) {
+            case .first: return resources.logos[0]
+            case .second: return resources.logos[1]
+            case .third: return resources.logos[2]
+            case .fourth: return resources.logos[3]
+            case .fifth: return resources.logos[4]
+            case .sixth: return resources.logos[5]
+            case .seventh: return resources.logos[6]
+            case nil: return ""
+            }
+            
+        case is PresentedSearchLogo.Type:
+            
+            switch PresentedDisplayLogo(rawValue: resources.presentedSearchLogo) {
+            case .first: return resources.logos[0]
+            case .second: return resources.logos[1]
+            case .third: return resources.logos[2]
+            case .fourth: return resources.logos[3]
+            case .fifth: return resources.logos[4]
+            case .sixth: return resources.logos[5]
+            case .seventh: return resources.logos[6]
+            case nil: return ""
+            }
+            
+        default:
+            return ""
+        }
+    }
 }
 
+extension Media {
+    
+    func separatedAttributedString(separatingBy separator: String, separatorAttributes: NSAttributedString.Attributes, genresAttributes: NSAttributedString.Attributes) -> NSMutableAttributedString {
+        
+        let mutableString = NSMutableAttributedString()
+        
+        let mappedGenres = genres.map {
+            NSAttributedString(string: $0, attributes: genresAttributes)
+        }
+        
+        mappedGenres.forEach {
+            mutableString.append($0)
+            
+            let attributedSeparator = NSAttributedString(string: separator, attributes: separatorAttributes)
+            
+            if $0 == mappedGenres.last {
+                return
+            }
+            
+            mutableString.append(attributedSeparator)
+        }
+        
+        return mutableString
+    }
+}
 
 extension Media {
     
@@ -126,13 +255,14 @@ extension Media.Resources {
 extension Array where Element == Media {
     
     func toDTO() -> [MediaDTO] {
-        return map { $0.toDTO() }
+        return map {
+            $0.toDTO()
+        }
     }
 }
 
-// MARK: - Vacant Value
-
 extension Media {
+    
     static var vacantValue: Media {
         let resources = Media.Resources(
             posters: [],

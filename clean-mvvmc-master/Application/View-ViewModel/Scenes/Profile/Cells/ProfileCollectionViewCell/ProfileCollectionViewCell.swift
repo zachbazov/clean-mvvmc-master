@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileCollectionViewCell: UICollectionViewCell, CollectionViewCell {
+final class ProfileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var button: UIButton!
     

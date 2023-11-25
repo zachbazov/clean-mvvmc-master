@@ -16,8 +16,8 @@ final class BorderedButton: UIButton {
     @IBInspectable
     var borderColor: UIColor = .clear
     
-    @IBInspectable
-    var cornerRadius: CGFloat = .zero
+//    @IBInspectable
+//    var cornerRadius: CGFloat = .zero
     
     
     override init(frame: CGRect) {

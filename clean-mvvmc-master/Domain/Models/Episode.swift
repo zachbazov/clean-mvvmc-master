@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Episode: MediaRepresentable {
+struct Episode {
     var id: String?
     let mediaId: String
     let title: String

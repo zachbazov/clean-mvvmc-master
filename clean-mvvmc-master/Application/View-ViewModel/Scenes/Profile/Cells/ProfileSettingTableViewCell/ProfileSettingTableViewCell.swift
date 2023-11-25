@@ -10,18 +10,12 @@ import UIKit
 final class ProfileSettingTableViewCell: UITableViewCell, TableViewCell {
     
     @IBOutlet private weak var symbolImageView: UIImageView!
-    
     @IBOutlet private weak var headerTitleLabel: UILabel!
-    
     @IBOutlet private weak var optionLabel: UILabel!
     
-    
     var viewModel: ProfileViewModel?
-    
     var cellViewModel: ProfileSettingTableViewCellViewModel?
-    
     var indexPath: IndexPath?
-    
     
     func deploySubviews() {
         configureSubviews()
@@ -40,7 +34,6 @@ final class ProfileSettingTableViewCell: UITableViewCell, TableViewCell {
     }
 }
 
-
 extension ProfileSettingTableViewCell {
     
     enum Section: Int {
@@ -57,12 +50,10 @@ extension ProfileSettingTableViewCell {
     }
 }
 
-
 extension ProfileSettingTableViewCell {
     
     @objc
     func switchValueDidChange(_ sender: UISwitch) {
-        
         guard let section = ProfileSettingTableViewCell.Section(rawValue: sender.tag) else {
             return
         }
@@ -83,13 +74,11 @@ extension ProfileSettingTableViewCell {
     
     @objc
     func cellDidTap() {
-        
         guard let section = ProfileSettingTableViewCell.Section(rawValue: indexPath?.section ?? .zero) else {
             return
         }
         
         switch section {
-            
         case .maturityRating, .displayLanguage, .audioAndSubtitles:
             
             viewModel?.coordinator?.coordinate(to: .editSetting)
@@ -103,7 +92,6 @@ extension ProfileSettingTableViewCell {
     }
 }
 
-
 extension ProfileSettingTableViewCell {
     
     private func configureLayer() {
@@ -111,7 +99,6 @@ extension ProfileSettingTableViewCell {
     }
     
     private func configureImageView() {
-        
         let image = UIImage(systemName: cellViewModel?.image ?? "")?
             .withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         
@@ -119,7 +106,6 @@ extension ProfileSettingTableViewCell {
     }
     
     private func configureLabels() {
-        
         let headerTitle = cellViewModel?.title ?? ""
         
         headerTitleLabel.text = headerTitle
@@ -131,7 +117,6 @@ extension ProfileSettingTableViewCell {
     }
     
     private func configureAccessoryView() {
-        
         let chevron = UIImage(systemName: "chevron.right")?
             .withTintColor(.white, renderingMode: .alwaysOriginal)
         let imageView = UIImageView(image: chevron)
@@ -158,7 +143,6 @@ extension ProfileSettingTableViewCell {
     }
     
     private func hasChanges() {
-        
         guard let editingProfile = viewModel?.editingProfile,
               let editingProfileIndex = viewModel?.editingProfileIndex else {
             return

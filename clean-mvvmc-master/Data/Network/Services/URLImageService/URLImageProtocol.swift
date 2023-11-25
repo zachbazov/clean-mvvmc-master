@@ -17,7 +17,7 @@ final class URLImageProtocol: URLProtocol {
     private let dispatchQueue = DispatchQueue(label: "com.netflix.URLImageProtocol",
                                               qos: .userInitiated,
                                               attributes: .concurrent,
-                                              autoreleaseFrequency: .workItem)
+                                              autoreleaseFrequency: .never)
     
     // MARK: URLProtocol
     
@@ -65,6 +65,7 @@ final class URLImageProtocol: URLProtocol {
     }
     
     override func stopLoading() {
+        
         dispatchQueue.async { [weak self] in
             guard let self = self else {
                 return

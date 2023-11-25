@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AvatarSelectorCollectionViewCell: UICollectionViewCell, CollectionViewCell {
+final class AvatarSelectorCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var button: UIButton!
     

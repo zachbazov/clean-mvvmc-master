@@ -13,6 +13,15 @@ protocol TableViewCell: UITableViewCell, ViewInstantiable, PathIndexable {
     func cellDidLongPress(_ gesture: UILongPressGestureRecognizer)
 }
 
+extension TableViewCell {
+    
+    func cellDidTap() {
+    }
+    
+    func cellDidLongPress(_ gesture: UILongPressGestureRecognizer) {
+    }
+}
+
 
 extension TableViewCell {
     
@@ -38,6 +47,25 @@ extension TableViewCell {
                 cell.indexPath = indexPath
                 cell.viewModel = viewModel
                 cell.cellViewModel = cellViewModel
+                cell.deploySubviews()
+                
+                return cell as! T
+                
+            case (let cell as DisplayTableViewCell,
+                  let viewModel as HomeViewModel):
+                
+                let state = viewModel.dataSourceState.value
+                let model = viewModel.displayMedia[state]
+                let cellViewModel = DisplayTableViewCellViewModel(with: model ?? .vacantValue)
+                
+                cell.viewModel = cellViewModel
+                cell.deploySubviews()
+                
+                return cell as! T
+                
+                case (let cell as SkeletonDisplayTableViewCell,
+                      _ as HomeViewModel):
+                
                 cell.deploySubviews()
                 
                 return cell as! T

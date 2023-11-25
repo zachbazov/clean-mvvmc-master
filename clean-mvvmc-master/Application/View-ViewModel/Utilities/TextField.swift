@@ -15,8 +15,8 @@ final class TextField: UITextField {
     @IBInspectable
     var bgColor: UIColor = UIColor.clear
     
-    @IBInspectable
-    var cornerRadius: CGFloat = .zero
+//    @IBInspectable
+//    var cornerRadius: CGFloat = .zero
     
     @IBInspectable
     var topPadding: CGFloat = .zero

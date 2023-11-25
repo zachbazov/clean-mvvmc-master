@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Trailer: MediaRepresentable {
+struct Trailer {
     
     var id: String?
     var title: String = ""
