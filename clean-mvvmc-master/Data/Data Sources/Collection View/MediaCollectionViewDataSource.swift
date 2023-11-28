@@ -46,29 +46,13 @@ final class MediaCollectionViewDataSource<Cell>: NSObject,
         
         switch section {
         case .rated:
-            return MediaCollectionViewCell.create(in: collectionView,
-                                                  for: indexPath,
-                                                  typeOf: RatingCollectionViewCell.self,
-                                                  section: self.section,
-                                                  with: viewModel)
+            return RatingCollectionViewCell.create(in: collectionView, for: indexPath, section: self.section, with: viewModel)
         case .resumable:
-            return MediaCollectionViewCell.create(in: collectionView,
-                                                  for: indexPath,
-                                                  typeOf: ResumingCollectionViewCell.self,
-                                                  section: self.section,
-                                                  with: viewModel)
+            return ResumingCollectionViewCell.create(in: collectionView, for: indexPath, section: self.section, with: viewModel)
         case .blockbuster:
-            return MediaCollectionViewCell.create(in: collectionView,
-                                                  for: indexPath,
-                                                  typeOf: BrandCollectionViewCell.self,
-                                                  section: self.section,
-                                                  with: viewModel)
+            return BrandCollectionViewCell.create(in: collectionView, for: indexPath, section: self.section, with: viewModel)
         default:
-            return MediaCollectionViewCell.create(in: collectionView,
-                                                  for: indexPath,
-                                                  typeOf: PosterCollectionViewCell.self,
-                                                  section: self.section,
-                                                  with: viewModel)
+            return PosterCollectionViewCell.create(in: collectionView, for: indexPath, section: self.section, with: viewModel)
         }
     }
     

@@ -9,6 +9,5 @@ import Foundation
 
 @objc
 protocol PathIndexable {
-    
     @objc optional var indexPath: IndexPath! { get }
 }

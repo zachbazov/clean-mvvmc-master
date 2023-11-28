@@ -19,12 +19,11 @@ extension UITableViewCell: ViewInstantiable,
     
     static func create<T, U>(in tableView: UITableView,
                              for indexPath: IndexPath,
-                             typeOf type: T.Type,
                              with viewModel: U) -> T where T: UITableViewCell, U: ViewModel {
         
-        tableView.register(T.nib, forCellReuseIdentifier: T.reuseIdentifier)
+        tableView.register(Self.nib, forCellReuseIdentifier: Self.reuseIdentifier)
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as? T else {
             fatalError()
         }
         

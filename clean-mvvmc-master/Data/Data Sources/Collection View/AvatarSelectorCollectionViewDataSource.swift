@@ -37,10 +37,7 @@ final class AvatarSelectorCollectionViewDataSource: NSObject, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return AvatarSelectorCollectionViewCell.create(in: collectionView,
-                                                       for: indexPath,
-                                                       typeOf: AvatarSelectorCollectionViewCell.self,
-                                                       with: viewModel)
+        return AvatarSelectorCollectionViewCell.create(in: collectionView, for: indexPath, with: viewModel)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

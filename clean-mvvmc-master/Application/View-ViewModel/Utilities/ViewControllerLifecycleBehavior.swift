@@ -11,7 +11,6 @@ import Foundation
 
 @objc
 protocol ViewControllerObservingBehavior {
-    
     @objc optional func viewDidBindObservers()
     @objc optional func viewDidUnbindObservers()
 }
@@ -20,7 +19,6 @@ protocol ViewControllerObservingBehavior {
 
 @objc
 protocol ViewControllerLifecycleBehavior: ViewControllerObservingBehavior {
-    
     @objc optional func viewDidDeploySubviews()
     @objc optional func viewHierarchyDidConfigure()
     @objc optional func viewDidConfigure()

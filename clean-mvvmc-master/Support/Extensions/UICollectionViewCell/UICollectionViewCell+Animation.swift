@@ -10,7 +10,6 @@ import UIKit
 extension UICollectionViewCell {
     
     func opacityAnimation() {
-        
         let animation = CABasicAnimation(keyPath: "opacity")
         
         animation.duration = 0.5

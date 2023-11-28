@@ -19,13 +19,12 @@ extension UICollectionViewCell: ViewInstantiable,
     
     static func create<T, U>(in collectionView: UICollectionView,
                              for indexPath: IndexPath,
-                             typeOf type: T.Type,
                              section: Section? = nil,
                              with viewModel: U) -> T where T: UICollectionViewCell, U: ViewModel {
         
-        collectionView.register(T.nib, forCellWithReuseIdentifier: T.reuseIdentifier)
+        collectionView.register(Self.nib, forCellWithReuseIdentifier: Self.reuseIdentifier)
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.reuseIdentifier, for: indexPath) as? T else {
             fatalError()
         }
         

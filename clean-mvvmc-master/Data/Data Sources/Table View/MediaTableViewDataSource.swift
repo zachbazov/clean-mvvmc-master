@@ -16,8 +16,6 @@ final class MediaTableViewDataSource: NSObject,
     
     private var viewModel: HomeViewModel
     
-    private var displayCell: DisplayTableViewCell!
-    
     init(_ tableView: UITableView, with viewModel: HomeViewModel) {
         self.tableView = tableView
         self.viewModel = viewModel
@@ -46,23 +44,22 @@ final class MediaTableViewDataSource: NSObject,
         switch section {
         case .display:
             guard !viewModel.media.isEmpty else {
-                return SkeletonDisplayTableViewCell.create(in: tableView, for: indexPath, typeOf: SkeletonDisplayTableViewCell.self, with: viewModel)
+                return SkeletonDisplayTableViewCell.create(in: tableView, for: indexPath, with: viewModel)
             }
             
-            displayCell = DisplayTableViewCell.create(in: tableView, for: indexPath, typeOf: DisplayTableViewCell.self, with: viewModel)
-            return displayCell
+            return DisplayTableViewCell.create(in: tableView, for: indexPath, with: viewModel)
             
         case .rated:
-            return MediaHybridCell<RatingCollectionViewCell>.create(in: tableView, for: indexPath, embeddingWith: MediaHybridCell<RatingCollectionViewCell>.self, with: viewModel)
+            return UIHybridTableViewCell<RatingCollectionViewCell>.create(in: tableView, for: indexPath, with: viewModel)
             
         case .resumable:
-            return MediaHybridCell<ResumingCollectionViewCell>.create(in: tableView, for: indexPath, embeddingWith: MediaHybridCell<ResumingCollectionViewCell>.self, with: viewModel)
+            return UIHybridTableViewCell<ResumingCollectionViewCell>.create(in: tableView, for: indexPath, with: viewModel)
             
         case .blockbuster:
-            return MediaHybridCell<BrandCollectionViewCell>.create(in: tableView, for: indexPath, embeddingWith: MediaHybridCell<BrandCollectionViewCell>.self, with: viewModel)
+            return UIHybridTableViewCell<BrandCollectionViewCell>.create(in: tableView, for: indexPath, with: viewModel)
             
         default:
-            return MediaHybridCell<PosterCollectionViewCell>.create(in: tableView, for: indexPath, embeddingWith: MediaHybridCell<PosterCollectionViewCell>.self, with: viewModel)
+            return UIHybridTableViewCell<PosterCollectionViewCell>.create(in: tableView, for: indexPath, with: viewModel)
         }
     }
     
@@ -71,7 +68,6 @@ final class MediaTableViewDataSource: NSObject,
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         guard let section = Section(rawValue: indexPath.section) else {
             return .zero
         }
@@ -149,7 +145,6 @@ final class MediaTableViewDataSource: NSObject,
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
@@ -161,86 +156,18 @@ final class MediaTableViewDataSource: NSObject,
             switch section {
             case .display:
                 break
+                
             case .rated:
-                if let c = tableView.cellForRow(at: indexPath) as? MediaHybridCell<RatingCollectionViewCell> {
-                    
-                    for (i, media) in c.cellViewModel.section.media.enumerated() where i < 5 {
-                        let imageService = Application.app.server.imageService
-                        let host = Application.app.server.hostProvider.absoluteString
-                        let posterImagePath = media.path(forResourceOfType: Media.PresentedPoster.self)
-                        let logoImagePath = media.path(forResourceOfType: Media.PresentedLogo.self)
-                        let posterImageURL = URL(string: host + posterImagePath)!
-                        let logoImageURL = URL(string: host + logoImagePath)!
-                        let posterImageIdentifier = "poster_\(media.slug)" as NSString
-                        let logoImageIdentifier = "logo_\(media.slug)" as NSString
-                        
-                        imageService.load(url: posterImageURL, identifier: posterImageIdentifier) { _ in
-                        }
-                        
-                        imageService.load(url: logoImageURL, identifier: logoImageIdentifier) { _ in
-                        }
-                    }
-                }
+                prefetchResources(in: tableView, forRowsAt: indexPath, using: RatingCollectionViewCell.self)
+                
             case .resumable:
-                if let c = tableView.cellForRow(at: indexPath) as? MediaHybridCell<ResumingCollectionViewCell> {
-                    
-                    for (i, media) in c.cellViewModel.section.media.enumerated() where i < 5 {
-                        let imageService = Application.app.server.imageService
-                        let host = Application.app.server.hostProvider.absoluteString
-                        let posterImagePath = media.path(forResourceOfType: Media.PresentedPoster.self)
-                        let logoImagePath = media.path(forResourceOfType: Media.PresentedLogo.self)
-                        let posterImageURL = URL(string: host + posterImagePath)!
-                        let logoImageURL = URL(string: host + logoImagePath)!
-                        let posterImageIdentifier = "poster_\(media.slug)" as NSString
-                        let logoImageIdentifier = "logo_\(media.slug)" as NSString
-                        
-                        imageService.load(url: posterImageURL, identifier: posterImageIdentifier) { _ in
-                        }
-                        
-                        imageService.load(url: logoImageURL, identifier: logoImageIdentifier) { _ in
-                        }
-                    }
-                }
+                prefetchResources(in: tableView, forRowsAt: indexPath, using: ResumingCollectionViewCell.self)
+                
             case .blockbuster:
-                if let c = tableView.cellForRow(at: indexPath) as? MediaHybridCell<BrandCollectionViewCell> {
-                    
-                    for (i, media) in c.cellViewModel.section.media.enumerated() where i < 5 {
-                        let imageService = Application.app.server.imageService
-                        let host = Application.app.server.hostProvider.absoluteString
-                        let posterImagePath = media.path(forResourceOfType: Media.PresentedPoster.self)
-                        let logoImagePath = media.path(forResourceOfType: Media.PresentedLogo.self)
-                        let posterImageURL = URL(string: host + posterImagePath)!
-                        let logoImageURL = URL(string: host + logoImagePath)!
-                        let posterImageIdentifier = "poster_\(media.slug)" as NSString
-                        let logoImageIdentifier = "logo_\(media.slug)" as NSString
-                        
-                        imageService.load(url: posterImageURL, identifier: posterImageIdentifier) { _ in
-                        }
-                        
-                        imageService.load(url: logoImageURL, identifier: logoImageIdentifier) { _ in
-                        }
-                    }
-                }
+                prefetchResources(in: tableView, forRowsAt: indexPath, using: BrandCollectionViewCell.self)
+                
             default:
-                if let c = tableView.cellForRow(at: indexPath) as? MediaHybridCell<PosterCollectionViewCell> {
-                    
-                    for (i, media) in c.cellViewModel.section.media.enumerated() where i < 5 {
-                        let imageService = Application.app.server.imageService
-                        let host = Application.app.server.hostProvider.absoluteString
-                        let posterImagePath = media.path(forResourceOfType: Media.PresentedPoster.self)
-                        let logoImagePath = media.path(forResourceOfType: Media.PresentedLogo.self)
-                        let posterImageURL = URL(string: host + posterImagePath)!
-                        let logoImageURL = URL(string: host + logoImagePath)!
-                        let posterImageIdentifier = "poster_\(media.slug)" as NSString
-                        let logoImageIdentifier = "logo_\(media.slug)" as NSString
-                        
-                        imageService.load(url: posterImageURL, identifier: posterImageIdentifier) { _ in
-                        }
-                        
-                        imageService.load(url: logoImageURL, identifier: logoImageIdentifier) { _ in
-                        }
-                    }
-                }
+                prefetchResources(in: tableView, forRowsAt: indexPath, using: PosterCollectionViewCell.self)
             }
         }
     }
@@ -249,11 +176,8 @@ final class MediaTableViewDataSource: NSObject,
     }
 }
 
-// MARK: - Index Type
-
 extension MediaTableViewDataSource {
     
-    /// Section index representation type.
     enum Section: Int, CaseIterable {
         case display
         case newRelease
@@ -273,16 +197,37 @@ extension MediaTableViewDataSource {
         case familyNchildren
         case documentary
     }
-}
-
-// MARK: - State Type
-
-extension MediaTableViewDataSource {
     
-    /// Section state representation type.
     enum State: Int, CaseIterable {
         case all
         case tvShows
         case movies
+    }
+}
+
+extension MediaTableViewDataSource {
+    
+    private func prefetchResources<T>(in tableView: UITableView, forRowsAt indexPath: IndexPath, using type: T.Type) where T: UICollectionViewCell {
+        guard let cell = tableView.cellForRow(at: indexPath) as? UIHybridTableViewCell<T> else {
+            return
+        }
+        
+        for (index, media) in cell.cellViewModel.section.media.enumerated() where index < 5 {
+            
+            let imageService = Application.app.server.imageService
+            let host = Application.app.server.hostProvider.absoluteString
+            let posterImagePath = media.path(forResourceOfType: Media.PresentedPoster.self)
+            let logoImagePath = media.path(forResourceOfType: Media.PresentedLogo.self)
+            let posterImageURL = URL(string: host + posterImagePath)!
+            let logoImageURL = URL(string: host + logoImagePath)!
+            let posterImageIdentifier = "poster_\(media.slug)" as NSString
+            let logoImageIdentifier = "logo_\(media.slug)" as NSString
+            
+            imageService.load(url: posterImageURL, identifier: posterImageIdentifier) { _ in
+            }
+            
+            imageService.load(url: logoImageURL, identifier: logoImageIdentifier) { _ in
+            }
+        }
     }
 }

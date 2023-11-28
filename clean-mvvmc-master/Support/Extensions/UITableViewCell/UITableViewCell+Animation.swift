@@ -12,7 +12,6 @@ import UIKit
 extension UITableViewCell {
     
     func opacityAnimation() {
-        
         let animation = CABasicAnimation(keyPath: "opacity")
         
         animation.duration = 0.5

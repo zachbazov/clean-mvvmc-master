@@ -37,16 +37,11 @@ final class ProfileCollectionViewDataSource: NSObject, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return ProfileCollectionViewCell.create(in: collectionView,
-                                                for: indexPath,
-                                                typeOf: ProfileCollectionViewCell.self,
-                                                with: viewModel)
+        return ProfileCollectionViewCell.create(in: collectionView, for: indexPath, with: viewModel)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if let cell = collectionView.cellForItem(at: indexPath) as? ProfileCollectionViewCell {
-            
             cell.cellDidTap()
         }
     }

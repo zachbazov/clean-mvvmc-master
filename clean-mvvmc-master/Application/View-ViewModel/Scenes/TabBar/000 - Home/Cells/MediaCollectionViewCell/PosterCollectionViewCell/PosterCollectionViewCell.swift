@@ -11,19 +11,13 @@ final class PosterCollectionViewCell: MediaCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        
     }
     
     override func deploySubviews() {
         super.deploySubviews()
-        
-        
     }
 }

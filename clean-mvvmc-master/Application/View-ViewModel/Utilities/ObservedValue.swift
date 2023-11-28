@@ -14,7 +14,6 @@ protocol Observable {
     var value: T { get }
 }
 
-
 final class ObservedValue<T>: Observable {
     
     private struct Observer {
@@ -24,7 +23,6 @@ final class ObservedValue<T>: Observable {
         let block: (T) -> Void
     }
     
-    
     private var observers = [Observer]()
     
     var value: T {
@@ -33,17 +31,14 @@ final class ObservedValue<T>: Observable {
         }
     }
     
-    
     init(_ value: T) {
         self.value = value
     }
 }
 
-
 extension ObservedValue {
     
     func observe(on observer: AnyObject, block: @escaping (T) -> Void) {
-        
         let observer = Observer(observer: observer, block: block)
         
         observers.append(observer)
@@ -56,9 +51,7 @@ extension ObservedValue {
     }
     
     private func notifyObservers() {
-        
         for observer in observers {
-            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 

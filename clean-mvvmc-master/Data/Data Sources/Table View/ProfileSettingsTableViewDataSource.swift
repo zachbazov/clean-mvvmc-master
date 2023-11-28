@@ -37,10 +37,7 @@ final class ProfileSettingsTableViewDataSource: NSObject, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return ProfileSettingTableViewCell.create(in: tableView,
-                                                  for: indexPath,
-                                                  typeOf: ProfileSettingTableViewCell.self,
-                                                  with: viewModel)
+        return ProfileSettingTableViewCell.create(in: tableView, for: indexPath, with: viewModel)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

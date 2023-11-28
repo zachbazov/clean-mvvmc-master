@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - ViewInstantiable Type
 
-protocol ViewInstantiable: UIView, Reusable {}
+protocol ViewInstantiable: UIView, Reusable {
+}
 
 // MARK: - ViewInstantiable Implementation
 
@@ -18,7 +19,6 @@ extension ViewInstantiable {
     static var nib: UINib {
         return UINib(nibName: reuseIdentifier, bundle: nil)
     }
-    
     
     @discardableResult
     func nibDidLoad() -> Self {
