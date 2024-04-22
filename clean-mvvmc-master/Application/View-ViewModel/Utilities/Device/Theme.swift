@@ -79,6 +79,12 @@ class Theme {
             navigationController?.navigationBar.compactAppearance = navigationBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
             
+            navigationController?.navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "",
+                style: .plain,
+                target: nil,
+                action: nil)
+            
 //            UINavigationBar.appearance().barTintColor = backgroundColor
 //            UINavigationBar.appearance().isTranslucent = true
 //            UINavigationBar.appearance().standardAppearance = navigationBarAppearance

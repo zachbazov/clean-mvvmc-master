@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlainScrollView" customModule="clean_mvvmc_master" customModuleProvider="target">
+            <connections>
+                <outlet property="scrollView" destination="q0H-Mn-Dv5" id="LLO-aC-BLM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="GEK-9T-NUO">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" id="q0H-Mn-Dv5">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7h-9r-Dpr">
+                            <rect key="frame" x="0.0" y="0.0" width="1572" height="852"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="g7h-9r-Dpr" firstAttribute="leading" secondItem="GEg-qD-fgM" secondAttribute="leading" id="D1x-DU-y1e"/>
+                        <constraint firstItem="g7h-9r-Dpr" firstAttribute="bottom" secondItem="GEg-qD-fgM" secondAttribute="bottom" id="HWo-mm-E76"/>
+                        <constraint firstItem="g7h-9r-Dpr" firstAttribute="height" secondItem="FbX-VB-yZd" secondAttribute="height" id="JPL-jv-DwF"/>
+                        <constraint firstItem="g7h-9r-Dpr" firstAttribute="width" secondItem="FbX-VB-yZd" secondAttribute="width" multiplier="4" id="P8x-Bx-IDO"/>
+                        <constraint firstItem="g7h-9r-Dpr" firstAttribute="top" secondItem="GEg-qD-fgM" secondAttribute="top" id="VBE-Le-GLB"/>
+                        <constraint firstItem="g7h-9r-Dpr" firstAttribute="trailing" secondItem="GEg-qD-fgM" secondAttribute="trailing" id="ah8-K7-AEl"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="GEg-qD-fgM"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="FbX-VB-yZd"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="y8o-1h-jNw"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="207" y="-15"/>
+        </view>
+    </objects>
+</document>

@@ -19,7 +19,6 @@ final class CollectionViewLayout: UICollectionViewFlowLayout {
         return CGSize(width: widthForItem(), height: heightForItem())
     }
     
-    
     init(layout: Layout) {
         self.layout = layout
         
@@ -35,8 +34,6 @@ final class CollectionViewLayout: UICollectionViewFlowLayout {
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    // MARK: UICollectionViewFlowLayout Lifecycle
     
     override func prepare() {
         super.prepare()
@@ -57,7 +54,7 @@ final class CollectionViewLayout: UICollectionViewFlowLayout {
         case .blockbuster:
             break
         case .detail:
-            sectionInset = .init(top: 0.0, left: 28.0, bottom: 0.0, right: 28.0)
+            sectionInset = .init(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
             
         case .navigationOverlay:
             sectionInset = .init(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
@@ -125,7 +122,6 @@ final class CollectionViewLayout: UICollectionViewFlowLayout {
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        
         if layout == .avatarSelector && layout == .profileSelector {
             return false
         }
@@ -167,7 +163,6 @@ extension CollectionViewLayout {
 extension CollectionViewLayout {
     
     private func widthForItem() -> CGFloat {
-        
         guard let width = collectionView?.bounds.width else {
             return .zero
         }
@@ -207,7 +202,6 @@ extension CollectionViewLayout {
     }
     
     private func heightForItem() -> CGFloat {
-        
         guard let height = collectionView?.bounds.height else {
             return .zero
         }
